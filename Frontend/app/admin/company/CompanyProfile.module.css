@@ -2,11 +2,11 @@
   max-width: 1151px;
   width: 100%;
   height: auto;
-  min-height: 1000px;
+  min-height: 900px;
   background-color: #ffffff;
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  padding: 32px;
+  padding: 20px;
   font-family: Helvetica;
   box-sizing: border-box;
   overflow-y: auto;
@@ -35,7 +35,7 @@
 .formGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  gap: 20px;
   flex: 1;
 }
 
@@ -43,7 +43,7 @@
 .rightColumn {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 10px;
 }
 
 .logoSection {
@@ -91,7 +91,7 @@
   height: 48px;
   padding: 0 16px;
   border: 1px solid #e0e0e0;
-  border-radius: 30px;
+  border-radius: 8px;
   font-size: 14px;
   color: #abafb1;
   background-color: #eff1f999;
@@ -114,7 +114,7 @@
   height: 48px;
   padding: 0 16px;
   border: 1px solid #e0e0e0;
-  border-radius: 30px;
+  border-radius: 8px;
   font-size: 14px;
   color: #abafb1;
   background-color: #eff1f999;
@@ -145,7 +145,7 @@
   height: 48px;
   padding: 0 12px;
   border: 1px solid #e0e0e0;
-  border-radius: 30px;
+  border-radius: 8px;
   font-size: 14px;
   color: #abafb1;
   background-color: #eff1f999;
@@ -165,7 +165,7 @@
   height: 48px;
   padding: 0 16px;
   border: 1px solid #e0e0e0;
-  border-radius: 30px;
+  border-radius: 8px;
   font-size: 14px;
   color: #abafb1;
   background-color: #eff1f999;
@@ -215,7 +215,7 @@
   width: 150px;
   height: 44px;
   border: 2px solid #30b4ff;
-  border-radius: 12px;
+  border-radius: 8px;
   background-color: #fff;
   color: #30b4ff;
   font-size: 20px;
@@ -234,7 +234,7 @@
   width: 150px;
   height: 44px;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   background-color: #30b4ff;
   color: #ffffff;
   font-size: 20px;

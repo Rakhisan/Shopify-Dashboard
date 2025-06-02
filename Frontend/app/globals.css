@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  /* min-height: auto; */
 }
 
 html,
@@ -11,6 +12,7 @@ body {
   font-size: 16px;
   background-color: #f6f6f7;
   color: #212b36;
+  overflow: hidden;
 }
 
 a {

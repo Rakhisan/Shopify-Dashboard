@@ -1,4 +1,4 @@
-.EmailContainer {
+.LoginContainer {
   display: flex;
   min-height: 100vh;
   background-color: #ffffff;
@@ -17,7 +17,7 @@
   height: 100%;
 }
 
-.EmailImage {
+.LoginImage {
   object-fit: cover;
 }
 
@@ -77,18 +77,6 @@
   align-items: center;
 }
 
-.inputError {
-  border: 2px solid #ff8989 !important;
-  background-color: #fcefef !important;
-}
-
-.error {
-  color: rgb(242, 80, 80);
-  font-size: 0.8rem;
-  margin-top: 4px;
-  display: block;
-}
-
 .input {
   width: 100%;
   padding: 16px 16px 16px 48px;
@@ -96,7 +84,7 @@
   border-radius: 12px;
   font-size: 16px;
   color: #374151;
-  background-color: #ffffff !important;
+  background-color: #ffffff;
   transition: all 0.2s ease;
 }
 
@@ -110,15 +98,45 @@
   color: #9ca3af;
 }
 
-.inputIcon {
+.inputIcon,
+.lockIcon {
   position: absolute;
   left: 16px;
   color: #9ca3af;
   z-index: 1;
+  font-size: 18px;
 }
 
-/* Email Button */
-.EmailButton {
+.eyeButton {
+  position: absolute;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+}
+
+.eyeButton:hover {
+  color: #6b7280;
+}
+
+.inputError {
+  border: 2px solid #ff8989 !important;
+  background-color: #fcefef !important;
+}
+
+.error {
+  color: rgb(242, 80, 80);
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: block;
+}
+
+/* Buttons */
+.LoginButton {
   width: 100%;
   padding: 16px;
   background-color: #6ecbff;
@@ -132,7 +150,7 @@
   margin-top: 16px;
 }
 
-.EmailButton:hover {
+.LoginButton:hover {
   background-color: #56c1ff;
   color: #ffffff;
 }
@@ -155,9 +173,9 @@
   font-size: 14px;
 }
 
-/* .signupLink:hover {
+.signupLink:hover {
   text-decoration: underline;
-} */
+}
 
 /* Footer */
 .footer {
@@ -191,7 +209,7 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .EmailContainer {
+  .LoginContainer {
     flex-direction: column;
   }
 

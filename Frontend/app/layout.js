@@ -8,12 +8,7 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
 
   // Define auth routes where navbar/sidebar should not appear
-  const authRoutes = [
-    "/auth/sign-up",
-    "/auth/email",
-    "/auth/password",
-    "/auth/company-details",
-  ];
+  const authRoutes = ["/auth/sign-up", "/auth/company-details", "/auth/login"];
   const isAuthPage = authRoutes.includes(pathname);
 
   if (isAuthPage) {

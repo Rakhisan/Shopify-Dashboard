@@ -1,6 +1,6 @@
 .sidebar {
   width: 240px;
-  height: 100vh;
+  height: calc(100vh - 60px);
   background-color: #f1f1f1;
   border-right: 1px solid #f1f1f1;
   overflow-y: auto;
