@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "../styles/Navbar.module.css";
 import Image from "next/image";
 import logo from "../images/logo.png";
@@ -7,6 +7,25 @@ import icon from "../images/icon.jpg";
 
 export default function Navbar() {
   const [showSearch, setShowSearch] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => {
+    setOpenDropdown(!openDropdown);
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpenDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className={styles.navbar}>
@@ -108,8 +127,17 @@ export default function Navbar() {
           </div>
 
           <div className={styles.profile}>
-            <div className={styles.avatar}>
-              <Image src={icon} alt="Shopify Logo" width={140} height={70} />
+            <div className={styles.avatarContainer} ref={dropdownRef}>
+              <div className={styles.avatar} onClick={toggleDropdown}>
+                <Image src={icon} alt="Profile Avatar" width={40} height={40} />
+              </div>
+              {openDropdown && (
+                <div className={styles.dropdownMenu}>
+                  <div className={styles.dropdownItem}>Profile</div>
+                  <div className={styles.dropdownItem}>Settings</div>
+                  <div className={styles.dropdownItem}>Logout</div>
+                </div>
+              )}
             </div>
           </div>
         </div>
