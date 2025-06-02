@@ -1,0 +1,245 @@
+.container {
+  max-width: 1138px;
+  min-height: 1009px;
+  width: 90%;
+  margin: auto;
+  padding: 37px 43px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 400;
+  color: #2b2f32;
+  margin-bottom: 30px;
+  font-family: "Inter";
+}
+
+.formWrapper {
+  width: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 160px;
+  row-gap: 20px;
+  width: 100%;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  font-family: "Helvetica";
+  font-weight: 400;
+}
+
+.formGroup label {
+  font-size: 16px;
+  color: #5e6366;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.formInput {
+  width: 100%;
+  height: 58px;
+  padding: 8px 16px;
+  border: 1px solid #cfd3d4;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Helvetica";
+  outline: none;
+  transition: border 0.3s ease;
+  box-sizing: border-box;
+}
+
+.editIcon {
+  position: absolute;
+  right: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.inputIcon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formInput::placeholder {
+  color: #abafb1;
+}
+
+.formInput:focus {
+  border: 2px solid #2fb4ff;
+}
+
+.statusContainer {
+  margin: 50px 10px;
+  /* width: 100%; */
+  max-width: 181px;
+}
+
+.selectWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.statusSelect {
+  appearance: none;
+  width: 100%;
+  height: 58px;
+  padding: 12px 15px;
+  padding-right: 50px;
+  border: 1px solid #cfd2d4;
+  border-radius: 30px;
+  color: #5e6366;
+  font-size: 16px;
+  font-family: "Helvetica";
+  font-weight: 400;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+  text-align: center;
+  background: none;
+}
+
+.selectArrow {
+  position: absolute;
+  top: 50%;
+  right: 50px;
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 44px;
+  width: 100%;
+  margin-top: 80px;
+  flex-wrap: wrap;
+}
+
+.cancelButton,
+.saveButton {
+  width: 180px;
+  height: 58px;
+  padding: 12px 35px;
+  font-size: 20px;
+  font-family: "Inter";
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.cancelButton {
+  color: #30b4ff;
+  border: 2px solid #30b4ff;
+  background-color: transparent;
+}
+
+.saveButton {
+  background-color: #30b4ff;
+  color: #ffffff;
+  border: none;
+}
+
+/* === Responsive Design === */
+@media (max-width: 1024px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formInput,
+  .statusSelect {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 22px;
+  }
+
+  .formInput,
+  .statusSelect {
+    font-size: 16px;
+  }
+
+  .selectArrow {
+    right: 50px;
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .cancelButton,
+  .saveButton {
+    width: 100%;
+    max-width: 280px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 18px;
+    padding-left: 0;
+  }
+
+  .statusContainer {
+    margin: 30px 13px;
+  }
+
+  .buttonContainer {
+    margin-top: 40px;
+  }
+
+  .formInput,
+  .statusSelect {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .statusSelect {
+    padding-right: 40px;
+  }
+
+  .selectArrow {
+    right: 50px;
+  }
+
+  .cancelButton,
+  .saveButton {
+    font-size: 20px;
+  }
+}

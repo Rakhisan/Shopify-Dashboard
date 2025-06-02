@@ -1,0 +1,594 @@
+.container {
+  width: 100%;
+  font-family: Public Sans;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #686f83;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3px;
+  background-color: white;
+  color: #24282e;
+  border-top-right-radius: 18px;
+  border-top-left-radius: 18px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: Public Sans;
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.searchContainer {
+  position: relative;
+}
+
+.searchInput {
+  padding: 8px 12px 8px 65px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 14px;
+  width: 280px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 25px;
+  top: 55%;
+  transform: translateY(-50%);
+  color: #999;
+}
+
+.searchInput::placeholder {
+  color: #aaa;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #2fb4ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.addButton:hover {
+  background-color: #32a5fd;
+}
+
+.plusIcon {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.tableContainer {
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th {
+  font-weight: 500;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  height: 56px;
+  vertical-align: middle;
+  position: relative;
+  font-size: 14px;
+}
+
+.table td {
+  padding: 20px 0px 20px 17px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.checkboxColumn {
+  width: 20px;
+}
+
+.idColumn {
+  width: 170px;
+  margin-right: 20px;
+  color: #24282e;
+}
+
+.nameColumn {
+  position: relative;
+  width: 200px;
+}
+
+.email {
+  width: 250px;
+}
+
+.role {
+  width: 200px;
+  padding: 8px !important;
+}
+
+.sortIcon {
+  font-size: 10px;
+  margin-left: 120px;
+  color: #888;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.active {
+  background-color: rgba(13, 157, 227, 0.1);
+  color: #29b1ba;
+  border: 1px solid #009499;
+  padding: 6px 30px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.inactive {
+  background-color: rgba(255, 87, 87, 0.1);
+  color: #ff6365;
+  border: 1px solid #ff6365;
+  padding: 6px 26px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #374957;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menuButton:hover {
+  background-color: #f5f5f5;
+}
+
+.actionMenu {
+  position: absolute;
+  right: 80;
+  top: 42px;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  z-index: 10;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  padding: 6px 0;
+}
+
+.actionMenuItem {
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+  transition: background 0.2s;
+}
+
+.actionMenuItem:hover {
+  background-color: #f0f0f0;
+}
+
+.deleteAction {
+  color: red;
+}
+
+.actionColumn {
+  position: relative;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+}
+
+.paginationButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding-left: 50px;
+}
+
+.paginationButton {
+  background: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 30px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.paginationButton:hover {
+  background-color: #f5f5f5;
+  border: 1px solid #5f5e5e;
+}
+
+.paginationInfos {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #7e7b7b;
+}
+
+.customDropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  transition: all 0.2s ease;
+  min-width: 60px;
+  justify-content: space-between;
+}
+
+.dropdownButton:hover {
+  border-color: #999;
+  background-color: #f9f9f9;
+}
+
+.dropdownButton:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.dropdownIcon {
+  font-size: 14px;
+  transition: transform 0.2s ease;
+  color: #666;
+}
+
+.dropdownIcon.rotated {
+  transform: rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  margin-top: 2px;
+}
+
+.dropdownItem {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdownItem:last-child {
+  border-bottom: none;
+}
+
+.dropdownItem:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdownItem.selected {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  font-weight: 500;
+}
+
+.paginationInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.pageSize {
+  display: none;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: white;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .actions {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .searchContainer {
+    width: 100%;
+  }
+
+  .searchInput {
+    width: 100%;
+    padding: 8px 12px 8px 40px;
+    font-size: 13px;
+  }
+
+  .searchIcon {
+    left: 12px;
+    font-size: 14px;
+  }
+
+  .addButton {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 13px;
+    justify-content: center;
+  }
+
+  .plusIcon {
+    font-size: 14px;
+  }
+
+  .tableContainer {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 10px;
+  }
+
+  .table {
+    width: 800px;
+    min-width: 100%;
+  }
+
+  .table th {
+    font-size: 12px;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 5;
+  }
+
+  .table td {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .checkboxColumn {
+    width: 30px;
+  }
+
+  .idColumn {
+    width: 100px;
+  }
+
+  .nameColumn {
+    width: 120px;
+  }
+
+  .email {
+    width: 150px;
+  }
+
+  .role {
+    width: 120px;
+  }
+
+  .actionColumn {
+    width: 50px;
+  }
+
+  .sortIcon {
+    margin-left: 5px;
+    font-size: 8px;
+  }
+
+  .statusBadge {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .actionMenu {
+    right: 5px;
+    top: 30px;
+    width: 100px;
+    font-size: 12px;
+  }
+
+  .actionMenuItem {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  .menuButton {
+    width: 28px;
+    height: 28px;
+  }
+
+  .pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 8px 10px;
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    background-color: white;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .paginationButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-grow: 0;
+  }
+
+  .paginationButton {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+    border-radius: 50%;
+  }
+
+  .paginationInfos {
+    position: absolute;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .paginationInfo {
+    font-size: 12px;
+  }
+
+  .dropdownButton {
+    padding: 5px 8px;
+    font-size: 12px;
+    min-width: 45px;
+  }
+
+  .dropdownMenu {
+    min-width: 50px;
+    right: 0;
+    left: auto;
+  }
+
+  .dropdownItem {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 14px;
+  }
+
+  .searchInput {
+    font-size: 12px;
+  }
+
+  .addButton {
+    font-size: 12px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 11px;
+    padding: 8px;
+  }
+
+  .statusBadge {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
+  .actionMenu {
+    width: 90px;
+  }
+
+  .paginationButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .paginationInfos {
+    font-size: 11px;
+  }
+
+  .paginationInfo {
+    font-size: 11px;
+  }
+
+  .dropdownButton {
+    padding: 4px 6px;
+    font-size: 11px;
+    min-width: 40px;
+  }
+
+  .dropdownMenu {
+    min-width: 45px;
+  }
+
+  .dropdownItem {
+    padding: 5px 6px;
+    font-size: 11px;
+  }
+}

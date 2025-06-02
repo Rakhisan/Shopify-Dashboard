@@ -1,0 +1,347 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+  font-size: 16px;
+  background-color: #f6f6f7;
+  color: #212b36;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+}
+
+input {
+  font-family: inherit;
+}
+
+/* Dark Mode Styles */
+.dark-mode-active {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+}
+
+.dark-mode-active *,
+.dark-mode-active *::before,
+.dark-mode-active *::after {
+  box-sizing: border-box;
+}
+
+/* Force dark mode on body and html */
+html.dark-mode-active,
+body.dark-mode-active {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+}
+
+/* Force dark mode on all elements */
+.dark-mode-active *:not(img):not(svg):not(video):not(iframe) {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+/* Dark mode for all cards and containers */
+.dark-mode-active .card,
+.dark-mode-active .content-card,
+.dark-mode-active .dashboard-card,
+.dark-mode-active .main-content,
+.dark-mode-active .page-container,
+.dark-mode-active .container,
+.dark-mode-active .wrapper,
+.dark-mode-active .box,
+.dark-mode-active .panel,
+.dark-mode-active .section,
+.dark-mode-active .widget,
+.dark-mode-active .component,
+.dark-mode-active [class*="card"],
+.dark-mode-active [class*="box"],
+.dark-mode-active [class*="panel"],
+.dark-mode-active [class*="container"],
+.dark-mode-active [class*="wrapper"] {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+  border-color: #333 !important;
+}
+
+/* Force dark background on white/light colored elements */
+.dark-mode-active [style*="background-color: white"],
+.dark-mode-active [style*="background-color: #fff"],
+.dark-mode-active [style*="background-color: #ffffff"],
+.dark-mode-active [style*="background: white"],
+.dark-mode-active [style*="background: #fff"],
+.dark-mode-active [style*="background: #ffffff"],
+.dark-mode-active .bg-white,
+.dark-mode-active .bg-light,
+.dark-mode-active .bg-gray-100,
+.dark-mode-active .bg-gray-50 {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+}
+
+/* Dark mode for form elements */
+.dark-mode-active input,
+.dark-mode-active textarea,
+.dark-mode-active select,
+.dark-mode-active .form-control {
+  background-color: #2a2a2a !important;
+  color: #ffffff !important;
+  border-color: #444 !important;
+}
+
+.dark-mode-active input::placeholder,
+.dark-mode-active textarea::placeholder {
+  color: #888 !important;
+}
+
+/* Dark mode for buttons */
+.dark-mode-active .btn,
+.dark-mode-active button,
+.dark-mode-active [role="button"],
+.dark-mode-active input[type="button"],
+.dark-mode-active input[type="submit"],
+.dark-mode-active input[type="reset"] {
+  background-color: #2a2a2a !important;
+  color: #ffffff !important;
+  border-color: #444 !important;
+}
+
+.dark-mode-active .btn:hover,
+.dark-mode-active button:hover {
+  background-color: #333 !important;
+}
+
+.dark-mode-active .btn-primary {
+  background-color: #2fb4ff !important;
+  border-color: #2fb4ff !important;
+  color: #ffffff !important;
+}
+
+.dark-mode-active .btn-secondary {
+  background-color: #444 !important;
+  border-color: #555 !important;
+  color: #ffffff !important;
+}
+
+/* Force button backgrounds in forms */
+.dark-mode-active form .btn,
+.dark-mode-active form button,
+.dark-mode-active .form .btn,
+.dark-mode-active .form button,
+.dark-mode-active .form-group .btn,
+.dark-mode-active .form-group button {
+  background-color: #2a2a2a !important;
+  color: #ffffff !important;
+  border: 1px solid #444 !important;
+}
+
+.dark-mode-active form .btn-primary,
+.dark-mode-active .form .btn-primary {
+  background-color: #2fb4ff !important;
+  border-color: #2fb4ff !important;
+}
+
+.dark-mode-active form .btn-success,
+.dark-mode-active .form .btn-success {
+  background-color: #28a745 !important;
+  border-color: #28a745 !important;
+}
+
+.dark-mode-active form .btn-danger,
+.dark-mode-active .form .btn-danger {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+}
+
+.dark-mode-active form .btn-warning,
+.dark-mode-active .form .btn-warning {
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+  color: #000000 !important;
+}
+
+/* Override any transparent/inherit button backgrounds */
+.dark-mode-active button[style*="background:transparent"],
+.dark-mode-active .btn[style*="background:transparent"],
+.dark-mode-active button[style*="background-color:transparent"],
+.dark-mode-active .btn[style*="background-color:transparent"] {
+  background-color: #2a2a2a !important;
+}
+
+/* Dark mode for tables */
+.dark-mode-active table,
+.dark-mode-active .table {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+}
+
+.dark-mode-active table th,
+.dark-mode-active .table th {
+  background-color: #2a2a2a !important;
+  color: #ffffff !important;
+  border-color: #444 !important;
+}
+
+.dark-mode-active table td,
+.dark-mode-active .table td {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+  border-color: #333 !important;
+}
+
+/* Dark mode for modals and popups */
+.dark-mode-active .modal,
+.dark-mode-active .popup,
+.dark-mode-active .dropdown-menu {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+  border-color: #444 !important;
+}
+
+/* Dark mode for icons and SVGs */
+.dark-mode-active .icon,
+.dark-mode-active .icon svg,
+.dark-mode-active svg,
+.dark-mode-active i,
+.dark-mode-active [class*="icon"],
+.dark-mode-active .fa,
+.dark-mode-active [class^="fa-"],
+.dark-mode-active [class*=" fa-"] {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* Dark mode for navbar icons specifically */
+.dark-mode-active .navbar .icon,
+.dark-mode-active .navbar svg,
+.dark-mode-active .navbar i,
+.dark-mode-active nav .icon,
+.dark-mode-active nav svg,
+.dark-mode-active nav i,
+.dark-mode-active header .icon,
+.dark-mode-active header svg,
+.dark-mode-active header i {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Message and bell icon visibility */
+.dark-mode-active .message-icon,
+.dark-mode-active .bell-icon,
+.dark-mode-active .notification-icon,
+.dark-mode-active [class*="message"],
+.dark-mode-active [class*="bell"],
+.dark-mode-active [class*="notification"] {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.dark-mode-active h1,
+.dark-mode-active h2,
+.dark-mode-active h3,
+.dark-mode-active h4,
+.dark-mode-active h5,
+.dark-mode-active h6,
+.dark-mode-active p,
+.dark-mode-active span,
+.dark-mode-active div,
+.dark-mode-active label {
+  color: #ffffff !important;
+}
+
+/* Dark mode for links */
+.dark-mode-active a {
+  color: #4fb3ff !important;
+}
+
+.dark-mode-active a:hover {
+  color: #2fb4ff !important;
+}
+
+/* Dark mode for borders and dividers */
+.dark-mode-active .border,
+.dark-mode-active hr {
+  border-color: #444 !important;
+}
+
+/* Dark mode for scrollbars */
+.dark-mode-active ::-webkit-scrollbar {
+  width: 8px;
+  background-color: #1e1e1e;
+}
+
+.dark-mode-active ::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 4px;
+}
+
+.dark-mode-active ::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* Dark mode for mobile menu button */
+.dark-mode-active .mobileMenuButton {
+  background: #2a2a2a !important;
+  border-color: #444 !important;
+  color: #ffffff !important;
+}
+
+.dark-mode-active .mobileMenuButton:hover {
+  background-color: #333 !important;
+}
+
+/* Dark mode for hamburger */
+.dark-mode-active .hamburger span {
+  background-color: #ffffff !important;
+}
+
+/* Additional comprehensive dark mode rules */
+.dark-mode-active nav,
+.dark-mode-active header,
+.dark-mode-active footer,
+.dark-mode-active aside,
+.dark-mode-active section,
+.dark-mode-active article,
+.dark-mode-active main {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+}
+
+/* Dark mode for any remaining white backgrounds */
+.dark-mode-active [style="background:#fff"],
+.dark-mode-active [style="background:#ffffff"],
+.dark-mode-active [style="background-color:#fff"],
+.dark-mode-active [style="background-color:#ffffff"],
+.dark-mode-active [style="background-color:white"],
+.dark-mode-active [style="background:white"] {
+  background-color: #1e1e1e !important;
+}
+
+/* Dark mode for common utility classes */
+.dark-mode-active .text-dark {
+  color: #ffffff !important;
+}
+
+.dark-mode-active .text-muted {
+  color: #888 !important;
+}
+
+.dark-mode-active .shadow,
+.dark-mode-active .shadow-sm,
+.dark-mode-active .shadow-lg {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+}

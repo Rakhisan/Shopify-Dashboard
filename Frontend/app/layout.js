@@ -1,0 +1,40 @@
+"use client";
+import { usePathname } from "next/navigation";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import "./globals.css";
+
+export default function RootLayout({ children }) {
+  const pathname = usePathname();
+
+  // Define auth routes where navbar/sidebar should not appear
+  const authRoutes = [
+    "/auth/sign-up",
+    "/auth/email",
+    "/auth/password",
+    "/auth/company-details",
+  ];
+  const isAuthPage = authRoutes.includes(pathname);
+
+  if (isAuthPage) {
+    return (
+      <html lang="en">
+        <body>{children}</body>
+      </html>
+    );
+  }
+
+  return (
+    <html lang="en">
+      <body>
+        <Navbar />
+        <div style={{ display: "flex", height: "100vh" }}>
+          <Sidebar />
+          <main style={{ flex: 1, padding: "20px", overflowY: "auto" }}>
+            {children}
+          </main>
+        </div>
+      </body>
+    </html>
+  );
+}

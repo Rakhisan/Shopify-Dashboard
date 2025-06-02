@@ -1,0 +1,108 @@
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  height: 668px;
+  width: 1151px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  font-family: "Helvetica";
+  padding: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 516px);
+  gap: 20px 25px;
+}
+
+.input,
+.select {
+  padding: 9px 18px;
+  font-size: 15px;
+  border: none;
+  background: #f5f8fc;
+  border-radius: 30px;
+  color: #abafb1;
+  width: 516px;
+  font-family: "Helvetica";
+  font-family: Inter;
+  height: 56px;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: #b0b9c8;
+}
+
+.select {
+  color: #abafb1;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 45px;
+}
+
+.selectWrapper {
+  position: relative;
+  width: 516px;
+}
+
+.selectIcon {
+  position: absolute;
+  pointer-events: none;
+  top: 50%;
+  right: 18px;
+
+  transform: translateY(-50%);
+  fill: #8e95a6;
+  width: 21px;
+  height: 21px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 45px;
+  margin-top: 25px;
+  padding-right: 30px;
+}
+
+.cancel,
+.submit {
+  padding: 17px 16px 17px 16px;
+  font-size: 20px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: Inter;
+}
+
+.cancel {
+  background: white;
+  color: #30b4ff;
+  border: 1px solid #30b4ff;
+  width: 175px;
+  padding: 10px;
+  height: 55px;
+}
+
+.submit {
+  background: #30b4ff;
+  color: white;
+  height: 55px;
+  width: 175px;
+  padding: 10px;
+}

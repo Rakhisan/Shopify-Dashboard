@@ -1,0 +1,355 @@
+.container {
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #f9fafb;
+  margin: 0;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-right: 7px;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 10px;
+}
+
+.configButton {
+  border: 1px solid #e0e0e0;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.logsButton {
+  background-color: #0095ff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+}
+
+.cardsContainer {
+  display: flex;
+  gap: 20px;
+  /* flex-wrap: wrap; */
+  /* padding: 20px; */
+}
+
+.card {
+  background-color: white;
+  border-radius: 12px;
+  /* Enhanced shadow for better depth */
+  box-shadow: 4px 5px 4px -1px #0003, 6px 6px 5px #00000024,
+    5px 4px 10px #0000001f;
+  width: 280px;
+  height: 310px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect for better interactivity */
+/* .card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+} */
+
+.logoContainer {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.companyName {
+  font-size: 20px;
+  font-weight: 500;
+  color: #555;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+.statusDetails {
+  margin-bottom: 20px;
+}
+
+.statusRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.statusLabel {
+  color: #666;
+  font-size: 14px;
+}
+
+.statusValue {
+  color: #333;
+  font-size: 14px;
+  background-color: #f0f7ff;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.statusTag {
+  font-size: 14px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.success {
+  color: #009966;
+  background-color: #e6fff2;
+}
+
+.pending {
+  color: #ff9900;
+  background-color: #fff9e6;
+}
+
+.failed {
+  color: #ff3366;
+  background-color: #ffe6ec;
+}
+
+.inProgress {
+  color: #009966;
+  background-color: #e6fff2;
+}
+
+.completed {
+  color: #009966;
+  background-color: #e6fff2;
+}
+
+.seeMoreButton,
+.seeDetailsButton,
+.viewErrorsButton,
+.checkHistoryButton {
+  background-color: #0095ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 0;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.seeDetailsButton {
+  background-color: #0095ff;
+}
+
+.viewErrorsButton {
+  background-color: #0095ff;
+}
+
+.checkHistoryButton {
+  background-color: #0095ff;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .section {
+    margin-bottom: 30px;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 15px;
+    margin-right: 0;
+  }
+
+  .sectionTitle {
+    font-size: 20px;
+  }
+
+  .buttonGroup {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .configButton,
+  .logsButton {
+    padding: 6px 12px;
+    font-size: 13px;
+    flex: 1;
+    text-align: center;
+  }
+
+  .cardsContainer {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .card {
+    width: 100%;
+    height: auto; /* Allow height to adjust */
+    min-height: 280px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Softer shadow */
+  }
+
+  .logoContainer {
+    height: 60px;
+    margin-bottom: 15px;
+  }
+
+  .logo {
+    max-height: 80%;
+  }
+
+  .companyName {
+    font-size: 18px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+  }
+
+  .statusDetails {
+    margin-bottom: 15px;
+  }
+
+  .statusRow {
+    margin-bottom: 10px;
+  }
+
+  .statusLabel,
+  .statusValue,
+  .statusTag {
+    font-size: 13px;
+  }
+
+  .statusValue,
+  .statusTag {
+    padding: 2px 6px;
+  }
+
+  .seeMoreButton,
+  .seeDetailsButton,
+  .viewErrorsButton,
+  .checkHistoryButton {
+    padding: 7px 0;
+    font-size: 13px;
+    min-height: 36px; /* Touch-friendly */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .section {
+    margin-bottom: 20px;
+  }
+
+  .sectionTitle {
+    font-size: 18px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .configButton,
+  .logsButton {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .cardsContainer {
+    gap: 12px;
+  }
+
+  .card {
+    padding: 12px;
+    min-height: 260px;
+  }
+
+  .logoContainer {
+    height: 50px;
+    margin-bottom: 12px;
+  }
+
+  .logo {
+    max-height: 70%;
+  }
+
+  .companyName {
+    font-size: 16px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+  }
+
+  .statusDetails {
+    margin-bottom: 12px;
+  }
+
+  .statusRow {
+    margin-bottom: 8px;
+  }
+
+  .statusLabel,
+  .statusValue,
+  .statusTag {
+    font-size: 12px;
+  }
+
+  .statusValue,
+  .statusTag {
+    padding: 1px 5px;
+  }
+
+  .seeMoreButton,
+  .seeDetailsButton,
+  .viewErrorsButton,
+  .checkHistoryButton {
+    padding: 6px 0;
+    font-size: 12px;
+    min-height: 32px; /* Touch-friendly */
+  }
+}

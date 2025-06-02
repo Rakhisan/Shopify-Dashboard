@@ -1,0 +1,211 @@
+.container {
+  max-width: 1138px;
+  height: 1009px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px 43px;
+  width: 100%;
+  margin: auto;
+  /* background-color: #ffffff; */
+  border-radius: 20px;
+  border: 1px solid #dde2e5;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 400;
+  font-family: "Inter";
+  color: #2b2f32;
+  margin-bottom: 30px;
+  text-align: left;
+  width: 100%;
+}
+
+.formWrapper {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 160px;
+  row-gap: 20px;
+  width: 100%;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  font-family: "Helvetica";
+  font-weight: 400;
+}
+
+.formGroup label {
+  font-size: 16px;
+  color: #5e6366;
+  margin-bottom: 8px;
+  margin-left: 20px;
+}
+
+.formInput {
+  width: 100%;
+  max-width: 446px;
+  height: 58px;
+  padding: 8px 16px;
+  border: 1px solid #cfd3d4;
+  border-radius: 30px;
+  font-size: 16px;
+  font-family: "Helvetica";
+  outline: none;
+  transition: border 0.3s ease;
+  box-sizing: border-box;
+}
+
+.formInput::placeholder {
+  color: #abafb1;
+}
+
+.formInput:focus {
+  border-color: #3498db;
+}
+
+.statusContainer {
+  margin: 30px 0;
+  width: 100%;
+  max-width: 181px;
+}
+
+.selectWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.statusSelect {
+  appearance: none;
+  width: 181px;
+  height: 58px;
+  padding: 12px 15px;
+  padding-right: 40px;
+  border: 1px solid #cfd2d4;
+  border-radius: 30px;
+  color: #5e6366;
+  font-size: 14px;
+  font-family: "Helvetica";
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.selectArrow {
+  position: absolute;
+  top: 50%;
+  right: 50px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.buttonContainer {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 44px;
+  width: 404px;
+  flex-wrap: wrap;
+  align-self: center;
+  margin-bottom: 30px;
+}
+
+.cancelButton,
+.addButton {
+  width: 180px;
+  height: 58px;
+  padding: 12px 35px;
+  font-size: 20px;
+  font-family: "Inter";
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.cancelButton {
+  color: #30b4ff;
+  border: 2px solid #30b4ff;
+  background-color: transparent;
+}
+
+.addButton {
+  background-color: #30b4ff;
+  color: #ffffff;
+  border: none;
+}
+
+/*  Responsive styles */
+
+@media (max-width: 1024px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formInput,
+  .statusSelect {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 22px;
+  }
+
+  .formInput,
+  .statusSelect {
+    font-size: 14px;
+  }
+
+  .selectArrow {
+    right: 40px;
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .cancelButton,
+  .addButton {
+    width: 100%;
+    max-width: 280px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .formInput,
+  .statusSelect {
+    padding: 10px 12px;
+    font-size: 16px;
+  }
+
+  .cancelButton,
+  .addButton {
+    font-size: 16px;
+  }
+}

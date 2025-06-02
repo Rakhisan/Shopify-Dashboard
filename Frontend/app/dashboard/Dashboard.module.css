@@ -1,0 +1,375 @@
+/* Dashboard.module.css - Fully Responsive Version */
+
+.dashboardWrapper {
+  display: flex;
+  gap: 2rem;
+  width: 100%; /* Changed to 100% to adapt to screen width */
+  max-width: 1225px; /* Maintain max-width for larger screens */
+  min-height: 80vh;
+  margin: 0 auto 30px auto; /* Center the wrapper and add bottom margin */
+}
+
+.container {
+  background-color: #f1f1f1;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  font-family: Helvetica;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 2.5;
+}
+
+.containers {
+  padding: 2rem;
+  border-radius: 0.5rem;
+  font-family: Helvetica;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 400;
+  color: #101010;
+}
+
+.channelsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.vendorsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.cards {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  height: 128px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.logoContainer {
+  width: 9rem;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.moreButton {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #4b5563;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.moreButton:hover {
+  color: #ef4444;
+}
+
+.cardContent {
+  margin-top: 2rem;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.metricLabel {
+  color: #4b5563;
+  margin-bottom: 0.5rem;
+  font-size: 14px;
+}
+
+.progressBarContainer {
+  position: relative;
+  padding-top: 0.5rem;
+}
+
+.progressBarBg {
+  height: 0.5rem;
+  background-color: #89d5ff;
+  border-radius: 9999px;
+}
+
+.progressBarRg {
+  height: 0.5rem;
+  background-color: #fdc7c6;
+  border-radius: 9999px;
+}
+
+.progressBar {
+  height: 0.5rem;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.blueBar {
+  background-color: #2fb4ff;
+}
+
+.redBar {
+  background-color: #ff302f;
+}
+
+.sliderContainer {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.sliderDot {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.blueDot {
+  background-color: #60a5fa;
+}
+
+.redDot {
+  background-color: #ef4444;
+}
+
+.card:hover .sliderDot {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+}
+
+.metricValues {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.25rem;
+}
+
+.metricValue {
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.vendorName {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.blueText {
+  color: #3b82f6;
+}
+
+.redText {
+  color: #ef4444;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .dashboardWrapper {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem; /* Add padding for better spacing on medium screens */
+  }
+
+  .container,
+  .containers {
+    padding: 1.5rem;
+    flex: none; /* Remove flex grow/shrink to stack properly */
+    width: 100%; /* Ensure full width on smaller screens */
+  }
+
+  .channelsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem; /* Reduce gap for better fit */
+  }
+
+  .logoContainer {
+    width: 7rem; /* Reduce logo size on medium screens */
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .vendorName {
+    font-size: 1.1rem;
+  }
+
+  .cards {
+    height: 110px; /* Slightly reduce height for better fit */
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboardWrapper {
+    padding: 0.5rem;
+    gap: 1rem;
+  }
+
+  .container,
+  .containers {
+    padding: 1rem;
+  }
+
+  .channelsContainer {
+    grid-template-columns: 1fr; /* Single column on small screens */
+    gap: 0.75rem;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .vendorName {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card,
+  .cards {
+    padding: 0.75rem;
+  }
+
+  .cards {
+    height: 100px; /* Further reduce height for mobile */
+  }
+
+  .cardHeader {
+    margin-bottom: 1rem;
+  }
+
+  .logoContainer {
+    width: 5rem; /* Further reduce logo size on small screens */
+  }
+
+  .moreButton {
+    font-size: 1.25rem;
+  }
+
+  .cardContent {
+    margin-top: 1.5rem;
+  }
+
+  .metricLabel,
+  .metricValue {
+    font-size: 12px;
+  }
+
+  .sliderDot {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .progressBarBg,
+  .progressBarRg,
+  .progressBar {
+    height: 0.4rem; /* Slightly thinner progress bars on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboardWrapper {
+    padding: 0.25rem;
+    gap: 0.5rem;
+  }
+
+  .container,
+  .containers {
+    padding: 0.75rem;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .vendorName {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card,
+  .cards {
+    padding: 0.5rem;
+  }
+
+  .cards {
+    height: 90px; /* Further reduce height for very small screens */
+  }
+
+  .cardHeader {
+    margin-bottom: 0.75rem;
+  }
+
+  .logoContainer {
+    width: 4rem;
+  }
+
+  .moreButton {
+    font-size: 1rem;
+  }
+
+  .cardContent {
+    margin-top: 1rem;
+  }
+
+  .metricLabel,
+  .metricValue {
+    font-size: 11px;
+  }
+
+  .sliderDot {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  .progressBarBg,
+  .progressBarRg,
+  .progressBar {
+    height: 0.3rem;
+  }
+}

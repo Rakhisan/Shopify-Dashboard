@@ -1,0 +1,398 @@
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  max-width: 1400px;
+  gap: 24px;
+  padding: 32px;
+  background-color: #f1f1f1;
+  border-radius: 0.5rem;
+
+  /* min-height: 100vh; */
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 420px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+.cards {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 272px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  /* border-bottom: 1px solid #cfd3d8; */
+}
+.cardHeaders {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #cfd3d8;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 20px 0;
+}
+
+.cardSubtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #64748b;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.menuButton:hover {
+  background-color: #f1f5f9;
+}
+
+/* Import from Platforms Styles */
+
+/* Header Section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.menuIcon {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  cursor: pointer;
+}
+
+.menuIcon span {
+  width: 4px;
+  height: 4px;
+  background-color: #64748b;
+  border-radius: 50%;
+}
+
+/* Subtitle */
+.subtitle {
+  color: #666;
+  font-size: 14px;
+  margin: 0 0 16px 0;
+  font-weight: 400;
+}
+
+/* Border Line */
+.borderLine {
+  width: 100%;
+  height: 1px;
+  background-color: #e5e5e5;
+  margin-bottom: 24px;
+}
+
+/* Platform List */
+.platformList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Platform Item */
+.platformItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Logo Section */
+.logoSection {
+  flex-shrink: 0;
+  margin-bottom: 6px;
+}
+
+.logo {
+  width: 80px;
+  height: 32px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 8px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* .logo.amazon {
+  background-color: #ff9900;
+  color: #000;
+}
+
+.logo.google {
+  background-color: #4285f4;
+  color: #fff;
+  font-family: "Product Sans", sans-serif;
+}
+
+.logo.walmart {
+  background-color: #0071ce;
+  color: #fff;
+  font-family: "Bogle", sans-serif;
+}
+
+.logo.ebay {
+  background-color: #e53238;
+  color: #fff;
+  font-weight: 700;
+} */
+
+/* Content Section */
+.contentSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* gap: 8px; */
+}
+
+/* Top Row */
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.label {
+  color: #1a1a1a;
+  font-size: 14px;
+  font-family: Nunito Sans;
+  /* font-weight: 500; */
+}
+
+.number {
+  color: #1a1a1a;
+  font-size: 14px;
+  /* font-weight: 600; */
+}
+
+/* Progress Section */
+.progressSection {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.progressBar {
+  flex: 1;
+  height: 10px;
+  background-color: #84c7ff;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #0073d5;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.percentage {
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 32px;
+  text-align: right;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .container {
+    padding: 16px;
+    margin: 16px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .logo {
+    width: 70px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .platformItem {
+    gap: 12px;
+  }
+}
+/* Product Change Summary Styles */
+.chartContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.donutChart {
+  position: relative;
+}
+
+.chartCenterText {
+  font-size: 32px;
+  font-weight: 700;
+  fill: #1e293b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Updated Legend Styles */
+.chartLegend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.legendRow {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+
+.legendRowCenter {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.LegendItems {
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.legendColor {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.blueColor {
+  background-color: #0073d5;
+  width: 25px;
+  height: 10px;
+  border-radius: 20px;
+}
+
+.redColor {
+  background-color: #ff302f;
+  width: 25px;
+  height: 10px;
+  border-radius: 20px;
+}
+
+.lightBlueColor {
+  background-color: #2fb4ff;
+  width: 25px;
+  height: 10px;
+  border-radius: 20px;
+}
+
+/* Pending Actions Styles */
+.actionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.actionItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #b3b3b4;
+}
+
+.actionItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.actionTitle {
+  font-size: 16px;
+  color: #24282e;
+  padding-right: 100px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.actionCount {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  min-width: 32px;
+  text-align: right;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .dashboard {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .platformInfo {
+    min-width: 140px;
+  }
+
+  .platformLabel {
+    font-size: 13px;
+  }
+}
