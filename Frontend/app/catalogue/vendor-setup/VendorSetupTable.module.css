@@ -11,7 +11,7 @@
   align-items: center;
   padding: 1rem;
   border-bottom: 3px solid #e5e7eb;
-  gap: 27px;
+  /* gap: 27px; */
 }
 
 .title {
@@ -181,7 +181,7 @@
 }
 
 .vendorCell {
-  padding: 1rem 1.5rem;
+  padding: 1rem 1rem;
   min-width: 12rem;
 }
 
@@ -253,7 +253,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  cursor: pointer;
+  /* cursor: pointer; */
   font-family: Public Sans;
   color: #686f83;
 }
@@ -360,7 +360,7 @@
 .statusBadge {
   display: inline-block;
   padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
+  border-radius: 8px;
   font-size: 0.75rem;
   font-weight: 500;
 }
@@ -405,8 +405,9 @@
 
 .actionMenu {
   position: absolute;
-  right: 10px;
-  top: 40px;
+  right: 110px;
+  align-items: self-start;
+  /* top: 40px; */
   background-color: white;
   border: 1px solid #ddd;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);

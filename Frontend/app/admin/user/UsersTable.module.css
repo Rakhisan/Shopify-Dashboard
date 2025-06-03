@@ -41,7 +41,7 @@
 .searchInput {
   padding: 8px 12px 8px 65px;
   border: 1px solid #e0e0e0;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 14px;
   width: 280px;
 }
@@ -106,7 +106,7 @@
 }
 
 .table td {
-  padding: 20px 0px 20px 17px;
+  padding: 10px 0 10px 17px;
   border-bottom: 1px solid #e0e0e0;
 }
 
@@ -143,7 +143,7 @@
 .statusBadge {
   display: inline-block;
   padding: 5px 10px;
-  border-radius: 50px;
+  border-radius: 8px;
   font-size: 12px;
   font-weight: 500;
 }
@@ -171,7 +171,7 @@
   color: #374957;
   width: 28px;
   height: 28px;
-  border-radius: 50%;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;

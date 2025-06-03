@@ -174,7 +174,7 @@ export default function VendorSetup() {
                 <td className={styles.connectionCell}>
                   <div className={styles.connectionType}>
                     <span>{vendor.connectionType}</span>
-                    <span className={styles.dropdownArrow}>
+                    {/* <span className={styles.dropdownArrow}>
                       <svg
                         width="20"
                         height="20"
@@ -187,7 +187,7 @@ export default function VendorSetup() {
                           fill="#727A90"
                         />
                       </svg>
-                    </span>
+                    </span> */}
                   </div>
                 </td>
                 <td className={styles.progressCell}>
@@ -238,16 +238,17 @@ export default function VendorSetup() {
                     <div className={styles.actionMenu}>
                       <div
                         className={styles.actionMenuItem}
-                        onClick={handleEditUser}
-                      >
-                        Edit
-                      </div>
-                      <div
-                        className={styles.actionMenuItem}
                         onClick={() => handleStatusToggle(vendor.id)}
                       >
                         {vendor.status === "Active" ? "Inactive" : "Active"}
                       </div>
+                      <div
+                        className={styles.actionMenuItem}
+                        onClick={handleEditUser}
+                      >
+                        Edit
+                      </div>
+                      
                       <div
                         className={`${styles.actionMenuItem} ${styles.deleteAction}`}
                       >

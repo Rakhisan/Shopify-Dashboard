@@ -53,7 +53,7 @@
 .logoUpload {
   width: 100%;
   max-width: 516px;
-  height: 141px;
+  height: 130px;
   border: 2px dashed #e0e0e0;
   border-radius: 8px;
   display: flex;
@@ -87,8 +87,8 @@
 }
 
 .input {
-  width: 100%;
-  height: 48px;
+  width: 95%;
+  height: 45px;
   padding: 0 16px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
@@ -110,8 +110,8 @@
 }
 
 .select {
-  width: 100%;
-  height: 48px;
+  width: 95%;
+  height: 45px;
   padding: 0 16px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
@@ -141,8 +141,8 @@
 }
 
 .countryCode {
-  width: 120px;
-  height: 48px;
+  width: 105px;
+  height: 45px;
   padding: 0 12px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
@@ -161,8 +161,10 @@
 }
 
 .phoneInput {
-  flex: 1;
-  height: 48px;
+  /* flex: 1; */
+  height: 45px;
+  width: 406px;
+
   padding: 0 16px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
@@ -181,8 +183,8 @@
 }
 
 .documentUpload {
-  width: 100%;
-  max-width: 513px;
+  width: 95%;
+  /* max-width: 513px; */
   height: 141px;
   border: 2px dashed #e0e0e0;
   border-radius: 8px;
