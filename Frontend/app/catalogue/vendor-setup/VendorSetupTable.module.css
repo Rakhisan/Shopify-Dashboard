@@ -349,12 +349,12 @@
 .syncCell {
   padding: 1rem 1.5rem;
   font-size: 0.875rem;
-  min-width: 12rem;
+  /* min-width: 12rem; */
 }
 
 .statusCell {
   padding: 1rem 1.5rem;
-  min-width: 8rem;
+  /* min-width: 8rem; */
 }
 
 .statusBadge {
@@ -383,7 +383,7 @@
 .actionColumn {
   padding: 1rem 1.5rem;
   text-align: right;
-  min-width: 6rem;
+  /* min-width: 6rem; */
 }
 
 .menuButton {

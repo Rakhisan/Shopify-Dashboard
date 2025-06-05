@@ -46,6 +46,14 @@
   width: 280px;
 }
 
+.emailid {
+  width: 20px;
+}
+
+.userid {
+  width: 20px;
+}
+
 .searchIcon {
   position: absolute;
   left: 25px;
@@ -84,7 +92,7 @@
 .tableContainer {
   background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  overflow: auto visible;
   margin-bottom: 20px;
 }
 

@@ -2,79 +2,92 @@
   background: #ffffff;
   padding: 30px;
   border-radius: 20px;
-  max-width: 1151px;
+  max-width: 1000px;
   width: 100%;
   margin: auto;
   box-sizing: border-box;
 }
 
-/* Title */
 .title {
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 700;
   margin-bottom: 20px;
   font-family: "Helvetica", sans-serif;
   text-align: left;
 }
 
-/* Form Layout */
 .form {
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
+  padding-top: 10px;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px 25px;
+  gap: 5px;
   justify-items: center;
 }
 
-/* Inputs and Selects */
-.input,
-.select {
+.input {
   padding: 9px 18px;
-  font-size: 16px;
+  font-size: 18px;
   border-radius: 8px;
-  color: #abafb1;
+  color: #000;
   border: 1px solid #cfd3d4;
-  font-family: "Inter", sans-serif;
+  font-family: "Inter";
   height: 45px;
   box-sizing: border-box;
-  width: 99%;
-  /* max-width: 516px; */
+  width: 100%;
+  max-width: 520px;
   transition: all 0.2s ease;
-}
-
-.input:focus,
-.select:focus {
-  outline: none;
-  border: 2px solid #30b4ff;
   background: #ffffff;
 }
 
-.input[readonly],
-.input:disabled {
-  background: #ffffff !important;
-  color: #abafb1;
-  cursor: text;
+.input:focus {
+  outline: none;
+  border: 2px solid #30b4ff;
+  background: #ffffff;
 }
 
 .input::placeholder {
   color: #b0b9c8;
 }
 
-/* Custom Select */
-.select {
-  appearance: none;
-  padding-right: 45px;
-}
-
-.selectWrapper {
+.customDropdown {
   position: relative;
   width: 100%;
-  /* max-width: 516px; */
+  max-width: 520px;
+}
+
+.dropdownButton {
+  padding: 9px 18px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid #cfd3d4;
+  font-family: "Inter";
+  height: 45px;
+  box-sizing: border-box;
+  width: 100%;
+  transition: all 0.2s ease;
+  background: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding-right: 45px;
+  text-align: left;
+}
+
+.dropdownButton.focused {
+  border: 2px solid #30b4ff;
+}
+
+.dropdownButton.placeholder {
+  color: #abafb1;
+}
+
+.dropdownButton.hasValue {
+  color: #000;
 }
 
 .selectIcon {
@@ -85,27 +98,65 @@
   transform: translateY(-50%);
   width: 21px;
   height: 21px;
+  transition: transform 0.2s ease;
 }
 
-/* Buttons */
+.selectIcon.rotated {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #cfd3d4;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  margin-top: 2px;
+}
+
+.dropdownOption {
+  padding: 12px 18px;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: "Inter";
+  color: #abafb1;
+
+  transition: background-color 0.2s ease;
+}
+
+.dropdownOption:first-child {
+  border-radius: 8px 8px 0 0;
+}
+
+.dropdownOption:last-child {
+  border-radius: 0 0 8px 8px;
+}
+
+.dropdownOption:hover {
+  background-color: #1fa6f0;
+}
+
 .buttons {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-top: 36px;
   flex-wrap: wrap;
+  margin-top: 20px;
 }
 
 .cancel,
 .add {
-  /* padding: 17px 16px; */
   font-size: 18px;
-  border-radius: 12px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   font-weight: 500;
   font-family: "Inter";
-  width: 140px;
+  width: 180px;
   height: 45px;
   transition: all 0.2s ease;
 }
@@ -129,29 +180,27 @@
   background-color: #1fa6f0;
 }
 
-/* Responsive Breakpoints */
-
-/* Tablet (768px - 1024px) */
+/* Responsive: Tablet */
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px 20px;
+    gap: 12px 8px;
   }
 
   .input,
-  .select {
-    height: 52px;
+  .dropdownButton {
+    height: 45px;
     font-size: 14px;
   }
 
   .cancel,
   .add {
-    height: 52px;
+    height: 45px;
     font-size: 16px;
   }
 }
 
-/* Mobile (481px - 767px) */
+/* Responsive: Mobile */
 @media (max-width: 767px) {
   .container {
     padding: 20px;
@@ -172,8 +221,7 @@
   }
 
   .input,
-  .select,
-  .selectWrapper {
+  .customDropdown {
     max-width: 100%;
   }
 
@@ -190,7 +238,7 @@
   }
 }
 
-/* Small Devices (≤ 480px) */
+/* Responsive: Small Devices */
 @media (max-width: 480px) {
   .container {
     padding: 16px;
@@ -202,10 +250,14 @@
   }
 
   .input,
-  .select {
+  .dropdownButton {
     font-size: 13px;
     padding: 8px 14px;
     height: 48px;
+  }
+
+  .dropdownButton {
+    padding-right: 40px;
   }
 
   .cancel,

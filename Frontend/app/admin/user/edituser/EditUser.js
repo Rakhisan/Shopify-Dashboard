@@ -5,25 +5,23 @@ import styles from "./EditUser.module.css";
 
 export default function EditUser() {
   const [formData, setFormData] = useState({
-    companyId: "",
+    userrole: "",
     email: "",
-    name: "",
-    roleId: "",
-    authSecret: "Auth secret",
+    firstname: "",
+    lastname: "",
     mfaEnabled: "",
     mfaSecret: "",
-    updatedAt: "Updated at",
-    status: "",
-    createdAt: "Created at",
   });
 
-  const [editableFields, setEditableFields] = useState({
-    companyId: false,
-    // You can add more: authSecret: false, updatedAt: false, etc.
-  });
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleDropdownSelect = (value) => {
+    setFormData({ ...formData, mfaEnabled: value });
+    setIsDropdownOpen(false);
   };
 
   const handleSubmit = (e) => {
@@ -31,9 +29,9 @@ export default function EditUser() {
     console.log("Form Submitted", formData);
   };
 
-  const SvgArrow = () => (
+  const SvgArrow = ({ isOpen }) => (
     <svg
-      className={styles.selectIcon}
+      className={`${styles.selectIcon} ${isOpen ? styles.rotated : ""}`}
       width="21"
       height="21"
       viewBox="0 0 21 21"
@@ -52,44 +50,33 @@ export default function EditUser() {
       <h2 className={styles.title}>Edit User</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.grid}>
+          {/* User Role Input with Edit Icon */}
           <div className={styles.inputWrapper}>
             <input
               className={styles.input}
-              name="companyId"
-              value={formData.companyId}
+              name="userrole"
+              value={formData.userrole}
               onChange={handleChange}
-              placeholder="Company Id"
+              placeholder="User Role"
             />
-            <div
+            <svg
               className={styles.editIcon}
-              onClick={() =>
-                setEditableFields((prev) => ({
-                  ...prev,
-                  companyId: !prev.companyId,
-                }))
-              }
-              role="button"
-              tabIndex={0}
-              style={{ cursor: "pointer" }}
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  opacity="0.3"
-                  d="M5 18.08V19H5.92L14.98 9.94002L14.06 9.02002L5 18.08Z"
-                  fill="black"
-                />
-                <path
-                  d="M20.71 7.04C20.8027 6.94749 20.8762 6.8376 20.9264 6.71662C20.9766 6.59565 21.0024 6.46597 21.0024 6.335C21.0024 6.20403 20.9766 6.07435 20.9264 5.95338C20.8762 5.8324 20.8027 5.72251 20.71 5.63L18.37 3.29C18.17 3.09 17.92 3 17.66 3C17.4 3 17.15 3.1 16.96 3.29L15.13 5.12L18.88 8.87L20.71 7.04ZM3 17.25V21H6.75L17.81 9.94L14.06 6.19L3 17.25ZM5.92 19H5V18.08L14.06 9.02L14.98 9.94L5.92 19Z"
-                  fill="black"
-                />
-              </svg>
-            </div>
+              <path
+                opacity="0.3"
+                d="M5 18.08V19H5.92L14.98 9.94002L14.06 9.02002L5 18.08Z"
+                fill="black"
+              />
+              <path
+                d="M20.71 7.04C20.8027 6.94749 20.8762 6.8376 20.9264 6.71662C20.9766 6.59565 21.0024 6.46597 21.0024 6.335C21.0024 6.20403 20.9766 6.07435 20.9264 5.95338C20.8762 5.8324 20.8027 5.72251 20.71 5.63L18.37 3.29C18.17 3.09 17.92 3 17.66 3C17.4 3 17.15 3.1 16.96 3.29L15.13 5.12L18.88 8.87L20.71 7.04ZM3 17.25V21H6.75L17.81 9.94L14.06 6.19L3 17.25ZM5.92 19H5V18.08L14.06 9.02L14.98 9.94L5.92 19Z"
+                fill="black"
+              />
+            </svg>
           </div>
 
           <input
@@ -99,82 +86,90 @@ export default function EditUser() {
             onChange={handleChange}
             placeholder="Your Email Address"
           />
+
           <input
             className={styles.input}
-            name="name"
-            value={formData.name}
+            name="firstname"
+            value={formData.firstname}
             onChange={handleChange}
-            placeholder="Name"
+            placeholder="First Name"
           />
+
+          {/* Last Name Input */}
           <input
             className={styles.input}
-            name="roleId"
-            value={formData.roleId}
+            name="lastname"
+            value={formData.lastname}
             onChange={handleChange}
-            placeholder="Role-id"
+            placeholder="Last Name"
           />
-          <input
-            className={styles.input}
-            name="authSecret"
-            value={formData.authSecret}
-            placeholder="Auth secret"
-          />
-          <div className={styles.selectWrapper}>
-            <select
-              className={styles.select}
-              name="MFA"
-              value={formData.mfaEnabled}
-              onChange={handleChange}
+
+          {/* Custom Dropdown */}
+          <div className={styles.customDropdown}>
+            <button
+              type="button"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className={styles.dropdownButton}
             >
-              <option value="">MFA</option>
-              <option value="true">True</option>
-              <option value="false">False</option>
-            </select>
-            <SvgArrow />
+              <span
+                className={
+                  formData.mfaEnabled
+                    ? styles.selectedText
+                    : styles.placeholderText
+                }
+              >
+                {formData.mfaEnabled
+                  ? formData.mfaEnabled === "true"
+                    ? "True"
+                    : "False"
+                  : "mfa_enabled"}
+              </span>
+              <SvgArrow isOpen={isDropdownOpen} />
+            </button>
+
+            {isDropdownOpen && (
+              <div className={styles.dropdownMenu}>
+                <div
+                  onClick={() => handleDropdownSelect("true")}
+                  className={`${styles.dropdownOption} ${styles.firstOption}`}
+                >
+                  True
+                </div>
+                <div
+                  onClick={() => handleDropdownSelect("false")}
+                  className={`${styles.dropdownOption} ${styles.lastOption}`}
+                >
+                  False
+                </div>
+              </div>
+            )}
           </div>
+
           <input
             className={styles.input}
             name="mfaSecret"
             value={formData.mfaSecret}
             onChange={handleChange}
-            placeholder="MFA Secret"
-          />
-          <input
-            className={styles.input}
-            name="updatedAt"
-            value={formData.updatedAt}
-            placeholder="Updated at "
-          />
-          <div className={styles.selectWrapper}>
-            <select
-              className={styles.select}
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-            >
-              <option value="">Status</option>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
-            <SvgArrow />
-          </div>
-          <input
-            className={styles.input}
-            name="createdAt"
-            value={formData.createdAt}
-            placeholder="Created at "
+            placeholder="mfa_secret"
           />
         </div>
 
+        {/* Buttons */}
         <div className={styles.buttons}>
           <button type="button" className={styles.cancel}>
             Cancel
           </button>
-          <button type="submit" className={styles.add}>
-            Add
+          <button type="submit" className={styles.save}>
+            Save
           </button>
         </div>
       </form>
+      {isDropdownOpen && (
+        <div
+          className={styles.overlay}
+          onClick={() => setIsDropdownOpen(false)}
+        />
+      )}
        
     </div>
   );

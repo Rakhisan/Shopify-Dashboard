@@ -182,8 +182,8 @@ export default function Users() {
                 </td>
                 <td className={styles.idColumn}>{user.id}</td>
                 <td className={styles.nameColumn}>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.role}</td>
+                <td className={styles.emailid}>{user.email}</td>
+                <td className={styles.userid}>{user.role}</td>
                 <td>
                   <span
                     className={`${styles.statusBadge} ${
@@ -237,69 +237,69 @@ export default function Users() {
             ))}
           </tbody>
         </table>
-      </div>
 
-      <div className={styles.pagination}>
-        <div className={styles.paginationButtons}>
-          <button className={styles.paginationButton}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
-          <button className={styles.paginationButton}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </button>
-        </div>
-        <div className={styles.paginationInfo}>
-          <span>Show</span>
-          <div className={styles.customDropdown}>
-            <button
-              className={styles.dropdownButton}
-              onClick={togglePageSizeDropdown}
-            >
-              {selectedPageSize}
-              <AiOutlineCaretDown
-                className={`${styles.dropdownIcon} ${
-                  showPageSizeDropdown ? styles.rotated : ""
-                }`}
-              />
+        <div className={styles.pagination}>
+          <div className={styles.paginationButtons}>
+            <button className={styles.paginationButton}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
             </button>
+            <button className={styles.paginationButton}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
+          <div className={styles.paginationInfo}>
+            <span>Show</span>
+            <div className={styles.customDropdown}>
+              <button
+                className={styles.dropdownButton}
+                onClick={togglePageSizeDropdown}
+              >
+                {selectedPageSize}
+                <AiOutlineCaretDown
+                  className={`${styles.dropdownIcon} ${
+                    showPageSizeDropdown ? styles.rotated : ""
+                  }`}
+                />
+              </button>
 
-            {showPageSizeDropdown && (
-              <div className={styles.dropdownMenu}>
-                {pageSizeOptions.map((option) => (
-                  <div
-                    key={option}
-                    className={`${styles.dropdownItem} ${
-                      selectedPageSize === option ? styles.selected : ""
-                    }`}
-                    onClick={() => handlePageSizeSelect(option)}
-                  >
-                    {option}
-                  </div>
-                ))}
-              </div>
-            )}
+              {showPageSizeDropdown && (
+                <div className={styles.dropdownMenu}>
+                  {pageSizeOptions.map((option) => (
+                    <div
+                      key={option}
+                      className={`${styles.dropdownItem} ${
+                        selectedPageSize === option ? styles.selected : ""
+                      }`}
+                      onClick={() => handlePageSizeSelect(option)}
+                    >
+                      {option}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

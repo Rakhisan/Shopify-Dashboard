@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "./CompanyProfile.module.css";
 
 export default function CompanyProfile() {
@@ -23,6 +23,12 @@ export default function CompanyProfile() {
     city: "",
     distributorFeed: "",
   });
+  const [logoFile, setLogoFile] = useState(null);
+  const [documentFiles, setDocumentFiles] = useState([]);
+  const [additionalFields, setAdditionalFields] = useState([]);
+
+  const logoInputRef = useRef(null);
+  const documentInputRef = useRef(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,11 +40,53 @@ export default function CompanyProfile() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    console.log("Form submitted:", {
+      ...formData,
+      logoFile,
+      documentFiles,
+      additionalFields,
+    });
   };
 
   const handleCancel = () => {
     console.log("Form cancelled");
+  };
+
+  const handleFileDrop = (e, setFile, isMultiple = false) => {
+    e.preventDefault();
+    const files = Array.from(e.dataTransfer.files);
+    if (isMultiple) {
+      setFile((prev) => [...prev, ...files]);
+    } else {
+      setFile(files[0]);
+    }
+  };
+
+  const handleFileSelect = (e, setFile, isMultiple = false) => {
+    const files = Array.from(e.target.files);
+    if (isMultiple) {
+      setFile((prev) => [...prev, ...files]);
+    } else {
+      setFile(files[0]);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const openFileDialog = (inputRef) => {
+    inputRef.current.click();
+  };
+
+  const addNewField = () => {
+    setAdditionalFields((prev) => [...prev, { id: Date.now(), value: "" }]);
+  };
+
+  const handleAdditionalFieldChange = (id, value) => {
+    setAdditionalFields((prev) =>
+      prev.map((field) => (field.id === id ? { ...field, value } : field))
+    );
   };
 
   return (
@@ -53,7 +101,19 @@ export default function CompanyProfile() {
           <div className={styles.leftColumn}>
             {/* Logo Upload */}
             <div className={styles.logoSection}>
-              <div className={styles.logoUpload}>
+              <div
+                className={styles.logoUpload}
+                onDragOver={handleDragOver}
+                onDrop={(e) => handleFileDrop(e, setLogoFile)}
+                onClick={() => openFileDialog(logoInputRef)}
+              >
+                <input
+                  type="file"
+                  ref={logoInputRef}
+                  style={{ display: "none" }}
+                  accept="image/*"
+                  onChange={(e) => handleFileSelect(e, setLogoFile)}
+                />
                 <div className={styles.uploadIcon}>
                   <svg
                     width="38"
@@ -70,7 +130,9 @@ export default function CompanyProfile() {
                     />
                   </svg>
                 </div>
-                <span className={styles.logoText}>logo</span>
+                <span className={styles.logoText}>
+                  {logoFile ? logoFile.name : "logo"}
+                </span>
               </div>
             </div>
 
@@ -88,8 +150,22 @@ export default function CompanyProfile() {
 
             {/* Phone Number */}
             <div className={styles.phoneGroup}>
-              <select className={styles.countryCode}>
-                <option value="+123">+123</option>
+              <select
+                name="countryCode"
+                className={styles.countryCode}
+                onChange={handleInputChange}
+                value={formData.countryCode}
+              >
+                <option value="+1">🇺🇸 +1</option>
+                <option value="+44">🇬🇧 +44</option>
+                <option value="+91">🇮🇳 +91</option>
+                <option value="+81">🇯🇵 +81</option>
+                <option value="+86">🇨🇳 +86</option>
+                <option value="+33">🇫🇷 +33</option>
+                <option value="+49">🇩🇪 +49</option>
+                <option value="+61">🇦🇺 +61</option>
+                <option value="+55">🇧🇷 +55</option>
+                <option value="+7">🇷🇺 +7</option>
               </select>
               <input
                 type="text"
@@ -113,6 +189,11 @@ export default function CompanyProfile() {
                 <option value="USD">USD ($)</option>
                 <option value="EUR">EUR (€)</option>
                 <option value="GBP">GBP (£)</option>
+                <option value="INR">INR (₹)</option>
+                <option value="JPY">JPY (¥)</option>
+                <option value="CNY">CNY (¥)</option>
+                <option value="AUD">AUD ($)</option>
+                <option value="BRL">BRL (R$)</option>
               </select>
             </div>
 
@@ -142,19 +223,19 @@ export default function CompanyProfile() {
 
             {/* State */}
             <div className={styles.inputGroup}>
-              <div className={styles.selectWrapper}>
-                <select
-                  name="state"
-                  value={formData.state}
-                  onChange={handleInputChange}
-                  className={styles.select}
-                >
-                  <option value="">State</option>
-                  <option value="CA">California</option>
-                  <option value="NY">New York</option>
-                  <option value="TX">Texas</option>
-                </select>
-              </div>
+              <select
+                name="state"
+                value={formData.state}
+                onChange={handleInputChange}
+                className={styles.select}
+              >
+                <option value="">State</option>
+                <option value="CA">California</option>
+                <option value="NY">New York</option>
+                <option value="TX">Texas</option>
+                <option value="FL">Florida</option>
+                <option value="IL">Illinois</option>
+              </select>
             </div>
 
             {/* Postal Code */}
@@ -181,6 +262,8 @@ export default function CompanyProfile() {
                 <option value="EST">Eastern Time</option>
                 <option value="PST">Pacific Time</option>
                 <option value="MST">Mountain Time</option>
+                <option value="CST">Central Time</option>
+                <option value="UTC">UTC</option>
               </select>
             </div>
 
@@ -203,7 +286,7 @@ export default function CompanyProfile() {
           {/* Right Column */}
           <div className={styles.rightColumn}>
             {/* Company ID */}
-            <div className={styles.inputGroup}>
+            {/* <div className={styles.inputGroup}>
               <input
                 type="text"
                 name="companyId"
@@ -212,7 +295,7 @@ export default function CompanyProfile() {
                 onChange={handleInputChange}
                 className={styles.input}
               />
-            </div>
+            </div> */}
 
             {/* Address */}
             <div className={styles.inputGroup}>
@@ -253,29 +336,6 @@ export default function CompanyProfile() {
               />
             </div>
 
-            {/* Document Upload */}
-            <div className={styles.documentUpload}>
-              <div className={styles.uploadIcon}>
-                <svg
-                  width="33"
-                  height="33"
-                  viewBox="0 0 33 33"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M16.2231 0.313416C16.3865 0.313312 16.548 0.3486 16.6965 0.416853C16.845 0.485106 16.9769 0.584706 17.0833 0.708805L21.6106 5.99073C21.8059 6.21887 21.9026 6.51525 21.8794 6.81468C21.8562 7.11411 21.715 7.39206 21.4869 7.58738C21.2587 7.7827 20.9623 7.87939 20.6629 7.85618C20.3635 7.83298 20.0855 7.69177 19.8902 7.46363L17.3549 4.50575V21.0638C17.3549 21.364 17.2356 21.6519 17.0234 21.8642C16.8111 22.0764 16.5232 22.1957 16.2231 22.1957C15.9229 22.1957 15.635 22.0764 15.4227 21.8642C15.2105 21.6519 15.0912 21.364 15.0912 21.0638V4.50425L12.5559 7.46363C12.4592 7.57659 12.3412 7.6694 12.2086 7.73676C12.076 7.80411 11.9315 7.84469 11.7832 7.85618C11.6349 7.86767 11.4859 7.84985 11.3445 7.80373C11.2031 7.75761 11.0722 7.68409 10.9592 7.58738C10.8463 7.49067 10.7535 7.37265 10.6861 7.24007C10.6188 7.10749 10.5782 6.96295 10.5667 6.81468C10.5552 6.66642 10.573 6.51735 10.6191 6.37597C10.6653 6.2346 10.7388 6.10369 10.8355 5.99073L15.3629 0.708805C15.4692 0.584706 15.6011 0.485106 15.7496 0.416853C15.8981 0.3486 16.0596 0.313312 16.2231 0.313416ZM8.67141 10.8803C8.97159 10.8787 9.26012 10.9964 9.47351 11.2075C9.6869 11.4187 9.80769 11.7059 9.80929 12.0061C9.81089 12.3063 9.69318 12.5948 9.48205 12.8082C9.27092 13.0216 8.98367 13.1424 8.68348 13.144C7.03401 13.153 5.86444 13.1953 4.97557 13.3583C4.12141 13.5167 3.62491 13.7687 3.25819 14.1355C2.84017 14.5535 2.56852 15.1405 2.41912 16.2482C2.2667 17.3876 2.26368 18.8982 2.26368 21.0638V22.573C2.26368 24.7401 2.2667 26.2507 2.41912 27.3901C2.56852 28.4978 2.84168 29.0833 3.25819 29.5028C3.67622 29.9194 4.26176 30.191 5.37096 30.3404C6.50884 30.4943 8.02098 30.4958 10.1866 30.4958H22.2595C24.4251 30.4958 25.9358 30.4943 27.0767 30.3404C28.1843 30.191 28.7699 29.9194 29.1879 29.5013C29.6059 29.0833 29.8776 28.4978 30.027 27.3901C30.1794 26.2507 30.1824 24.7401 30.1824 22.573V21.0638C30.1824 18.8982 30.1794 17.3876 30.027 16.2467C29.8776 15.1405 29.6044 14.5535 29.1879 14.1355C28.8197 13.7687 28.3247 13.5167 27.4705 13.3583C26.5817 13.1953 25.4121 13.153 23.7626 13.144C23.614 13.1432 23.467 13.1131 23.3299 13.0555C23.1929 12.9979 23.0686 12.9138 22.9641 12.8082C22.8595 12.7025 22.7768 12.5773 22.7207 12.4397C22.6645 12.3021 22.636 12.1547 22.6368 12.0061C22.6376 11.8575 22.6677 11.7104 22.7253 11.5734C22.7829 11.4364 22.8669 11.3121 22.9726 11.2075C23.0783 11.103 23.2035 11.0203 23.3411 10.9641C23.4787 10.908 23.6261 10.8795 23.7747 10.8803C25.4076 10.8893 26.7673 10.9286 27.8795 11.1323C29.0234 11.3436 29.9968 11.7435 30.7891 12.5358C31.6976 13.4428 32.0869 14.5882 32.271 15.9464C32.4461 17.2533 32.4461 18.9179 32.4461 20.9808V22.656C32.4461 24.7204 32.4461 26.3835 32.271 27.6919C32.0869 29.0501 31.6976 30.194 30.7891 31.1025C29.8806 32.011 28.7367 32.4004 27.3785 32.5845C26.0701 32.7595 24.4055 32.7595 22.3425 32.7595H10.1036C8.0406 32.7595 6.37604 32.7595 5.06763 32.5845C3.70942 32.4019 2.56551 32.011 1.65702 31.1025C0.748524 30.194 0.359171 29.0501 0.176567 27.6919C-2.24877e-08 26.3835 0 24.7189 0 22.656V20.9808C0 18.9179 -2.24877e-08 17.2533 0.176567 15.9449C0.357662 14.5867 0.750033 13.4428 1.65702 12.5343C2.4493 11.7435 3.42269 11.3421 4.5666 11.1323C5.67882 10.9286 7.03854 10.8893 8.67141 10.8803Z"
-                    fill="#ABAFB1"
-                  />
-                </svg>
-              </div>
-              <span className={styles.uploadText}>
-                Upload Company Documents
-              </span>
-            </div>
-
             {/* Website */}
             <div className={styles.inputGroup}>
               <input
@@ -298,8 +358,20 @@ export default function CompanyProfile() {
               >
                 <option value="">Country</option>
                 <option value="US">United States</option>
+                <option value="GB">United Kingdom</option>
+                <option value="IN">India</option>
+                <option value="JP">Japan</option>
+                <option value="CN">China</option>
+                <option value="FR">France</option>
+                <option value="DE">Germany</option>
+                <option value="AU">Australia</option>
+                <option value="BR">Brazil</option>
+                <option value="RU">Russia</option>
                 <option value="CA">Canada</option>
-                <option value="UK">United Kingdom</option>
+                <option value="IT">Italy</option>
+                <option value="ES">Spain</option>
+                <option value="MX">Mexico</option>
+                <option value="ZA">South Africa</option>
               </select>
             </div>
 
@@ -338,20 +410,99 @@ export default function CompanyProfile() {
                 className={styles.input}
               />
             </div>
+
+            {/* Document Upload */}
+            <div className={styles.documentUpload}>
+              <div
+                className={styles.documentUpload}
+                onDragOver={handleDragOver}
+                onDrop={(e) => handleFileDrop(e, setDocumentFiles, true)}
+                onClick={() => openFileDialog(documentInputRef)}
+              >
+                <input
+                  type="file"
+                  ref={documentInputRef}
+                  style={{ display: "none" }}
+                  accept=".pdf,.doc,.docx"
+                  multiple
+                  onChange={(e) => handleFileSelect(e, setDocumentFiles, true)}
+                />
+                <div className={styles.uploadIcon}>
+                  <svg
+                    width="33"
+                    height="33"
+                    viewBox="0 0 33 33"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M16.2231 0.313416C16.3865 0.313312 16.548 0.3486 16.6965 0.416853C16.845 0.485106 16.9769 0.584706 17.0833 0.708805L21.6106 5.99073C21.8059 6.21887 21.9026 6.51525 21.8794 6.81468C21.8562 7.11411 21.715 7.39206 21.4869 7.58738C21.2587 7.7827 20.9623 7.87939 20.6629 7.85618C20.3635 7.83298 20.0855 7.69177 19.8902 7.46363L17.3549 4.50575V21.0638C17.3549 21.364 17.2356 21.6519 17.0234 21.8642C16.8111 22.0764 16.5232 22.1957 16.2231 22.1957C15.9229 22.1957 15.635 22.0764 15.4227 21.8642C15.2105 21.6519 15.0912 21.364 15.0912 21.0638V4.50425L12.5559 7.46363C12.4592 7.57659 12.3412 7.6694 12.2086 7.73676C12.076 7.80411 11.9315 7.84469 11.7832 7.85618C11.6349 7.86767 11.4859 7.84985 11.3445 7.80373C11.2031 7.75761 11.0722 7.68409 10.9592 7.58738C10.8463 7.49067 10.7535 7.37265 10.6861 7.24007C10.6188 7.10749 10.5782 6.96295 10.5667 6.81468C10.5552 6.66642 10.573 6.51735 10.6191 6.37597C10.6653 6.2346 10.7388 6.10369 10.8355 5.99073L15.3629 0.708805C15.4692 0.584706 15.6011 0.485106 15.7496 0.416853C15.8981 0.3486 16.0596 0.313312 16.2231 0.313416ZM8.67141 10.8803C8.97159 10.8787 9.26012 10.9964 9.47351 11.2075C9.6869 11.4187 9.80769 11.7059 9.80929 12.0061C9.81089 12.3063 9.69318 12.5948 9.48205 12.8082C9.27092 13.0216 8.98367 13.1424 8.68348 13.144C7.03401 13.153 5.86444 13.1953 4.97557 13.3583C4.12141 13.5167 3.62491 13.7687 3.25819 14.1355C2.84017 14.5535 2.56852 15.1405 2.41912 16.2482C2.2667 17.3876 2.26368 18.8982 2.26368 21.0638V22.573C2.26368 24.7401 2.2667 26.2507 2.41912 27.3901C2.56852 28.4978 2.84168 29.0833 3.25819 29.5028C3.67622 29.9194 4.26176 30.191 5.37096 30.3404C6.50884 30.4943 8.02098 30.4958 10.1866 30.4958H22.2595C24.4251 30.4958 25.9358 30.4943 27.0767 30.3404C28.1843 30.191 28.7699 29.9194 29.1879 29.5013C29.6059 29.0833 29.8776 28.4978 30.027 27.3901C30.1794 26.2507 30.1824 24.7401 30.1824 22.573V21.0638C30.1824 18.8982 30.1794 17.3876 30.027 16.2467C29.8776 15.1405 29.6044 14.5535 29.1879 14.1355C28.8197 13.7687 28.3247 13.5167 27.4705 13.3583C26.5817 13.1953 25.4121 13.153 23.7626 13.144C23.614 13.1432 23.467 13.1131 23.3299 13.0555C23.1929 12.9979 23.0686 12.9138 22.9641 12.8082C22.8595 12.7025 22.7768 12.5773 22.7207 12.4397C22.6645 12.3021 22.636 12.1547 22.6368 12.0061C22.6376 11.8575 22.6677 11.7104 22.7253 11.5734C22.7829 11.4364 22.8669 11.3121 22.9726 11.2075C23.0783 11.103 23.2035 11.0203 23.3411 10.9641C23.4787 10.908 23.6261 10.8795 23.7747 10.8803C25.4076 10.8893 26.7673 10.9286 27.8795 11.1323C29.0234 11.3436 29.9968 11.7435 30.7891 12.5358C31.6976 13.4428 32.0869 14.5882 32.271 15.9464C32.4461 17.2533 32.4461 18.9179 32.4461 20.9808V22.656C32.4461 24.7204 32.4461 26.3835 32.271 27.6919C32.0869 29.0501 31.6976 30.194 30.7891 31.1025C29.8806 32.011 28.7367 32.4004 27.3785 32.5845C26.0701 32.7595 24.4055 32.7595 22.3425 32.7595H10.1036C8.0406 32.7595 6.37604 32.7595 5.06763 32.5845C3.70942 32.4019 2.56551 32.011 1.65702 31.1025C0.748524 30.194 0.359171 29.0501 0.176567 27.6919C-2.24877e-08 26.3835 0 24.7189 0 22.656V20.9808C0 18.9179 -2.24877e-08 17.2533 0.176567 15.9449C0.357662 14.5867 0.750033 13.4428 1.65702 12.5343C2.4493 11.7435 3.42269 11.3421 4.5666 11.1323C5.67882 10.9286 7.03854 10.8893 8.67141 10.8803Z"
+                      fill="#ABAFB1"
+                    />
+                  </svg>
+                </div>
+                <span className={styles.uploadText}>
+                  {documentFiles.length > 0
+                    ? `${documentFiles.length} file(s) uploaded`
+                    : "Upload Company Documents"}
+                </span>
+              </div>
+            </div>
+
+            {/* Additional Fields */}
+            {additionalFields.map((field) => (
+              <div key={field.id} className={styles.additionalField}>
+                <input
+                  type="text"
+                  placeholder="Additional Field"
+                  value={field.value}
+                  onChange={(e) =>
+                    handleAdditionalFieldChange(field.id, e.target.value)
+                  }
+                  className={styles.input}
+                />
+              </div>
+            ))}
+
+            {/* Add More Buttons */}
+            <div className={styles.addMoreButtons}>
+              <button
+                type="button"
+                onClick={addNewField}
+                className={styles.addButton}
+              >
+                +
+              </button>
+              <button
+                type="button"
+                onClick={addNewField}
+                className={styles.addButton}
+              >
+                +
+              </button>
+              <button
+                type="button"
+                onClick={addNewField}
+                className={styles.addButton}
+              >
+                +
+              </button>
+            </div>
           </div>
         </div>
-
         {/* Action Buttons */}
         <div className={styles.actionButtons}>
-          <button type="submit" className={styles.saveButton}>
-            Save
-          </button>
           <button
             type="button"
             onClick={handleCancel}
             className={styles.cancelButton}
           >
             Cancel
+          </button>
+          <button type="submit" className={styles.saveButton}>
+            Save
           </button>
         </div>
       </form>

@@ -5,7 +5,6 @@ import styles from "./AddVendor.module.css";
 
 export default function AddVendor() {
   const [formData, setFormData] = useState({
-    companyId: "",
     name: "",
     email: "",
     email2: "",
@@ -17,8 +16,9 @@ export default function AddVendor() {
     city: "",
     state: "",
     postalCode: "",
-    status: "",
   });
+
+  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,10 +28,80 @@ export default function AddVendor() {
     }));
   };
 
+  const handleCountrySelect = (value) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      country: value,
+    }));
+    setIsCountryDropdownOpen(false);
+  };
+
+  const toggleCountryDropdown = () => {
+    setIsCountryDropdownOpen(!isCountryDropdownOpen);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
   };
+
+  const SvgArrow = ({ isOpen }) => (
+    <svg
+      className={`${styles.selectIcon} ${isOpen ? styles.rotated : ""}`}
+      width="22"
+      height="22"
+      viewBox="0 0 22 22"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.25837 8.45361H15.7421C15.9099 8.45365 16.074 8.50345 16.2136 8.59673C16.3531 8.69001 16.4619 8.82258 16.5262 8.97767C16.5904 9.13276 16.6072 9.30341 16.5745 9.46805C16.5417 9.63269 16.4609 9.78393 16.3422 9.90265L11.6004 14.6445C11.4412 14.8036 11.2253 14.893 11.0002 14.893C10.7751 14.893 10.5592 14.8036 10.4001 14.6445L5.65821 9.90265C5.53953 9.78393 5.45871 9.63269 5.42597 9.46805C5.39323 9.30341 5.41004 9.13276 5.47428 8.97767C5.53851 8.82258 5.64729 8.69001 5.78685 8.59673C5.92641 8.50345 6.0905 8.45365 6.25837 8.45361Z"
+        fill="#3D3C3C"
+      />
+    </svg>
+  );
+
+  const CustomDropdown = ({
+    value,
+    placeholder,
+    options,
+    isOpen,
+    onToggle,
+    onSelect,
+  }) => (
+    <div className={styles.customDropdown}>
+      <div
+        onClick={onToggle}
+        className={`${styles.dropdownButton} ${isOpen ? styles.focused : ""} ${
+          value ? styles.hasValue : styles.placeholder
+        }`}
+      >
+        {value || placeholder}
+      </div>
+      <SvgArrow isOpen={isOpen} />
+
+      {isOpen && (
+        <div className={styles.dropdownMenu}>
+          {options.map((option, index) => (
+            <div
+              key={index}
+              onClick={() => onSelect(option.value)}
+              className={styles.dropdownOption}
+            >
+              {option.label}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
+  const countryOptions = [
+    { label: "United States", value: "US" },
+    { label: "India", value: "IN" },
+    { label: "United Kingdom", value: "UK" },
+    { label: "Canada", value: "CA" },
+  ];
 
   return (
     <div className={styles.container}>
@@ -40,21 +110,9 @@ export default function AddVendor() {
         <meta name="description" content="Add a new vendor" />
       </Head>
       <h1 className={styles.title}>Add Vendor</h1>
-      <form onSubmit={handleSubmit} className={styles.formWrapper}>
+      <div className={styles.formWrapper}>
         <div className={styles.formGrid}>
           {[
-            {
-              id: "companyId",
-              label: "Company-id",
-              type: "text",
-              placeholder: "Company-id",
-            },
-            {
-              id: "phone",
-              label: "Phone No",
-              type: "text",
-              placeholder: "Phone Number",
-            },
             {
               id: "name",
               label: "Name",
@@ -62,17 +120,31 @@ export default function AddVendor() {
               placeholder: "Name",
             },
             {
+              id: "phone",
+              label: "Phone no",
+              type: "text",
+              placeholder: "Phone Number",
+            },
+            {
+              id: "email",
+              label: "Email",
+              type: "email",
+              placeholder: "text@gmail.com",
+            },
+
+            {
               id: "website",
               label: "Website",
               type: "text",
               placeholder: "e.g. example.com",
             },
             {
-              id: "email",
-              label: "Email",
-              type: "email",
-              placeholder: "21 for FTP,22 for SFTP",
+              id: "address line",
+              label: "Address Line1",
+              type: "text",
+              placeholder: "Address",
             },
+
             {
               id: "taxId",
               label: "Tax-id",
@@ -80,87 +152,76 @@ export default function AddVendor() {
               placeholder: "Tax-id",
             },
             {
-              id: "email2",
-              label: "Email",
-              type: "email",
-              placeholder: "21 for FTP,22 for SFTP",
+              id: "address line 2",
+              label: "Address Line2",
+              type: "text",
+              placeholder: "Address",
             },
+
             {
               id: "city",
               label: "City",
               type: "text",
               placeholder: "City Name",
             },
-            {
-              id: "address",
-              label: "Address",
-              type: "text",
-              placeholder: "Address",
-            },
+
             {
               id: "state",
               label: "State",
               type: "text",
               placeholder: "State Name",
             },
-            {
-              id: "country",
-              label: "Country",
-              type: "text",
-              placeholder: "Country",
-            },
-            {
-              id: "postalCode",
-              label: "Postal Code",
-              type: "text",
-              placeholder: "Postal Code",
-            },
           ].map((field) => (
             <div className={styles.formGroup} key={field.id}>
               <label htmlFor={field.id}>{field.label}</label>
-              <input
-                type={field.type}
-                id={field.id}
-                name={field.id}
-                placeholder={field.placeholder}
-                value={formData[field.id]}
-                onChange={handleChange}
-                className={styles.formInput}
-              />
+              {field.icon ? (
+                <div className={styles.inputWrapper}>
+                  <input
+                    type={field.type}
+                    id={field.id}
+                    name={field.id}
+                    placeholder={field.placeholder}
+                    value={formData[field.id]}
+                    onChange={handleChange}
+                    className={styles.formInput}
+                  />
+                </div>
+              ) : (
+                <input
+                  type={field.type}
+                  id={field.id}
+                  name={field.id}
+                  placeholder={field.placeholder}
+                  value={formData[field.id]}
+                  onChange={handleChange}
+                  className={styles.formInput}
+                />
+              )}
             </div>
           ))}
-        </div>
 
-        <div className={styles.statusContainer}>
-          <div className={styles.selectWrapper}>
-            <select
-              id="status"
-              name="status"
-              value={formData.status}
+          <div className={styles.formGroup}>
+            <label htmlFor="postalCode">Postal-code</label>
+            <input
+              type="text"
+              id="postalCode"
+              name="postalCode"
+              placeholder="Postal-code"
+              value={formData.postalCode}
               onChange={handleChange}
-              className={styles.statusSelect}
-            >
-              <option value="" disabled>
-                Status
-              </option>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-              <option value="pending">Pending</option>
-            </select>
-            <div className={styles.selectArrow}>
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 22 22"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6.25812 8.45361H15.7418C15.9097 8.45365 16.0738 8.50345 16.2133 8.59673C16.3529 8.69001 16.4617 8.82258 16.5259 8.97767C16.5901 9.13276 16.607 9.30341 16.5742 9.46805C16.5415 9.63269 16.4607 9.78393 16.342 9.90265L11.6001 14.6445C11.4409 14.8036 11.2251 14.893 11 14.893C10.7749 14.893 10.559 14.8036 10.3998 14.6445L5.65796 9.90265C5.53928 9.78393 5.45846 9.63269 5.42573 9.46805C5.39299 9.30341 5.4098 9.13276 5.47403 8.97767C5.53827 8.82258 5.64704 8.69001 5.78661 8.59673C5.92617 8.50345 6.09026 8.45365 6.25812 8.45361Z"
-                  fill="#3D3C3C"
-                />
-              </svg>
-            </div>
+              className={styles.formInput}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="country">Country</label>
+            <CustomDropdown
+              value={formData.country}
+              placeholder="Country"
+              options={countryOptions}
+              isOpen={isCountryDropdownOpen}
+              onToggle={toggleCountryDropdown}
+              onSelect={handleCountrySelect}
+            />
           </div>
         </div>
 
@@ -168,12 +229,16 @@ export default function AddVendor() {
           <button type="button" className={styles.cancelButton}>
             Cancel
           </button>
-          <button type="submit" className={styles.addButton}>
+          <button
+            type="button"
+            onClick={handleSubmit}
+            className={styles.addButton}
+          >
             Add
           </button>
         </div>
-      </form>
-       
+      </div>
+         
     </div>
   );
 }

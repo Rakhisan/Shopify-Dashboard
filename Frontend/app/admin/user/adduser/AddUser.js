@@ -5,20 +5,35 @@ import styles from "./AddUser.module.css";
 
 export default function AddUser() {
   const [formData, setFormData] = useState({
-    companyId: "",
+    userrole: "",
     email: "",
-    name: "",
-    roleId: "",
-    authSecret: " Auth Secret",
+    firstname: "",
+    lastname: "",
     mfaEnabled: "",
     mfaSecret: "",
-    updatedAt: "Updated at ",
-    status: "",
-    createdAt: "Updated at",
+  });
+
+  const [dropdownStates, setDropdownStates] = useState({
+    userrole: false,
+    mfaEnabled: false,
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleDropdownSelect = (name, value) => {
+    setFormData({ ...formData, [name]: value });
+    setDropdownStates({ ...dropdownStates, [name]: false });
+  };
+
+  const toggleDropdown = (name) => {
+    setDropdownStates({
+      ...dropdownStates,
+      [name]: !dropdownStates[name],
+      // Close other dropdowns
+      ...(name === "userrole" ? { mfaEnabled: false } : { userrole: false }),
+    });
   };
 
   const handleSubmit = (e) => {
@@ -26,9 +41,9 @@ export default function AddUser() {
     console.log("Form Submitted", formData);
   };
 
-  const SvgArrow = () => (
+  const SvgArrow = ({ isOpen }) => (
     <svg
-      className={styles.selectIcon}
+      className={`${styles.selectIcon} ${isOpen ? styles.rotated : ""}`}
       width="21"
       height="21"
       viewBox="0 0 21 21"
@@ -42,18 +57,68 @@ export default function AddUser() {
     </svg>
   );
 
+  const CustomDropdown = ({
+    name,
+    value,
+    placeholder,
+    options,
+    isOpen,
+    onToggle,
+    onSelect,
+  }) => (
+    <div className={styles.customDropdown}>
+      <div
+        onClick={() => onToggle(name)}
+        className={`${styles.dropdownButton} ${isOpen ? styles.focused : ""} ${
+          value ? styles.hasValue : styles.placeholder
+        }`}
+      >
+        {value || placeholder}
+      </div>
+      <SvgArrow isOpen={isOpen} />
+
+      {isOpen && (
+        <div className={styles.dropdownMenu}>
+          {options.map((option, index) => (
+            <div
+              key={index}
+              onClick={() => onSelect(name, option.value)}
+              className={styles.dropdownOption}
+            >
+              {option.label}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
+  const userRoleOptions = [
+    { label: "Admin", value: "admin" },
+    { label: "User", value: "user" },
+    { label: "Manager", value: "manager" },
+  ];
+
+  const mfaOptions = [
+    { label: "True", value: "true" },
+    { label: "False", value: "false" },
+  ];
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Add User</h2>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <div className={styles.form}>
         <div className={styles.grid}>
-          <input
-            className={styles.input}
-            name="companyId"
-            value={formData.companyId}
-            onChange={handleChange}
-            placeholder="Company Id"
+          <CustomDropdown
+            name="userrole"
+            value={formData.userrole}
+            placeholder="User role"
+            options={userRoleOptions}
+            isOpen={dropdownStates.userrole}
+            onToggle={toggleDropdown}
+            onSelect={handleDropdownSelect}
           />
+
           <input
             className={styles.input}
             name="email"
@@ -64,76 +129,36 @@ export default function AddUser() {
 
           <input
             className={styles.input}
-            name="name"
-            value={formData.name}
+            name="firstname"
+            value={formData.firstname}
             onChange={handleChange}
-            placeholder="Name"
-          />
-          <input
-            className={styles.input}
-            name="roleId"
-            value={formData.roleId}
-            onChange={handleChange}
-            placeholder="Role-id"
+            placeholder="First name"
           />
 
           <input
             className={styles.input}
-            name="authSecret"
-            value={formData.authSecret}
-            disabled
-            placeholder="Auth Secret "
+            name="lastname"
+            value={formData.lastname}
+            onChange={handleChange}
+            placeholder="Last Name"
           />
 
-          <div className={styles.selectWrapper}>
-            <select
-              className={styles.select}
-              name="MFA"
-              value={formData.mfaEnabled}
-              onChange={handleChange}
-            >
-              <option value="">MFA</option>
-              <option value="true">True</option>
-              <option value="false">False</option>
-            </select>
-            <SvgArrow />
-          </div>
+          <CustomDropdown
+            name="mfaEnabled"
+            value={formData.mfaEnabled}
+            placeholder="mfa_enabled"
+            options={mfaOptions}
+            isOpen={dropdownStates.mfaEnabled}
+            onToggle={toggleDropdown}
+            onSelect={handleDropdownSelect}
+          />
 
           <input
             className={styles.input}
             name="mfaSecret"
             value={formData.mfaSecret}
             onChange={handleChange}
-            placeholder="MFA Secret"
-          />
-          <input
-            className={styles.input}
-            name="updatedAt"
-            value={formData.updatedAt}
-            disabled
-            placeholder="Updated at"
-          />
-
-          <div className={styles.selectWrapper}>
-            <select
-              className={styles.select}
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-            >
-              <option value="">Status</option>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
-            <SvgArrow />
-          </div>
-
-          <input
-            className={styles.input}
-            name="createdAt"
-            value={formData.createdAt}
-            disabled
-            placeholder="Created at"
+            placeholder="MFA"
           />
         </div>
 
@@ -141,11 +166,12 @@ export default function AddUser() {
           <button type="button" className={styles.cancel}>
             Cancel
           </button>
-          <button type="submit" className={styles.add}>
+          <button type="button" onClick={handleSubmit} className={styles.add}>
             Add
           </button>
         </div>
-      </form>
+      </div>
+       
     </div>
   );
 }

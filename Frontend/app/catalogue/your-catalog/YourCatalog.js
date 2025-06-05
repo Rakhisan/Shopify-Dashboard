@@ -255,6 +255,15 @@ export default function CatalogueFilter() {
     setCurrentPage(1); // Reset to first page when changing page size
   };
 
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(999);
+
+  const handleSliderChange = (e) => {
+    const value = e.target.value;
+    setMinPrice(value[0]);
+    setMaxPrice(value[1]);
+  };
+
   // Calculate pagination
   const totalPages = Math.ceil(filters.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -276,11 +285,8 @@ export default function CatalogueFilter() {
           </div>
         </div>
         <div className={styles.searchContainer}>
-          <button className={styles.Button}>Save this Search</button>
-          <button className={styles.addButton} onClick={handleFilter}>
-            <MdTune />
-            Filters
-          </button>
+          <button className={styles.Button}>Save Filter</button>
+
           <button className={styles.Button}>
             <Plus size={20} />
             Add Your Product
@@ -288,6 +294,124 @@ export default function CatalogueFilter() {
         </div>
       </div>
 
+      <div className={styles.filterContainer}>
+        {/* Row 1 */}
+        <div className={styles.filterRow}>
+          <select className={styles.filterDropdown}>
+            <option>Sub-category</option>
+          </select>
+          <select className={styles.filterDropdown}>
+            <option>Vendors</option>
+          </select>
+          <select className={styles.filterDropdown}>
+            <option>Option 1 Name</option>
+          </select>
+          <select className={styles.filterDropdown}>
+            <option>Option 1 Value</option>
+          </select>
+          <select className={styles.filterDropdown}>
+            <option>Option 2 Name</option>
+          </select>
+          <select className={styles.filterDropdown}>
+            <option>Option 2 Value</option>
+          </select>
+          <select className={styles.filterDropdown}>
+            <option>Option 3 Name</option>
+          </select>
+          <select className={styles.filterDropdown}>
+            <option>Option 3 Value</option>
+          </select>
+        </div>
+
+        {/* Row 2 */}
+        <div className={styles.filterRow}>
+          <label className={styles.myLabelClass}>Enter Keyword</label>
+          <input
+            type="text"
+            placeholder="Enter Keyword"
+            className={styles.filterInput}
+            defaultValue="CartXpress"
+          />
+          <label className={styles.myLabelClass}>Enter SKU</label>
+          <br></br>
+          <input type="text" placeholder="" className={styles.filterInput} />
+          <div className={styles.priceRangeContainer}>
+            <span className={styles.priceLabel}>Price Range</span>
+            <input
+              type="text"
+              value="$0"
+              readOnly
+              className={styles.priceInput}
+            />
+            <span className={styles.priceSeparator}>Min</span>
+            <input
+              type="text"
+              value="$999"
+              readOnly
+              className={styles.priceInput}
+            />
+            <span className={styles.priceSeparator}>Max</span>
+          </div>
+        </div>
+
+        {/* Row 3 */}
+        <div className={styles.filterRow}>
+          <select className={styles.filterDropdownn}>
+            <option>Catalog</option>
+          </select>
+          <select className={styles.filterDropdownn}>
+            <option>Price Profile</option>
+          </select>
+          <select className={styles.filterDropdowns}>
+            <option>Manufacturer</option>
+          </select>
+          <div className={styles.sliderContainer}>
+            <span className={styles.sliderLabel}>$0</span>
+            <input
+              type="range"
+              min="0"
+              max="999"
+              value={minPrice}
+              onChange={(e) => setMinPrice(e.target.value)}
+              className={styles.priceSlider}
+            />
+            {/* <input
+              type="range"
+              min="0"
+              max="999"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
+              className={styles.priceSlider}
+            /> */}
+            <span className={styles.sliderLabel}>$999</span>
+          </div>
+        </div>
+
+        {/* Row 4 */}
+        <div className={styles.filterRow + " " + styles.lastRow}>
+          <div className={styles.leftSection}>
+            <select className={styles.filterDropdown}>
+              <option>Category</option>
+            </select>
+            <select className={styles.filterDropdown}>
+              <option>Part Number</option>
+            </select>
+          </div>
+          <div className={styles.centerSection}>
+            <button className={styles.cancelButton}>Cancel</button>
+            <button className={styles.applyButton}>Apply</button>
+          </div>
+          <div className={styles.rightSection}>
+            <label className={styles.checkboxLabel}>
+              <input type="checkbox" className={styles.inStockCheckbox} />
+              In-Stock
+            </label>
+            <select className={styles.filterDropdown}>
+              <option>Export Filter</option>
+            </select>
+          </div>
+        </div>
+      </div>
       <div className={styles.tableContainer}>
         <table className={styles.filtersTable}>
           <thead>
