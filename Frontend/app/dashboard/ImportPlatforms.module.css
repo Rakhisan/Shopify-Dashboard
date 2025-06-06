@@ -1,18 +1,19 @@
 .dashboard {
-  display: grid;
+  display: flex;
   grid-template-columns: 1fr 1fr 1fr;
-  max-width: 1400px;
+  max-width: 1200px;
   gap: 24px;
   padding: 32px;
   background-color: #f1f1f1;
-  border-radius: 0.5rem;
+  border-radius: 8px;
+  margin-bottom: 20px;
 
   /* min-height: 100vh; */
 }
 
 .card {
   background: white;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 24px;
   width: 420px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -20,7 +21,7 @@
 }
 .cards {
   background: white;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 24px;
   width: 272px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);

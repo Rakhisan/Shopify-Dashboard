@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import styles from "./Price.module.css";
 import { useRouter } from "next/navigation";
 
-const statusColor = {
-  Active: styles.active,
-  Inactive: styles.inactive,
-};
+// const statusColor = {
+//   Active: styles.active,
+//   Inactive: styles.inactive,
+// };
 
 export default function Price() {
   const router = useRouter();
@@ -17,85 +17,106 @@ export default function Price() {
     {
       id: "#302012",
       profilename: "Standard Pricing",
-      rulescount: "4 Rules",
-      status: "Active",
+      Description: "ABC",
+      pricetype: "EDK",
+      excludevendore: "3",
+      pricerule: "1",
     },
     {
       id: "#302011",
       profilename: "Premium Pricing",
-      rulescount: "8 Rules",
-      status: "Active",
+      Description: "ABC",
+      pricetype: "EDH",
+      excludevendore: "2",
+      pricerule: "4",
     },
     {
       id: "#302002",
       profilename: "Basic Pricing",
-      rulescount: "12 Rules",
-      status: "Inactive",
+      Description: "def",
+      pricetype: "FED",
+      excludevendore: "4",
+      pricerule: "3",
     },
     {
       id: "#301901",
       profilename: "Enterprise Pricing",
-      rulescount: "10 Rules",
-      status: "Inactive",
+      Description: "ghi",
+      pricetype: "LOC",
+      excludevendore: "5",
+      pricerule: "2",
     },
     {
       id: "#301900",
       profilename: "Student Pricing",
-      rulescount: "15 Rules",
-      status: "Active",
+      Description: "jkl",
+      pricetype: "STA",
+      excludevendore: "7",
+      pricerule: "5",
     },
     {
       id: "#301800",
       profilename: "Family Plan",
-      rulescount: "14 Rules",
-      status: "Inactive",
+      Description: "mno",
+      pricetype: "REG",
+      excludevendore: "5",
+      pricerule: "8",
     },
     {
       id: "#301701",
       profilename: "Seasonal Discount",
-      rulescount: "12 Rules",
-      status: "Inactive",
+      Description: "pqr",
+      pricetype: "EDK",
+      excludevendore: "3",
+      pricerule: "6",
     },
     {
       id: "#301600",
       profilename: "Loyalty Program",
-      rulescount: "20 Rules",
-      status: "Inactive",
+      Description: "stu",
+      pricetype: "LOC",
+      excludevendore: "5",
+      pricerule: "7",
     },
     {
       id: "#301500",
       profilename: "Referral Pricing",
-      rulescount: "8 Rules",
-      status: "Active",
+      Description: "vwx",
+      pricetype: "EDK",
+      excludevendore: "4",
+      pricerule: "8",
     },
     {
       id: "#301400",
       profilename: "Trial Offer",
-      rulescount: "5 Rules",
-      status: "Inactive",
+      Description: "yz",
+      pricetype: "FED",
+      excludevendore: "6",
+      pricerule: "9",
     },
   ]);
 
   const handlePriceRule = () => {
-    router.push("./price/price-rule");
+    router.push("./price-profile/add-profile");
   };
   const handleEditRule = () => {
-    router.push("./price/edit-rule");
+    router.push("./price-profile/edit-profile");
   };
 
-  const handleStatusToggle = (itemId) => {
-    setPriceData(
-      priceData.map((item) =>
-        item.id === itemId
-          ? {
-              ...item,
-              status: item.status === "Active" ? "Inactive" : "Active",
-            }
-          : item
-      )
-    );
-    setOpenMenuIndex(null); // Close the dropdown menu after status change
-  };
+  // const handleStatusToggle = (itemId) => {
+  //   setPriceData(
+  //     priceData.map((item) =>
+  //       item.id === itemId
+  //         ? {
+  //             ...item,
+
+  //             pricerule: item.status === "Active" ? "Inactive" : "Active",
+  //           }
+  //         : item
+  //     )
+  //   );
+  //   setOpenMenuIndex(null); // Close the dropdown menu after status change
+  // };
 
   return (
     <div className={styles.container}>
@@ -126,7 +147,7 @@ export default function Price() {
 
         <button className={styles.button} onClick={handlePriceRule}>
           <span className={styles.plusIcon}>+</span>
-          Price Rule
+          Add Price Profile
         </button>
       </div>
 
@@ -139,8 +160,10 @@ export default function Price() {
               </th>
               <th className={styles.idHeader}>ID</th>
               <th className={styles.profilenameHeader}>Profile Name</th>
-              <th className={styles.rulesCount}>Rules Count</th>
-              <th className={styles.statusHeader}>Status</th>
+              <th className={styles.Description}>Description</th>
+              <th className={styles.Description}>Price Type</th>
+              <th className={styles.Description}>Exclude Vendor</th>
+              <th className={styles.statusHeader}>Price Rule</th>
               <th></th>
             </tr>
           </thead>
@@ -154,16 +177,10 @@ export default function Price() {
                   {item.id}
                 </td>
                 <td className={styles.nameCell}>{item.profilename}</td>
-                <td className={styles.rulesCell}>{item.rulescount}</td>
-                <td className={styles.statusCell}>
-                  <span
-                    className={`${styles.statusBadge} ${
-                      statusColor[item.status] || ""
-                    }`}
-                  >
-                    {item.status}
-                  </span>
-                </td>
+                <td className={styles.rulesCell}>{item.Description}</td>
+                <td className={styles.statusCell}>{item.pricetype} </td>
+                <td className={styles.statusCell}>{item.excludevendore} </td>
+                <td className={styles.statusCell}>{item.pricerule} </td>
                 <td className={styles.verticalDotsWrapper}>
                   <span
                     className={styles.verticalDots}
@@ -176,9 +193,7 @@ export default function Price() {
                   {openMenuIndex === index && (
                     <div className={styles.dropdownMenu}>
                       <button onClick={handleEditRule}>Edit</button>
-                      <button onClick={() => handleStatusToggle(item.id)}>
-                        {item.status === "Active" ? "Inactive" : "Active"}
-                      </button>
+                      <button>Add</button>
                       <button>Delete</button>
                     </div>
                   )}

@@ -162,6 +162,7 @@ export default function CatalogueFilter() {
           </button>
         </div>
       </div>
+
       <div className={styles.tableContainer}>
         <table className={styles.filtersTable}>
           <thead>

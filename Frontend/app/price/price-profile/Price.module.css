@@ -5,6 +5,7 @@
   font-family: Public Sans;
   max-width: 1200px;
   margin: 0 auto;
+  height: 120%;
   color: #686f83;
   /* background-color: white; */
   /* padding: 20px; */
@@ -45,7 +46,7 @@
   position: relative;
   width: 260px;
   height: 40px;
-  margin-left: auto;
+  /* margin-left: auto; */
 }
 
 .searchIcon {
@@ -62,7 +63,7 @@
 .input {
   padding: 10px 23px; /* Fixed comma syntax */
   border: 1px solid #d5d5d5;
-  border-radius: 12px;
+  border-radius: 8px;
   width: 241px;
   height: 100%;
   font-size: 14px;
@@ -75,13 +76,20 @@
   background: #2fb4ff;
   color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   cursor: pointer;
   height: 44px;
   font-size: 0.92rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.smallSelectGroup {
+  display: flex;
+  flex-direction: column;
+  width: 182px;
+  font-family: "Helvetica";
 }
 
 .plusIcon {
@@ -160,7 +168,7 @@
 .profilenameHeader,
 /* .rulesCount, */
 .nameCell {
-  width: 7px;
+  /* width: 7px; */
   padding-left: 0.5rem;
   padding-right: 22px;
   white-space: nowrap;
@@ -172,7 +180,7 @@
 
 /* Rules Count column */
 .rulesCell {
-  width: 200px;
+  /* width: 200px; */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -183,7 +191,7 @@
 
 /* Status column */
 .statusHeader {
-  width: 70px;
+  /* width: 50px; */
   text-align: right;
   padding-right: 1.5rem;
 }

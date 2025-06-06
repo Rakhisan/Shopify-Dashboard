@@ -262,7 +262,7 @@ export default function Sidebar() {
                         className={`${styles.navItem} ${styles.subItem}`}
                         onClick={() => toggleMenu("your-catalog")}
                       >
-                        <span>Your Catalog</span>
+                        <span> Catalog</span>
                         <div
                           className={`${styles.chevron} ${
                             expandedMenus.yourcatalog ? styles.expanded : ""
@@ -280,7 +280,7 @@ export default function Sidebar() {
                         className={`${styles.navItem} ${styles.subItem}`}
                         onClick={() => toggleMenu("export-filter")}
                       >
-                        <span>Export Filters</span>
+                        <span>Catalog Filters</span>
                         <div
                           className={`${styles.chevron} ${
                             expandedMenus.exportfilter ? styles.expanded : ""
@@ -289,24 +289,74 @@ export default function Sidebar() {
                       </div>
                     </Link>
                   </li>
-                  {/* <li className={styles.subItemWithLine}>
-                    <Link href="/catalogue/product-search" onClick={closeMobileMenu}>
+                </ul>
+              )}
+            </li>
+            <li>
+              <div
+                className={styles.navItem}
+                onClick={() => toggleMenu("price")}
+              >
+                <div className={styles.icon}>
+                  <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 9a3 3 0 100-6 3 3 0 000 6zM6 8a2 2 0 00-2 2v1a2 2 0 002 2h8a2 2 0 002-2v-1a2 2 0 00-2-2H6z" />
+                  </svg>
+                </div>
+                <span>Price</span>
+                <div
+                  className={`${styles.chevron} ${
+                    expandedMenus.price ? styles.expanded : ""
+                  }`}
+                >
+                  <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              {expandedMenus.price && (
+                <ul className={`${styles.submenu} ${styles.submenuWithLines}`}>
+                  <li className={styles.subItemWithLine}>
+                    <Link href="/price/price-profile" onClick={closeMobileMenu}>
                       <div
-                        className={`${styles.navItem} ${styles.subItem}`}
-                        onClick={() => toggleMenu("product-search")}
+                        className={`${styles.navItem} ${styles.subItem} ${
+                          expandedMenus.priceprofile ? styles.active : ""
+                        }`}
+                        onClick={() => toggleMenu("price-profile")}
                       >
-                        <span>Product Search</span>
+                        <span>Price Profile</span>
                         <div
-                          className={`${styles.chevron} ${expandedMenus.productsearch ? styles.expanded : ""}`}
+                          className={`${styles.chevron} ${
+                            expandedMenus.priceprofile ? styles.expanded : ""
+                          }`}
                         ></div>
                       </div>
                     </Link>
-                  </li> */}
+                  </li>
+                  <li className={styles.subItemWithLine}>
+                    <Link href="/price/price-rule" onClick={closeMobileMenu}>
+                      <div
+                        className={`${styles.navItem} ${styles.subItem}`}
+                        onClick={() => toggleMenu("price-rule")}
+                      >
+                        <span> Price Rule</span>
+                        <div
+                          className={`${styles.chevron} ${
+                            expandedMenus.pricerule ? styles.expanded : ""
+                          }`}
+                        ></div>
+                      </div>
+                    </Link>
+                  </li>
                 </ul>
               )}
             </li>
 
-            <li>
+            {/* <li>
               <Link href="/price" onClick={closeMobileMenu}>
                 <div className={styles.navItem}>
                   <div className={styles.icon}>
@@ -315,7 +365,7 @@ export default function Sidebar() {
                   <span>Price</span>
                 </div>
               </Link>
-            </li>
+            </li> */}
 
             <li>
               <div

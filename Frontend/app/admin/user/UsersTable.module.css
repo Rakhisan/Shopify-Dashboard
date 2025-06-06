@@ -4,7 +4,7 @@
   max-width: 1200px;
   margin: 0 auto;
   color: #686f83;
-  min-height: 940px;
+  min-height: 770px;
   /* padding: 20px; */
 }
 
@@ -31,7 +31,7 @@
 
 .actions {
   display: flex;
-  gap: 10px;
+  gap: 350px;
 }
 
 .searchContainer {
