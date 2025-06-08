@@ -1,0 +1,603 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Public+Sans&display=swap'); */
+
+.container {
+  width: 100%;
+  font-family: Public Sans;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 120%;
+  color: #686f83;
+  /* background-color: white; */
+  /* padding: 20px; */
+}
+
+/* Header Styles */
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3px;
+  background-color: white;
+  color: #727a90;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: Public Sans;
+}
+
+/* Header row */
+/* .topRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+} */
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #24282e;
+  font-family: "Public Sans";
+}
+
+.searchWrapper {
+  position: relative;
+  width: 260px;
+  height: 40px;
+  /* margin-left: auto; */
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #575757;
+  pointer-events: none;
+}
+
+.input {
+  padding: 10px 23px; /* Fixed comma syntax */
+  border: 1px solid #d5d5d5;
+  border-radius: 8px;
+  width: 241px;
+  height: 100%;
+  font-size: 14px;
+  color: #575757;
+  text-align: center;
+}
+
+.button {
+  padding: 0 1rem;
+  background: #2fb4ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  height: 44px;
+  font-size: 0.92rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.smallSelectGroup {
+  display: flex;
+  flex-direction: column;
+  width: 182px;
+  font-family: "Helvetica";
+}
+
+.plusIcon {
+  font-weight: 500;
+  font-size: 1.5rem;
+  user-select: none;
+}
+
+/* Table layout */
+.tableContainer {
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  width: 100%;
+  overflow-x: auto;
+  background-color: white;
+  /* border-radius: 8px; */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tableHeaderRow {
+  height: 56px;
+}
+
+.table th,
+.table td {
+  font-size: 14px;
+  padding: 14px 30px;
+  text-align: left;
+  border-bottom: 1px solid #e9eaea;
+  vertical-align: middle;
+  color: #686f83;
+  font-weight: 500;
+  background-color: transparent;
+  font-family: "Public Sans";
+}
+
+.checkboxColumn {
+  width: 40px;
+}
+
+/* Checkbox column */
+.table th:first-child,
+.table td:first-child {
+  width: 5px;
+  text-align: center;
+  padding: 10px 0px 10px 10px;
+}
+
+/* ID column */
+.idHeader,
+.idCell {
+  width: 60px;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+.idCell {
+  color: #24282e;
+  font-weight: 600;
+}
+
+.rulesCount {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  vertical-align: middle;
+  color: #202224;
+}
+
+/* Profile Name column */
+.profilenameHeader,
+/* .rulesCount, */
+.nameCell {
+  /* width: 7px; */
+  padding-left: 0.5rem;
+  padding-right: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  color: #727a90;
+}
+
+/* Rules Count column */
+.rulesCell {
+  /* width: 200px; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  vertical-align: middle;
+  color: #202224;
+}
+
+/* Status column */
+.statusHeader {
+  /* width: 50px; */
+  text-align: right;
+  padding-right: 1.5rem;
+}
+
+.statusCell {
+  padding: 1rem 1.5rem;
+  min-width: 8rem;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.active {
+  background-color: rgba(13, 157, 227, 0.1);
+  color: #29b1ba;
+  border: 1px solid #009499;
+  padding: 6px 30px;
+}
+
+.inactive {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  font-family: Helvetica;
+  padding: 6px 26px;
+}
+
+/* Action menu */
+.verticalDotsWrapper {
+  position: relative;
+  text-align: right;
+  width: 4px;
+}
+
+.verticalDots {
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #686f83;
+  user-select: none;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 2.5rem;
+  right: 0;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+}
+
+.dropdownMenu button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.dropdownMenu button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Select wrapper with arrow inside */
+.selectWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.select {
+  /* -webkit-appearance: none;
+    -moz-appearance: none; */
+  appearance: none;
+  padding: 6px 30px 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #d5d5d5;
+  background-color: #fff;
+  font-size: 14px;
+  color: #202224;
+  cursor: pointer;
+  min-width: 70px;
+}
+
+/* Arrow icon inside select box */
+.arrowIcon {
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.footerRow {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  align-items: center;
+  /* margin-top: 1.5rem; */
+  flex-wrap: nowrap;
+  gap: 1rem;
+}
+
+.rowsPerPage {
+  position: absolute;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 14px;
+  color: #727a90;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+/* Container for just the arrow buttons */
+.paginationButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; /* takes available space and centers its children */
+  padding-left: 50px;
+}
+
+.paginationButton {
+  background: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 30px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.paginationButton:hover {
+  background-color: #f5f5f5;
+  border: 1px solid #787676;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .topRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: white;
+    border-radius: 0;
+  }
+
+  .title {
+    font-size: 1.125rem;
+  }
+
+  .searchWrapper {
+    width: 100%;
+    margin-left: 0;
+    height: 36px;
+  }
+
+  .input {
+    width: 100%;
+    font-size: 0.875rem;
+    padding: 8px 20px;
+  }
+
+  .searchIcon {
+    left: 8px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .button {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    font-size: 0.875rem;
+    justify-content: center;
+    height: 40px;
+  }
+
+  .tableContainer {
+    width: 100%;
+    max-width: 100%;
+    /* height: 400px; */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* margin-bottom: 60px; */
+    box-sizing: border-box;
+    border: 1px solid #e5e7eb; /* Optional: visual boundary */
+  }
+
+  .table {
+    width: 1000px; /* Wide table for scrolling */
+    min-width: 1000px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 0.875rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .table th:first-child,
+  .table td:first-child {
+    padding: 0.8rem 0.5rem;
+  }
+
+  .idHeader,
+  .idCell {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .profilenameHeader,
+  .nameCell {
+    padding-left: 0.5rem;
+    padding-right: 1rem;
+  }
+
+  .rulesCount,
+  .rulesCell {
+    text-align: center;
+  }
+
+  .statusHeader {
+    padding-right: 1rem;
+  }
+
+  .statusCell {
+    padding: 0.8rem 1rem;
+    min-width: 6rem;
+  }
+
+  .statusBadge {
+    font-size: 0.6875rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .active,
+  .inactive {
+    padding: 4px 20px;
+  }
+
+  .verticalDotsWrapper {
+    padding: 0.8rem 1rem;
+  }
+
+  .verticalDots {
+    font-size: 1.25rem;
+  }
+
+  .dropdownMenu {
+    right: 5px;
+    top: 2rem;
+    min-width: 100px;
+    font-size: 12px;
+  }
+
+  .dropdownMenu button {
+    padding: 0.4rem 0.8rem;
+    font-size: 12px;
+  }
+
+  .footerRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* position: fixed; */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    padding: 8px 10px;
+    z-index: 10;
+    box-sizing: border-box;
+  }
+
+  .pagination {
+    margin: 0;
+  }
+
+  .paginationButtons {
+    gap: 8px;
+    padding-left: 0;
+  }
+
+  .paginationButton {
+    width: 36px;
+    height: 36px;
+  }
+
+  .rowsPerPage {
+    position: absolute;
+    right: 10px;
+    font-size: 0.875rem;
+  }
+
+  .select {
+    padding: 5px 25px 5px 8px;
+    font-size: 0.75rem;
+    min-width: 60px;
+  }
+
+  .arrowIcon {
+    right: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1rem;
+  }
+
+  .input {
+    font-size: 0.8125rem;
+    padding: 6px 18px;
+  }
+
+  .searchIcon {
+    width: 14px;
+    height: 14px;
+    left: 6px;
+  }
+
+  .button {
+    font-size: 0.8125rem;
+    padding: 0.6rem;
+    height: 36px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 0.8125rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .table th:first-child,
+  .table td:first-child {
+    padding: 0.6rem 0.4rem;
+  }
+
+  .statusCell {
+    min-width: 5rem;
+  }
+
+  .statusBadge {
+    font-size: 0.625rem;
+    padding: 0.15rem 0.4rem;
+  }
+
+  .active,
+  .inactive {
+    padding: 3px 15px;
+  }
+
+  .dropdownMenu {
+    min-width: 90px;
+  }
+
+  .paginationButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .rowsPerPage {
+    font-size: 0.75rem;
+  }
+
+  .select {
+    padding: 4px 20px 4px 6px;
+    font-size: 0.6875rem;
+    min-width: 50px;
+  }
+
+  .arrowIcon {
+    right: 6px;
+    width: 16px;
+    height: 16px;
+  }
+}

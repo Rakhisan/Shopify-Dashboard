@@ -15,7 +15,7 @@ export default function VendorSetup() {
   const router = useRouter();
 
   const handleEditExport = () => {
-    router.push("/export/export-to-channel/edit-export");
+    router.push("/export/export-to-channel/edit");
   };
 
   const toggleActionMenu = (index) => {

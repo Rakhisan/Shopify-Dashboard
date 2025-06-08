@@ -6,7 +6,7 @@
   width: 100%; /* Changed to 100% to adapt to screen width */
   max-width: 1175px; /* Maintain max-width for larger screens */
   min-height: 60vh;
-  margin: 0 auto 30px auto; /* Center the wrapper and add bottom margin */
+  margin: 0 auto 30px auto;
 }
 
 .container {

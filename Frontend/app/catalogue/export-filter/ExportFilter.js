@@ -1,10 +1,6 @@
-// components/CatalogueFilter.js
-
 "use client";
-import styles from "./ExportFilter.module.css";
 import { FaSearch } from "react-icons/fa";
 import { MdTune } from "react-icons/md";
-
 import { useState } from "react";
 
 export default function CatalogueFilter() {
@@ -13,7 +9,6 @@ export default function CatalogueFilter() {
       id: "#302012",
       name: "My Catalog",
       createdBy: "Alex Johnson",
-
       productCount: "1900",
       rule: "Britways+10%",
       selected: false,
@@ -97,7 +92,7 @@ export default function CatalogueFilter() {
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
   const handleFilter = () => {
-    router.push("/catalogue/your-catalog/filter");
+    // router.push("/catalogue/your-catalog/filter");
   };
 
   const handleCheckboxChange = (id) => {
@@ -131,43 +126,39 @@ export default function CatalogueFilter() {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filters.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Import font in the head section if using Next.js pages directory
-  // const addPublicSansFont = () => {
-  //   return (
-  //     <style jsx global>{`
-  //       @import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap");
-  //     `}</style>
-  //   );
-  // };
-
   return (
-    <div className={styles.container}>
-      {/* <div className={styles.tableContainer}> */}
-      {/* {addPublicSansFont()} */}
-      <div className={styles.header}>
-        <h2 className={styles.title}>Export Filters</h2>
-        <div className={styles.searchContainer}>
-          <div className={styles.inputWrapper}>
-            <FaSearch className={styles.searchIcon} />
+    <div className="w-full font-sans max-w-[1200px] mx-auto text-[#686f83] ">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-1 bg-white text-[#727a90] rounded-t-lg px-4 py-4 shadow-[0_2px_8px_rgba(0,0,0,0.1)] overflow-hidden font-sans">
+        <h2 className="text-[#24282e] m-0 text-xl font-semibold">
+          Export Filters
+        </h2>
+        <div className="flex flex-nowrap gap-[350px] items-center">
+          <div className="relative w-full">
+            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#aaa] pointer-events-none" />
             <input
               type="text"
               placeholder="Search by Created By..."
-              className={styles.searchInput}
+              className="w-full py-2 px-3 pl-[66px] border border-[#ccc] rounded-[10px] text-sm"
             />
           </div>
 
-          <button className={styles.addButton} onClick={handleFilter}>
+          <button
+            className="flex items-center gap-1.5 bg-[#2fb4ff] text-white border-none rounded-lg py-3 px-4 text-sm cursor-pointer transition-colors duration-200 hover:bg-[#32a5fd]"
+            onClick={handleFilter}
+          >
             <MdTune />
             Filter
           </button>
         </div>
       </div>
 
-      <div className={styles.tableContainer}>
-        <table className={styles.filtersTable}>
+      {/* Table Container */}
+      <div className="w-full overflow-x-auto bg-white shadow-[0_1px_3px_rgba(0,0,0,0.1)]">
+        <table className="w-full border-collapse text-left">
           <thead>
             <tr>
-              <th className={styles.checkboxColumn}>
+              <th className="w-10 py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
                 <input
                   type="checkbox"
                   onChange={() => {
@@ -187,52 +178,77 @@ export default function CatalogueFilter() {
                   }
                 />
               </th>
-              <th className={styles.idColumn}>ID</th>
-              <th className={styles.nameColumn}>Saved Search Name</th>
-              <th className={styles.createdByColumn}>Created By</th>
-              <th className={styles.countColumn}>No. of Product</th>
-              <th className={styles.ruleColumn}>Rule</th>
-              <th className={styles.actionsColumn}></th>
+              <th className="w-[100px] text-[#24282e] py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
+                ID
+              </th>
+              <th className="min-w-[180px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
+                Saved Search Name
+              </th>
+              <th className="min-w-[150px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
+                Created By
+              </th>
+              <th className="py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
+                No. of Product
+              </th>
+              <th className="min-w-[150px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
+                Rule
+              </th>
+              <th className="w-10 text-center relative py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap"></th>
             </tr>
           </thead>
           <tbody>
             {currentItems.map((filter) => (
               <tr
                 key={filter.id}
-                className={filter.selected ? styles.selectedRow : ""}
+                className={filter.selected ? "bg-[#f0f7ff]" : ""}
               >
-                <td className={styles.checkboxColumn}>
+                <td className="w-10 py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
                   <input
                     type="checkbox"
                     checked={filter.selected}
                     onChange={() => handleCheckboxChange(filter.id)}
                   />
                 </td>
-                <td className={styles.idColumn}>{filter.id}</td>
-                <td className={styles.nameColumn}>{filter.name}</td>
-                <td className={styles.createdByColumn}>{filter.createdBy}</td>
-                <td className={styles.countColumn}>{filter.productCount}</td>
-                <td className={styles.ruleColumn}>{filter.rule}</td>
-                <td className={styles.actionsColumn}>
+                <td className="w-[100px] text-[#24282e] py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
+                  {filter.id}
+                </td>
+                <td className="min-w-[180px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
+                  {filter.name}
+                </td>
+                <td className="min-w-[150px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
+                  {filter.createdBy}
+                </td>
+                <td className="py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
+                  {filter.productCount}
+                </td>
+                <td className="min-w-[150px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
+                  {filter.rule}
+                </td>
+                <td className="w-10 text-center relative py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
                   <button
-                    className={styles.menuButton}
+                    className="bg-transparent border-none cursor-pointer text-lg p-0 w-6 h-6 flex items-center justify-center text-[#374957]"
                     onClick={() => toggleMenu(filter.id)}
                   >
-                    <span className={styles.menuDots}>⋮</span>
+                    <span className="font-bold leading-none text-[#374957]">
+                      ⋮
+                    </span>
                   </button>
                   {activeMenu === filter.id && (
-                    <div className={styles.menuDropdown}>
+                    <div className="absolute right-5 bg-white border border-[#ddd] rounded shadow-[0_2px_5px_rgba(0,0,0,0.15)] z-10 flex flex-col min-w-[120px] overflow-hidden">
                       <button
+                        className="bg-transparent border-none text-left py-2 px-3 text-sm cursor-pointer hover:bg-[#f5f5f5]"
                         onClick={() => handleMenuAction("edit", filter.id)}
                       >
                         Edit
                       </button>
                       <button
+                        className="bg-transparent border-none text-left py-2 px-3 text-sm cursor-pointer hover:bg-[#f5f5f5]"
                         onClick={() => handleMenuAction("update", filter.id)}
                       >
                         Update
                       </button>
                       <button
+                        className="bg-transparent border-none text-left py-2 px-3 text-sm cursor-pointer hover:bg-[#f5f5f5]"
                         onClick={() => handleMenuAction("delete", filter.id)}
                       >
                         Delete
@@ -245,9 +261,10 @@ export default function CatalogueFilter() {
           </tbody>
         </table>
 
-        <div className={styles.pagination}>
-          <div className={styles.paginationButtons}>
-            <button className={styles.paginationButton}>
+        {/* Pagination */}
+        <div className="flex justify-center items-center m-5">
+          <div className="flex justify-center items-center flex-1 pl-[50px]">
+            <button className="bg-transparent border border-[#e0e0e0] rounded-[30px] w-[50px] h-[50px] flex items-center justify-center cursor-pointer mr-1 hover:bg-[#f5f5f5] hover:border-[#787676]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -261,7 +278,7 @@ export default function CatalogueFilter() {
                 <polyline points="15 18 9 12 15 6" />
               </svg>
             </button>
-            <button className={styles.paginationButton}>
+            <button className="bg-transparent border border-[#e0e0e0] rounded-[30px] w-[50px] h-[50px] flex items-center justify-center cursor-pointer mr-1 hover:bg-[#f5f5f5] hover:border-[#787676]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

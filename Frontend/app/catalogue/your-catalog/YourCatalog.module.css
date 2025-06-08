@@ -1,14 +1,14 @@
 /* ProductSearch.module.css - UPDATED VERSION TO FIX OVERLAPPING AND ALIGNMENT */
 
-.container {
+/* .container {
   width: 100%;
   font-family: Public Sans;
   max-width: 1200px;
   margin: 0 auto;
   color: #686f83;
   min-height: 920px;
-  /* padding: 20px; */
-}
+  padding: 20px;
+} */
 
 /* Header Styles */
 .header {

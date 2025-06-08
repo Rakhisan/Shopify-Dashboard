@@ -321,32 +321,32 @@ export default function Sidebar() {
               {expandedMenus.price && (
                 <ul className={`${styles.submenu} ${styles.submenuWithLines}`}>
                   <li className={styles.subItemWithLine}>
-                    <Link href="/price/price-profile" onClick={closeMobileMenu}>
+                    <Link href="/price/profile" onClick={closeMobileMenu}>
                       <div
                         className={`${styles.navItem} ${styles.subItem} ${
-                          expandedMenus.priceprofile ? styles.active : ""
+                          expandedMenus.profile ? styles.active : ""
                         }`}
-                        onClick={() => toggleMenu("price-profile")}
+                        onClick={() => toggleMenu("profile")}
                       >
                         <span>Price Profile</span>
                         <div
                           className={`${styles.chevron} ${
-                            expandedMenus.priceprofile ? styles.expanded : ""
+                            expandedMenus.profile ? styles.expanded : ""
                           }`}
                         ></div>
                       </div>
                     </Link>
                   </li>
                   <li className={styles.subItemWithLine}>
-                    <Link href="/price/price-rule" onClick={closeMobileMenu}>
+                    <Link href="/price/rule" onClick={closeMobileMenu}>
                       <div
                         className={`${styles.navItem} ${styles.subItem}`}
-                        onClick={() => toggleMenu("price-rule")}
+                        onClick={() => toggleMenu("rule")}
                       >
                         <span> Price Rule</span>
                         <div
                           className={`${styles.chevron} ${
-                            expandedMenus.pricerule ? styles.expanded : ""
+                            expandedMenus.rule ? styles.expanded : ""
                           }`}
                         ></div>
                       </div>
