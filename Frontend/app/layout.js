@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Navbar />
-        <div style={{ display: "flex", height: "100vh" }}>
+        <div style={{ display: "flex", height: "calc(100vh - 50px)" }}>
           <Sidebar />
           <main style={{ flex: 1, padding: "20px", overflowY: "auto" }}>
             {children}

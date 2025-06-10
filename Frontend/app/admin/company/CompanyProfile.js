@@ -1,16 +1,20 @@
 "use client";
 import React, { useState } from "react";
-import { Upload, ChevronDown } from "lucide-react";
+import { Upload } from "lucide-react";
+
+const CustomChevronDown = () => (
+  <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5.81769 7.72449H15.3014C15.4693 7.72452 15.6333 7.77433 15.7729 7.86761C15.9125 7.96089 16.0212 8.09345 16.0855 8.24854C16.1497 8.40363 16.1665 8.57428 16.1338 8.73892C16.101 8.90357 16.0202 9.05481 15.9015 9.17352L11.1597 13.9154C11.0005 14.0745 10.7846 14.1639 10.5595 14.1639C10.3344 14.1639 10.1186 14.0745 9.95938 13.9154L5.21754 9.17352C5.09885 9.05481 5.01803 8.90357 4.9853 8.73892C4.95256 8.57428 4.96937 8.40363 5.0336 8.24854C5.09784 8.09345 5.20661 7.96089 5.34618 7.86761C5.48574 7.77433 5.64983 7.72452 5.81769 7.72449Z" fill="#8E95A6" />
+  </svg>
+);
+
+
 
 const CompanyProfileForm = () => {
   const [formData, setFormData] = useState({
     companyName: "",
     email: "",
     phone: "",
-    website: "",
-    domain: "",
-    industry: "",
-    taxId: "",
     plan: "",
     address: "",
     city: "",
@@ -19,8 +23,6 @@ const CompanyProfileForm = () => {
     postalCode: "",
     timezone: "",
     currencySymbol: "",
-    distributorFeedRefresh: "",
-    roundingMultiple: "",
   });
 
   const [logo, setLogo] = useState(null);
@@ -34,7 +36,7 @@ const CompanyProfileForm = () => {
   const [showStateDropdown, setShowStateDropdown] = useState(false);
   const [showTimezoneDropdown, setShowTimezoneDropdown] = useState(false);
   const [showCurrencyDropdown, setShowCurrencyDropdown] = useState(false);
-  const [showDistributorDropdown, setShowDistributorDropdown] = useState(false);
+  const [showPlanDropdown, setShowPlanDropdown] = useState(false);
 
   const countryCodes = [
     { code: "+1", flag: "🇺🇸", country: "US", name: "United States" },
@@ -120,7 +122,7 @@ const CompanyProfileForm = () => {
     "CAD ($)",
   ];
 
-  const distributorOptions = ["Daily", "Weekly", "Monthly", "Real-time"];
+  const planOptions = ["Basic", "Standard", "Premium", "Enterprise"];
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -153,127 +155,137 @@ const CompanyProfileForm = () => {
     }
   };
 
-  const DocumentUploadBox = () => (
-    <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 transition-colors">
-      <Upload className="w-8 h-8 text-gray-400 mb-2" />
-      <span className="text-sm text-gray-500">Upload Company Documents</span>
-      <input
-        type="file"
-        multiple
-        accept=".pdf,.doc,.docx"
-        className="hidden"
-        onChange={(e) => console.log("Documents uploaded:", e.target.files)}
-      />
-    </div>
-  );
-
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-white">
-      <h1 className="text-2xl font-semibold text-gray-800 mb-6">
+    <div className="p-4 sm:p-6 h-auto rounded-xl bg-white mb-10 max-w-7xl mx-auto">
+      <h2 className="text-2xl font-semibold text-[#2B2F32] mb-6">
         Company Profile
-      </h1>
+      </h2>
 
-      <div className="flex gap-8">
-        {/* Left Side */}
-        <div className="flex-1 space-y-6">
-          {/* Logo Upload Section */}
-          <div className="flex justify-start">
-            <div
-              className="w-[535px] h-32 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-blue-400 transition-colors"
-              onDragOver={handleDragOver}
-              onDrop={handleDrop}
-              onClick={() => document.getElementById("logo-upload").click()}
-            >
-              {logo ? (
-                <img
-                  src={logo}
-                  alt="Logo"
-                  className="w-full h-full object-contain rounded-lg"
-                />
-              ) : (
-                <div className="text-center">
-                  <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                  <span className="text-xs text-gray-500">logo</span>
-                </div>
-              )}
-            </div>
-            <input
-              id="logo-upload"
-              type="file"
-              accept="image/*"
-              onChange={handleLogoUpload}
-              className="hidden"
-            />
+      <div className="space-y-2">
+
+        <div>
+          <label className="block text-sm font-medium text-[#5E6366] mb-2">
+            Logo
+          </label>
+          <div
+            className=" w-auto max-w-xl h-20 border-2 border-dashed border-[#CFD3D4] rounded-lg flex items-center justify-center cursor-pointer hover:border-[#30B4FF] transition-colors"
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+            onClick={() => document.getElementById("logo-upload").click()}
+          >
+            {logo ? (
+              <img
+                src={logo}
+                alt="Logo"
+                className=" object-contain rounded-lg"
+              />
+            ) : (
+              <div className="text-center">
+                <Upload className="w-8 h-8 text-[#5E6366] mx-auto  item-center" />
+                <span className="text-sm text-[#5E6366] "> Logo max 150kb support jpg, png </span>
+              </div>
+            )}
           </div>
-          {/* Company Name */}
-          <div>
+          <input
+            id="logo-upload"
+            type="file"
+            accept="image/*"
+            onChange={handleLogoUpload}
+            className="hidden"
+          />
+        </div>
+
+
+        <div className="flex flex-col sm:flex-row gap-2">
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-[#5E6366] mb-2">
+              Company Name
+            </label>
             <input
               type="text"
-              placeholder="Company Name"
+              placeholder="Enter company name"
               value={formData.companyName}
               onChange={(e) => handleInputChange("companyName", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  focus:border-transparent"
             />
           </div>
-
-          {/* Phone with Country Code */}
-          <div className="flex">
-            <div className="relative">
-              <button
-                onClick={() => setShowCountryDropdown(!showCountryDropdown)}
-                className="flex items-center px-3 py-3 border border-gray-300 rounded-l-lg bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <span className="mr-1">{selectedCountryCode.flag}</span>
-                <span className="text-sm">{selectedCountryCode.code}</span>
-                <ChevronDown className="w-4 h-4 ml-1" />
-              </button>
-              {showCountryDropdown && (
-                <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
-                  {countryCodes.map((country) => (
-                    <button
-                      key={country.country}
-                      onClick={() => {
-                        setSelectedCountryCode(country);
-                        setShowCountryDropdown(false);
-                      }}
-                      className="w-full px-3 py-2 text-left hover:bg-gray-100 flex items-center"
-                    >
-                      <span className="mr-2">{country.flag}</span>
-                      <span className="mr-2">{country.code}</span>
-                      <span className="text-sm text-gray-600">
-                        {country.name}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-[#5E6366] mb-2">
+              Email Address
+            </label>
             <input
-              type="tel"
-              placeholder="8023456789"
-              value={formData.phone}
-              onChange={(e) => handleInputChange("phone", e.target.value)}
-              className="flex-1 px-4 py-3 border border-gray-300 border-l-0 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              type="email"
+              placeholder="Enter email address"
+              value={formData.email}
+              onChange={(e) => handleInputChange("email", e.target.value)}
+              className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  focus:border-transparent"
             />
           </div>
+        </div>
 
-          {/* Currency Symbol Dropdown */}
-          <div className="relative">
+
+        <div className="flex flex-col lg:flex-row gap-2 lg:gap-2">
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-[#5E6366] mb-2">
+              Phone Number
+            </label>
+            <div className="flex">
+              <div className="relative">
+                <button
+                  onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                  className="flex items-center px-2 py-2  border border-[#CFD3D4] rounded-l-lg   focus:outline-none focus:ring-2 focus:ring-[#30B4FF] "
+                >
+                  <span className="mr-1">{selectedCountryCode.flag}</span>
+                  <span className="text-sm">{selectedCountryCode.code}</span>
+                  <CustomChevronDown />
+                </button>
+                {showCountryDropdown && (
+                  <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
+                    {countryCodes.map((country) => (
+                      <button
+                        key={country.country}
+                        onClick={() => {
+                          setSelectedCountryCode(country);
+                          setShowCountryDropdown(false);
+                        }}
+                        className="w-full px-3 py-2 hover:bg-[#30B4FF] text-left text-[#5E6366] flex items-center"
+                      >
+                        <span className="mr-2">{country.flag}</span>
+                        <span className="mr-2">{country.code}</span>
+                        <span className="text-sm hover:bg-[#30B4FF] text-[#5E6366]">
+                          {country.name}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <input
+                type="tel"
+                placeholder="8023456789"
+                value={formData.phone}
+                onChange={(e) => handleInputChange("phone", e.target.value)}
+                className="flex-1 px-4 py-2 border border-[#CFD3D4] border-l-0 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  focus:border-transparent"
+              />
+            </div>
+          </div>
+          <div className="flex-1 relative">
+            <label className="block text-sm font-medium text-[#5E6366] mb-2">
+              Currency
+            </label>
             <button
               onClick={() => setShowCurrencyDropdown(!showCurrencyDropdown)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-left bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between"
+              className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg text-left bg-white hover:[#30B4FF]  focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  flex items-center justify-between"
             >
               <span
-                className={
-                  formData.currencySymbol ? "text-gray-900" : "text-gray-500"
-                }
+                className={formData.currencySymbol ? "text-[#5E6366]" : "text-[#5E6366]"}
               >
-                {formData.currencySymbol || "Currency Symbol"}
+                {formData.currencySymbol || "Select currency"}
               </span>
-              <ChevronDown className="w-4 h-4" />
+              <CustomChevronDown />
             </button>
             {showCurrencyDropdown && (
-              <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
+              <div className="absolute top-full left-0 mt-1 w-full bg-white border border-[#CFD3D4] rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
                 {currencies.map((currency) => (
                   <button
                     key={currency}
@@ -281,7 +293,7 @@ const CompanyProfileForm = () => {
                       handleInputChange("currencySymbol", currency);
                       setShowCurrencyDropdown(false);
                     }}
-                    className="w-full px-4 py-2 text-left hover:bg-gray-100"
+                    className="w-full px-2 py-2 text-left text-[#5E6366] hover:bg-[#30B4FF] "
                   >
                     {currency}
                   </button>
@@ -289,315 +301,212 @@ const CompanyProfileForm = () => {
               </div>
             )}
           </div>
-
-          {/* Domain */}
-          <div>
-            <input
-              type="text"
-              placeholder="Domain"
-              value={formData.domain}
-              onChange={(e) => handleInputChange("domain", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-
-          {/* Tax ID */}
-          <div>
-            <input
-              type="text"
-              placeholder="Tax-Id"
-              value={formData.taxId}
-              onChange={(e) => handleInputChange("taxId", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-
-          {/* State Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setShowStateDropdown(!showStateDropdown)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-left bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between"
-            >
-              <span
-                className={formData.state ? "text-gray-900" : "text-gray-500"}
-              >
-                {formData.state || "State"}
-              </span>
-              <ChevronDown className="w-4 h-4" />
-            </button>
-            {showStateDropdown && (
-              <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
-                {states.map((state) => (
-                  <button
-                    key={state}
-                    onClick={() => {
-                      handleInputChange("state", state);
-                      setShowStateDropdown(false);
-                    }}
-                    className="w-full px-4 py-2 text-left hover:bg-gray-100"
-                  >
-                    {state}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Postal Code */}
-          <div>
-            <input
-              type="text"
-              placeholder="Postal-code"
-              value={formData.postalCode}
-              onChange={(e) => handleInputChange("postalCode", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-
-          {/* Timezone Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setShowTimezoneDropdown(!showTimezoneDropdown)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-left bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between"
-            >
-              <span
-                className={
-                  formData.timezone ? "text-gray-900" : "text-gray-500"
-                }
-              >
-                {formData.timezone || "Time-zone"}
-              </span>
-              <ChevronDown className="w-4 h-4" />
-            </button>
-            {showTimezoneDropdown && (
-              <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
-                {timezones.map((timezone) => (
-                  <button
-                    key={timezone}
-                    onClick={() => {
-                      handleInputChange("timezone", timezone);
-                      setShowTimezoneDropdown(false);
-                    }}
-                    className="w-full px-4 py-2 text-left hover:bg-gray-100"
-                  >
-                    {timezone}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Rounding Multiple */}
-          <div>
-            <input
-              type="text"
-              placeholder="Rounding-multiple"
-              value={formData.roundingMultiple}
-              onChange={(e) =>
-                handleInputChange("roundingMultiple", e.target.value)
-              }
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
         </div>
 
-        {/* Right Side */}
-        <div className="flex-1 space-y-6">
-          {/* Address */}
-          <div>
-            <input
-              type="text"
-              placeholder="Address"
-              value={formData.address}
-              onChange={(e) => handleInputChange("address", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
+        <div>
+          <label className="block text-sm font-medium text-[#5E6366] mb-1">
+            Address
+          </label>
+          <textarea
+            placeholder="Enter complete address"
+            value={formData.address}
+            onChange={(e) => handleInputChange("address", e.target.value)}
+            rows={2}
+            className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  focus:border-transparent resize-none"
+          />
+        </div>
 
-          {/* Distributor Feed Refresh Frequency */}
-          <div className="relative">
-            <button
-              onClick={() =>
-                setShowDistributorDropdown(!showDistributorDropdown)
-              }
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-left bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between"
-            >
-              <span
-                className={
-                  formData.distributorFeedRefresh
-                    ? "text-gray-900"
-                    : "text-gray-500"
+        <div className="flex flex-col lg:flex-row gap-2">
+
+          <div className="flex-1 space-y-2">
+
+            <div className="relative">
+              <label className="block text-sm font-medium text-[#5E6366] mb-2">
+                Country
+              </label>
+              <button
+                onClick={() =>
+                  setShowCountryNameDropdown(!showCountryNameDropdown)
                 }
+                className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg text-left bg-white  focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  flex items-center justify-between"
               >
-                {formData.distributorFeedRefresh ||
-                  "Distributor Feed Refresh Frequency"}
-              </span>
-              <ChevronDown className="w-4 h-4" />
-            </button>
-            {showDistributorDropdown && (
-              <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10">
-                {distributorOptions.map((option) => (
-                  <button
-                    key={option}
-                    onClick={() => {
-                      handleInputChange("distributorFeedRefresh", option);
-                      setShowDistributorDropdown(false);
-                    }}
-                    className="w-full px-4 py-2 text-left hover:bg-gray-100"
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+                <span
+                  className={formData.country ? "text-[#5E6366]" : "text-[#5E6366]"}
+                >
+                  {formData.country || "Select country"}
+                </span>
+                <CustomChevronDown />
+              </button>
+              {showCountryNameDropdown && (
+                <div className="absolute top-full left-0 mt-1 w-full bg-white border border-[#CFD3D4] rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
+                  {countries.map((country) => (
+                    <button
+                      key={country}
+                      onClick={() => {
+                        handleInputChange("country", country);
+                        setShowCountryNameDropdown(false);
+                      }}
+                      className="w-full px-2 py-2 text-left text-[#5E6366] hover:bg-[#30B4FF] "
+                    >
+                      {country}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
 
-          {/* Email */}
-          <div>
-            <input
-              type="email"
-              placeholder="Your Email Address"
-              value={formData.email}
-              onChange={(e) => handleInputChange("email", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
 
-          {/* Website */}
-          <div>
-            <input
-              type="url"
-              placeholder="Website"
-              value={formData.website}
-              onChange={(e) => handleInputChange("website", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
 
-          {/* Country Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() =>
-                setShowCountryNameDropdown(!showCountryNameDropdown)
-              }
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-left bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between"
-            >
-              <span
-                className={formData.country ? "text-gray-900" : "text-gray-500"}
+            <div>
+              <label className="block text-sm font-medium text-[#5E6366] mb-2">
+                City
+              </label>
+              <input
+                type="text"
+                placeholder="Enter city"
+                value={formData.city}
+                onChange={(e) => handleInputChange("city", e.target.value)}
+                className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  focus:border-transparent"
+              />
+            </div>
+
+            <div className="relative">
+              <label className="block text-sm font-medium text-[#5E6366] mb-2">
+                Plan
+              </label>
+              <button
+                onClick={() => setShowPlanDropdown(!showPlanDropdown)}
+                className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg text-left bg-white focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  flex items-center justify-between"
               >
-                {formData.country || "Country"}
-              </span>
-              <ChevronDown className="w-4 h-4" />
-            </button>
-            {showCountryNameDropdown && (
-              <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
-                {countries.map((country) => (
-                  <button
-                    key={country}
-                    onClick={() => {
-                      handleInputChange("country", country);
-                      setShowCountryNameDropdown(false);
-                    }}
-                    className="w-full px-4 py-2 text-left hover:bg-gray-100"
-                  >
-                    {country}
-                  </button>
-                ))}
-              </div>
-            )}
+                <span
+                  className={formData.plan ? "text-[#5E6366]" : "text-[#5E6366]"}
+                >
+                  {formData.plan || "Select plan"}
+                </span>
+                <CustomChevronDown />
+              </button>
+              {showPlanDropdown && (
+                <div className="absolute top-full left-0 mt-1 w-full bg-white border border-[#CFD3D4]rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
+                  {planOptions.map((plan) => (
+                    <button
+                      key={plan}
+                      onClick={() => {
+                        handleInputChange("plan", plan);
+                        setShowPlanDropdown(false);
+                      }}
+                      className="w-full px-4 py-2 text-left  text-[#5E6366] hover:bg-[#30B4FF] "
+                    >
+                      {plan}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
           </div>
 
-          {/* Industry */}
-          <div>
-            <input
-              type="text"
-              placeholder="Industry"
-              value={formData.industry}
-              onChange={(e) => handleInputChange("industry", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
 
-          {/* Plan */}
-          <div>
-            <input
-              type="text"
-              placeholder="Plan"
-              value={formData.plan}
-              onChange={(e) => handleInputChange("plan", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
+          <div className="flex-1 space-y-2">
 
-          {/* City */}
-          <div>
-            <input
-              type="text"
-              placeholder="City"
-              value={formData.city}
-              onChange={(e) => handleInputChange("city", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
 
-          {/* Document Upload Section - 3 boxes vertically */}
-          <div className="flex space-x-4">
-            <div
-              onClick={() => document.getElementById("doc-upload-1").click()}
-            >
-              <DocumentUploadBox />
+            <div className="relative">
+              <label className="block text-sm font-medium text-[#5E6366] mb-2">
+                State
+              </label>
+              <button
+                onClick={() => setShowStateDropdown(!showStateDropdown)}
+                className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg text-left bg-white  focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  flex items-center justify-between"
+              >
+                <span
+                  className={formData.state ? "text-[#5E6366]" : "text-[#5E6366]"}
+                >
+                  {formData.state || "Select state"}
+                </span>
+                <CustomChevronDown />
+              </button>
+              {showStateDropdown && (
+                <div className="absolute top-full left-0 mt-1 w-full bg-white border border-[#CFD3D4] rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
+                  {states.map((state) => (
+                    <button
+                      key={state}
+                      onClick={() => {
+                        handleInputChange("state", state);
+                        setShowStateDropdown(false);
+                      }}
+                      className="w-full px-2 py-2 text-left hover:bg-[#30B4FF] "
+                    >
+                      {state}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+
+            <div>
+              <label className="block text-sm font-medium text-[#5E6366] mb-2">
+                Postal Code
+              </label>
               <input
-                id="doc-upload-1"
-                type="file"
-                accept=".pdf,.doc,.docx"
-                className="hidden"
-                onChange={(e) =>
-                  console.log("Document 1 uploaded:", e.target.files)
-                }
+                type="text"
+                placeholder="Enter postal code"
+                value={formData.postalCode}
+                onChange={(e) => handleInputChange("postalCode", e.target.value)}
+                className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  focus:border-transparent"
               />
             </div>
-            <div
-              onClick={() => document.getElementById("doc-upload-2").click()}
-            >
-              <DocumentUploadBox />
-              <input
-                id="doc-upload-2"
-                type="file"
-                accept=".pdf,.doc,.docx"
-                className="hidden"
-                onChange={(e) =>
-                  console.log("Document 2 uploaded:", e.target.files)
-                }
-              />
+
+            <div className="relative">
+              <label className="block text-sm font-medium text-[#5E6366] mb-2">
+                Timezone
+              </label>
+              <button
+                onClick={() => setShowTimezoneDropdown(!showTimezoneDropdown)}
+                className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg text-left bg-white focus:outline-none focus:ring-2 focus:ring-[#30B4FF] flex items-center justify-between"
+              >
+                <span
+                  className={formData.timezone ? "text-[#5E6366]" : "text-[#5E6366]"}
+                >
+                  {formData.timezone || "Select timezone"}
+                </span>
+                <CustomChevronDown />
+              </button>
+              {showTimezoneDropdown && (
+                <div className="absolute top-full left-0 mt-1 w-full bg-white border border-[#CFD3D4] rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
+                  {timezones.map((timezone) => (
+                    <button
+                      key={timezone}
+                      onClick={() => {
+                        handleInputChange("timezone", timezone);
+                        setShowTimezoneDropdown(false);
+                      }}
+                      className="w-full px-2 py-2 text-left text-[#5E6366] hover:bg-[#30B4FF] "
+                    >
+                      {timezone}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
-            <div
-              onClick={() => document.getElementById("doc-upload-3").click()}
-            >
-              <DocumentUploadBox />
-              <input
-                id="doc-upload-3"
-                type="file"
-                accept=".pdf,.doc,.docx"
-                className="hidden"
-                onChange={(e) =>
-                  console.log("Document 3 uploaded:", e.target.files)
-                }
-              />
-            </div>
+
           </div>
         </div>
       </div>
 
-      {/* Action Buttons */}
-      <div className="flex justify-center gap-4 mt-8">
-        <div className="md:col-span-2 flex justify-center gap-4 mt-8">
-          <button className="px-8 py-3 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-50 transition-colors">
-            Cancel
-          </button>
-          <button className="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
-            Save
-          </button>
-        </div>
+      <div className="mt-8 flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-2">
+        <button
+          onClick={() => console.log("Cancel clicked")}
+          className="w-full h-10 sm:w-40 px-6 py-2 text-[#30B4FF] rounded-lg hover:bg-[#30B4FF] hover:text-white "
+          style={{ border: "2px solid #30B4FF" }}
+        >
+          Cancel
+        </button>
+        <button
+          onClick={() => console.log("Submit clicked", formData)}
+          className="w-full h-10 sm:w-40 px-6 py-2 bg-[#30B4FF] text-white rounded-lg "
+        >
+          Save
+        </button>
       </div>
     </div>
   );
