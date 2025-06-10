@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Search, Plus, MoreVertical } from "lucide-react";
 import "../../globals.css";
+import { useRouter } from "next/navigation";
 
 const VendorSetup = () => {
   const [showActionMenu, setShowActionMenu] = useState(null);
@@ -19,6 +20,7 @@ const VendorSetup = () => {
       progressBg: "bg-green-100",
       lastSync: "2025-05-13, 8:00 AM",
       status: "Active",
+      priority: "1",
       statusColor: "text-teal-600 bg-teal-50 border-teal-200",
     },
     {
@@ -32,6 +34,8 @@ const VendorSetup = () => {
       progressBg: "bg-red-100",
       lastSync: "2025-05-15, 8:00 AM",
       status: "Active",
+      priority: "2",
+
       statusColor: "text-teal-600 bg-teal-50 border-teal-200",
     },
     {
@@ -45,6 +49,8 @@ const VendorSetup = () => {
       progressBg: "bg-gray-700",
       lastSync: "2025-05-18, 8:00 AM",
       status: "Inactive",
+      priority: "3",
+
       statusColor: "text-red-600 bg-red-50 border-red-200",
     },
     {
@@ -58,9 +64,20 @@ const VendorSetup = () => {
       progressBg: "bg-yellow-400",
       lastSync: "2025-05-10, 8:00 AM",
       status: "Inactive",
+      priority: "4",
       statusColor: "text-red-600 bg-red-50 border-red-200",
     },
   ];
+
+  const router = useRouter();
+
+  const handleAddVendor = () => {
+    router.push("/catalogue/vendor-setup/add");
+  };
+
+  const handleEditVendor = () => {
+    router.push("/catalogue/vendor-setup/edit");
+  };
 
   const toggleActionMenu = (index) => {
     setShowActionMenu(showActionMenu === index ? null : index);
@@ -78,6 +95,16 @@ const VendorSetup = () => {
     } else {
       setSelectedRows(vendors.map((vendor) => vendor.id));
     }
+  };
+
+  // You'll also need to add this handler function to your component
+  const handlePriorityChange = (vendorId, newPriority) => {
+    // Update the vendor's priority in your state/data
+    setVendors(
+      vendors.map((vendor) =>
+        vendor.id === vendorId ? { ...vendor, priority: newPriority } : vendor
+      )
+    );
   };
 
   return (
@@ -98,7 +125,10 @@ const VendorSetup = () => {
           </div>
 
           {/* Add Vendor Button */}
-          <button className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
+          <button
+            onClick={handleAddVendor}
+            className="flex items-center gap-2 bg-[#2FB4FF] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#1A9BE6] transition-colors"
+          >
             <Plus className="w-4 h-4" />
             Add Vendor
           </button>
@@ -110,21 +140,21 @@ const VendorSetup = () => {
         <table className="w-full">
           <thead className="bg-gray-50">
             <tr>
-              <th className="w-12 px-4 py-3">
+              {/* <th className="w-12 px-4 py-3">
                 <input
                   type="checkbox"
                   checked={selectedRows.length === vendors.length}
                   onChange={handleSelectAll}
                   className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
                 />
-              </th>
-              <th className="text-left px-4 py-3 text-sm font-medium text-gray-700">
+              </th> */}
+              {/* <th className="text-left px-4 py-3 text-sm font-medium text-gray-700">
                 S.N.
-              </th>
-              <th className="text-left px-4 py-3 text-sm font-medium text-gray-700">
+              </th> */}
+              <th className="text-left px-4 py-4 text-sm font-medium text-gray-700">
                 Vendor Name
               </th>
-              <th className="text-left px-4 py-3 text-sm font-medium text-gray-700">
+              <th className="text-left px-4 py-4 text-sm font-medium text-gray-700">
                 Connection Type
               </th>
               <th className="text-left px-4 py-3 text-sm font-medium text-gray-700">
@@ -136,6 +166,9 @@ const VendorSetup = () => {
               <th className="text-left px-4 py-3 text-sm font-medium text-gray-700">
                 Status
               </th>
+              <th className="text-left px-4 py-3 text-sm font-medium text-gray-700">
+                Priority
+              </th>
               <th className="w-12 px-4 py-3"></th>
             </tr>
           </thead>
@@ -143,17 +176,17 @@ const VendorSetup = () => {
             {vendors.map((vendor, index) => (
               <tr key={vendor.id} className="hover:bg-gray-50">
                 {/* Checkbox */}
-                <td className="px-4 py-4">
+                {/* <td className="px-4 py-4">
                   <input
                     type="checkbox"
                     checked={selectedRows.includes(vendor.id)}
                     onChange={() => handleRowSelect(vendor.id)}
                     className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
                   />
-                </td>
+                </td> */}
 
                 {/* S.N. */}
-                <td className="px-4 py-4 text-sm text-gray-600">{vendor.id}</td>
+                {/* <td className="px-4 py-4 text-sm text-gray-600">{vendor.id}</td> */}
 
                 {/* Vendor Name */}
                 <td className="px-4 py-4">
@@ -203,10 +236,36 @@ const VendorSetup = () => {
                 {/* Status */}
                 <td className="px-4 py-4">
                   <span
-                    className={`inline-flex px-5 py-1.5 rounded-full text-xs font-medium border rounded-[4px] ${vendor.statusColor}`}
+                    className={`inline-flex px-5 py-1.5 rounded-half text-xs font-medium border rounded-[4px] ${vendor.statusColor}`}
                   >
                     {vendor.status}
                   </span>
+                </td>
+
+                {/* Priority */}
+                <td className="px-4 py-4 text-sm text-gray-600">
+                  {vendor.status === "Active" ? (
+                    <select
+                      value={vendor.priority}
+                      onChange={(e) =>
+                        handlePriorityChange(vendor.id, e.target.value)
+                      }
+                      className="w-full px-2 py-1 text-sm  rounded-md focus:outline-none  focus:transparent"
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  ) : (
+                    <span className="text-gray-400">{vendor.priority}</span>
+                  )}
                 </td>
 
                 {/* Actions */}
@@ -224,7 +283,10 @@ const VendorSetup = () => {
                         <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
                           {vendor.status === "Active" ? "Inactive" : "Active"}
                         </button>
-                        <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                        <button
+                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                          onClick={handleEditVendor}
+                        >
                           Edit
                         </button>
                         <button className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">

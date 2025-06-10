@@ -159,7 +159,7 @@ export default function CatalogueFilter() {
           <thead>
             <tr>
               <th className="w-10 py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
-                <input
+                {/* <input
                   type="checkbox"
                   onChange={() => {
                     const allSelected = filters.every(
@@ -176,13 +176,13 @@ export default function CatalogueFilter() {
                     filters.length > 0 &&
                     filters.every((filter) => filter.selected)
                   }
-                />
+                /> */}
               </th>
-              <th className="w-[100px] text-[#24282e] py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
+              {/* <th className="w-[100px] text-[#24282e] py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
                 ID
-              </th>
+              </th> */}
               <th className="min-w-[180px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
-                Saved Search Name
+                Saved Searches
               </th>
               <th className="min-w-[150px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
                 Created By
@@ -209,9 +209,9 @@ export default function CatalogueFilter() {
                     onChange={() => handleCheckboxChange(filter.id)}
                   />
                 </td>
-                <td className="w-[100px] text-[#24282e] py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
+                {/* <td className="w-[100px] text-[#24282e] py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
                   {filter.id}
-                </td>
+                </td> */}
                 <td className="min-w-[180px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
                   {filter.name}
                 </td>
