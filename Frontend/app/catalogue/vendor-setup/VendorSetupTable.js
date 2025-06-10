@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Search, Plus, MoreVertical } from "lucide-react";
 import "../../globals.css";
+import { useRouter } from "next/navigation";
 
 const VendorSetup = () => {
   const [showActionMenu, setShowActionMenu] = useState(null);
@@ -62,6 +63,16 @@ const VendorSetup = () => {
     },
   ];
 
+  const router = useRouter();
+
+  const handleAddVendor = () => {
+    router.push("/catalogue/vendor-setup/add");
+  };
+
+  const handleEditVendor = () => {
+    router.push("/catalogue/vendor-setup/edit");
+  };
+
   const toggleActionMenu = (index) => {
     setShowActionMenu(showActionMenu === index ? null : index);
   };
@@ -98,7 +109,10 @@ const VendorSetup = () => {
           </div>
 
           {/* Add Vendor Button */}
-          <button className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
+          <button
+            onClick={handleAddVendor}
+            className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors"
+          >
             <Plus className="w-4 h-4" />
             Add Vendor
           </button>
@@ -203,7 +217,7 @@ const VendorSetup = () => {
                 {/* Status */}
                 <td className="px-4 py-4">
                   <span
-                    className={`inline-flex px-5 py-1.5 rounded-full text-xs font-medium border rounded-[4px] ${vendor.statusColor}`}
+                    className={`inline-flex px-5 py-1.5 rounded-half text-xs font-medium border rounded-[4px] ${vendor.statusColor}`}
                   >
                     {vendor.status}
                   </span>
@@ -224,7 +238,10 @@ const VendorSetup = () => {
                         <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
                           {vendor.status === "Active" ? "Inactive" : "Active"}
                         </button>
-                        <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                        <button
+                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                          onClick={handleEditVendor}
+                        >
                           Edit
                         </button>
                         <button className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
