@@ -39,7 +39,7 @@ export default function Navbar() {
         />
         <div className={styles.title}>Dashboard</div>
       </div>
-      <div className={`${styles.searchContainer} ${styles.desktopSearch}`}>
+      {/* <div className={`${styles.searchContainer} ${styles.desktopSearch}`}>
         <div className={styles.searchIcon}>
           <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -79,7 +79,7 @@ export default function Navbar() {
             ×
           </button>
         </div>
-      )}
+      )} */}
       <div className={styles.right}>
         <div className={styles.rightSection}>
           {/* Mobile Search Toggle Button */}
