@@ -15,7 +15,7 @@ export default function SearchPageReplica() {
   };
 
   return (
-    <div className="w-full font-sans max-w-[1200px] mx-auto text-[#686f83] ">
+    <div className="w-full font-sans max-w-[1200px]  text-[#686f83] ">
       <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-sm p-8">
         {/* Header */}
         <div className="mb-8">

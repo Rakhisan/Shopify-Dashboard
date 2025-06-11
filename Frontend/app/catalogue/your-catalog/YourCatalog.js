@@ -966,28 +966,28 @@ export default function CatalogueFilter() {
                   <TableCell sx={{ color: "#686f83", fontSize: "0.875rem" }}>
                     {row.mfr}
                   </TableCell>
-                  <TableCell sx={{ color: "#6b7280", fontSize: "0.875rem" }}>
+                  <TableCell sx={{ color: "#686F83", fontSize: "0.875rem" }}>
                     {row.category}
                   </TableCell>
-                  <TableCell sx={{ color: "#6b7280", fontSize: "0.875rem" }}>
+                  <TableCell sx={{ color: "#686F83", fontSize: "0.875rem" }}>
                     {row.subcategory}
                   </TableCell>
-                  <TableCell sx={{ color: "#6b7280", fontSize: "0.875rem" }}>
+                  <TableCell sx={{ color: "#686F83", fontSize: "0.875rem" }}>
                     {row.option1Value}
                   </TableCell>
-                  <TableCell sx={{ color: "#6b7280", fontSize: "0.875rem" }}>
+                  <TableCell sx={{ color: "#686F83", fontSize: "0.875rem" }}>
                     {row.option1Name}
                   </TableCell>
-                  <TableCell sx={{ color: "#6b7280", fontSize: "0.875rem" }}>
+                  <TableCell sx={{ color: "#686F83", fontSize: "0.875rem" }}>
                     {row.option2Value}
                   </TableCell>
-                  <TableCell sx={{ color: "#6b7280", fontSize: "0.875rem" }}>
+                  <TableCell sx={{ color: "#686F83", fontSize: "0.875rem" }}>
                     {row.option2Name}
                   </TableCell>
-                  <TableCell sx={{ color: "#6b7280", fontSize: "0.875rem" }}>
+                  <TableCell sx={{ color: "#686F83", fontSize: "0.875rem" }}>
                     {row.option3Value}
                   </TableCell>
-                  <TableCell sx={{ color: "#6b7280", fontSize: "0.875rem" }}>
+                  <TableCell sx={{ color: "#686F83", fontSize: "0.875rem" }}>
                     {row.option3Name}
                   </TableCell>
                   <TableCell sx={{ color: "#686f83", fontSize: "0.875rem" }}>
@@ -996,7 +996,7 @@ export default function CatalogueFilter() {
                   <TableCell sx={{ color: "#686f83", fontSize: "0.875rem" }}>
                     {row.size}
                   </TableCell>
-                  <TableCell sx={{ color: "#6b7280", fontSize: "0.875rem" }}>
+                  <TableCell sx={{ color: "#686F83", fontSize: "0.875rem" }}>
                     {row.stock}
                   </TableCell>
                   <TableCell sx={{ color: "#686f83", fontSize: "0.875rem" }}>
@@ -1013,7 +1013,7 @@ export default function CatalogueFilter() {
                     <IconButton
                       size="small"
                       onClick={(event) => handleMenuClick(event, index)}
-                      sx={{ color: "#9ca3af" }}
+                      sx={{ color: "#686f83" }}
                     >
                       <MoreVert />
                     </IconButton>
@@ -1054,22 +1054,22 @@ export default function CatalogueFilter() {
             count={totalPages}
             page={page}
             onChange={handleChangePage}
-            variant="outlined"
+            variant="contained"
             shape="rounded"
             sx={{
               "& .MuiPaginationItem-root": {
-                borderColor: "#e5e7eb",
+                borderColor: "#2FB4FF",
                 color: "#6b7280",
                 "&:hover": {
-                  backgroundColor: "#f3f4f6",
+                  backgroundColor: "#2FB4FF",
                   borderColor: "#9ca3af",
                 },
                 "&.Mui-selected": {
-                  backgroundColor: "#3b82f6",
+                  backgroundColor: "#2FB4FF",
                   borderColor: "#3b82f6",
                   color: "white",
                   "&:hover": {
-                    backgroundColor: "#2563eb",
+                    backgroundColor: "#2FB4FF",
                   },
                 },
               },

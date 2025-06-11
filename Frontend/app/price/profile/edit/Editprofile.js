@@ -1,226 +1,244 @@
 "use client";
-import { useState } from "react";
-import styles from "./EditProfile.module.css";
+import React, { useState } from "react";
+import {
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Button,
+  Typography,
+  Paper,
+  Box,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 
-const CustomDropdown = ({
-  label,
-  name,
-  value,
-  onChange,
-  options,
-  placeholder,
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleSelect = (optionValue) => {
-    onChange({ target: { name, value: optionValue } });
-    setIsOpen(false);
-  };
-
-  return (
-    <div className={styles.customDropdown}>
-      <label className={styles.formLabel}>{label}</label>
-      <div className={styles.dropdownContainer}>
-        <div
-          className={styles.dropdownHeader}
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <span
-            className={value ? styles.selectedText : styles.placeholderText}
-          >
-            {value || placeholder}
-          </span>
-          <span
-            className={`${styles.dropdownArrow} ${
-              isOpen ? styles.arrowUp : ""
-            }`}
-          >
-            <svg
-              width="21"
-              height="22"
-              viewBox="0 0 21 22"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M5.44489 8.45312H14.9286C15.0965 8.45316 15.2605 8.50297 15.4001 8.59624C15.5397 8.68952 15.6484 8.82209 15.7127 8.97718C15.7769 9.13227 15.7937 9.30292 15.761 9.46756C15.7282 9.6322 15.6474 9.78344 15.5287 9.90216L10.7869 14.644C10.6277 14.8031 10.4118 14.8925 10.1867 14.8925C9.96165 14.8925 9.74577 14.8031 9.58658 14.644L4.84473 9.90216C4.72605 9.78344 4.64523 9.6322 4.61249 9.46756C4.57975 9.30292 4.59656 9.13227 4.6608 8.97718C4.72503 8.82209 4.83381 8.68952 4.97337 8.59624C5.11294 8.50297 5.27702 8.45316 5.44489 8.45312Z"
-                fill="#3D3C3C"
-              />
-            </svg>
-          </span>
-        </div>
-        {isOpen && (
-          <div className={styles.dropdownOptions}>
-            {options.map((option, index) => (
-              <div
-                key={index}
-                className={`${styles.dropdownOption} ${
-                  value === option.value ? styles.activeOption : ""
-                }`}
-                onClick={() => handleSelect(option.value)}
-              >
-                {option.label}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default function AddProfilePrice() {
-  const [formData, setFormData] = useState({
-    name: "Standard Price",
-    description: "ABC",
-    EDK: "",
-    priceRule: "",
-    excludeVendor: "Vendor 1,vendor 2,",
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleCancel = () => {
-    console.log("Cancel clicked");
-  };
-
-  const handleAdd = () => {
-    console.log("Add clicked", formData);
-  };
-
-  const EDKOptions = [
-    { value: "", label: "EDK" },
-    { value: "fixed", label: "Fixed" },
-    { value: "percentage", label: "Percentage" },
-    { value: "dynamic", label: "Dynamic" },
-  ];
-
-  const priceRuleOptions = [
-    { value: "", label: "Price Rule" },
-    { value: "standard", label: "3" },
-    { value: "premium", label: "4" },
-    { value: "discount", label: "1" },
-  ];
-
-  const vendorOptions = [
-    {
-      value: "for eg Vendor 1,vendor 2, vender 3",
-      label: "for eg Vendor 1,vendor 2, vender 3",
-    },
-    { value: "vendor1", label: "Vendor 1" },
-    { value: "vendor2", label: "Vendor 2" },
-    { value: "vendor3", label: "Vendor 3" },
-  ];
+export default function EditProfilePrice() {
+  const [name, setName] = useState("Standard Pricing");
+  const [description, setDescription] = useState("ABC");
+  const [currency, setCurrency] = useState("EDK");
+  const [value, setValue] = useState("4");
+  const [excludeVendor, setExcludeVendor] = useState("3");
 
   return (
-    <div className={styles.container}>
-      <div className={styles.headerSection}>
-        <h2 className={styles.formTitle}>Edit Profile Price</h2>
-      </div>
+    <div className="w-full font-sans max-w-[1200px]  text-[#686f83] ">
+      <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-sm p-8">
+        <Typography variant="h5" className="text-gray-800 font-medium mb-8">
+          Edit Profile Price
+        </Typography>
 
-      <div className={styles.formCard}>
-        <div className={styles.formContent}>
-          <div className={styles.topRow}>
-            <div className={styles.nameGroup}>
-              <label className={styles.formLabel}>Name</label>
-              <div className={styles.inputWithIcon}>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className={`${styles.formInput} ${styles.nameInput}`}
-                  placeholder="Standard Price"
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+          {/* Left Column */}
+          <div className="space-y-6">
+            {/* Name Field */}
+            <div>
+              <Typography variant="body2" className="text-#5E6366 mb-2">
+                Name
+              </Typography>
+              <div className="relative mb-11">
+                <TextField
+                  className="bg-white"
+                  label=""
+                  variant="outlined"
+                  color="#5E6366"
+                  fullWidth
+                  value="john"
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "8px",
+                      "& fieldset": {
+                        borderColor: "#d1d5db",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "#9ca3af",
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "#3b82f6",
+                      },
+                    },
+                  }}
+                  onChange={(e) => setValue(e.target.value)}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton edge="end">
+                          <EditIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
-                <svg
-                  className={styles.editIcon}
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+                {/* <IconButton
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                  size="small"
+                  sx={{ color: "#3b82f6" }}
                 >
-                  <path
-                    opacity="0.3"
-                    d="M5 18.0795V18.9995H5.92L14.98 9.93953L14.06 9.01953L5 18.0795Z"
-                    fill="#30B4FF"
-                  />
-                  <path
-                    d="M20.71 7.04C20.8027 6.94749 20.8762 6.8376 20.9264 6.71662C20.9766 6.59565 21.0024 6.46597 21.0024 6.335C21.0024 6.20403 20.9766 6.07435 20.9264 5.95338C20.8762 5.8324 20.8027 5.72251 20.71 5.63L18.37 3.29C18.17 3.09 17.92 3 17.66 3C17.4 3 17.15 3.1 16.96 3.29L15.13 5.12L18.88 8.87L20.71 7.04ZM3 17.25V21H6.75L17.81 9.94L14.06 6.19L3 17.25ZM5.92 19H5V18.08L14.06 9.02L14.98 9.94L5.92 19Z"
-                    fill="#30B4FF"
-                  />
-                </svg>
+                  <EditIcon fontSize="small" />
+                </IconButton> */}
               </div>
             </div>
 
-            <div className={styles.descriptionGroup}>
-              <label className={styles.formLabel}>Description</label>
-              <input
-                type="text"
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-                className={`${styles.formInput} ${styles.nameInput}`}
-                placeholder="ABC"
-              />
+            {/* Currency and Value Row */}
+            <div className="grid grid-cols-2 gap-4 text-#5E6366">
+              <FormControl fullWidth>
+                <Select
+                  value={currency}
+                  onChange={(e) => setCurrency(e.target.value)}
+                  displayEmpty
+                  sx={{
+                    backgroundColor: "white",
+                    borderRadius: "8px",
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#d1d5db",
+                    },
+                    "&:hover .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#9ca3af",
+                    },
+                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#3b82f6",
+                    },
+                  }}
+                >
+                  <MenuItem value="EDK">EDK</MenuItem>
+                  <MenuItem value="USD">USD</MenuItem>
+                  <MenuItem value="EUR">EUR</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl fullWidth>
+                <Select
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                  displayEmpty
+                  sx={{
+                    backgroundColor: "white",
+                    borderRadius: "8px",
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#d1d5db",
+                    },
+                    "&:hover .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#9ca3af",
+                    },
+                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#3b82f6",
+                    },
+                  }}
+                >
+                  <MenuItem value="1">1</MenuItem>
+                  <MenuItem value="2">2</MenuItem>
+                  <MenuItem value="3">3</MenuItem>
+                  <MenuItem value="4">4</MenuItem>
+                  <MenuItem value="5">5</MenuItem>
+                </Select>
+              </FormControl>
             </div>
           </div>
 
-          <div className={styles.middleRow}>
-            <div className={styles.smallSelectGroup}>
-              <CustomDropdown
-                name="EDK"
-                value={formData.EDK}
-                onChange={handleInputChange}
-                options={EDKOptions}
-                placeholder="EDK"
+          {/* Right Column */}
+          <div className="space-y-6">
+            {/* Description Field */}
+            <div>
+              <Typography variant="body2" className="text-gray-600 mb-2">
+                Description
+              </Typography>
+              <TextField
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                variant="outlined"
+                fullWidth
+                className="bg-white"
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "8px",
+                    "& fieldset": {
+                      borderColor: "#d1d5db",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#9ca3af",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#3b82f6",
+                    },
+                  },
+                }}
               />
             </div>
 
-            <div className={styles.smallSelectGroup}>
-              <CustomDropdown
-                name="priceRule"
-                value={formData.priceRule}
-                onChange={handleInputChange}
-                options={priceRuleOptions}
-                placeholder="4"
-              />
-            </div>
-
-            <div className={styles.vendorGroup}>
-              <CustomDropdown
-                label="Exclude vendor"
-                name="excludeVendor"
-                value={formData.excludeVendor}
-                onChange={handleInputChange}
-                options={vendorOptions}
-                placeholder="Select vendor"
-              />
+            {/* Exclude Vendor Field */}
+            <div>
+              <Typography variant="body2" className="text-gray-600 mb-2">
+                Exclude vendor
+              </Typography>
+              <FormControl fullWidth>
+                <Select
+                  value={excludeVendor}
+                  onChange={(e) => setExcludeVendor(e.target.value)}
+                  displayEmpty
+                  sx={{
+                    backgroundColor: "white",
+                    borderRadius: "8px",
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#d1d5db",
+                    },
+                    "&:hover .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#9ca3af",
+                    },
+                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "#3b82f6",
+                    },
+                  }}
+                >
+                  <MenuItem value="1">1</MenuItem>
+                  <MenuItem value="2">2</MenuItem>
+                  <MenuItem value="3">3</MenuItem>
+                  <MenuItem value="4">4</MenuItem>
+                  <MenuItem value="5">5</MenuItem>
+                </Select>
+              </FormControl>
             </div>
           </div>
+        </div>
 
-          <div className={styles.buttonRow}>
-            <button
-              type="button"
-              onClick={handleCancel}
-              className={styles.cancelButton}
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              onClick={handleAdd}
-              className={styles.saveButton}
-            >
-              Save
-            </button>
-          </div>
+        {/* Action Buttons */}
+        <div className="flex justify-center gap-4 mt-12">
+          <Button
+            variant="outlined"
+            className="px-8 py-3 text-blue-500 border-blue-500 rounded-lg"
+            sx={{
+              borderColor: "#3b82f6",
+              color: "#3b82f6",
+              textTransform: "none",
+              fontSize: "16px",
+              fontWeight: "500",
+              minWidth: "120px",
+              borderRadius: "8px",
+              "&:hover": {
+                borderColor: "#2563eb",
+                backgroundColor: "rgba(59, 130, 246, 0.04)",
+              },
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            className="px-8 py-3 bg-blue-500 text-white rounded-lg"
+            sx={{
+              backgroundColor: "#3b82f6",
+              textTransform: "none",
+              fontSize: "16px",
+              fontWeight: "500",
+              minWidth: "120px",
+              borderRadius: "8px",
+              "&:hover": {
+                backgroundColor: "#2563eb",
+              },
+            }}
+          >
+            Save
+          </Button>
         </div>
       </div>
     </div>

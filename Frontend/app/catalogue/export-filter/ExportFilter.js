@@ -497,22 +497,22 @@ export default function CatalogueFilter() {
             count={filtrePages}
             page={page}
             onChange={handleChangePage}
-            variant="outlined"
+            variant="contained"
             shape="rounded"
             sx={{
               "& .MuiPaginationItem-root": {
                 borderColor: "#e5e7eb",
                 color: "#6b7280",
                 "&:hover": {
-                  backgroundColor: "#f3f4f6",
+                  backgroundColor: "#2FB4FF",
                   borderColor: "#9ca3af",
                 },
                 "&.Mui-selected": {
-                  backgroundColor: "#3b82f6",
+                  backgroundColor: "#2FB4FF",
                   borderColor: "#3b82f6",
                   color: "white",
                   "&:hover": {
-                    backgroundColor: "#2563eb",
+                    backgroundColor: "#2FB4FF",
                   },
                 },
               },

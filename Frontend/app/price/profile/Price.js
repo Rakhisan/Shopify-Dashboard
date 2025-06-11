@@ -1,10 +1,23 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import {
+  Checkbox,
+  Button,
+  Select,
+  MenuItem,
+  FormControl,
+  Menu,
+  MenuItem as MenuItemMUI,
+  MenuItem as SelectMenuItem,
+  IconButton,
+} from "@mui/material";
+import { Search, Add, MoreVert } from "@mui/icons-material";
 
 export default function Price() {
   const router = useRouter();
   const [openMenuIndex, setOpenMenuIndex] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const [priceData, setPriceData] = useState([
     {
@@ -97,70 +110,106 @@ export default function Price() {
     router.push("/price/profile/edit");
   };
 
+  const handleMenuClick = (event, index) => {
+    setAnchorEl(event.currentTarget);
+    setOpenMenuIndex(index);
+  };
+
+  const [priceType, setPriceType] = useState("");
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    setOpenMenuIndex(null);
+  };
+
   return (
-    <div className="w-full max-w-screen-xl mx-auto h-[120%] text-[#686f83]">
+    <div className="w-full max-w-screen-xl mx-auto  text-[#686f83]">
       {/* Header */}
-      <div className="flex justify-between items-center mb-1 bg-white text-[#727a90] rounded-t-lg px-4 py-4 shadow-md overflow-hidden flex-col md:flex-row gap-3 md:gap-0">
+      <div className="flex justify-between items-center mb-1 bg-white text-[#727a90] rounded-t-lg px-4 py-4 shadow-md overflow-hidden flex-col md:flex-row gap-3 md:gap-0 md:p-2.5">
         <h2 className="text-xl font-semibold text-[#24282e] text-left w-full md:w-auto">
           Price Profile
         </h2>
 
-        <div className="relative w-full md:w-64 h-10">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="absolute top-1/2 left-3 transform -translate-y-1/2 w-5 h-5 text-[#575757] pointer-events-none"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z"
-            />
-          </svg>
-          <input
-            type="text"
-            placeholder="Search Profile Name"
-            className="w-full h-full px-6 pl-10 border border-[#d5d5d5] rounded-lg text-sm text-[#575757] text-center focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+        <div className="flex items-center gap-4">
+          <FormControl size="small" className="min-w-32">
+            <Select
+              value={priceType}
+              onChange={(e) => setPriceType(e.target.value)}
+              displayEmpty
+              className="bg-white"
+              sx={{
+                textTransform: "none",
+                height: "44px",
+                fontSize: "14px",
+                fontWeight: 500,
+                width: { xs: "100%", md: "auto" },
+              }}
+            >
+              <SelectMenuItem value="">Pricetype</SelectMenuItem>
+              <SelectMenuItem value="EDK">EDK</SelectMenuItem>
+              <SelectMenuItem value="EDH">EDH</SelectMenuItem>
+              <SelectMenuItem value="FED">FED</SelectMenuItem>
+              <SelectMenuItem value="LOC">LOC</SelectMenuItem>
+              <SelectMenuItem value="STA">STA</SelectMenuItem>
+              <SelectMenuItem value="REG">REG</SelectMenuItem>
+            </Select>
+          </FormControl>
 
-        <button
-          className="flex items-center gap-2 px-4 bg-[#2fb4ff] text-white border-none rounded-lg cursor-pointer h-11 text-sm font-medium w-full md:w-auto justify-center hover:bg-[#1e9ce6] transition-colors"
-          onClick={handlePriceRule}
-        >
-          <span className="font-medium text-2xl select-none">+</span>
-          Add Price Profile
-        </button>
+          <Button
+            variant="contained"
+            startIcon={<Add />}
+            onClick={handlePriceRule}
+            sx={{
+              backgroundColor: "#2fb4ff",
+              color: "white",
+              textTransform: "none",
+              height: "44px",
+              fontSize: "14px",
+              fontWeight: 500,
+              width: { xs: "100%", md: "auto" },
+              "&:hover": {
+                backgroundColor: "#2fb4fe",
+              },
+            }}
+          >
+            Add Price Profile
+          </Button>
+        </div>
       </div>
 
       {/* Table Container */}
       <div className="bg-white shadow-sm">
-        <div className="w-full overflow-x-auto bg-white shadow-sm">
-          <table className="w-full min-w-[1000px]">
+        <div className="w-full overflow-x-auto bg-white shadow-sm md:w-full md:max-w-full md:overflow-x-auto md:-webkit-overflow-scrolling-touch md:box-border md:border md:border-gray-200">
+          <table className="w-full min-w-[1200px] ">
             <thead>
               <tr className="h-14">
-                <th className="w-10 text-center px-0 py-2 text-left border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm">
-                  <input type="checkbox" />
+                <th className="w-10 text-center px-0 py-2 text-left border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm md:py-3.5 md:px-2 sm:py-3.5 sm:px-1.5">
+                  {/* <Checkbox
+                    size="small"
+                    sx={{
+                      color: "#686f83",
+                      "&.Mui-checked": {
+                        color: "#2fb4ff",
+                      },
+                    }}
+                  /> */}
                 </th>
-                <th className="w-15 px-1 py-4 text-left border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm">
+                {/* <th className="w-15 px-1 py-4 text-left border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm">
                   ID
-                </th>
-                <th className="px-2 pr-6 py-4 text-left border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm">
+                </th> */}
+                <th className="px-2 pr-6 py-4 text-left border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm md:text-sm md:py-3.5 md:px-4 md:pr-2 sm:text-xs sm:py-2.5 sm:px-3.5 sm:pr-2">
                   Profile Name
                 </th>
-                <th className="px-7 py-4 text-left border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm">
+                <th className="px-7 py-4 text-left border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm md:text-sm md:py-3.5 md:px-4 sm:text-xs sm:py-2.5 sm:px-3.5">
                   Description
                 </th>
-                <th className="px-7 py-4 text-left border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm">
+                <th className="px-7 py-4 text-left border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm md:text-sm md:py-3.5 md:px-4 sm:text-xs sm:py-2.5 sm:px-3.5">
                   Price Type
                 </th>
-                <th className="px-7 py-4 text-left border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm">
+                <th className="px-7 py-4 text-left border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm md:text-sm md:py-3.5 md:px-4 sm:text-xs sm:py-2.5 sm:px-3.5">
                   Exclude Vendor
                 </th>
-                <th className="px-7 py-4 text-left pr-6 border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm">
+                <th className="px-7 py-4 text-left pr-6 border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm md:text-sm md:py-3.5 md:px-4 sm:text-xs sm:py-2.5 sm:px-3.5">
                   Price Rule
                 </th>
                 <th className="px-7 py-4 text-left border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm"></th>
@@ -169,52 +218,48 @@ export default function Price() {
             <tbody>
               {priceData.map((item, index) => (
                 <tr key={index}>
-                  <td className="text-center px-0 py-2 border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm">
-                    <input type="checkbox" />
+                  <td className="text-center px-0 py-2  border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm md:py-3.5 md:px-2 sm:py-2.5 sm:px-1.5">
+                    <Checkbox
+                      size="small"
+                      sx={{
+                        color: "#686f83",
+                        "&.Mui-checked": {
+                          color: "#2fb4ff",
+                        },
+                      }}
+                    />
                   </td>
-                  <td className="w-15 px-1 py-4 border-b border-[#e9eaea] align-middle text-[#24282e] font-semibold bg-transparent text-sm">
+                  {/* <td className="w-15 px-1 py-4 border-b border-[#e9eaea] align-middle text-[#24282e] font-semibold bg-transparent text-sm">
                     {item.id}
-                  </td>
-                  <td className="px-2 pr-6 py-4 border-b border-[#e9eaea] align-middle text-[#727a90] font-medium bg-transparent text-sm whitespace-nowrap overflow-hidden text-ellipsis">
+                  </td> */}
+                  <td className="px-2 pr-6 py-4 border-b border-[#e9eaea] align-middle text-[#727a90] font-medium bg-transparent text-sm whitespace-nowrap overflow-hidden text-ellipsis md:text-sm md:py-3.5 md:px-4 md:pr-2 sm:text-xs sm:py-2.5 sm:px-3.5 sm:pr-4">
                     {item.profilename}
                   </td>
-                  <td className="px-7 py-4 border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm min-w-32">
+                  <td className="px-7 py-4 border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm min-w-32 md:text-sm md:py-3.5 md:px-4 md:min-w-24 sm:text-xs sm:py-2.5 sm:px-3.5 sm:min-w-20">
                     {item.Description}
                   </td>
-                  <td className="px-7 py-4 border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm min-w-32">
+                  <td className="px-7 py-4 border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm min-w-32 md:text-sm md:py-3.5 md:px-4 md:min-w-24 sm:text-xs sm:py-2.5 sm:px-3.5 sm:min-w-20">
                     {item.pricetype}
                   </td>
-                  <td className="px-7 py-4 border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm min-w-32">
+                  <td className="px-7 py-4 border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm min-w-32 md:text-sm md:py-3.5 md:px-4 md:min-w-24 sm:text-xs sm:py-2.5 sm:px-3.5 sm:min-w-20">
                     {item.excludevendore}
                   </td>
-                  <td className="px-7 py-4 border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm min-w-32">
+                  <td className="px-7 py-4 border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm min-w-32 md:text-sm md:py-3.5 md:px-4 md:min-w-24 sm:text-xs sm:py-2.5 sm:px-3.5 sm:min-w-20">
                     {item.pricerule}
                   </td>
                   <td className="relative text-right w-1 px-7 py-4 border-b border-[#e9eaea] align-middle text-[#686f83] font-medium bg-transparent text-sm">
-                    <span
-                      className="cursor-pointer text-2xl text-[#686f83] select-none"
-                      onClick={() =>
-                        setOpenMenuIndex(openMenuIndex === index ? null : index)
-                      }
+                    <IconButton
+                      size="small"
+                      onClick={(e) => handleMenuClick(e, index)}
+                      sx={{
+                        color: "#686f83",
+                        "&:hover": {
+                          backgroundColor: "rgba(104, 111, 131, 0.1)",
+                        },
+                      }}
                     >
-                      &#x22EE;
-                    </span>
-                    {openMenuIndex === index && (
-                      <div className="absolute top-10 right-0 bg-white border border-[#e5e7eb] rounded-md shadow-lg z-10 flex flex-col min-w-30">
-                        <button
-                          className="px-4 py-2 border-none bg-transparent text-left cursor-pointer text-sm text-[#333] hover:bg-gray-100 transition-colors"
-                          onClick={handleEditRule}
-                        >
-                          Edit
-                        </button>
-                        <button className="px-4 py-2 border-none bg-transparent text-left cursor-pointer text-sm text-[#333] hover:bg-gray-100 transition-colors">
-                          Add
-                        </button>
-                        <button className="px-4 py-2 border-none bg-transparent text-left cursor-pointer text-sm text-[#333] hover:bg-gray-100 transition-colors">
-                          Delete
-                        </button>
-                      </div>
-                    )}
+                      <MoreVert />
+                    </IconButton>
                   </td>
                 </tr>
               ))}
@@ -223,36 +268,119 @@ export default function Price() {
         </div>
       </div>
 
+      {/* Menu */}
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        PaperProps={{
+          sx: {
+            minWidth: "120px",
+            boxShadow:
+              "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          },
+        }}
+      >
+        <MenuItemMUI
+          onClick={() => {
+            handleEditRule();
+            handleMenuClose();
+          }}
+          sx={{
+            fontSize: "14px",
+            color: "#333",
+            "&:hover": {
+              backgroundColor: "#f3f4f6",
+            },
+          }}
+        >
+          Edit
+        </MenuItemMUI>
+        <MenuItemMUI
+          onClick={handleMenuClose}
+          sx={{
+            fontSize: "14px",
+            color: "#333",
+            "&:hover": {
+              backgroundColor: "#f3f4f6",
+            },
+          }}
+        >
+          Add
+        </MenuItemMUI>
+        <MenuItemMUI
+          onClick={handleMenuClose}
+          sx={{
+            fontSize: "14px",
+            color: "#333",
+            "&:hover": {
+              backgroundColor: "#f3f4f6",
+            },
+          }}
+        >
+          Delete
+        </MenuItemMUI>
+      </Menu>
+
       {/* Footer */}
       <div className="relative flex justify-center bg-white items-center flex-nowrap gap-4">
-        <div className="absolute right-6 flex items-center gap-2 text-sm text-[#727a90]">
+        <div className="absolute right-6 flex items-center gap-2 text-sm text-[#727a90] md:text-sm sm:text-xs">
           <span>Show</span>
           <div className="relative inline-block">
-            <select className="appearance-none px-3 py-1.5 pr-8 rounded-md border border-[#d5d5d5] bg-white text-sm text-[#202224] cursor-pointer min-w-18">
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="50">50</option>
-            </select>
-            <span className="pointer-events-none absolute top-1/2 right-2.5 transform -translate-y-1/2 flex items-center">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+            <FormControl size="small">
+              <Select
+                defaultValue={10}
+                sx={{
+                  minWidth: "72px",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#d5d5d5",
+                  },
+                  "&:hover .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#d5d5d5",
+                  },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#2fb4ff",
+                  },
+                  "& .MuiSelect-select": {
+                    fontSize: "14px",
+                    color: "#202224",
+                    padding: "6px 32px 6px 12px",
+                  },
+                }}
+                className="md:text-xs md:py-1.5 md:px-6 md:min-w-15 sm:text-2xs sm:py-1 sm:px-5 sm:min-w-12.5"
               >
-                <path
-                  d="M6.27337 8H13.7267C13.8586 8.00055 13.9873 8.04019 14.0966 8.1139C14.2059 8.18761 14.2909 8.29208 14.3409 8.4141C14.3908 8.53612 14.4035 8.67021 14.3772 8.79942C14.351 8.92863 14.287 8.04715 14.1934 9.14L10.4734 12.86C10.4114 12.9225 10.3377 12.9721 10.2564 13.0059C10.1752 13.0398 10.088 13.0572 10 13.0572C9.91203 13.0572 9.82489 13.0398 9.74365 13.0059C9.66241 12.9721 9.58868 12.9225 9.5267 12.86L5.8067 9.14C5.71309 9.04715 5.64911 8.92863 5.62285 8.79942C5.59659 8.67021 5.60924 8.53612 5.65919 8.4141C5.70914 8.29208 5.79415 8.18761 5.90347 8.1139C6.0128 8.04019 6.14152 8.00055 6.27337 8Z"
-                  fill="#727A90"
-                />
-              </svg>
-            </span>
+                <MenuItem value={10} sx={{ fontSize: "14px" }}>
+                  10
+                </MenuItem>
+                <MenuItem value={25} sx={{ fontSize: "14px" }}>
+                  25
+                </MenuItem>
+                <MenuItem value={50} sx={{ fontSize: "14px" }}>
+                  50
+                </MenuItem>
+              </Select>
+            </FormControl>
           </div>
         </div>
 
         <div className="flex justify-center items-center my-5">
           <div className="flex justify-center items-center flex-1 pl-12 gap-1">
-            <button className="bg-none border border-[#e0e0e0] rounded-full w-12 h-12 flex items-center justify-center cursor-pointer mr-1 hover:bg-gray-100 hover:border-[#787676] transition-colors">
+            <IconButton
+              sx={{
+                border: "1px solid #e0e0e0",
+                borderRadius: "50%",
+                width: "48px",
+                height: "48px",
+                marginRight: "4px",
+                "&:hover": {
+                  backgroundColor: "#f3f4f6",
+                  borderColor: "#787676",
+                },
+              }}
+              className="md:w-9 md:h-9 sm:w-8 sm:h-8"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -265,8 +393,20 @@ export default function Price() {
               >
                 <polyline points="15 18 9 12 15 6" />
               </svg>
-            </button>
-            <button className="bg-none border border-[#e0e0e0] rounded-full w-12 h-12 flex items-center justify-center cursor-pointer hover:bg-gray-100 hover:border-[#787676] transition-colors">
+            </IconButton>
+            <IconButton
+              sx={{
+                border: "1px solid #e0e0e0",
+                borderRadius: "50%",
+                width: "48px",
+                height: "48px",
+                "&:hover": {
+                  backgroundColor: "#f3f4f6",
+                  borderColor: "#787676",
+                },
+              }}
+              className="md:w-9 md:h-9 sm:w-8 sm:h-8"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -279,121 +419,10 @@ export default function Price() {
               >
                 <polyline points="9 18 15 12 9 6" />
               </svg>
-            </button>
+            </IconButton>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .container {
-            padding: 10px;
-          }
-
-          table {
-            width: 1000px;
-            min-width: 1000px;
-          }
-
-          .table-container {
-            width: 100%;
-            max-width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            box-sizing: border-box;
-            border: 1px solid #e5e7eb;
-          }
-
-          th,
-          td {
-            font-size: 0.875rem;
-            padding: 0.8rem 1rem;
-          }
-
-          th:first-child,
-          td:first-child {
-            padding: 0.8rem 0.5rem;
-          }
-
-          .id-cell {
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-          }
-
-          .name-cell {
-            padding-left: 0.5rem;
-            padding-right: 1rem;
-          }
-
-          .status-cell {
-            padding: 0.8rem 1rem;
-            min-width: 6rem;
-          }
-
-          .dropdown-menu {
-            right: 5px;
-            top: 2rem;
-            min-width: 100px;
-            font-size: 12px;
-          }
-
-          .dropdown-menu button {
-            padding: 0.4rem 0.8rem;
-            font-size: 12px;
-          }
-
-          .pagination-button {
-            width: 36px;
-            height: 36px;
-          }
-
-          .rows-per-page {
-            font-size: 0.875rem;
-          }
-
-          .select {
-            padding: 5px 25px 5px 8px;
-            font-size: 0.75rem;
-            min-width: 60px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          th,
-          td {
-            font-size: 0.8125rem;
-            padding: 0.6rem 0.8rem;
-          }
-
-          th:first-child,
-          td:first-child {
-            padding: 0.6rem 0.4rem;
-          }
-
-          .status-cell {
-            min-width: 5rem;
-          }
-
-          .dropdown-menu {
-            min-width: 90px;
-          }
-
-          .pagination-button {
-            width: 32px;
-            height: 32px;
-          }
-
-          .rows-per-page {
-            font-size: 0.75rem;
-          }
-
-          .select {
-            padding: 4px 20px 4px 6px;
-            font-size: 0.6875rem;
-            min-width: 50px;
-          }
-        }
-      `}</style>
     </div>
   );
 }
