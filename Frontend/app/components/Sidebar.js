@@ -280,7 +280,7 @@ export default function Sidebar() {
                         className={`${styles.navItem} ${styles.subItem}`}
                         onClick={() => toggleMenu("export-filter")}
                       >
-                        <span>Catalog Filters</span>
+                        <span>Export Filters</span>
                         <div
                           className={`${styles.chevron} ${
                             expandedMenus.exportfilter ? styles.expanded : ""

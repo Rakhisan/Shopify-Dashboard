@@ -1,10 +1,8 @@
 // components/CatalogueFilter.js
 
 "use client";
-import styles from "./YourCatalog.module.css";
+// import styles from "./YourCatalog.module.css";
 import { useState } from "react";
-import { MdTune } from "react-icons/md";
-
 import { Search, Plus, Check, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
