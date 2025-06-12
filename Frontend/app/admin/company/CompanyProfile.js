@@ -158,7 +158,7 @@ const CompanyProfileForm = () => {
   return (
     <div className="max-w-7xl  mx-auto min-h-screen">
       {/* Header Section */}
-      <div className="bg-white p-4 sm:p-6 shadow-sm">
+      <div className="bg-white rounded-tl-lg p-3 sm:p-4">
         <h2 className="text-2xl font-semibold text-[#2B2F32]">
           Company Profile
         </h2>

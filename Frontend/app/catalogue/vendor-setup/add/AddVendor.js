@@ -69,7 +69,7 @@ export default function AddVendorForm() {
   return (
     <div className="max-w-7xl  space-y-1">
       {/* Header Card */}
-      <div className="bg-white p-4">
+      <div className="bg-white rounded-tl-lg p-3">
         <h2 className="text-2xl font-semibold text-[#2B2F32]">Add Vendor</h2>
       </div>
 

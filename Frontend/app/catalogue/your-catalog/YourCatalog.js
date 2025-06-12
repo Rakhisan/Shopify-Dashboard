@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Slider, Box } from "@mui/material";
 
+
 // Material-UI imports for the new table
 import {
   Table,
@@ -310,6 +311,9 @@ export default function CatalogueFilter() {
   const [selectedRowIndex, setSelectedRowIndex] = useState(null);
 
   // ----------------
+  const handleAddProduct = () => {
+    router.push("/catalogue/your-catalog/add");
+  };
 
   const SelectDropdown = ({ placeholder, value, onChange, className = "" }) => (
     <div className={`relative ${className}`}>
@@ -425,7 +429,7 @@ export default function CatalogueFilter() {
           <button className="text-gray-600 py-2 px-4 rounded-lg text-sm font-medium flex items-center gap-2 cursor-pointer transition-colors bg-white border border-gray-200">
             Save Filter
           </button>
-          <button className="text-gray-600 py-2 px-4 rounded-lg text-sm font-medium flex items-center gap-2 cursor-pointer transition-colors bg-white border border-gray-200">
+          <button className="text-gray-600 py-2 px-4 rounded-lg text-sm font-medium flex items-center gap-2 cursor-pointer transition-colors bg-white border border-gray-200" onClick={handleAddProduct}>
             <Plus size={20} />
             Add Your Product
           </button>
@@ -598,9 +602,8 @@ export default function CatalogueFilter() {
                   className="flex items-center cursor-pointer"
                 >
                   <div
-                    className={`w-5 h-5 border-2 rounded flex items-center justify-center ${
-                      filters.inStock ? "border" : "border-gray-300"
-                    }`}
+                    className={`w-5 h-5 border-2 rounded flex items-center justify-center ${filters.inStock ? "border" : "border-gray-300"
+                      }`}
                     style={
                       filters.inStock
                         ? { backgroundColor: "#32B4FE", borderColor: "#32B4FE" }
