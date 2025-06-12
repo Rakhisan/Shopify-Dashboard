@@ -30,7 +30,6 @@ export default function AddUser() {
     setDropdownStates({
       ...dropdownStates,
       [name]: !dropdownStates[name],
-
       ...(name === "userrole" ? { mfaEnabled: false } : { userrole: false }),
     });
   };
@@ -74,7 +73,7 @@ export default function AddUser() {
       <div className="relative w-full">
         <div
           onClick={() => onToggle(name)}
-          className={`flex items-center w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 pr-8 sm:pr-10 lg:pr-11 text-left text-sm sm:text-base lg:text-lg bg-white border rounded-lg cursor-pointer transition-all duration-200 ease-in-out ${isOpen
+          className={`flex items-center w-full placeholder-gray-400 h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 pr-8 sm:pr-10 lg:pr-11 text-left text-sm sm:text-base bg-white border rounded-lg cursor-pointer transition-all duration-200 ease-in-out ${isOpen
             ? "border-2 border-[#30B4FF]"
             : "border border-[#CFD3D4] hover:border-[#CFD3D4]"
             } ${value ? "text-[#5E6366]" : "text-[#5E6366]"}`}
@@ -113,106 +112,112 @@ export default function AddUser() {
   ];
 
   return (
-    <div className="bg-white p-3 sm:p-5 lg:p-8 rounded-xl lg:rounded-1xl w-full mx-auto">
-      <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-4 sm:mb-5 text-left">
-        Add User
-      </h2>
-      <div className="flex flex-col pt-1 sm:pt-2 lg:pt-1">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-3">
-
-          <div className="flex flex-col w-full">
-            <label className="text-sm sm:text-base lg:text-base font-medium text-[#5E6366] mb-1.5 sm:mb-2">
-              First Name
-            </label>
-            <input
-              className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base lg:text-lg text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
-              name="firstname"
-              value={formData.firstname}
-              onChange={handleChange}
-              placeholder="Enter first name"
-            />
-          </div>
-
-          <div className="flex flex-col w-full">
-            <label className="text-sm sm:text-base lg:text-base font-medium text-[#5E6366] mb-1.5 sm:mb-2">
-              Last Name
-            </label>
-            <input
-              className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base lg:text-lg text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
-              name="lastname"
-              value={formData.lastname}
-              onChange={handleChange}
-              placeholder="Enter last name"
-            />
-          </div>
-
-          <div className="flex flex-col w-full">
-            <label className="text-sm sm:text-base lg:text-base font-medium text-[#5E6366] mb-1.5 sm:mb-2">
-              Email Address
-            </label>
-            <input
-              className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base lg:text-lg text-[#5E6366] bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Enter email address"
-            />
-          </div>
-
-          <div className="flex flex-col w-full">
-            <label className="text-sm sm:text-base lg:text-base font-medium text-[#5E6366] mb-1.5 sm:mb-2">
-              Phone Number
-            </label>
-            <input
-              className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base lg:text-lg text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="Enter phone number"
-            />
-          </div>
-
-          <CustomDropdown
-            name="userrole"
-            value={formData.userrole}
-            placeholder="Select user role"
-            options={userRoleOptions}
-            isOpen={dropdownStates.userrole}
-            onToggle={toggleDropdown}
-            onSelect={handleDropdownSelect}
-            label="User Role"
-          />
-
-          <CustomDropdown
-            name="mfaEnabled"
-            value={formData.mfaEnabled}
-            placeholder="Select MFA status"
-            options={mfaOptions}
-            isOpen={dropdownStates.mfaEnabled}
-            onToggle={toggleDropdown}
-            onSelect={handleDropdownSelect}
-            label="MFA Enabled"
-          />
-
-        </div>
-
-        <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 sm:gap-4 lg:gap-5 mt-5 sm:mt-6 lg:mt-8 w-full">
-          <button
-            type="button"
-            className="w-full sm:w-auto sm:min-w-40  md:min-w-40 h-9 sm:h-10 lg:h-10 text-sm sm:text-base lg:text-lg font-medium bg-white text-[#30B4FF] border border-[#30B4FF] rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-[#30B4FF] hover:text-white"
-          >
-            Cancel
-          </button>
-          <button
-            type="button"
-            onClick={handleSubmit}
-            className="w-full sm:w-auto  sm:min-w-40  md:min-w-40 h-9 sm:h-10 lg:h-10 text-sm sm:text-base lg:text-lg font-medium bg-[#30B4FF] text-white border-none rounded-lg cursor-pointer transition-all duration-200 ease-in-out "
-          >
-            Add
-          </button>
-        </div>
+    <div className="w-full mx-auto space-y-1">
+      {/* Header Card */}
+      <div className="bg-white p-2 sm:p-6 lg:p-4 lg:rounded-1xl w-full">
+        <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-left">
+          Add User
+        </h2>
       </div>
 
+      {/* Form Card */}
+      <div className="bg-white p-1 sm:p-5 lg:p-4  lg:rounded-1xl w-full">
+        <div className="flex flex-col pt-1 sm:pt-2 lg:pt-1">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-3">
+
+            <div className="flex flex-col w-full">
+              <label className="text-sm sm:text-base lg:text-base font-medium text-[#5E6366] mb-1.5 sm:mb-2">
+                First Name
+              </label>
+              <input
+                className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                name="firstname"
+                value={formData.firstname}
+                onChange={handleChange}
+                placeholder="Enter first name"
+              />
+            </div>
+
+            <div className="flex flex-col w-full">
+              <label className="text-sm sm:text-base lg:text-base font-medium text-[#5E6366] mb-1.5 sm:mb-2">
+                Last Name
+              </label>
+              <input
+                className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base  text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                name="lastname"
+                value={formData.lastname}
+                onChange={handleChange}
+                placeholder="Enter last name"
+              />
+            </div>
+
+            <div className="flex flex-col w-full">
+              <label className="text-sm sm:text-base lg:text-base font-medium text-[#5E6366] mb-1.5 sm:mb-2">
+                Email Address
+              </label>
+              <input
+                className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base  text-[#5E6366] bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter email address"
+              />
+            </div>
+
+            <div className="flex flex-col w-full">
+              <label className="text-sm sm:text-base lg:text-base font-medium text-[#5E6366] mb-1.5 sm:mb-2">
+                Phone Number
+              </label>
+              <input
+                className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Enter phone number"
+              />
+            </div>
+
+            <CustomDropdown
+              name="userrole"
+              value={formData.userrole}
+              placeholder="Select user role"
+              options={userRoleOptions}
+              isOpen={dropdownStates.userrole}
+              onToggle={toggleDropdown}
+              onSelect={handleDropdownSelect}
+              label="User Role"
+            />
+
+            <CustomDropdown
+              name="mfaEnabled"
+              value={formData.mfaEnabled}
+              placeholder="Select MFA status"
+              options={mfaOptions}
+              isOpen={dropdownStates.mfaEnabled}
+              onToggle={toggleDropdown}
+              onSelect={handleDropdownSelect}
+              label="MFA Enabled"
+            />
+
+          </div>
+
+          <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 sm:gap-4 lg:gap-5 mt-5 sm:mt-6 lg:mt-8 w-full">
+            <button
+              type="button"
+              className="w-full sm:w-auto sm:min-w-40  md:min-w-40 h-9 sm:h-10 lg:h-10 text-sm sm:text-base lg:text-lg font-medium bg-white text-[#30B4FF] border border-[#30B4FF] rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-[#30B4FF] hover:text-white"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="w-full sm:w-auto  sm:min-w-40  md:min-w-40 h-9 sm:h-10 lg:h-10 text-sm sm:text-base lg:text-lg font-medium bg-[#30B4FF] text-white border-none rounded-lg cursor-pointer transition-all duration-200 ease-in-out "
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }

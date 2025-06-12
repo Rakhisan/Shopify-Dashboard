@@ -141,7 +141,7 @@ export default function AddProductForm() {
                         {/* Left Column - Image Section (2 columns width) */}
                         <div className="lg:col-span-2 space-y-1">
                             {/* Main Product Image */}
-                            <div className="rounded-lg p-6 flex justify-center items-center min-h-[100px]">
+                            <div className=" p-1 flex justify-center items-center min-h-[100px]">
                                 <Image
                                     src={selectedImages[mainImageIndex]}
                                     alt="Product"
