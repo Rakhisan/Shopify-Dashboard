@@ -50,7 +50,7 @@ export default function VariantForm() {
     return (
         <div className="max-w-6xl mx-auto p-6 bg-white">
             {/* Tab Navigation */}
-            <div className="flex mb-8">
+            {/* <div className="flex mb-8">
                 <button
                     onClick={() => setActiveTab('product')}
                     className={`px-6 py-3 font-medium rounded-l-lg border ${activeTab === 'product'
@@ -69,7 +69,7 @@ export default function VariantForm() {
                 >
                     Variant
                 </button>
-            </div>
+            </div> */}
 
             {/* Form Content */}
             <div>
@@ -196,13 +196,7 @@ export default function VariantForm() {
                 </div>
             </div>
 
-            {/* Debug Info */}
-            <div className="mt-8 p-4 bg-gray-100 rounded-lg">
-                <h3 className="text-sm font-medium text-gray-700 mb-2">Current Data:</h3>
-                <pre className="text-xs text-gray-600 overflow-auto">
-                    {JSON.stringify(variants, null, 2)}
-                </pre>
-            </div>
+
         </div>
     );
 }

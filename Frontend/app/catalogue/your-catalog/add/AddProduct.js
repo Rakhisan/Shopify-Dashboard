@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import bottle from "../../../images/bottle.png"
-import HeadPhone from "../../../images/HeadPhone.png"
+import bottle from "../../../images/bottle.jpg"
+import HeadPhone from "../../../images/HeadPhone.jpg"
 import Image from 'next/image';
-import Variants from './Variant.js';
+import Variant from './Variant.js';
 
 export default function AddProductForm() {
     const [formData, setFormData] = useState({
@@ -91,39 +91,8 @@ export default function AddProductForm() {
         </svg>
     );
 
-    // Variants Page Content
-    // const VariantsContent = () => (
-    //     <div className="bg-white shadow-sm p-5">
-    //         <div className="text-center py-12">
-    //             <h3 className="text-2xl font-semibold text-[#5E6366] mb-4">Product Variants</h3>
-    //             <p className="text-[#5E6366] mb-6">Manage different variants of your product here</p>
 
-    //             <div className="max-w-md mx-auto space-y-4">
-    //                 <div className="border border-[#CFD3D4] rounded-lg p-4">
-    //                     <h4 className="font-medium text-[#5E6366] mb-2">Size Variants</h4>
-    //                     <div className="flex flex-wrap gap-2">
-    //                         <span className="px-3 py-1 bg-[#30B4FF] text-white rounded-full text-sm">Small</span>
-    //                         <span className="px-3 py-1 bg-gray-200 text-[#5E6366] rounded-full text-sm">Medium</span>
-    //                         <span className="px-3 py-1 bg-gray-200 text-[#5E6366] rounded-full text-sm">Large</span>
-    //                     </div>
-    //                 </div>
 
-    //                 <div className="border border-[#CFD3D4] rounded-lg p-4">
-    //                     <h4 className="font-medium text-[#5E6366] mb-2">Color Variants</h4>
-    //                     <div className="flex flex-wrap gap-2">
-    //                         <span className="px-3 py-1 bg-[#30B4FF] text-white rounded-full text-sm">Black</span>
-    //                         <span className="px-3 py-1 bg-gray-200 text-[#5E6366] rounded-full text-sm">White</span>
-    //                         <span className="px-3 py-1 bg-gray-200 text-[#5E6366] rounded-full text-sm">Silver</span>
-    //                     </div>
-    //                 </div>
-    //             </div>
-
-    //             <button className="mt-6 bg-[#30B4FF] text-white py-2 px-6 rounded-lg hover:bg-[#2593d4] transition-colors">
-    //                 Add New Variant
-    //             </button>
-    //         </div>
-    //     </div>
-    // );
 
     return (
         <div className="max-w-7xl mx-auto min-h-screen">
@@ -439,7 +408,7 @@ export default function AddProductForm() {
                 </div>
             ) : (
                 /* Variants Content */
-                <VariantsContent />
+                <Variant />
             )}
         </div>
     );
