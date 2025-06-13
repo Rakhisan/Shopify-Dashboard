@@ -114,7 +114,7 @@ export default function AddUser() {
   return (
     <div className="w-full mx-auto space-y-1">
       {/* Header Card */}
-      <div className="bg-white p-2 sm:p-6 lg:p-4 lg:rounded-1xl w-full">
+      <div className="bg-white p-2 sm:p-6 rounded-tl-lg lg:p-4 lg:rounded-1xl w-full">
         <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-left">
           Add User
         </h2>

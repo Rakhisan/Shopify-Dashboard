@@ -248,7 +248,7 @@ export default function AddProductForm() {
                             </div>
                         </div>
 
-                        {/* Price and Status */}
+                    
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
                                 <label className="block text-[#5E6366] font-medium mb-2">Cost</label>
@@ -284,7 +284,7 @@ export default function AddProductForm() {
                                     >
                                         <option value="Active">Active</option>
                                         <option value="Inactive">Inactive</option>
-                                        <option value="Draft">Draft</option>
+
                                     </select>
                                     <DropdownArrow />
                                 </div>

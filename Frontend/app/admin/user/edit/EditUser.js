@@ -170,10 +170,10 @@ export default function EditUser() {
         <div
           onClick={() => onToggle(name)}
           className={`flex items-center w-full placeholder-gray-400 h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 pr-8 sm:pr-10 lg:pr-11 text-left text-sm sm:text-base bg-white border rounded-lg cursor-pointer transition-all duration-200 ease-in-out ${error
-              ? "border-2 border-red-500"
-              : isOpen
-                ? "border-2 border-[#30B4FF]"
-                : "border border-[#CFD3D4] hover:border-[#CFD3D4]"
+            ? "border-2 border-red-500"
+            : isOpen
+              ? "border-2 border-[#30B4FF]"
+              : "border border-[#CFD3D4] hover:border-[#CFD3D4]"
             } ${value ? "text-[#5E6366]" : "text-[#5E6366]"}`}
         >
           {value || placeholder}
@@ -215,7 +215,7 @@ export default function EditUser() {
   return (
     <div className="w-full mx-auto space-y-1">
       {/* Header Card */}
-      <div className="bg-white p-2 sm:p-6 lg:p-4 lg:rounded-1xl w-full">
+      <div className="bg-white p-2 sm:p-6 rounded-tl-lg lg:p-4  w-full">
         <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-left">
           Edit User
         </h2>
@@ -232,8 +232,8 @@ export default function EditUser() {
               </label>
               <input
                 className={`w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border rounded-lg transition-all duration-200 ease-in-out focus:outline-none placeholder-gray-400 ${errors.firstname
-                    ? "border-2 border-red-500 focus:border-red-500"
-                    : "border border-[#CFD3D4] focus:border-2 focus:border-[#30B4FF]"
+                  ? "border-2 border-red-500 focus:border-red-500"
+                  : "border border-[#CFD3D4] focus:border-2 focus:border-[#30B4FF]"
                   }`}
                 name="firstname"
                 value={formData.firstname}
@@ -252,8 +252,8 @@ export default function EditUser() {
               </label>
               <input
                 className={`w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border rounded-lg transition-all duration-200 ease-in-out focus:outline-none placeholder-gray-400 ${errors.lastname
-                    ? "border-2 border-red-500 focus:border-red-500"
-                    : "border border-[#CFD3D4] focus:border-2 focus:border-[#30B4FF]"
+                  ? "border-2 border-red-500 focus:border-red-500"
+                  : "border border-[#CFD3D4] focus:border-2 focus:border-[#30B4FF]"
                   }`}
                 name="lastname"
                 value={formData.lastname}
@@ -272,8 +272,8 @@ export default function EditUser() {
               </label>
               <input
                 className={`w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-[#5E6366] bg-white border rounded-lg transition-all duration-200 ease-in-out focus:outline-none placeholder-gray-400 ${errors.email
-                    ? "border-2 border-red-500 focus:border-red-500"
-                    : "border border-[#CFD3D4] focus:border-2 focus:border-[#30B4FF]"
+                  ? "border-2 border-red-500 focus:border-red-500"
+                  : "border border-[#CFD3D4] focus:border-2 focus:border-[#30B4FF]"
                   }`}
                 name="email"
                 value={formData.email}
@@ -293,8 +293,8 @@ export default function EditUser() {
               </label>
               <input
                 className={`w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border rounded-lg transition-all duration-200 ease-in-out focus:outline-none placeholder-gray-400 ${errors.phone
-                    ? "border-2 border-red-500 focus:border-red-500"
-                    : "border border-[#CFD3D4] focus:border-2 focus:border-[#30B4FF]"
+                  ? "border-2 border-red-500 focus:border-red-500"
+                  : "border border-[#CFD3D4] focus:border-2 focus:border-[#30B4FF]"
                   }`}
                 name="phone"
                 value={formData.phone}
