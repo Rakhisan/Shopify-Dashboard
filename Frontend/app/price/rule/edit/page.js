@@ -1,7 +1,6 @@
-// import EditProfilePageProfile from "@/app/price/rule/add/EditProfilePageProfileRule";
-// import EditProfilePage from "../../profile/edit/page";
+import EditRulePage from "@/app/price/rule/add/EditRulePage";
 
-// export default function PriceProfile() {
-//   return <EditProfilePageProfile />;
-//   //   return <></>;
-// }
+export default function PriceProfile() {
+  return <EditRulePage />;
+  //   return <></>;
+}
