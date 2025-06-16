@@ -20,6 +20,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { Search, FilterList, Add, MoreVert } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 
 const PriceRuleTable = () => {
   const [page, setPage] = useState(1);
@@ -160,7 +161,11 @@ const PriceRuleTable = () => {
       inStock: false,
     },
   ];
+  const router = useRouter();
 
+  const handleAddPriceRule = () => {
+    router.push("/price/rule/add");
+  };
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -242,6 +247,7 @@ const PriceRuleTable = () => {
             Filters
           </Button>
           <Button
+            onClick={handleAddPriceRule}
             variant="contained"
             startIcon={<Add />}
             sx={{

@@ -248,7 +248,7 @@ export default function AddProductForm() {
                             </div>
                         </div>
 
-                    
+
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
                                 <label className="block text-[#5E6366] font-medium mb-2">Cost</label>

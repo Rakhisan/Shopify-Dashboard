@@ -42,7 +42,7 @@ export default function ProfileSettings() {
     <div className=" min-h-screen">
       <div className="flex flex-col lg:flex-row max-w-7xl mx-auto">
         {/* Sidebar */}
-        <div className="w-full lg:w-64 bg-white shadow-sm p-6 lg:min-h-screen lg:sticky lg:top-0">
+        <div className="w-full lg:w-64 bg-white shadow-sm p-6 lg:sticky lg:top-0">
           {/* Profile Section */}
           <div className="flex items-center space-x-3 mb-8">
             <img
@@ -312,4 +312,4 @@ export default function ProfileSettings() {
       </div>
     </div>
   );
-}
+} 

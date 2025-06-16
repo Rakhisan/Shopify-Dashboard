@@ -113,9 +113,8 @@ export default function Sidebar() {
         aria-label="Toggle menu"
       >
         <div
-          className={`${styles.hamburger} ${
-            isMobileMenuOpen ? styles.open : ""
-          }`}
+          className={`${styles.hamburger} ${isMobileMenuOpen ? styles.open : ""
+            }`}
         >
           <span></span>
           <span></span>
@@ -128,9 +127,8 @@ export default function Sidebar() {
       )}
       {/* Sidebar */}
       <div
-        className={`${styles.sidebar} ${
-          isMobileMenuOpen ? styles.mobileOpen : ""
-        } ${isDarkMode ? styles.dark : styles.light}`}
+        className={`${styles.sidebar} ${isMobileMenuOpen ? styles.mobileOpen : ""
+          } ${isDarkMode ? styles.dark : styles.light}`}
       >
         <nav className={styles.nav}>
           <ul>
@@ -155,9 +153,8 @@ export default function Sidebar() {
                 </div>
                 <span>Admin</span>
                 <div
-                  className={`${styles.chevron} ${
-                    expandedMenus.admin ? styles.expanded : ""
-                  }`}
+                  className={`${styles.chevron} ${expandedMenus.admin ? styles.expanded : ""
+                    }`}
                 >
                   <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -179,9 +176,8 @@ export default function Sidebar() {
                       >
                         <span>Company Profile</span>
                         <div
-                          className={`${styles.chevron} ${
-                            expandedMenus.company ? styles.expanded : ""
-                          }`}
+                          className={`${styles.chevron} ${expandedMenus.company ? styles.expanded : ""
+                            }`}
                         ></div>
                       </div>
                     </Link>
@@ -194,9 +190,22 @@ export default function Sidebar() {
                       >
                         <span>Users</span>
                         <div
-                          className={`${styles.chevron} ${
-                            expandedMenus.users ? styles.expanded : ""
-                          }`}
+                          className={`${styles.chevron} ${expandedMenus.users ? styles.expanded : ""
+                            }`}
+                        ></div>
+                      </div>
+                    </Link>
+                  </li>
+                  <li className={styles.subItemWithLine}>
+                    <Link href="/admin/user-roles" onClick={closeMobileMenu}>
+                      <div
+                        className={`${styles.navItem} ${styles.subItem} ${styles.active}`}
+                        onClick={() => toggleMenu("user-roles")}
+                      >
+                        <span>User Roles</span>
+                        <div
+                          className={`${styles.chevron} ${expandedMenus.users ? styles.expanded : ""
+                            }`}
                         ></div>
                       </div>
                     </Link>
@@ -217,9 +226,8 @@ export default function Sidebar() {
                 </div>
                 <span>Catalog</span>
                 <div
-                  className={`${styles.chevron} ${
-                    expandedMenus.catalogue ? styles.expanded : ""
-                  }`}
+                  className={`${styles.chevron} ${expandedMenus.catalogue ? styles.expanded : ""
+                    }`}
                 >
                   <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -239,16 +247,14 @@ export default function Sidebar() {
                       onClick={closeMobileMenu}
                     >
                       <div
-                        className={`${styles.navItem} ${styles.subItem} ${
-                          expandedMenus.vendorsetup ? styles.active : ""
-                        }`}
+                        className={`${styles.navItem} ${styles.subItem} ${expandedMenus.vendorsetup ? styles.active : ""
+                          }`}
                         onClick={() => toggleMenu("vendor-setup")}
                       >
                         <span>Vendor Setup</span>
                         <div
-                          className={`${styles.chevron} ${
-                            expandedMenus.vendorsetup ? styles.expanded : ""
-                          }`}
+                          className={`${styles.chevron} ${expandedMenus.vendorsetup ? styles.expanded : ""
+                            }`}
                         ></div>
                       </div>
                     </Link>
@@ -264,9 +270,8 @@ export default function Sidebar() {
                       >
                         <span> Catalog</span>
                         <div
-                          className={`${styles.chevron} ${
-                            expandedMenus.yourcatalog ? styles.expanded : ""
-                          }`}
+                          className={`${styles.chevron} ${expandedMenus.yourcatalog ? styles.expanded : ""
+                            }`}
                         ></div>
                       </div>
                     </Link>
@@ -282,9 +287,8 @@ export default function Sidebar() {
                       >
                         <span>Export Filters</span>
                         <div
-                          className={`${styles.chevron} ${
-                            expandedMenus.exportfilter ? styles.expanded : ""
-                          }`}
+                          className={`${styles.chevron} ${expandedMenus.exportfilter ? styles.expanded : ""
+                            }`}
                         ></div>
                       </div>
                     </Link>
@@ -304,9 +308,8 @@ export default function Sidebar() {
                 </div>
                 <span>Price</span>
                 <div
-                  className={`${styles.chevron} ${
-                    expandedMenus.price ? styles.expanded : ""
-                  }`}
+                  className={`${styles.chevron} ${expandedMenus.price ? styles.expanded : ""
+                    }`}
                 >
                   <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -323,16 +326,14 @@ export default function Sidebar() {
                   <li className={styles.subItemWithLine}>
                     <Link href="/price/profile" onClick={closeMobileMenu}>
                       <div
-                        className={`${styles.navItem} ${styles.subItem} ${
-                          expandedMenus.profile ? styles.active : ""
-                        }`}
+                        className={`${styles.navItem} ${styles.subItem} ${expandedMenus.profile ? styles.active : ""
+                          }`}
                         onClick={() => toggleMenu("profile")}
                       >
                         <span>Price Profile</span>
                         <div
-                          className={`${styles.chevron} ${
-                            expandedMenus.profile ? styles.expanded : ""
-                          }`}
+                          className={`${styles.chevron} ${expandedMenus.profile ? styles.expanded : ""
+                            }`}
                         ></div>
                       </div>
                     </Link>
@@ -345,9 +346,8 @@ export default function Sidebar() {
                       >
                         <span> Price Rule</span>
                         <div
-                          className={`${styles.chevron} ${
-                            expandedMenus.rule ? styles.expanded : ""
-                          }`}
+                          className={`${styles.chevron} ${expandedMenus.rule ? styles.expanded : ""
+                            }`}
                         ></div>
                       </div>
                     </Link>
@@ -377,9 +377,8 @@ export default function Sidebar() {
                 </div>
                 <span>Export</span>
                 <div
-                  className={`${styles.chevron} ${
-                    expandedMenus.export ? styles.expanded : ""
-                  }`}
+                  className={`${styles.chevron} ${expandedMenus.export ? styles.expanded : ""
+                    }`}
                 >
                   <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -399,16 +398,14 @@ export default function Sidebar() {
                       onClick={closeMobileMenu}
                     >
                       <div
-                        className={`${styles.navItem} ${styles.subItem} ${
-                          expandedMenus.exportdashboard ? styles.active : ""
-                        }`}
+                        className={`${styles.navItem} ${styles.subItem} ${expandedMenus.exportdashboard ? styles.active : ""
+                          }`}
                         onClick={() => toggleMenu("export-dashboard")}
                       >
                         <span>Dashboard</span>
                         <div
-                          className={`${styles.chevron} ${
-                            expandedMenus.exportdashboard ? styles.expanded : ""
-                          }`}
+                          className={`${styles.chevron} ${expandedMenus.exportdashboard ? styles.expanded : ""
+                            }`}
                         ></div>
                       </div>
                     </Link>
@@ -424,9 +421,8 @@ export default function Sidebar() {
                       >
                         <span>Export to Channels</span>
                         <div
-                          className={`${styles.chevron} ${
-                            expandedMenus.exporttochannel ? styles.expanded : ""
-                          }`}
+                          className={`${styles.chevron} ${expandedMenus.exporttochannel ? styles.expanded : ""
+                            }`}
                         ></div>
                       </div>
                     </Link>
@@ -442,11 +438,10 @@ export default function Sidebar() {
                       >
                         <span>Import from Channel</span>
                         <div
-                          className={`${styles.chevron} ${
-                            expandedMenus.importfromchannel
-                              ? styles.expanded
-                              : ""
-                          }`}
+                          className={`${styles.chevron} ${expandedMenus.importfromchannel
+                            ? styles.expanded
+                            : ""
+                            }`}
                         ></div>
                       </div>
                     </Link>
@@ -486,7 +481,7 @@ export default function Sidebar() {
           </div>
         </div>
       </div>
-          
+
     </>
   );
 }
