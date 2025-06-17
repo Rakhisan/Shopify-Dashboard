@@ -57,6 +57,8 @@
   cursor: pointer;
   transition: background-color 0.2s;
   position: relative;
+  border-radius: 8px;
+
 }
 
 .navItem:hover {
@@ -94,6 +96,10 @@
   color: #637381;
   font-size: 14px;
   font-weight: 500;
+}
+
+.navItem span:hover {
+  color: white;
 }
 
 .dark .navItem span {
@@ -137,6 +143,8 @@
 .subItemWithLine {
   position: relative;
   margin-left: 28px;
+  border-radius: 8px;
+
 }
 
 .subItemWithLine::before {
@@ -201,8 +209,8 @@
   position: relative;
 }
 
-.active span {
-  color: gray !important;
+.active span:hover {
+  color: white;
 }
 
 .active .chevron svg {

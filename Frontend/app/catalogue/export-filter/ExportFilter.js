@@ -1,7 +1,6 @@
 "use client";
 import { FaSearch } from "react-icons/fa";
 import { MdTune } from "react-icons/md";
-import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { Pagination, Select, FormControl, Menu, MenuItem } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -115,8 +114,7 @@ export default function CatalogueFilter() {
   const [savedSearches, setSavedSearches] = useState("");
   const [rules, setRules] = useState("");
   const [createdBy, setCreatedBy] = useState("");
-  const [minValue, setMinValue] = useState("");
-  const [maxValue, setMaxValue] = useState("");
+
   const [showSavedSearches, setShowSavedSearches] = useState(false);
   const [showRules, setShowRules] = useState(false);
   const [showCreatedBy, setShowCreatedBy] = useState(false);
@@ -146,6 +144,18 @@ export default function CatalogueFilter() {
   const handleFilter = () => {
     // router.push("/catalogue/your-catalog/filter");
   };
+
+  const handleSearch = () => {
+    // Add search functionality here
+    console.log("Search triggered");
+  };
+
+  // Custom dropdown arrow component
+  const DropdownArrow = () => (
+    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6.27337 8.5H13.7267C13.8586 8.50055 13.9873 8.54019 14.0966 8.6139C14.2059 8.68761 14.2909 8.79208 14.3409 8.9141C14.3908 9.03612 14.4035 9.17021 14.3772 9.29942C14.351 9.42863 14.287 9.54715 14.1934 9.64L10.4734 13.36C10.4114 13.4225 10.3377 13.4721 10.2564 13.5059C10.1752 13.5398 10.088 13.5572 10 13.5572C9.91203 13.5572 9.82489 13.5398 9.74365 13.5059C9.66241 13.4721 9.58868 13.4225 9.5267 13.36L5.8067 9.64C5.71309 9.54715 5.64911 9.42863 5.62285 9.29942C5.59659 9.17021 5.60924 9.03612 5.65919 8.9141C5.70914 8.79208 5.79415 8.68761 5.90347 8.6139C6.0128 8.54019 6.14152 8.50055 6.27337 8.5Z" fill="#727A90" />
+    </svg>
+  );
 
   const handleCheckboxChange = (id, event) => {
     event.stopPropagation(); // Prevent row click when checkbox is clicked
@@ -190,22 +200,13 @@ export default function CatalogueFilter() {
   return (
     <div className="w-full font-sans max-w-[1200px] mx-auto text-[#686f83] ">
       {/* Header */}
-      <div className="flex justify-between items-center mb-0.5 bg-white text-[#727a90] rounded-t-lg px-4 py-4 shadow-[0_2px_8px_rgba(0,0,0,0.1)] overflow-hidden font-sans">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-0.5 bg-white text-[#727a90] rounded-t-lg px-4 py-4 shadow-[0_2px_8px_rgba(0,0,0,0.1)] overflow-hidden font-sans gap-4 sm:gap-0">
         <h2 className="text-[#24282e] m-0 text-xl font-semibold">
           Export Filters
         </h2>
-        <div className="flex flex-nowrap gap-[350px] items-center">
-          {/* <div className="relative w-full">
-            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#aaa] pointer-events-none" />
-            <input
-              type="text"
-              placeholder="Search by Created By..."
-              className="w-full py-2 px-3 pl-[66px] border border-[#ccc] rounded-[10px] text-sm"
-            />
-          </div> */}
-
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-[350px] items-start sm:items-center w-full sm:w-auto">
           <button
-            className="flex items-center gap-1.5 bg-[#2fb4ff] text-white border-none rounded-lg py-3 px-4 text-sm cursor-pointer transition-colors duration-200 hover:bg-[#32a5fd]"
+            className="flex items-center gap-1.5 bg-[#2fb4ff] text-white border-none rounded-lg py-3 px-4 text-sm cursor-pointer transition-colors duration-200 hover:bg-[#32a5fd] w-full sm:w-auto justify-center"
             onClick={handleFilter}
           >
             <MdTune />
@@ -215,23 +216,22 @@ export default function CatalogueFilter() {
       </div>
 
       {/* Filter Section */}
-      <div className="w-full bg-white  border-gray-200  p-4 mb-0.5 shadow-[0_1px_3px_rgba(0,0,0,0.1)]">
-        <div className="flex flex-wrap items-center gap-16">
+      <div className="w-full bg-white border-gray-200 p-4 mb-0.5 shadow-[0_1px_3px_rgba(0,0,0,0.1)]">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-16">
           {/* Saved Searches Dropdown */}
-          <div className="flex-1 min-w-[230px] max-w-[280px] relative">
+          <div className="flex-1 min-w-[200px] max-w-full lg:max-w-[280px] relative">
             <div
               className="w-full px-3 py-2 border border-gray-300 rounded-md cursor-pointer bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               onClick={() => setShowSavedSearches(!showSavedSearches)}
             >
               <div className="flex items-center justify-between">
                 <span
-                  className={`text-sm ${
-                    savedSearches ? "text-gray-800" : "text-gray-400"
-                  }`}
+                  className={`text-sm ${savedSearches ? "text-gray-800" : "text-gray-400"
+                    }`}
                 >
                   {savedSearches || "Saved Searches"}
                 </span>
-                <ChevronDown className="w-4 h-4 text-gray-400" />
+                <DropdownArrow />
               </div>
             </div>
             {showSavedSearches && (
@@ -252,22 +252,22 @@ export default function CatalogueFilter() {
             )}
           </div>
 
-          {/* Rules Dropdown */}
-          <div className="flex gap-4">
-            <div className="flex-1 min-w-[170px] max-w-[200px] relative">
+          {/* Rules and Created By Dropdowns with Search Button */}
+          <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+            {/* Rules Dropdown */}
+            <div className="flex-1 min-w-[170px] max-w-full sm:max-w-[200px] relative">
               <div
                 className="w-full px-3 py-2 border border-gray-300 rounded-md cursor-pointer bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 onClick={() => setShowRules(!showRules)}
               >
                 <div className="flex items-center justify-between">
                   <span
-                    className={`text-sm ${
-                      rules ? "text-gray-800" : "text-gray-400"
-                    }`}
+                    className={`text-sm ${rules ? "text-gray-800" : "text-gray-400"
+                      }`}
                   >
                     {rules || "Rules"}
                   </span>
-                  <ChevronDown className="w-4 h-4 text-gray-400" />
+                  <DropdownArrow />
                 </div>
               </div>
               {showRules && (
@@ -288,97 +288,60 @@ export default function CatalogueFilter() {
               )}
             </div>
 
-            {/* Created By Dropdown */}
-            <div className="flex-1 min-w-[170px] max-w-[200px] relative">
-              <div
-                className="w-full px-3 py-2 border border-gray-300 rounded-md cursor-pointer bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                onClick={() => setShowCreatedBy(!showCreatedBy)}
-              >
-                <div className="flex items-center justify-between">
-                  <span
-                    className={`text-sm ${
-                      createdBy ? "text-gray-800" : "text-gray-400"
-                    }`}
-                  >
-                    {createdBy || "Created By"}
-                  </span>
-                  <ChevronDown className="w-4 h-4 text-gray-400" />
-                </div>
-              </div>
-              {showCreatedBy && (
-                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
-                  {createdByOptions.map((option, index) => (
-                    <div
-                      key={index}
-                      className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => {
-                        setCreatedBy(option);
-                        setShowCreatedBy(false);
-                      }}
+            {/* Created By Dropdown with Search Button */}
+            <div className="flex gap-2 items-center">
+              <div className="flex-1 min-w-[170px] max-w-full sm:max-w-[200px] relative">
+                <div
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md cursor-pointer bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  onClick={() => setShowCreatedBy(!showCreatedBy)}
+                >
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={`text-sm ${createdBy ? "text-gray-800" : "text-gray-400"
+                        }`}
                     >
-                      {option}
-                    </div>
-                  ))}
+                      {createdBy || "Created By"}
+                    </span>
+                    <DropdownArrow />
+                  </div>
                 </div>
-              )}
-            </div>
-          </div>
+                {showCreatedBy && (
+                  <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
+                    {createdByOptions.map((option, index) => (
+                      <div
+                        key={index}
+                        className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                        onClick={() => {
+                          setCreatedBy(option);
+                          setShowCreatedBy(false);
+                        }}
+                      >
+                        {option}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
 
-          {/* Product */}
-          <div className="col-span-3 flex flex-col gap-2">
-            <label className="block text-sm text-gray-600">Product</label>
-            <div className="flex gap-2">
-              <div className="min-w-[80px] max-w-[120px]">
-                <input
-                  type="text"
-                  placeholder="Min"
-                  value={minValue}
-                  onChange={(e) => setMinValue(e.target.value)}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
-                />
-              </div>
-              <div className="min-w-[80px] max-w-[120px]">
-                <input
-                  type="text"
-                  placeholder="Max"
-                  value={maxValue}
-                  onChange={(e) => setMaxValue(e.target.value)}
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
-                />
-              </div>
+              {/* Search Button */}
+              <button
+                className="flex items-center justify-center bg-[#2fb4ff] text-white border-none rounded-md p-2 cursor-pointer transition-colors duration-200 hover:bg-[#32a5fd] min-w-[40px] h-[40px]"
+                onClick={handleSearch}
+              >
+                search
+              </button>
             </div>
           </div>
         </div>
       </div>
 
       {/* Table Container */}
-      <div className="w-full overflow-x-auto bg-white shadow-[0_1px_3px_rgba(0,0,0,0.1)]">
-        <table className="w-full border-collapse text-left">
+      <div className="w-full overflow-x-auto bg-white">
+        <table className="w-full border-collapse text-left min-w-[600px]">
           <thead>
             <tr>
-              <th className="w-10 py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
-                {/* <input
-                  type="checkbox"
-                  onChange={() => {
-                    const allSelected = filters.every(
-                      (filter) => filter.selected
-                    );
-                    setFilters(
-                      filters.map((filter) => ({
-                        ...filter,
-                        selected: !allSelected,
-                      }))
-                    );
-                  }}
-                  checked={
-                    filters.length > 0 &&
-                    filters.every((filter) => filter.selected)
-                  }
-                /> */}
+              <th className="w-10 py-[17px] px-2 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
               </th>
-              {/* <th className="w-[100px] text-[#24282e] py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
-                ID
-              </th> */}
               <th className="min-w-[180px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
                 Saved Searches
               </th>
@@ -398,9 +361,8 @@ export default function CatalogueFilter() {
             {currentItems.map((filter) => (
               <tr
                 key={filter.id}
-                className={`${
-                  filter.selected ? "bg-[#f0f7ff]" : ""
-                } hover:bg-gray-50 cursor-pointer transition-colors duration-150`}
+                className={`${filter.selected ? "bg-[#f0f7ff]" : ""
+                  } hover:bg-gray-50 cursor-pointer transition-colors duration-150`}
                 onClick={() => handleRowClick(filter.id)}
               >
                 <td className="w-10 py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
@@ -411,9 +373,6 @@ export default function CatalogueFilter() {
                     onClick={(e) => e.stopPropagation()}
                   />
                 </td>
-                {/* <td className="w-[100px] text-[#24282e] py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
-                  {filter.id}
-                </td> */}
                 <td className="min-w-[180px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
                   {filter.name}
                 </td>
@@ -468,8 +427,36 @@ export default function CatalogueFilter() {
         </table>
 
         {/* Pagination */}
-        <div className="flex justify-between items-center p-4 border-t border-gray-200">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row justify-between items-center p-4 border-t border-gray-200 gap-4">
+          <div className="flex items-center gap-2 order-2 sm:order-1">
+            <Pagination
+              count={filtrePages}
+              page={page}
+              onChange={handleChangePage}
+              variant="contained"
+              shape="rounded"
+              sx={{
+                "& .MuiPaginationItem-root": {
+                  borderColor: "#e5e7eb",
+                  color: "#6b7280",
+                  "&:hover": {
+                    backgroundColor: "#2FB4FF",
+                    borderColor: "#9ca3af",
+                  },
+                  "&.Mui-selected": {
+                    backgroundColor: "#2FB4FF",
+                    borderColor: "#3b82f6",
+                    color: "white",
+                    "&:hover": {
+                      backgroundColor: "#2FB4FF",
+                    },
+                  },
+                },
+              }}
+            />
+          </div>
+
+          <div className="flex items-center gap-2 order-1 sm:order-2">
             <span className="text-sm text-gray-600">Show</span>
             <FormControl size="small" sx={{ minWidth: 80 }}>
               <Select
@@ -490,34 +477,8 @@ export default function CatalogueFilter() {
                 <MenuItem value={50}>50</MenuItem>
               </Select>
             </FormControl>
-            <span className="text-sm text-gray-600">entries</span>
-          </div>
 
-          <Pagination
-            count={filtrePages}
-            page={page}
-            onChange={handleChangePage}
-            variant="contained"
-            shape="rounded"
-            sx={{
-              "& .MuiPaginationItem-root": {
-                borderColor: "#e5e7eb",
-                color: "#6b7280",
-                "&:hover": {
-                  backgroundColor: "#2FB4FF",
-                  borderColor: "#9ca3af",
-                },
-                "&.Mui-selected": {
-                  backgroundColor: "#2FB4FF",
-                  borderColor: "#3b82f6",
-                  color: "white",
-                  "&:hover": {
-                    backgroundColor: "#2FB4FF",
-                  },
-                },
-              },
-            }}
-          />
+          </div>
         </div>
       </div>
     </div>

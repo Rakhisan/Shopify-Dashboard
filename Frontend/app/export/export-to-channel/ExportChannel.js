@@ -17,6 +17,9 @@ export default function VendorSetup() {
   const handleEditExport = () => {
     router.push("/export/export-to-channel/edit");
   };
+  const handleAddChannel = () => {
+    router.push("/export/export-to-channel/add");
+  };
 
   const toggleActionMenu = (index) => {
     setShowActionMenu(showActionMenu === index ? null : index);
@@ -79,7 +82,7 @@ export default function VendorSetup() {
       <div className={styles.header}>
         <h2 className={styles.title}>Export to Channels</h2>
 
-        <button className={styles.button}>
+        <button className={styles.button} onClick={handleAddChannel}>
           {/* <span className={styles.plusIcon}>+</span> */}
           Add Channel
         </button>

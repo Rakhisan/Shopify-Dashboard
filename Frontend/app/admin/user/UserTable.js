@@ -82,6 +82,7 @@ export default function Users() {
   const [showActionMenu, setShowActionMenu] = useState(null);
   const [showPageSizeDropdown, setShowPageSizeDropdown] = useState(false);
   const [selectedPageSize, setSelectedPageSize] = useState(10);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const pageSizeOptions = [10, 20, 50];
 
@@ -111,9 +112,9 @@ export default function Users() {
       users.map((user) =>
         user.id === userId
           ? {
-              ...user,
-              status: user.status === "Active" ? "Inactive" : "Active",
-            }
+            ...user,
+            status: user.status === "Active" ? "Inactive" : "Active",
+          }
           : user
       )
     );
@@ -123,38 +124,32 @@ export default function Users() {
   return (
     <div className="w-full font-sans max-w-[1200px] mx-auto text-[#686f83] min-h-[770px] px-2 sm:px-0">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-1 bg-white text-[#24282e] rounded-t-lg px-2 sm:px-4 py-4 shadow-[0_2px_8px_rgba(0,0,0,0.1)] overflow-hidden font-sans gap-4 sm:gap-0">
-        <h2 className="m-0 text-lg font-semibold">Users</h2>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-1 bg-white text-[#24282e] rounded-t-lg px-2 sm:px-4 py-4 overflow-hidden font-sans gap-4 sm:gap-0">
+        <h2 className="text-2xl font-semibold text-[#2B2F32]">
+          Users
+        </h2>
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-[350px] w-full sm:w-auto">
-          <div className="relative w-full sm:w-auto">
-            <input
-              type="text"
-              placeholder="Search"
-              className="py-2 px-3 pl-[65px] border border-[#e0e0e0] rounded-lg text-sm w-full sm:w-[280px] placeholder:text-[#aaa]"
-            />
-            <span className="absolute left-[25px] top-[55%] transform -translate-y-1/2 text-[#999]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <div className="flex justify-end gap-4">
+            <div className="relative ">
+              <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-            </span>
+              <input
+                type="text"
+                placeholder="Search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-64 pl-10 pr-4 py-2 border border-[#D5D5D5] rounded-lg focus:border-2 focus:border-[#2FB4FF] focus:outline-none"
+              />
+            </div>
+
+            <button
+              className="flex items-center justify-center gap-2 bg-[#2fb4ff] text-white border-none rounded-lg py-2 px-5 text-sm cursor-pointer transition-colors duration-200 hover:bg-[#32a5fd] w-full sm:w-auto"
+              onClick={handleAddUser}
+            >
+              <span className="text-lg font-bold">+</span> Add User
+            </button>
           </div>
-          <button
-            className="flex items-center justify-center gap-1.5 bg-[#2fb4ff] text-white border-none rounded-lg py-2 px-4 text-sm cursor-pointer transition-colors duration-200 hover:bg-[#32a5fd] w-full sm:w-auto"
-            onClick={handleAddUser}
-          >
-            <span className="text-lg font-bold">+</span> Add User
-          </button>
         </div>
       </div>
 
@@ -204,11 +199,10 @@ export default function Users() {
                 </td>
                 <td className="py-2.5 pr-0 pl-4 border-b border-[#e0e0e0]">
                   <span
-                    className={`inline-block py-1.5 px-2.5 rounded-lg text-xs font-medium ${
-                      user.status === "Active"
-                        ? "bg-[rgba(13,157,227,0.1)] text-[#29b1ba] border border-[#009499] py-1.5 px-7.5"
-                        : "bg-[rgba(255,87,87,0.1)] text-[#ff6365] border border-[#ff6365] py-1.5 px-6.5"
-                    }`}
+                    className={`inline-block py-1.5 px-2.5 rounded-lg text-xs font-medium ${user.status === "Active"
+                      ? "bg-[rgba(13,157,227,0.1)] text-[#29b1ba] border border-[#009499] py-1.5 px-7.5"
+                      : "bg-[rgba(255,87,87,0.1)] text-[#ff6365] border border-[#ff6365] py-1.5 px-6.5"
+                      }`}
                     style={{ fontFamily: "Arial, Helvetica, sans-serif" }}
                   >
                     {user.status}
@@ -298,9 +292,8 @@ export default function Users() {
               >
                 {selectedPageSize}
                 <AiOutlineCaretDown
-                  className={`text-sm transition-transform duration-200 ease-in-out text-[#666] ${
-                    showPageSizeDropdown ? "rotate-180" : ""
-                  }`}
+                  className={`text-sm transition-transform duration-200 ease-in-out text-[#666] ${showPageSizeDropdown ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
@@ -309,11 +302,10 @@ export default function Users() {
                   {pageSizeOptions.map((option) => (
                     <div
                       key={option}
-                      className={`py-2.5 px-3 cursor-pointer text-sm text-[#333] transition-colors duration-200 ease-in-out border-b border-[#f0f0f0] last:border-b-0 hover:bg-[#f8f9fa] ${
-                        selectedPageSize === option
-                          ? "bg-[#e3f2fd] text-[#1976d2] font-medium"
-                          : ""
-                      }`}
+                      className={`py-2.5 px-3 cursor-pointer text-sm text-[#333] transition-colors duration-200 ease-in-out border-b border-[#f0f0f0] last:border-b-0 hover:bg-[#f8f9fa] ${selectedPageSize === option
+                        ? "bg-[#e3f2fd] text-[#1976d2] font-medium"
+                        : ""
+                        }`}
                       onClick={() => handlePageSizeSelect(option)}
                     >
                       {option}

@@ -316,15 +316,27 @@ export default function CatalogueFilter() {
   };
 
   const SelectDropdown = ({ placeholder, value, onChange, className = "" }) => (
-    <div className={`relative ${className}`}>
+    <div className={`relative min-w-[120px] ${className}`}>
       <select
-        className="w-full px-3 py-2 text-sm text-gray-600 border border-gray-300 rounded-md bg-white appearance-none pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        className="w-full px-3 py-2 text-sm border font sans  border-[#D5D5D5] rounded-md bg-white appearance-none pr-8 focus:outline-none focus:ring-2 focus:ring-[#32B4FE] focus:border-[#32B4FE]"
         value={value}
         onChange={onChange}
       >
         <option value="">{placeholder}</option>
       </select>
-      <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+      <svg
+        width="16"
+        height="17"
+        viewBox="0 0 16 17"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none"
+      >
+        <path
+          d="M4.27337 6.5H11.7267C11.8586 6.50055 11.9873 6.54019 12.0966 6.6139C12.2059 6.68761 12.2909 6.79208 12.3409 6.9141C12.3908 7.03612 12.4035 7.17021 12.3772 7.29942C12.351 7.42863 12.287 7.54715 12.1934 7.64L8.47337 11.36C8.41139 11.4225 8.33766 11.4721 8.25642 11.5059C8.17518 11.5398 8.08804 11.5572 8.00004 11.5572C7.91203 11.5572 7.82489 11.5398 7.74365 11.5059C7.66241 11.4721 7.58868 11.4225 7.5267 11.36L3.8067 7.64C3.71309 7.54715 3.64911 7.42863 3.62285 7.29942C3.59659 7.17021 3.60924 7.03612 3.65919 6.9141C3.70914 6.79208 3.79415 6.68761 3.90347 6.6139C4.0128 6.54019 4.14152 6.50055 4.27337 6.5Z"
+          fill="#727A90"
+        />
+      </svg>
     </div>
   );
 
@@ -426,10 +438,10 @@ export default function CatalogueFilter() {
           Your Catalog
         </h2>
         <div className="flex items-center gap-4">
-          <button className="text-gray-600 py-2 px-4 rounded-lg text-sm font-medium flex items-center gap-2 cursor-pointer transition-colors bg-white border border-gray-200">
+          <button className="text-white py-2 px-4 rounded-lg text-sm font-medium flex items-center gap-2 cursor-pointer transition-colors bg-[#32B4FE] border border-[#D5D5D5]">
             Save Filter
           </button>
-          <button className="text-gray-600 py-2 px-4 rounded-lg text-sm font-medium flex items-center gap-2 cursor-pointer transition-colors bg-white border border-gray-200" onClick={handleAddProduct}>
+          <button className="text-white py-2 px-4 rounded-lg text-sm font-medium flex items-center gap-2 cursor-pointer transition-colors  bg-[#32B4FE]  border border-[#D5D5D5]" onClick={handleAddProduct}>
             <Plus size={20} />
             Add Your Product
           </button>
@@ -439,7 +451,7 @@ export default function CatalogueFilter() {
       {/* filter section - UNCHANGED */}
       <div className="bg-white px-4 py-4 border-b shadow-sm">
         {/* First Row - All dropdowns in one line */}
-        <div className="grid grid-cols-9 gap-3 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-9 xl:grid-cols-9 2xl:grid-cols-9 gap-2 mb-4">
           <SelectDropdown
             placeholder="Category"
             value={filters.category}
@@ -506,14 +518,14 @@ export default function CatalogueFilter() {
         </div>
 
         {/* Second Row - Enter Keyword, Enter SKU, and Price Range */}
-        <div className="grid grid-cols-12 gap-4 mb-4 items-center">
-          <div className="col-span-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 mb-2 items-center">
+          <div>
             <label className="block text-sm text-gray-600 mb-1">
               Enter Keyword
             </label>
             <input
               type="text"
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-2 py-2 text-sm border border-[#D5D5D5] rounded-md focus:outline-none focus:ring-2 focus:ring-[#32B4FE] focus:border-[#32B4FE]"
               value={filters.enterKeyword}
               onChange={(e) =>
                 setFilters({ ...filters, enterKeyword: e.target.value })
@@ -521,13 +533,13 @@ export default function CatalogueFilter() {
             />
           </div>
 
-          <div className="col-span-3">
-            <label className="block text-sm text-gray-600 mb-1">
+          <div>
+            <label className="block  mb-1">
               Enter SKU
             </label>
             <input
               type="text"
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-2 py-2 text-sm border border-[#D5D5D5] rounded-md focus:outline-none focus:ring-2 focus:ring-[#32B4FE] focus:border-[#32B4FE]"
               value={filters.enterSKU}
               onChange={(e) =>
                 setFilters({ ...filters, enterSKU: e.target.value })
@@ -535,13 +547,13 @@ export default function CatalogueFilter() {
             />
           </div>
 
-          <div className="col-span-3">
-            <label className="block text-sm text-gray-600 mb-1">
+          <div>
+            <label className="block  mb-1">
               Manufacture
             </label>
             <input
               type="text"
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 text-sm border border-[#D5D5D5] rounded-md focus:outline-none focus:ring-2 focus:ring-[#32B4FE] focus:border-[#32B4FE]"
               value={filters.manufacturer}
               onChange={(e) =>
                 setFilters({ ...filters, manufacture: e.target.value })
@@ -549,13 +561,13 @@ export default function CatalogueFilter() {
             />
           </div>
 
-          <div className="col-span-3">
-            <label className="block text-sm text-gray-600 mb-1">
+          <div>
+            <label className="block  mb-1">
               Part Number
             </label>
             <input
               type="text"
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 text-sm border border-[#D5D5D5] rounded-md focus:outline-none focus:ring-2 focus:ring-[#32B4FE] focus:border-[#32B4FE]"
               value={filters.partNumber}
               onChange={(e) =>
                 setFilters({ ...filters, partNumber: e.target.value })
@@ -565,8 +577,8 @@ export default function CatalogueFilter() {
         </div>
 
         {/* Third Row - Other filters */}
-        <div className="grid grid-cols-11 gap-4 mb-4 items-end">
-          <div className="col-span-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2 mb-2 items-end">
+          <div>
             <SelectDropdown
               placeholder="Catalog"
               value={filters.catalog}
@@ -575,7 +587,7 @@ export default function CatalogueFilter() {
               }
             />
           </div>
-          <div className="col-span-2">
+          <div>
             <SelectDropdown
               placeholder="Price Profile"
               value={filters.priceProfile}
@@ -585,41 +597,39 @@ export default function CatalogueFilter() {
             />
           </div>
 
-          <div className="col-span-2 w-full px-3 py-2 text-sm border border-400 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-            <div className="flex items-center space-x-2">
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  id="inStock"
-                  checked={filters.inStock}
-                  onChange={(e) =>
-                    setFilters({ ...filters, inStock: e.target.checked })
+          <div className="flex items-center px-3 py-2 border-2 border-[#D5D5D5] rounded-md min-h-[40px]">
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="inStock"
+                checked={filters.inStock}
+                onChange={(e) =>
+                  setFilters({ ...filters, inStock: e.target.checked })
+                }
+                className="sr-only"
+              />
+              <label
+                htmlFor="inStock"
+                className="flex items-center cursor-pointer"
+              >
+                <div
+                  className={`w-5 h-5 border-2 rounded flex items-center justify-center ${filters.inStock ? "border-[#32B4FE]" : "border-[#D5D5D5]"
+                    }`}
+                  style={
+                    filters.inStock
+                      ? { backgroundColor: "#32B4FE", borderColor: "#32B4FE" }
+                      : {}
                   }
-                  className="sr-only"
-                />
-                <label
-                  htmlFor="inStock"
-                  className="flex items-center cursor-pointer"
                 >
-                  <div
-                    className={`w-5 h-5 border-2 rounded flex items-center justify-center ${filters.inStock ? "border" : "border-gray-300"
-                      }`}
-                    style={
-                      filters.inStock
-                        ? { backgroundColor: "#32B4FE", borderColor: "#32B4FE" }
-                        : {}
-                    }
-                  >
-                    {filters.inStock && (
-                      <Check className="w-3 h-3 text-white" />
-                    )}
-                  </div>
-                  <span className="ml-2 text-sm text-gray-600">In-Stock</span>
-                </label>
-              </div>
+                  {filters.inStock && (
+                    <Check className="w-3 h-3 text-white" />
+                  )}
+                </div>
+                <span className="ml-1">In-Stock</span>
+              </label>
             </div>
           </div>
-          <div className="col-span-2">
+          <div>
             <SelectDropdown
               placeholder="Export Filter"
               value={filters.exportFilter}
@@ -629,13 +639,13 @@ export default function CatalogueFilter() {
             />
           </div>
 
-          <div className="col-span-3">
-            <label className="block text-sm text-gray-600 mb-1">
+          <div>
+            <label className="block  mb-1">
               Price Range
             </label>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm font-medium">${priceRange[0]}</span>
-              <Box sx={{ width: "50%" }}>
+            <div className="flex items-center space-x-2">
+              <span className="text-sm font-medium whitespace-nowrap">${priceRange[0]}</span>
+              <Box sx={{ width: "100%", minWidth: "100px" }}>
                 <Slider
                   value={priceRange}
                   onChange={handlePriceRangeChange}
@@ -658,24 +668,21 @@ export default function CatalogueFilter() {
                   }}
                 />
               </Box>
-              <span className="text-sm font-medium">${priceRange[1]}</span>
+              <span className="text-sm font-medium whitespace-nowrap">${priceRange[1]}</span>
             </div>
           </div>
-          <div className="col-span-2"></div>
         </div>
 
-        {/* Fourth Row - Category, Part Number and Buttons */}
-        <div className="grid grid-cols-12  items-end">
-          <div className="col-span-4"></div>
-          <div className="col-span-4 flex space-x-3">
-            <button className="flex-1 px-6 py-2 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+        {/* Fourth Row - Buttons */}
+        <div className="flex justify-center items-end">
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 w-full sm:w-auto max-w-xs">
+            <button className="flex-1 px-6 py-2 text-sm border border-gray-300  rounded-md hover:bg-[#32B4FE] hover:text-white transition-colors">
               Cancel
             </button>
             <button
-              className="flex-1 px-6 py-2 text-sm text-white rounded-md hover:bg-blue-600 transition-colors"
-              style={{ backgroundColor: "#32B4FE" }}
+              className="flex-1 px-6 py-2 text-sm text-white rounded-md bg-[#32B4FE] transition-colors"
+
             >
-              {" "}
               Apply
             </button>
           </div>
@@ -1028,8 +1035,36 @@ export default function CatalogueFilter() {
         </TableContainer>
 
         {/* Pagination */}
-        <div className="flex justify-between items-center p-4 border-t border-gray-200">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row justify-between items-center p-4 border-t border-gray-200 gap-4">
+          <div className="flex items-center gap-2 order-2 sm:order-1">
+            <Pagination
+              count={totalPages}
+              page={page}
+              onChange={handleChangePage}
+              variant="contained"
+              shape="rounded"
+              sx={{
+                "& .MuiPaginationItem-root": {
+                  borderColor: "#e5e7eb",
+                  color: "#6b7280",
+                  "&:hover": {
+                    backgroundColor: "#2FB4FF",
+                    borderColor: "#9ca3af",
+                  },
+                  "&.Mui-selected": {
+                    backgroundColor: "#2FB4FF",
+                    borderColor: "#3b82f6",
+                    color: "white",
+                    "&:hover": {
+                      backgroundColor: "#2FB4FF",
+                    },
+                  },
+                },
+              }}
+            />
+          </div>
+
+          <div className="flex items-center gap-2 order-1 sm:order-2">
             <span className="text-sm text-gray-600">Show</span>
             <FormControl size="small" sx={{ minWidth: 80 }}>
               <Select
@@ -1050,34 +1085,8 @@ export default function CatalogueFilter() {
                 <MenuItem value={50}>50</MenuItem>
               </Select>
             </FormControl>
-            <span className="text-sm text-gray-600">entries</span>
-          </div>
 
-          <Pagination
-            count={totalPages}
-            page={page}
-            onChange={handleChangePage}
-            variant="contained"
-            shape="rounded"
-            sx={{
-              "& .MuiPaginationItem-root": {
-                borderColor: "#2FB4FF",
-                color: "#6b7280",
-                "&:hover": {
-                  backgroundColor: "#2FB4FF",
-                  borderColor: "#9ca3af",
-                },
-                "&.Mui-selected": {
-                  backgroundColor: "#2FB4FF",
-                  borderColor: "#3b82f6",
-                  color: "white",
-                  "&:hover": {
-                    backgroundColor: "#2FB4FF",
-                  },
-                },
-              },
-            }}
-          />
+          </div>
         </div>
         {/* Action Menu */}
         <Menu

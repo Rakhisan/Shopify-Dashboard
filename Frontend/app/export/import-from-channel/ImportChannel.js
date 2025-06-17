@@ -134,7 +134,7 @@ export default function VendorSetup() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto pt-1 px-1 sm:pt-3 sm:px-6 lg:pt-4 lg:px-6">
+    <div className="max-w-7xl mx-auto pt-1 px-1 sm:pt-3 sm:px-6 lg:pt-2 lg:px-5">
       <Card className="mb-3">
         <CardContent className="pb-2">
           <div className="flex justify-between items-center">
@@ -147,7 +147,7 @@ export default function VendorSetup() {
             </Typography>
 
             {/* View Logs Button */}
-            <button className="bg-[#2FB4FF]  text-white text-sm font-medium px-5 py-2 rounded-lg shadow-sm" onClick={handleViewLogs}>
+            <button className="bg-[#2FB4FF]  text-white text-sm font-medium px-5 py-2 rounded-lg " onClick={handleViewLogs}>
               View Logs
             </button>
           </div>
@@ -349,13 +349,13 @@ export default function VendorSetup() {
           onClick={handleMenuClose}
           className="px-4 py-2  transition-colors duration-200"
         >
-          <Update className="w-4 h-4 mr-2 text-gray-600" />
+          {/* <Update className="w-4 h-4 mr-2 text-gray-600" />
           <Typography variant="body2">Update</Typography>
         </MenuItem>
         <MenuItem
           onClick={handleMenuClose}
           className="px-4 py-2 hover:bg-red-50 transition-colors duration-200"
-        >
+        > */}
           <Delete className="w-4 h-4 mr-2 text-red-600" />
           <Typography variant="body2" className="text-red-600">Delete</Typography>
         </MenuItem>
