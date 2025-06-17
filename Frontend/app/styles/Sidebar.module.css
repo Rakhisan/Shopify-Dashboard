@@ -87,6 +87,8 @@
   fill: #1f2327;
 }
 
+
+
 .dark .icon svg {
   fill: #ffffff;
 }
@@ -118,7 +120,7 @@
 .chevron svg {
   width: 16px;
   height: 16px;
-  fill: #637381;
+
 }
 
 .dark .chevron svg {

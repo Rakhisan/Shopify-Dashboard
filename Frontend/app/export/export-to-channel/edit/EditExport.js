@@ -102,12 +102,12 @@ export default function ExportChannelForm() {
     <div className="min-h-screen  p-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="bg-white rounded-lg shadow-sm p-4 mb-1">
-          <h1 className="text-lg font-medium text-gray-800">Export to Channel Table</h1>
+        <div className="bg-white rounded-tl-lg p-4 mb-1">
+          <h1 className="text-lg font-medium text-gray-800">Export to Channels</h1>
         </div>
 
         {/* Form Content */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-white shadow-sm p-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
             {/* Left Column */}

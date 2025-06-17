@@ -102,19 +102,19 @@ export default function ExportChannelForm() {
         <div className="min-h-screen  p-4">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
-                <div className="bg-white rounded-lg shadow-sm p-4 mb-1">
-                    <h1 className="text-lg font-medium text-gray-800">Export to Channel Table</h1>
+                <div className="bg-white rounded-tl-lg p-4 mb-1">
+                    <h1 className="text-lg font-medium text-gray-800">Export to Channel</h1>
                 </div>
 
                 {/* Form Content */}
-                <div className="bg-white rounded-lg shadow-sm p-6">
+                <div className="bg-white shadow-sm p-6">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
                         {/* Left Column */}
                         <div>
 
                             {/* Basic Export Configuration */}
-                            <div className="mb-8 bg-gray-50 p-4 rounded-lg">
+                            <div className="mb-8 bg-[#F6F8FB] p-4 rounded-lg">
                                 <h2 className="text-base font-medium text-gray-800 mb-4">Basic Export Configuration</h2>
                                 <div>
                                     <InputField
@@ -153,7 +153,7 @@ export default function ExportChannelForm() {
                             </div>
 
                             {/* Contact & Export Status */}
-                            <div className="mb-8 bg-gray-50 p-4 rounded-lg">
+                            <div className="mb-8 bg-[#F6F8FB]  p-4 rounded-lg">
                                 <h2 className="text-base font-medium text-gray-800 mb-4">Contact</h2>
                                 <InputField
                                     label="Email"
@@ -186,7 +186,7 @@ export default function ExportChannelForm() {
                         <div>
 
                             {/* FTP Settings & Value Filters */}
-                            <div className="mb-8 bg-gray-50 p-4 rounded-lg">
+                            <div className="mb-8 bg-[#F6F8FB]  p-4 rounded-lg">
                                 <h2 className="text-base font-medium text-gray-800 mb-4">FTP Settings</h2>
                                 <div className="grid grid-cols-3 gap-3">
                                     <InputField
@@ -264,7 +264,7 @@ export default function ExportChannelForm() {
                             </div>
 
                             {/* Limits & Customization */}
-                            <div className="mb-8 bg-gray-50 p-4 rounded-lg">
+                            <div className="mb-8 bg-[#F6F8FB]  p-4 rounded-lg">
                                 <h2 className="text-base font-medium text-gray-800 mb-4">Limits & Customization</h2>
                                 <div>
                                     <InputField
