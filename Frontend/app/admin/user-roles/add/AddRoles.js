@@ -49,10 +49,10 @@ export default function AddRolePage() {
     };
 
     return (
-        <div className="min-h-screen p-4">
-            <div className="max-w-7xl mx-auto">
+        <div className="min-h-screen w-full  p-4">
+            <div className="w-full  mx-auto">
                 {/* Header */}
-                <div className="bg-white rounded-tl-lg border border-[#CFD2D4] p-4 mb-0">
+                <div className="bg-white rounded-tl-lg  border border-[#CFD2D4] p-4 mb-0">
                     <div className="flex items-center justify-between">
                         <h1 className="text-xl font-medium text-gray-900">Add Role</h1>
                         <div className="flex items-center space-x-2">

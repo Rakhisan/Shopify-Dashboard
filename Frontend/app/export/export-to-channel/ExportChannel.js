@@ -1,190 +1,408 @@
-"use client";
-import { useState } from "react";
-import Image from "next/image";
-import styles from "./ExportChannel.module.css";
-import { Search, Plus, ChevronDown, MoreVertical } from "lucide-react";
+'use client';
+
+import React, { useState } from 'react';
+import Image from 'next/image';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+  IconButton,
+  Menu,
+  MenuItem,
+  Chip,
+  LinearProgress,
+  Box,
+  Card,
+  CardContent
+} from '@mui/material';
+import { MoreVert, Edit, Update, Delete } from '@mui/icons-material';
+
+// Import logo images
 import amazonLogo from "../../images/logo_amazon.png";
 import googleLogo from "../../images/logo_google.png";
 import walmartLogo from "../../images/logo_walmart.png";
 import shopifyLogo from "../../images/logo.png";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
+
+// Logo component using Next.js Image component with imported images
+const LogoComponent = ({ name, logoSrc, className, width = 98, height = 32 }) => (
+  <div className={`${className} flex items-center justify-center rounded overflow-hidden  relative`}>
+    <Image
+      src={logoSrc}
+      alt={`${name} logo`}
+      width={width}
+      height={height}
+      className="object-contain p-1"
+      priority={false}
+      placeholder="blur"
+    />
+  </div>
+);
 
 export default function VendorSetup() {
-  const [showActionMenu, setShowActionMenu] = useState(null);
-
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [selectedVendor, setSelectedVendor] = useState(null);
   const router = useRouter();
 
-  const handleEditExport = () => {
-    router.push("/export/export-to-channel/edit");
+  const handleMenuClick = (event, vendorId) => {
+    setAnchorEl(event.currentTarget);
+    setSelectedVendor(vendorId);
   };
-  const handleAddChannel = () => {
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    setSelectedVendor(null);
+  };
+
+  const handleViewLogs = () => {
     router.push("/export/export-to-channel/add");
   };
 
-  const toggleActionMenu = (index) => {
-    setShowActionMenu(showActionMenu === index ? null : index);
-  };
-
-  // Sample vendor data for cleaner rendering
   const vendors = [
     {
       id: 1,
-      logo: shopifyLogo,
-      filterApplied: "Electronics In-Stock",
+      name: 'Shopify',
+      logoSrc: shopifyLogo,
+      filterApplied: 'Electronics In-Stock',
       progressValue: 1500,
       progressPercent: 70,
-      progressClass: styles.greenProgress,
-      progressBarClass: styles.progressBarAcmeContainer,
-      lastSync: "2025-05-12 , 8:15 PM",
-      status: "Connected",
-      statusClass: styles.activeBadge,
+      progressColor: 'success',
+      lastSync: '2025-05-12, 8:15 PM',
+      status: 'Connected',
+      statusColor: 'success',
+      statusVariant: 'outlined'
     },
     {
       id: 2,
-      logo: googleLogo,
-      filterApplied: "Trial Offer",
+      name: 'Google',
+      logoSrc: googleLogo,
+      filterApplied: 'Trial Offer',
       progressValue: 1200,
       progressPercent: 65,
-      progressClass: styles.redProgress,
-      progressBarClass: styles.progressBarBetaContainer,
-      lastSync: "2025-04-20 , 8:10 PM",
-      status: "Setup Required",
-      statusClass: styles.nonactiveBadge,
+      progressColor: 'warning',
+      lastSync: '2025-04-20, 8:10 PM',
+      status: 'Setup Required',
+      statusColor: 'warning',
+      statusVariant: 'outlined'
     },
     {
       id: 3,
-      logo: amazonLogo,
-      filterApplied: "Student Pricing",
+      name: 'Amazon',
+      logoSrc: amazonLogo,
+      filterApplied: 'Student Pricing',
       progressValue: 200,
       progressPercent: 80,
-      progressClass: styles.orangeProgress,
-      progressBarClass: styles.progressBarGammaContainer,
-      lastSync: "2025-02-12 , 10:15 PM",
-      status: "Error",
-      statusClass: styles.inactiveBadge,
+      progressColor: 'error',
+      lastSync: '2025-02-12, 10:15 PM',
+      status: 'Error',
+      statusColor: 'error',
+      statusVariant: 'outlined'
     },
     {
       id: 4,
-      logo: walmartLogo,
-      filterApplied: "Sectional Discount",
+      name: 'Walmart',
+      logoSrc: walmartLogo,
+      filterApplied: 'Seasonal Discount',
       progressValue: 1800,
       progressPercent: 30,
-      progressClass: styles.blueYellowProgress,
-      progressBarClass: styles.progressBarDeltaContainer,
-      lastSync: "2025-01-07 , 11:15 PM",
-      status: "Error",
-      statusClass: styles.inactiveBadge,
-    },
+      progressColor: 'info',
+      lastSync: '2025-01-07, 11:15 PM',
+      status: 'Error',
+      statusColor: 'error',
+      statusVariant: 'outlined'
+    }
   ];
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <h2 className={styles.title}>Export to Channels</h2>
+  const getProgressBarColor = (color) => {
+    switch (color) {
+      case 'success': return 'bg-[#66914A]';
+      case 'warning': return 'bg-[#FF302F]';
+      case 'error': return 'bg-[#FF9A00]';
+      case 'info': return 'bg-[#0073D5]';
 
-        <button className={styles.button} onClick={handleAddChannel}>
-          {/* <span className={styles.plusIcon}>+</span> */}
-          Add Channel
-        </button>
+    }
+  };
+
+  const getProgressBgColor = (color) => {
+    switch (color) {
+      case 'success': return 'bg-[#98C050]';
+      case 'warning': return 'bg-[#FF9C9C]';
+      case 'error': return 'bg-[#292929]';
+      case 'info': return 'bg-[#FFB200]';
+
+    }
+  };
+
+  const getStatusChipStyles = (status) => {
+    switch (status) {
+      case 'Connected':
+        return {
+          backgroundColor: '#EAFFC3',
+          color: '#66914A',
+          border: '1px solid #66914A'
+        };
+      case 'Setup Required':
+        return {
+          backgroundColor: ' #FFFAEA',
+          color: '#816406',
+          border: '1px solid #FFC300'
+        };
+      case 'Error':
+        return {
+          backgroundColor: '#FFD5D6',
+          color: '#A8280C',
+          border: '1px solid #FF6365'
+        };
+      default:
+        return {
+          backgroundColor: '#FFD5D6',
+          color: '#A8280C',
+          border: '1px solid #FF6365'
+        };
+    }
+  };
+
+  return (
+    <div className="w-full mx-auto pt-1 px-1 sm:pt-3 sm:px-6 lg:pt-2 lg:px-5">
+      <div className="mb-1 rounded-tl-lg bg-white">
+
+        <div className="bg-white w-full rounded-tl-lg p-3 sm:p-4">
+          <div className="flex justify-between items-center ">
+            <h2 className="text-2xl font-semibold text-[#2B2F32]">
+              Export to Channels
+            </h2>
+            <button
+              className="bg-[#2FB4FF] text-white text-sm font-medium px-5 py-2 rounded-lg"
+              onClick={handleViewLogs}
+            >
+              Add Channel
+            </button>
+          </div>
+
+        </div>
       </div>
 
-      <div className={styles.tableContainer}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th className={styles.columnHeader}>Icon</th>
-              <th className={styles.columnHeader}>Filter Applied </th>
-              <th className={styles.columnHeader}>Progress</th>
-              <th className={styles.columnHeader}>Last Export</th>
-              <th className={styles.columnHeader}>Status</th>
-              <th className={styles.columnHeader}></th>
-            </tr>
-          </thead>
-          <tbody>
-            {vendors.map((vendor, index) => (
-              <tr key={vendor.id} className={styles.tableRow}>
-                <td className={styles.vendorCell}>
-                  <div className={styles.vendorInfo}>
-                    <Image
-                      src={vendor.logo}
-                      alt="Vendor Logo"
-                      className={styles.vendorLogo}
-                      style={{ width: 100, height: 30 }}
-                    />
-                  </div>
-                </td>
-                <td className={styles.connectionCell}>
-                  <div className={styles.filterApplied}>
-                    <span>{vendor.filterApplied}</span>
-                  </div>
-                </td>
-                <td className={styles.progressCell}>
-                  <div className={styles.progressInfo}>
-                    <span className={styles.progressLabel}>
-                      Total Product Imported
-                    </span>
-                    <span className={styles.progressValue}>
-                      {vendor.progressValue}
-                    </span>
-                  </div>
-                  <div className={vendor.progressBarClass}>
-                    <div
-                      className={`${styles.progressBar} ${vendor.progressClass}`}
-                      style={{ width: `${vendor.progressPercent}%` }}
-                    ></div>
-                  </div>
-                  <div className={styles.progressPercentage}>
-                    {vendor.progressPercent}%
-                  </div>
-                </td>
-                <td className={styles.syncCell}>{vendor.lastSync}</td>
-                <td className={styles.statusCell}>
-                  <div
-                    className={`${styles.statusBadge} ${vendor.statusClass}`}
-                  >
-                    {vendor.status}
-                  </div>
-                </td>
-                <td className={styles.actionColumn}>
-                  <button
-                    className={styles.menuButton}
-                    onClick={() => toggleActionMenu(index)}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <circle cx="12" cy="12" r="1" />
-                      <circle cx="12" cy="6" r="1" />
-                      <circle cx="12" cy="18" r="1" />
-                    </svg>
-                  </button>
 
-                  {showActionMenu === index && (
-                    <div className={styles.actionMenu}>
-                      <div
-                        className={styles.actionMenuItem}
-                        onClick={handleEditExport}
-                      >
-                        Edit
+
+
+      {/* Desktop Table */}
+      <div className="hidden md:block">
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell className="font-medium text-[#727A90] py-4" style={{ width: '15%' }}>
+                  <Typography variant="body2" className="semibold">
+                    Icon
+                  </Typography>
+                </TableCell>
+                <TableCell className="font-medium text-[#727A90]  py-4" style={{ width: '20%' }}>
+                  <Typography variant="body2" className="font-medium">
+                    Filter Applied
+                  </Typography>
+                </TableCell>
+                <TableCell className="font-medium text-[#727A90]  py-4" style={{ width: '25%' }}>
+                  <Typography variant="body2" className="font-medium">
+                    Progress
+                  </Typography>
+                </TableCell>
+                <TableCell className="font-medium text-[#727A90] py-4" style={{ width: '20%' }}>
+                  <Typography variant="body2" className="font-medium">
+                    Last Export
+                  </Typography>
+                </TableCell>
+                <TableCell className="font-medium text-[#727A90]  py-4" style={{ width: '15%' }}>
+                  <Typography variant="body2" className="font-medium">
+                    Status
+                  </Typography>
+                </TableCell>
+                <TableCell className="font-medium text[#727A90] py-4" style={{ width: '5%' }}>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {vendors.map((vendor) => (
+                <TableRow
+                  key={vendor.id}
+                  className="transition-colors duration-200"
+                >
+                  <TableCell className="py-4" style={{ width: '15%' }}>
+                    <LogoComponent
+                      name={vendor.name}
+                      logoSrc={vendor.logoSrc}
+                      className="w-20 h-8"
+                      width={80}
+                      height={32}
+                    />
+                  </TableCell>
+
+                  <TableCell className="py-4" style={{ width: '20%' }}>
+                    <Typography variant="body2" className="text-[#686F83]">
+                      {vendor.filterApplied}
+                    </Typography>
+                  </TableCell>
+
+                  <TableCell className="py-4" style={{ width: '25%' }}>
+                    <div className="space-y-1">
+                      <div className="flex justify-between items-center">
+                        <Typography variant="caption" className="text-[#686F83] text-xs">
+                          Total Product Sent
+                        </Typography>
+                        <div className="text-right">
+                          <Typography variant="caption" className="font-semibold text-sm text-[#686F83]">
+                            {vendor.progressValue}
+                          </Typography>
+                        </div>
                       </div>
-                      <div className={styles.actionMenuItem}>Update</div>
-                      <div
-                        className={`${styles.actionMenuItem} ${styles.deleteAction}`}
-                      >
-                        Delete
+                      <div className="flex items-center space-x-3">
+                        <div className={`flex-1 h-3 rounded-full ${getProgressBgColor(vendor.progressColor)}`}>
+                          <div
+                            className={`h-full rounded-full transition-all duration-300 ${getProgressBarColor(vendor.progressColor)}`}
+                            style={{ width: `${vendor.progressPercent}%` }}
+                          />
+                        </div>
+                        <Typography variant="caption" className="text-[#686F83] text-sm font-medium min-w-[30px]">
+                          {vendor.progressPercent}%
+                        </Typography>
                       </div>
                     </div>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  </TableCell>
+
+                  <TableCell className="py-4" style={{ width: '20%' }}>
+                    <Typography variant="body2" className="text-[#686F83] whitespace-nowrap">
+                      {vendor.lastSync}
+                    </Typography>
+                  </TableCell>
+
+                  <TableCell className="py-4" style={{ width: '15%' }}>
+                    <Chip
+                      label={vendor.status}
+                      size="small"
+                      className="font-medium"
+                      style={getStatusChipStyles(vendor.status)}
+                    />
+                  </TableCell>
+
+                  <TableCell className="py-4" style={{ width: '5%' }}>
+                    <IconButton
+                      onClick={(e) => handleMenuClick(e, vendor.id)}
+                      className="transition-colors duration-200"
+                      size="small"
+                    >
+                      <MoreVert />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
-    </div>
+
+      {/* Mobile Cards */}
+      <div className="md:hidden space-y-4">
+        {vendors.map((vendor) => (
+          <Card key={vendor.id} className="shadow-sm">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between mb-3">
+                <LogoComponent
+                  name={vendor.name}
+                  logoSrc={vendor.logoSrc}
+                  className="w-16 h-6"
+                  width={70}
+                  height={30}
+                />
+                <div className="flex items-center space-x-2">
+                  <Chip
+                    label={vendor.status}
+                    size="small"
+                    style={getStatusChipStyles(vendor.status)}
+                  />
+                  <IconButton
+                    onClick={(e) => handleMenuClick(e, vendor.id)}
+                    size="small"
+                  >
+                    <MoreVert />
+                  </IconButton>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <div>
+                  <Typography variant="caption" className="text-[#686F83] block mb-1">
+                    Filter Applied
+                  </Typography>
+                  <Typography variant="body2" className="text-[#686F83]">
+                    {vendor.filterApplied}
+                  </Typography>
+                </div>
+
+                <div>
+                  <div className="flex justify-between items-center mb-1">
+                    <Typography variant="caption" className="text-[#686F83]">
+                      Total Product Sent
+                    </Typography>
+                    <Typography variant="caption" className="font-medium">
+                      {vendor.progressValue}
+                    </Typography>
+                  </div>
+
+                  <div className={`w-full h-2 rounded-full ${getProgressBgColor(vendor.progressColor)} mb-1`}>
+                    <div
+                      className={`h-full rounded-full ${getProgressBarColor(vendor.progressColor)}`}
+                      style={{ width: `${vendor.progressPercent}%` }}
+                    />
+                  </div>
+
+                  <Typography variant="caption" className="text-[#686F83]">
+                    {vendor.progressPercent}%
+                  </Typography>
+                </div>
+
+                <div>
+                  <Typography variant="caption" className="text--[#686F83] block">
+                    Last Export
+                  </Typography>
+                  <Typography variant="body2" className="text--[#686F83]">
+                    {vendor.lastSync}
+                  </Typography>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Action Menu */}
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+        className="mt-2"
+        PaperProps={{
+          className: "shadow-lg rounded-lg min-w-[120px]"
+        }}
+      >
+        <MenuItem
+          onClick={handleMenuClose}
+          className="px-4 py-2 transition-colors duration-200"
+        >
+          <Edit className="w-4 h-4 mr-2 text--[#686F83]" />
+          <Typography variant="body2">Edit</Typography>
+        </MenuItem>
+        <MenuItem
+          onClick={handleMenuClose}
+          className="px-4 py-2 transition-colors duration-200"
+        >
+          <Delete className="w-4 h-4 mr-2 text-red-600" />
+          <Typography variant="body2" className="text-red-600">Delete</Typography>
+        </MenuItem>
+      </Menu>
+    </div >
   );
 }

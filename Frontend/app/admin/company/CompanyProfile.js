@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import React, { useState } from "react";
 import { Upload } from "lucide-react";
 
@@ -8,9 +9,7 @@ const CustomChevronDown = () => (
   </svg>
 );
 
-
-
-const CompanyProfileForm = () => {
+export default function CompanyProfileForm() {
   const [formData, setFormData] = useState({
     companyName: "",
     email: "",
@@ -156,193 +155,81 @@ const CompanyProfileForm = () => {
   };
 
   return (
-    <div className="max-w-7xl  mx-auto min-h-screen">
-      {/* Header Section */}
-      <div className="bg-white rounded-tl-lg p-3 sm:p-4">
-        <h2 className="text-2xl font-semibold text-[#2B2F32]">
-          Company Profile
-        </h2>
+    <div className="w-full min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white rounded-tl-lg  w-full p-4 border-b">
+        <h2 className="text-xl font-semibold text-gray-800">Company Profile</h2>
       </div>
 
-      <div className="p-4 sm:p-6 h-auto bg-white mb-10 mt-1 max-w-7xl mx-auto">
+      {/* Form Content */}
+      <div className="p-4 sm:p-6 bg-white w-full">
+        <div className="w-full mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-6">
 
+            {/* Left Column */}
+            <div className="space-y-3">
 
-        <div className="space-y-2">
-
-          <div>
-
-            <div
-              className=" w-auto max-w-xl h-20 border-2 border-dashed border-[#CFD3D4] rounded-lg flex items-center justify-center cursor-pointer hover:border-[#30B4FF] transition-colors"
-              onDragOver={handleDragOver}
-              onDrop={handleDrop}
-              onClick={() => document.getElementById("logo-upload").click()}
-            >
-              {logo ? (
-                <img
-                  src={logo}
-                  alt="Logo"
-                  className=" object-contain rounded-lg"
-                />
-              ) : (
-                <div className="text-center">
-                  <Upload className="w-8 h-8 text-[#5E6366] mx-auto  item-center" />
-                  <span className="text-sm text-[#5E6366] "> Logo max 150kb support jpg, png </span>
-                </div>
-              )}
-            </div>
-            <input
-              id="logo-upload"
-              type="file"
-              accept="image/*"
-              onChange={handleLogoUpload}
-              className="hidden"
-            />
-          </div>
-
-
-          <div className="flex flex-col sm:flex-row gap-2">
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-[#5E6366] mb-2">
-                Company Name
-              </label>
-              <input
-                type="text"
-                placeholder="Enter company name"
-                value={formData.companyName}
-                onChange={(e) => handleInputChange("companyName", e.target.value)}
-                className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  focus:border-transparent"
-              />
-            </div>
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-[#5E6366] mb-2">
-                Email Address
-              </label>
-              <input
-                type="email"
-                placeholder="Enter email address"
-                value={formData.email}
-                onChange={(e) => handleInputChange("email", e.target.value)}
-                className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  focus:border-transparent"
-              />
-            </div>
-          </div>
-
-
-          <div className="flex flex-col lg:flex-row gap-2 lg:gap-2">
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-[#5E6366] mb-2">
-                Phone Number
-              </label>
-              <div className="flex">
-                <div className="relative">
-                  <button
-                    onClick={() => setShowCountryDropdown(!showCountryDropdown)}
-                    className="flex items-center px-2 py-2  border border-[#CFD3D4] rounded-l-lg   focus:outline-none focus:ring-2 focus:ring-[#30B4FF] "
-                  >
-                    <span className="mr-1">{selectedCountryCode.flag}</span>
-                    <span className="text-sm">{selectedCountryCode.code}</span>
-                    <CustomChevronDown />
-                  </button>
-                  {showCountryDropdown && (
-                    <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
-                      {countryCodes.map((country) => (
-                        <button
-                          key={country.country}
-                          onClick={() => {
-                            setSelectedCountryCode(country);
-                            setShowCountryDropdown(false);
-                          }}
-                          className="w-full px-3 py-2 hover:bg-[#30B4FF] text-left text-[#5E6366] flex items-center"
-                        >
-                          <span className="mr-2">{country.flag}</span>
-                          <span className="mr-2">{country.code}</span>
-                          <span className="text-sm hover:bg-[#30B4FF] text-[#5E6366]">
-                            {country.name}
-                          </span>
-                        </button>
-                      ))}
+              <div className="mt-5">
+                <div
+                  className="w-full min-h-40 border-2 border-dashed border-[#CFD3D4] rounded-lg flex flex-col items-center justify-center cursor-pointer transition-colors"
+                  onDragOver={handleDragOver}
+                  onDrop={handleDrop}
+                  onClick={() => document.getElementById("logo-upload").click()}
+                >
+                  {logo ? (
+                    <img
+                      src={logo}
+                      alt="Logo"
+                      className="h-full object-contain rounded-lg"
+                    />
+                  ) : (
+                    <div className="text-center  sm:text-base lg:text-base ">
+                      <Upload className="w-6 h-6  text-gray-400 mx-auto mb-1" />
+                      <span className="text-xs 2 sm:text-base lg:text-base  text-gray-500">logo max 150 kb</span>
+                      <br />
+                      <span className="text-xs  2 sm:text-base lg:text-base text-gray-500">support jpg, png</span>
                     </div>
                   )}
                 </div>
                 <input
-                  type="tel"
-                  placeholder="8023456789"
-                  value={formData.phone}
-                  onChange={(e) => handleInputChange("phone", e.target.value)}
-                  className="flex-1 px-4 py-2 border border-[#CFD3D4] border-l-0 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  focus:border-transparent"
+                  id="logo-upload"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleLogoUpload}
+                  className="hidden"
                 />
               </div>
-            </div>
-            <div className="flex-1 relative">
-              <label className="block text-sm font-medium text-[#5E6366] mb-2">
-                Currency
-              </label>
-              <button
-                onClick={() => setShowCurrencyDropdown(!showCurrencyDropdown)}
-                className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg text-left bg-white hover:[#30B4FF]  focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  flex items-center justify-between"
-              >
-                <span
-                  className={formData.currencySymbol ? "text-[#5E6366]" : "text-[#5E6366]"}
-                >
-                  {formData.currencySymbol || "Select currency"}
-                </span>
-                <CustomChevronDown />
-              </button>
-              {showCurrencyDropdown && (
-                <div className="absolute top-full left-0 mt-1 w-full bg-white border border-[#CFD3D4] rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
-                  {currencies.map((currency) => (
-                    <button
-                      key={currency}
-                      onClick={() => {
-                        handleInputChange("currencySymbol", currency);
-                        setShowCurrencyDropdown(false);
-                      }}
-                      className="w-full px-2 py-2 text-left text-[#5E6366] hover:bg-[#30B4FF] "
-                    >
-                      {currency}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
 
-          <div>
-            <label className="block text-sm font-medium text-[#5E6366] mb-1">
-              Address
-            </label>
-            <textarea
-              placeholder="Enter complete address"
-              value={formData.address}
-              onChange={(e) => handleInputChange("address", e.target.value)}
-              rows={2}
-              className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  focus:border-transparent resize-none"
-            />
-          </div>
+              {/* Company Name */}
+              <div>
+                <label className="block text-sm 2 sm:text-base lg:text-base  font-medium text-[#5E6366] mb-2">
+                  Address
+                </label>
+                <textarea
+                  placeholder="Address"
+                  value={formData.address}
+                  onChange={(e) => handleInputChange("address", e.target.value)}
+                  rows={4}
+                  className="w-full px-2 py-2 2 sm:text-base lg:text-base  border border-[#CFD3D4] rounded-md focus:outline-none focus:ring-2 focus:ring-[#30B4FF] focus:border-transparent resize-none text-sm"
+                />
+              </div>
 
-          <div className="flex flex-col lg:flex-row gap-2">
-
-            <div className="flex-1 space-y-2">
-
+              {/* Country */}
               <div className="relative">
-                <label className="block text-sm font-medium text-[#5E6366] mb-2">
+                <label className="block text-sm 2 sm:text-base lg:text-base  font-medium text-[#5E6366] mb-1">
                   Country
                 </label>
                 <button
-                  onClick={() =>
-                    setShowCountryNameDropdown(!showCountryNameDropdown)
-                  }
-                  className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg text-left bg-white  focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  flex items-center justify-between"
+                  onClick={() => setShowCountryNameDropdown(!showCountryNameDropdown)}
+                  className="w-full px-2 py-2  2 sm:text-base lg:text-base border border-[#CFD3D4] rounded-md text-left bg-white focus:outline-none focus:ring-2 focus:ring-[#30B4FF] flex items-center justify-between text-sm"
                 >
-                  <span
-                    className={formData.country ? "text-[#5E6366]" : "text-[#5E6366]"}
-                  >
-                    {formData.country || "Select country"}
+                  <span className={formData.country ? "text-gray-900" : "text-gray-500"}>
+                    {formData.country || "Country"}
                   </span>
                   <CustomChevronDown />
                 </button>
                 {showCountryNameDropdown && (
-                  <div className="absolute top-full left-0 mt-1 w-full bg-white border border-[#CFD3D4] rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
+                  <div className="absolute top-full left-0 mt-1 w-full bg-white 2 sm:text-base lg:text-base  border border-[#CFD3D4] rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
                     {countries.map((country) => (
                       <button
                         key={country}
@@ -350,7 +237,7 @@ const CompanyProfileForm = () => {
                           handleInputChange("country", country);
                           setShowCountryNameDropdown(false);
                         }}
-                        className="w-full px-2 py-2 text-left text-[#5E6366] hover:bg-[#30B4FF] "
+                        className="w-full px-3 py-2  2 sm:text-base lg:text-base text-left text-[#5E6366] hover:bg-[#30B4FF] hover:text-white text-sm"
                       >
                         {country}
                       </button>
@@ -359,77 +246,22 @@ const CompanyProfileForm = () => {
                 )}
               </div>
 
-
-
-              <div>
-                <label className="block text-sm font-medium text-[#5E6366] mb-2">
-                  City
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter city"
-                  value={formData.city}
-                  onChange={(e) => handleInputChange("city", e.target.value)}
-                  className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  focus:border-transparent"
-                />
-              </div>
-
+              {/* State */}
               <div className="relative">
-                <label className="block text-sm font-medium text-[#5E6366] mb-2">
-                  Plan
-                </label>
-                <button
-                  onClick={() => setShowPlanDropdown(!showPlanDropdown)}
-                  className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg text-left bg-white focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  flex items-center justify-between"
-                >
-                  <span
-                    className={formData.plan ? "text-[#5E6366]" : "text-[#5E6366]"}
-                  >
-                    {formData.plan || "Select plan"}
-                  </span>
-                  <CustomChevronDown />
-                </button>
-                {showPlanDropdown && (
-                  <div className="absolute top-full left-0 mt-1 w-full bg-white border border-[#CFD3D4]rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
-                    {planOptions.map((plan) => (
-                      <button
-                        key={plan}
-                        onClick={() => {
-                          handleInputChange("plan", plan);
-                          setShowPlanDropdown(false);
-                        }}
-                        className="w-full px-4 py-2 text-left  text-[#5E6366] hover:bg-[#30B4FF] "
-                      >
-                        {plan}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-            </div>
-
-
-            <div className="flex-1 space-y-2">
-
-
-              <div className="relative">
-                <label className="block text-sm font-medium text-[#5E6366] mb-2">
+                <label className="block text-sm 2 sm:text-base lg:text-base  font-medium text-[#5E6366] mb-2">
                   State
                 </label>
                 <button
                   onClick={() => setShowStateDropdown(!showStateDropdown)}
-                  className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg text-left bg-white  focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  flex items-center justify-between"
+                  className="w-full px-2 py-2 2 sm:text-base lg:text-base border border-[#CFD3D4] rounded-md text-left bg-white focus:outline-none focus:ring-2 focus:ring-[#30B4FF] flex items-center justify-between text-sm"
                 >
-                  <span
-                    className={formData.state ? "text-[#5E6366]" : "text-[#5E6366]"}
-                  >
-                    {formData.state || "Select state"}
+                  <span className={formData.state ? "text-gray-900" : "text-gray-500"}>
+                    {formData.state || "State"}
                   </span>
                   <CustomChevronDown />
                 </button>
                 {showStateDropdown && (
-                  <div className="absolute top-full left-0 mt-1 w-full bg-white border border-[#CFD3D4] rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
+                  <div className="absolute top-full 2 sm:text-base lg:text-base  left-0 mt-1 w-full bg-white border border-[#CFD3D4] rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
                     {states.map((state) => (
                       <button
                         key={state}
@@ -437,7 +269,7 @@ const CompanyProfileForm = () => {
                           handleInputChange("state", state);
                           setShowStateDropdown(false);
                         }}
-                        className="w-full px-2 py-2 text-left hover:bg-[#30B4FF] "
+                        className="w-full px-3 py-2 2 sm:text-base lg:text-base  text-left text-[#5E6366] hover:bg-[#30B4FF] hover:text-white text-sm"
                       >
                         {state}
                       </button>
@@ -446,77 +278,237 @@ const CompanyProfileForm = () => {
                 )}
               </div>
 
-
-              <div>
-                <label className="block text-sm font-medium text-[#5E6366] mb-2">
-                  Postal Code
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter postal code"
-                  value={formData.postalCode}
-                  onChange={(e) => handleInputChange("postalCode", e.target.value)}
-                  className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  focus:border-transparent"
-                />
-              </div>
-
+              {/* Plan */}
               <div className="relative">
-                <label className="block text-sm font-medium text-[#5E6366] mb-2">
-                  Timezone
+                <label className="block text-sm  2 sm:text-base lg:text-base font-medium text-[#5E6366] mb-2">
+                  Plan
                 </label>
                 <button
-                  onClick={() => setShowTimezoneDropdown(!showTimezoneDropdown)}
-                  className="w-full px-2 py-2 border border-[#CFD3D4] rounded-lg text-left bg-white focus:outline-none focus:ring-2 focus:ring-[#30B4FF] flex items-center justify-between"
+                  onClick={() => setShowPlanDropdown(!showPlanDropdown)}
+                  className="w-full px-3 py-2  2 sm:text-base lg:text-base border border-[#CFD3D4] rounded-md text-left bg-white focus:outline-none focus:ring-2 focus:ring-[#30B4FF] flex items-center justify-between text-sm"
                 >
-                  <span
-                    className={formData.timezone ? "text-[#5E6366]" : "text-[#5E6366]"}
-                  >
-                    {formData.timezone || "Select timezone"}
+                  <span className={formData.plan ? "text-gray-900" : "text-gray-500"}>
+                    {formData.plan || "Plan"}
                   </span>
                   <CustomChevronDown />
                 </button>
-                {showTimezoneDropdown && (
-                  <div className="absolute top-full left-0 mt-1 w-full bg-white border border-[#CFD3D4] rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
-                    {timezones.map((timezone) => (
+                {showPlanDropdown && (
+                  <div className="absolute top-full left-0 2 sm:text-base lg:text-base mt-1 w-full bg-white border border-[#CFD3D4] rounded-md  z-10 max-h-60 overflow-y-auto">
+                    {planOptions.map((plan) => (
                       <button
-                        key={timezone}
+                        key={plan}
                         onClick={() => {
-                          handleInputChange("timezone", timezone);
-                          setShowTimezoneDropdown(false);
+                          handleInputChange("plan", plan);
+                          setShowPlanDropdown(false);
                         }}
-                        className="w-full px-2 py-2 text-left text-[#5E6366] hover:bg-[#30B4FF] "
+                        className="w-full px-3 py-2 2 sm:text-base lg:text-base text-left text-[#5E6366] hover:bg-[#30B4FF] hover:text-white text-sm"
                       >
-                        {timezone}
+                        {plan}
                       </button>
                     ))}
                   </div>
                 )}
               </div>
 
+
+
+
+            </div>
+
+            {/* Right Column */}
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium 2 sm:text-base lg:text-base text-[#5E6366] mb-2">
+                  Company Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Company Name"
+                  value={formData.companyName}
+                  onChange={(e) => handleInputChange("companyName", e.target.value)}
+                  className="w-full px-3 py-2  2 sm:text-base lg:text-base border border-[#CFD3D4] rounded-md focus:outline-none focus:ring-2 focus:ring-[#30B4FF] focus:border-transparent text-sm"
+                />
+              </div>
+
+              {/* Email Address */}
+              <div>
+                <label className="block text-sm sm:text-base lg:text-base font-medium text-[#5E6366] mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  placeholder="Your Email Address"
+                  value={formData.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  className="w-full px-3 py-2 sm:text-base lg:text-base border border-[#CFD3D4] rounded-md focus:outline-none focus:ring-2 focus:ring-[#30B4FF] focus:border-transparent text-sm"
+                />
+              </div>
+
+
+              {/* Country */}
+              <div>
+                <label className="block text-sm  sm:text-base lg:text-base font-medium text-[#5E6366] mb-2">
+                  Phone Number
+                </label>
+                <div className="flex">
+                  <div className="relative">
+                    <button
+                      onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                      className="flex items-center px-3 py-2 border border-[#CFD3D4] rounded-l-md bg-white focus:outline-none focus:ring-2 focus:ring-[#30B4FF] text-sm"
+                    >
+                      <span className="mr-1">{selectedCountryCode.flag}</span>
+                      <span className="mr-1">{selectedCountryCode.code}</span>
+                      <CustomChevronDown />
+                    </button>
+                    {showCountryDropdown && (
+                      <div className="absolute top-full  2 sm:text-base lg:text-base left-0 mt-1 w-48 bg-white border border-[#CFD3D4] rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
+                        {countryCodes.map((country) => (
+                          <button
+                            key={country.country}
+                            onClick={() => {
+                              setSelectedCountryCode(country);
+                              setShowCountryDropdown(false);
+                            }}
+                            className="w-full px-3 py-2 2 sm:text-base lg:text-base hover:bg-[#30B4FF] hover:text-white text-left text-[#5E6366] flex items-center text-sm"
+                          >
+                            <span className="mr-2">{country.flag}</span>
+                            <span className="mr-2">{country.code}</span>
+                            <span className="text-xs 2 sm:text-base lg:text-base  text-gray-600 hover:bg-[#30B4FF] hover:text-white">
+                              {country.name}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <input
+                    type="tel"
+                    placeholder="8023456789"
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange("phone", e.target.value)}
+                    className="flex-1 px-3 py-2  2 sm:text-base lg:text-base border border-[#CFD3D4] border-l-0 rounded-r-md focus:outline-none focus:ring-2 focus:ring-[#30B4FF] focus:border-transparent text-sm"
+                  />
+                </div>
+              </div>
+
+              {/* Currency Symbol */}
+              <div className="relative">
+                <label className="block text-sm 2 sm:text-base lg:text-base  font-medium text-[#5E6366] mb-2">
+                  Currency Symbol
+                </label>
+                <button
+                  onClick={() => setShowCurrencyDropdown(!showCurrencyDropdown)}
+                  className="w-full px-3 py-2  2 sm:text-base lg:text-base border border-[#CFD3D4] rounded-md text-left bg-white focus:outline-none focus:ring-2 focus:ring-[#30B4FF] flex items-center justify-between text-sm"
+                >
+                  <span className={formData.currencySymbol ? "text-gray-900" : "text-gray-500"}>
+                    {formData.currencySymbol || "Currency Symbol"}
+                  </span>
+                  <CustomChevronDown />
+                </button>
+                {showCurrencyDropdown && (
+                  <div className="absolute top-full  2 sm:text-base lg:text-base left-0 mt-1 w-full bg-white border border-[#CFD3D4] rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
+                    {currencies.map((currency) => (
+                      <button
+                        key={currency}
+                        onClick={() => {
+                          handleInputChange("currencySymbol", currency);
+                          setShowCurrencyDropdown(false);
+                        }}
+                        className="w-full px-3 py-2 2 sm:text-base lg:text-base  text-left text-[#5E6366] hover:bg-[#30B4FF] hover:text-white text-sm"
+                      >
+                        {currency}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+
+              <div className="grid grid-cols-1  gap-2">
+
+                <div>
+                  <label className="block text-sm 2 sm:text-base lg:text-base font-medium text-[#5E6366] mb-2">
+                    Postal code
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter Postal-code"
+                    value={formData.postalCode}
+                    onChange={(e) => handleInputChange("postalCode", e.target.value)}
+                    className="w-full px-3 py-2 2 sm:text-base lg:text-base  border border-[#CFD3D4] rounded-md focus:outline-none focus:ring-2 focus:ring-[#30B4FF] focus:border-transparent text-sm"
+                  />
+                </div>
+
+                {/* City */}
+                <div>
+                  <label className="block text-sm 2 sm:text-base lg:text-base  font-medium text-[#5E6366] mb-2">
+                    City
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter city"
+                    value={formData.city}
+                    onChange={(e) => handleInputChange("city", e.target.value)}
+                    className="w-full px-3 py-2 2 sm:text-base lg:text-base  border border-[#CFD3D4] rounded-md focus:outline-none focus:ring-2 focus:ring-[#30B4FF] focus:border-transparent text-sm"
+                  />
+                </div>
+
+                {/* Time Zone */}
+                <div className="relative">
+                  <label className="block text-sm 2 2 sm:text-base lg:text-base  sm:text-base lg:text-base  font-medium text-[#5E6366] mb-2">
+                    Time Zone
+                  </label>
+                  <button
+                    onClick={() => setShowTimezoneDropdown(!showTimezoneDropdown)}
+                    className="w-full px-3 py-2 2 sm:text-base lg:text-base  border border-[#CFD3D4] rounded-md text-left bg-white focus:outline-none focus:ring-2 focus:ring-[#30B4FF] flex items-center justify-between text-sm"
+                  >
+                    <span className={formData.timezone ? "text-gray-900" : "text-gray-500"}>
+                      {formData.timezone || "Enter Time-zone"}
+                    </span>
+                    <CustomChevronDown />
+                  </button>
+                  {showTimezoneDropdown && (
+                    <div className="absolute top-full 2 sm:text-base lg:text-base left-0 mt-1 w-full bg-white border border-[#CFD3D4] rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
+                      {timezones.map((timezone) => (
+                        <button
+                          key={timezone}
+                          onClick={() => {
+                            handleInputChange("timezone", timezone);
+                            setShowTimezoneDropdown(false);
+                          }}
+                          className="w-full px- 2 sm:text-base lg:text-base  py-2 text-left text-[#5E6366] hover:bg-[#30B4FF] hover:text-white text-sm"
+                        >
+                          {timezone}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+
+
             </div>
           </div>
-        </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-2">
-          <button
-            onClick={() => console.log("Cancel clicked")}
-            className="w-full h-10 sm:w-40 px-6 py-2 text-[#30B4FF] rounded-lg hover:bg-[#30B4FF] hover:text-white "
-            style={{ border: "2px solid #30B4FF" }}
-          >
-            Cancel
-          </button>
-          <button
-            onClick={() => console.log("Submit clicked", formData)}
-            className="w-full h-10 sm:w-40 px-6 py-2 bg-[#30B4FF] text-white rounded-lg "
-          >
-            Save
-          </button>
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 sm:gap-4 lg:gap-5 mt-5 sm:mt-6 lg:mt-8 w-full">
+            <button
+              type="button"
+              className="w-full sm:w-auto sm:min-w-40  md:min-w-40 h-9 sm:h-10 lg:h-10 text-sm sm:text-base lg:text-lg font-medium bg-white text-[#30B4FF] border border-[#30B4FF] rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-[#30B4FF] hover:text-white"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+
+              className="w-full sm:w-auto  sm:min-w-40  md:min-w-40 h-9 sm:h-10 lg:h-10 text-sm sm:text-base lg:text-lg font-medium bg-[#30B4FF] text-white border-none rounded-lg cursor-pointer transition-all duration-200 ease-in-out "
+            >
+              Save
+            </button>
+          </div>
         </div>
       </div>
     </div>
-
-
   );
-};
-
-export default CompanyProfileForm;
+}

@@ -13,7 +13,7 @@ export default function CatalogueFilter() {
     {
       id: "#302012",
       name: "My Catalog",
-      createdBy: "Alex Johnson",
+      PriceProfile: "Alex Johnson",
       productCount: "1900",
       rule: "Britways+10%",
       selected: false,
@@ -21,7 +21,7 @@ export default function CatalogueFilter() {
     {
       id: "#302011",
       name: "GadgetHub",
-      createdBy: "Emily Davis",
+      PriceProfile: "Emily Davis",
       productCount: "1600",
       rule: "Moduline +12%",
       selected: false,
@@ -29,7 +29,7 @@ export default function CatalogueFilter() {
     {
       id: "#302002",
       name: "GizmoNest",
-      createdBy: "Michael Brown",
+      PriceProfile: "Michael Brown",
       productCount: "1700",
       rule: "RackSpace +15%",
       selected: false,
@@ -37,7 +37,7 @@ export default function CatalogueFilter() {
     {
       id: "#301901",
       name: "DeviceSphere",
-      createdBy: "Sarah Wilson",
+      PriceProfile: "Sarah Wilson",
       productCount: "1800",
       rule: "UrbanGrid +18%",
       selected: false,
@@ -45,7 +45,7 @@ export default function CatalogueFilter() {
     {
       id: "#301900",
       name: "TechHaven",
-      createdBy: "David Lee",
+      PriceProfile: "David Lee",
       productCount: "1900",
       rule: "StoreCraft +20%",
       selected: false,
@@ -53,7 +53,7 @@ export default function CatalogueFilter() {
     {
       id: "#301800",
       name: "GadgetNest",
-      createdBy: "Jessica Taylor",
+      PriceProfile: "Jessica Taylor",
       productCount: "2000",
       rule: "ChillCore +16%",
       selected: false,
@@ -61,7 +61,7 @@ export default function CatalogueFilter() {
     {
       id: "#301701",
       name: "SmartGadget",
-      createdBy: "Daniel Martinez",
+      PriceProfile: "Daniel Martinez",
       productCount: "2100",
       rule: "DisplayNest +14%",
       selected: false,
@@ -69,7 +69,7 @@ export default function CatalogueFilter() {
     {
       id: "#301600",
       name: "TechSphere",
-      createdBy: "Laura Anderson",
+      PriceProfile: "Laura Anderson",
       productCount: "2200",
       rule: "Shelvix +20%",
       selected: false,
@@ -77,7 +77,7 @@ export default function CatalogueFilter() {
     {
       id: "#301500",
       name: "GizmoHub",
-      createdBy: "James Thomas",
+      PriceProfile: "James Thomas",
       productCount: "2300",
       rule: "Structura +14%",
       selected: false,
@@ -85,7 +85,7 @@ export default function CatalogueFilter() {
     {
       id: "#301400",
       name: "DeviceNest",
-      createdBy: "Sophia White",
+      PriceProfile: "Sophia White",
       productCount: "2400",
       rule: "SpaceWell +12%",
       selected: false,
@@ -112,12 +112,12 @@ export default function CatalogueFilter() {
 
   // Filter section states
   const [savedSearches, setSavedSearches] = useState("");
-  const [rules, setRules] = useState("");
-  const [createdBy, setCreatedBy] = useState("");
+  const [Created, setCreated] = useState("");
+  const [PriceProfile, setPriceProfile] = useState("");
 
   const [showSavedSearches, setShowSavedSearches] = useState(false);
-  const [showRules, setShowRules] = useState(false);
-  const [showCreatedBy, setShowCreatedBy] = useState(false);
+  const [showCreated, setShowCreated] = useState(false);
+  const [showPriceProfile, setShowPriceProfile] = useState(false);
 
   const savedSearchOptions = [
     "My Catalog",
@@ -126,19 +126,20 @@ export default function CatalogueFilter() {
     "DeviceSphere",
     "TechHaven",
   ];
-  const rulesOptions = [
-    "Britways+10%",
-    "Moduline +12%",
-    "RackSpace +15%",
-    "UrbanGrid +18%",
-    "StoreCraft +20%",
-  ];
-  const createdByOptions = [
+  const CreatedOptions = [
     "Alex Johnson",
     "Emily Davis",
     "Michael Brown",
     "Sarah Wilson",
     "David Lee",
+
+  ];
+  const PriceProfileOptions = [
+    "Britways+10%",
+    "Moduline +12%",
+    "RackSpace +15%",
+    "UrbanGrid +18%",
+    "StoreCraft +20%",
   ];
 
   const handleFilter = () => {
@@ -198,7 +199,7 @@ export default function CatalogueFilter() {
   const currentItems = filters.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <div className="w-full font-sans max-w-[1200px] mx-auto text-[#686f83] ">
+    <div className="w-full  mx-auto text-[#686f83] ">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-0.5 bg-white text-[#727a90] rounded-t-lg px-4 py-4 shadow-[0_2px_8px_rgba(0,0,0,0.1)] overflow-hidden font-sans gap-4 sm:gap-0">
         <h2 className="text-[#24282e] m-0 text-xl font-semibold">
@@ -216,15 +217,15 @@ export default function CatalogueFilter() {
       </div>
 
       {/* Filter Section */}
-      <div className="w-full bg-white border-gray-200 p-4 mb-0.5 shadow-[0_1px_3px_rgba(0,0,0,0.1)]">
-        <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-16">
+      <div className="w-full bg-white border-gray-200 p-4 mb-0.5">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-4">
           {/* Saved Searches Dropdown */}
-          <div className="flex-1 min-w-[200px] max-w-full lg:max-w-[280px] relative">
+          <div className="flex-1 min-w-[200px] font-medium  max-w-full lg:max-w-[280px] relative">
             <div
-              className="w-full px-3 py-2 border border-gray-300 rounded-md cursor-pointer bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2  font-medium border border-gray-300 rounded-md cursor-pointer bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               onClick={() => setShowSavedSearches(!showSavedSearches)}
             >
-              <div className="flex items-center justify-between">
+              <div className="flex items-center  font-medium justify-between">
                 <span
                   className={`text-sm ${savedSearches ? "text-gray-800" : "text-gray-400"
                     }`}
@@ -252,33 +253,33 @@ export default function CatalogueFilter() {
             )}
           </div>
 
-          {/* Rules and Created By Dropdowns with Search Button */}
-          <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-            {/* Rules Dropdown */}
-            <div className="flex-1 min-w-[170px] max-w-full sm:max-w-[200px] relative">
+          {/* Created and Created By Dropdowns with Search Button */}
+          <div className="flex flex-col  font-medium sm:flex-row gap-4 w-full lg:w-auto">
+            {/* Created Dropdown */}
+            <div className="flex-1 min-w-[170px]   font-medium  max-w-full sm:max-w-[200px] relative">
               <div
-                className="w-full px-3 py-2 border border-gray-300 rounded-md cursor-pointer bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                onClick={() => setShowRules(!showRules)}
+                className="w-full px-3 py-2   font-medium  border border-gray-300 rounded-md cursor-pointer bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                onClick={() => setShowCreated(!showCreated)}
               >
                 <div className="flex items-center justify-between">
                   <span
-                    className={`text-sm ${rules ? "text-gray-800" : "text-gray-400"
+                    className={`text-sm ${Created ? "text-gray-800" : "text-gray-400"
                       }`}
                   >
-                    {rules || "Rules"}
+                    {Created || "Created"}
                   </span>
                   <DropdownArrow />
                 </div>
               </div>
-              {showRules && (
+              {showCreated && (
                 <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
-                  {rulesOptions.map((option, index) => (
+                  {CreatedOptions.map((option, index) => (
                     <div
                       key={index}
-                      className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                      className="px-3 py-2 text-sm text-gray-700 cursor-pointer"
                       onClick={() => {
-                        setRules(option);
-                        setShowRules(false);
+                        setCreated(option);
+                        setShowCreated(false);
                       }}
                     >
                       {option}
@@ -292,28 +293,28 @@ export default function CatalogueFilter() {
             <div className="flex gap-2 items-center">
               <div className="flex-1 min-w-[170px] max-w-full sm:max-w-[200px] relative">
                 <div
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md cursor-pointer bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  onClick={() => setShowCreatedBy(!showCreatedBy)}
+                  className="w-full px-3 py-2 border border-[#D5D5D5] rounded-md cursor-pointer bg-white  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  onClick={() => setShowPriceProfile(!showPriceProfile)}
                 >
                   <div className="flex items-center justify-between">
                     <span
-                      className={`text-sm ${createdBy ? "text-gray-800" : "text-gray-400"
+                      className={`text-sm ${PriceProfile ? "text-gray-800" : "text-gray-400"
                         }`}
                     >
-                      {createdBy || "Created By"}
+                      {PriceProfile || "Created By"}
                     </span>
                     <DropdownArrow />
                   </div>
                 </div>
-                {showCreatedBy && (
+                {showPriceProfile && (
                   <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
-                    {createdByOptions.map((option, index) => (
+                    {PriceProfileOptions.map((option, index) => (
                       <div
                         key={index}
-                        className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                        className="px-3 py-2 text-sm text-gray-700  cursor-pointer"
                         onClick={() => {
-                          setCreatedBy(option);
-                          setShowCreatedBy(false);
+                          setPriceProfile(option);
+                          setShowPriceProfile(false);
                         }}
                       >
                         {option}
@@ -340,21 +341,21 @@ export default function CatalogueFilter() {
         <table className="w-full border-collapse text-left min-w-[600px]">
           <thead>
             <tr>
-              <th className="w-10 py-[17px] px-2 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
+              <th className="w-10 py-[17px] px-2 border-b border-[#D5D5D5] text-sm font-medium text-[#686f83] whitespace-nowrap">
               </th>
-              <th className="min-w-[180px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
+              <th className="min-w-[180px] py-[17px] px-4 border-b border-[#D5D5D5] text-sm font-medium text-[#686f83] whitespace-nowrap">
                 Saved Searches
               </th>
-              <th className="min-w-[150px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
+              <th className="min-w-[150px] py-[17px] px-4 border-b border-[#D5D5D5] text-sm font-medium text-[#686f83] whitespace-nowrap">
                 Created By
               </th>
-              <th className="py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
+              <th className="py-[17px] px-4 border-b border-[#D5D5D5] text-sm font-medium text-[#686f83] whitespace-nowrap">
                 No. of Product
               </th>
-              <th className="min-w-[150px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap">
+              <th className="min-w-[150px] py-[17px] px-4 border-b border-[#D5D5D5] text-sm font-medium text-[#686f83] whitespace-nowrap">
                 Rule
               </th>
-              <th className="w-10 text-center relative py-[17px] px-4 border-b border-[#f0f0f0] text-sm font-medium text-[#686f83] whitespace-nowrap"></th>
+              <th className="w-10 text-center relative py-[17px] px-4 border-b border-[#D5D5D5] text-sm font-medium text-[#686f83] whitespace-nowrap"></th>
             </tr>
           </thead>
           <tbody>
@@ -362,10 +363,10 @@ export default function CatalogueFilter() {
               <tr
                 key={filter.id}
                 className={`${filter.selected ? "bg-[#f0f7ff]" : ""
-                  } hover:bg-gray-50 cursor-pointer transition-colors duration-150`}
+                  } cursor-pointer transition-colors duration-150`}
                 onClick={() => handleRowClick(filter.id)}
               >
-                <td className="w-10 py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
+                <td className="w-10 py-[17px] px-4 border-b border-[#D5D5D5] text-sm">
                   <input
                     type="checkbox"
                     checked={filter.selected}
@@ -373,19 +374,19 @@ export default function CatalogueFilter() {
                     onClick={(e) => e.stopPropagation()}
                   />
                 </td>
-                <td className="min-w-[180px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
+                <td className="min-w-[180px] py-[17px]  font-medium text-[#727A90] px-4 font-medium border-b border-[#D5D5D5] text-sm">
                   {filter.name}
                 </td>
-                <td className="min-w-[150px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
-                  {filter.createdBy}
+                <td className="min-w-[150px] py-[17px] font-medium text-[#727A90] px-4 border-b border-[#D5D5D5] text-sm">
+                  {filter.PriceProfile}
                 </td>
-                <td className="py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
+                <td className="py-[17px] px-4 border-b border-[#D5D5D5] font-medium text-[#727A90] text-sm">
                   {filter.productCount}
                 </td>
-                <td className="min-w-[150px] py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
+                <td className="min-w-[150px] py-[17px]  font-medium px-4 border-b border-[#D5D5D5] text-sm">
                   {filter.rule}
                 </td>
-                <td className="w-10 text-center relative py-[17px] px-4 border-b border-[#f0f0f0] text-sm">
+                <td className="w-10 text-center relative py-[17px] font-medium  text-[#727A90] px-4 border-b border-[#D5D5D5] text-sm">
                   <button
                     className="bg-transparent border-none cursor-pointer text-lg p-0 w-6 h-6 flex items-center justify-center text-[#374957]"
                     onClick={(e) => toggleMenu(filter.id, e)}
@@ -395,23 +396,16 @@ export default function CatalogueFilter() {
                     </span>
                   </button>
                   {activeMenu === filter.id && (
-                    <div className="absolute right-5 bg-white border border-[#ddd] rounded shadow-[0_2px_5px_rgba(0,0,0,0.15)] z-10 flex flex-col min-w-[120px] overflow-hidden">
+                    <div className="absolute right-5  font-medium bg-white border border-[#D5D5D5] rounded z-10 flex flex-col min-w-[120px] overflow-hidden">
                       <button
                         className="bg-transparent border-none text-left py-2 px-3 text-sm cursor-pointer hover:bg-[#f5f5f5]"
                         onClick={(e) => handleMenuAction("edit", filter.id, e)}
                       >
                         Edit
                       </button>
+
                       <button
-                        className="bg-transparent border-none text-left py-2 px-3 text-sm cursor-pointer hover:bg-[#f5f5f5]"
-                        onClick={(e) =>
-                          handleMenuAction("update", filter.id, e)
-                        }
-                      >
-                        Update
-                      </button>
-                      <button
-                        className="bg-transparent border-none text-left py-2 px-3 text-sm cursor-pointer hover:bg-[#f5f5f5]"
+                        className="bg-transparent border-none font-medium  text-left py-2 px-3 text-sm cursor-pointer hover:bg-[#f5f5f5]"
                         onClick={(e) =>
                           handleMenuAction("delete", filter.id, e)
                         }
@@ -456,9 +450,9 @@ export default function CatalogueFilter() {
             />
           </div>
 
-          <div className="flex items-center gap-2 order-1 sm:order-2">
-            <span className="text-sm text-gray-600">Show</span>
-            <FormControl size="small" sx={{ minWidth: 80 }}>
+          <div className="flex items-center font-medium rounded-lg  gap-2 order-1 sm:order-2">
+            <span className="text-sm  text-gray-600">Show</span>
+            <FormControl size="small" sx={{ minWidth: 80, }}>
               <Select
                 value={rowsPerPage}
                 onChange={handleChangeRowsPerPage}

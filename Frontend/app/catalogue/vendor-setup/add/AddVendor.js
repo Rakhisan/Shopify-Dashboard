@@ -117,8 +117,8 @@ export default function AddVendorForm() {
         <div
           onClick={() => onToggle(name)}
           className={`flex items-center w-full placeholder-gray-400 h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 pr-8 sm:pr-10 lg:pr-11 text-left text-sm sm:text-base bg-white border rounded-lg cursor-pointer transition-all duration-200 ease-in-out ${isOpen
-              ? "border-2 border-[#30B4FF]"
-              : "border border-[#CFD3D4] hover:border-[#CFD3D4]"
+            ? "border-2 border-[#30B4FF]"
+            : "border border-[#CFD3D4] hover:border-[#CFD3D4]"
             } ${value ? "text-[#5E6366]" : "text-[#5E6366]"}`}
         >
           {value || placeholder}
@@ -184,7 +184,7 @@ export default function AddVendorForm() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-3 mb-4 sm:mb-6">
                 <div className="flex flex-col w-full">
-                  <label className="text-sm sm:text-base lg:text-base font-medium text-[#5E6366] mb-1.5 sm:mb-2">
+                  <label className=" font-medium text-[#5E6366] mb-1.5 sm:mb-2">
                     Name
                   </label>
                   <input
@@ -193,7 +193,7 @@ export default function AddVendorForm() {
                     value={formData.vendorName}
                     onChange={handleInputChange}
                     placeholder="Enter Name"
-                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base  border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
                   />
                 </div>
 
@@ -207,7 +207,7 @@ export default function AddVendorForm() {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="Testing@gmail.com"
-                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base  border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
                   />
                 </div>
 
@@ -221,7 +221,7 @@ export default function AddVendorForm() {
                     value={formData.password}
                     onChange={handleInputChange}
                     placeholder="Password"
-                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF]"
                   />
                 </div>
 
@@ -235,7 +235,7 @@ export default function AddVendorForm() {
                     value={formData.phoneNo}
                     onChange={handleInputChange}
                     placeholder="Your Phone Number"
-                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF]"
                   />
                 </div>
               </div>
@@ -252,7 +252,7 @@ export default function AddVendorForm() {
                     value={formData.addressLine1}
                     onChange={handleInputChange}
                     placeholder="Enter Address Line 1"
-                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF]"
                   />
                 </div>
 
@@ -266,7 +266,7 @@ export default function AddVendorForm() {
                     value={formData.addressLine2}
                     onChange={handleInputChange}
                     placeholder="Enter Address Line 2"
-                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF]"
                   />
                 </div>
               </div>
@@ -293,7 +293,7 @@ export default function AddVendorForm() {
                     value={formData.state}
                     onChange={handleInputChange}
                     placeholder="Enter State"
-                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF]"
                   />
                 </div>
 
@@ -307,7 +307,7 @@ export default function AddVendorForm() {
                     value={formData.city}
                     onChange={handleInputChange}
                     placeholder="Enter City"
-                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF]"
                   />
                 </div>
 
@@ -321,7 +321,7 @@ export default function AddVendorForm() {
                     value={formData.zipCode}
                     onChange={handleInputChange}
                     placeholder="Enter Postal Code"
-                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF]"
                   />
                 </div>
               </div>
@@ -355,7 +355,7 @@ export default function AddVendorForm() {
                     value={formData.host}
                     onChange={handleInputChange}
                     placeholder="Host"
-                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF]"
                   />
                 </div>
 
@@ -369,7 +369,7 @@ export default function AddVendorForm() {
                     value={formData.userName}
                     onChange={handleInputChange}
                     placeholder="name"
-                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF]"
                   />
                 </div>
 
@@ -383,7 +383,7 @@ export default function AddVendorForm() {
                     value={formData.password}
                     onChange={handleInputChange}
                     placeholder="Password"
-                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF]"
                   />
                 </div>
 
@@ -397,7 +397,7 @@ export default function AddVendorForm() {
                     value={formData.port}
                     onChange={handleInputChange}
                     placeholder="Port"
-                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF]"
                   />
                 </div>
               </div>
@@ -413,7 +413,7 @@ export default function AddVendorForm() {
                     value={formData.filePath}
                     onChange={handleInputChange}
                     placeholder="filepath"
-                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF]"
                   />
                 </div>
 
@@ -427,7 +427,7 @@ export default function AddVendorForm() {
                     value={formData.catalogFormat}
                     onChange={handleInputChange}
                     placeholder="catalog"
-                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
+                    className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base  lg:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF]"
                   />
                 </div>
 

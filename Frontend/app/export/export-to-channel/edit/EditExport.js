@@ -99,8 +99,8 @@ export default function ExportChannelForm() {
   };
 
   return (
-    <div className="min-h-screen  p-4">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen w-full  p-4">
+      <div className="w-full mx-auto">
         {/* Header */}
         <div className="bg-white rounded-tl-lg p-4 mb-1">
           <h1 className="text-lg font-medium text-gray-800">Export to Channels</h1>

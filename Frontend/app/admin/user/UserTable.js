@@ -1,322 +1,168 @@
-"use client";
-import { useState } from "react";
-import { AiOutlineCaretDown } from "react-icons/ai";
-import { useRouter } from "next/navigation";
 
-export default function Users() {
-  const [users, setUsers] = useState([
-    {
-      id: "#302012",
-      name: "John Doe",
-      email: "john@company.com",
-      role: "1",
-      status: "Active",
-    },
-    {
-      id: "#302011",
-      name: "Alice Smith",
-      email: "jane@company.com",
-      role: "3",
-      status: "Active",
-    },
-    {
-      id: "#302002",
-      name: "Bob Johnson",
-      email: "mike@company.com",
-      role: "4",
-      status: "Inactive",
-    },
-    {
-      id: "#301901",
-      name: "Carol Williams",
-      email: "sara@company.com",
-      role: "2",
-      status: "Inactive",
-    },
-    {
-      id: "#301900",
-      name: "David Brown",
-      email: "david@company.com",
-      role: "5",
-      status: "Active",
-    },
-    {
-      id: "#301800",
-      name: "Eve Davis",
-      email: "emma@company.com",
-      role: "6",
-      status: "Active",
-    },
-    {
-      id: "#301701",
-      name: "Frank Miller",
-      email: "chris@company.com",
-      role: "1",
-      status: "Active",
-    },
-    {
-      id: "#301600",
-      name: "Grace Wilson",
-      email: "lisa@company.com",
-      role: "2",
-      status: "Inactive",
-    },
-    {
-      id: "#301500",
-      name: "Hannah Moore",
-      email: "tom@company.com",
-      role: "4",
-      status: "Inactive",
-    },
-    {
-      id: "#301400",
-      name: "Ian Taylor",
-      email: "nina@company.com",
-      role: "6",
-      status: "Active",
-    },
-  ]);
+'use client';
+import React, { useState } from 'react';
+import {
+  Plus,
+  Filter,
+  MoreVertical,
+  ChevronLeft,
+  ChevronRight,
+  Search,
+  X
+} from 'lucide-react';
 
-  const router = useRouter();
+export default function UserManagement() {
+  const [showCount, setShowCount] = useState(10);
+  const [showSearchBar, setShowSearchBar] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const [showActionMenu, setShowActionMenu] = useState(null);
-  const [showPageSizeDropdown, setShowPageSizeDropdown] = useState(false);
-  const [selectedPageSize, setSelectedPageSize] = useState(10);
-  const [searchTerm, setSearchTerm] = useState('');
+  const users = [
+    { name: 'John Doe', email: 'john@company.com', role: 'Abc', status: 'Active' },
+    { name: 'Alice Smith', email: 'jane@company.com', role: 'Def', status: 'Active' },
+    { name: 'Bob Johnson', email: 'mike@company.com', role: 'Ghi', status: 'Inactive' },
+    { name: 'Carol Williams', email: 'sara@company.com', role: 'Jkl', status: 'Inactive' },
+    { name: 'David Brown', email: 'david@company.com', role: 'Mno', status: 'Active' },
+    { name: 'Eve Davis', email: 'emma@company.com', role: 'Pqr', status: 'Active' },
+    { name: 'Frank Miller', email: 'chris@company.com', role: 'Stu', status: 'Active' },
+    { name: 'Grace Wilson', email: 'lisa@company.com', role: 'Vwx', status: 'Inactive' },
+    { name: 'Hannah Moore', email: 'tom@company.com', role: 'Yz', status: 'Inactive' },
+    { name: 'Ian Taylor', email: 'nina@company.com', role: 'ABC', status: 'Active' }
+  ];
 
-  const pageSizeOptions = [10, 20, 50];
+  const filteredUsers = users.filter(user =>
+    user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.role.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
-  const handleAddUser = () => {
-    router.push("/admin/user/add");
-  };
-
-  const handleEditUser = () => {
-    router.push("/admin/user/edit");
-  };
-
-  const toggleActionMenu = (index) => {
-    setShowActionMenu(showActionMenu === index ? null : index);
-  };
-
-  const togglePageSizeDropdown = () => {
-    setShowPageSizeDropdown(!showPageSizeDropdown);
-  };
-
-  const handlePageSizeSelect = (size) => {
-    setSelectedPageSize(size);
-    setShowPageSizeDropdown(false);
-  };
-
-  const handleStatusToggle = (userId) => {
-    setUsers(
-      users.map((user) =>
-        user.id === userId
-          ? {
-            ...user,
-            status: user.status === "Active" ? "Inactive" : "Active",
-          }
-          : user
-      )
-    );
-    setShowActionMenu(null);
+  const handleFilterClick = () => {
+    setShowSearchBar(!showSearchBar);
+    if (showSearchBar) {
+      setSearchQuery('');
+    }
   };
 
   return (
-    <div className="w-full font-sans max-w-[1200px] mx-auto text-[#686f83] min-h-[770px] px-2 sm:px-0">
+    <div className="p-6 min-h-screen">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-1 bg-white text-[#24282e] rounded-t-lg px-2 sm:px-4 py-4 overflow-hidden font-sans gap-4 sm:gap-0">
-        <h2 className="text-2xl font-semibold text-[#2B2F32]">
-          Users
-        </h2>
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-[350px] w-full sm:w-auto">
-          <div className="flex justify-end gap-4">
-            <div className="relative ">
-              <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-              <input
-                type="text"
-                placeholder="Search"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-64 pl-10 pr-4 py-2 border border-[#D5D5D5] rounded-lg focus:border-2 focus:border-[#2FB4FF] focus:outline-none"
-              />
-            </div>
-
-            <button
-              className="flex items-center justify-center gap-2 bg-[#2fb4ff] text-white border-none rounded-lg py-2 px-5 text-sm cursor-pointer transition-colors duration-200 hover:bg-[#32a5fd] w-full sm:w-auto"
-              onClick={handleAddUser}
-            >
-              <span className="text-lg font-bold">+</span> Add User
-            </button>
-          </div>
+      <div className="flex justify-between  bg-white p-6 items-center mb-6">
+        <h1 className="text-xl font-medium text-gray-900">Users</h1>
+        <div className="flex gap-3">
+          <button className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg font-medium text-sm transition-colors">
+            <Plus size={16} />
+            Add User
+          </button>
+          <button
+            onClick={handleFilterClick}
+            className="flex items-center gap-2 border border-blue-500 text-blue-500 hover:bg-blue-50 px-4 py-2 rounded-lg font-medium text-sm transition-colors"
+          >
+            <Filter size={16} />
+            Filters
+          </button>
         </div>
       </div>
 
-      {/* Table Container */}
-      <div className="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.1)] overflow-x-auto mb-5">
-        <table className="w-full border-collapse text-sm min-w-[800px]">
-          <thead>
+      {/* Search Bar */}
+      {showSearchBar && (
+        <div className="mb-4 bg-white rounded-lg shadow-sm p-4">
+          <div className="flex items-center gap-3">
+            <div className="flex-1 relative">
+              <Search size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search users by name, email, or role..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            <button
+              onClick={() => {
+                setShowSearchBar(false);
+                setSearchQuery('');
+              }}
+              className="p-2 text-gray-500 hover:text-gray-700 transition-colors"
+            >
+              <X size={20} />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Table Card */}
+      <div className="bg-white rounded-lg overflow-hidden">
+        <table className="w-full">
+          <thead className="bg-gray-50 border-b border-gray-200">
             <tr>
-              <th className="w-5 font-medium p-4 text-left border-b border-[#e5e7eb] h-14 align-middle relative text-sm">
-                <input type="checkbox" />
-              </th>
-              <th className="w-[170px] mr-5 text-[#24282e] font-medium p-4 text-left border-b border-[#e5e7eb] h-14 align-middle relative text-sm">
-                Company ID
-              </th>
-              <th className="relative w-[200px] font-medium p-4 text-left border-b border-[#e5e7eb] h-14 align-middle relative text-sm">
-                Name
-              </th>
-              <th className="w-[250px] font-medium p-4 text-left border-b border-[#e5e7eb] h-14 align-middle relative text-sm">
-                Email
-              </th>
-              <th className="w-[200px] p-2 font-medium p-4 text-left border-b border-[#e5e7eb] h-14 align-middle relative text-sm">
-                Role-id
-              </th>
-              <th className="font-medium p-4 text-left border-b border-[#e5e7eb] h-14 align-middle relative text-sm">
-                Status
-              </th>
-              <th className="font-medium p-4 text-left border-b border-[#e5e7eb] h-14 align-middle relative text-sm"></th>
+              <th className="text-left py-3 px-6 font-medium text-gray-700 text-sm">Name</th>
+              <th className="text-left py-3 px-6 font-medium text-gray-700 text-sm">Email</th>
+              <th className="text-left py-3 px-6 font-medium text-gray-700 text-sm">Role Name</th>
+              <th className="text-left py-3 px-6 font-medium text-gray-700 text-sm">Status</th>
+              <th className="py-3 px-6 w-12"></th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
-              <tr key={user.id}>
-                <td className="w-5 py-2.5 pr-0 pl-4 border-b border-[#e0e0e0]">
-                  <input type="checkbox" />
-                </td>
-                <td className="w-[170px] mr-5 text-[#24282e] py-2.5 pr-0 pl-4 border-b border-[#e0e0e0]">
-                  {user.id}
-                </td>
-                <td className="relative w-[200px] py-2.5 pr-0 pl-4 border-b border-[#e0e0e0]">
+            {filteredUsers.map((user, index) => (
+              <tr key={index} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                <td className="py-4 px-6 text-gray-900 font-medium text-sm">
                   {user.name}
                 </td>
-                <td className="w-5 py-2.5 pr-0 pl-4 border-b border-[#e0e0e0]">
+                <td className="py-4 px-6 text-gray-600 text-sm">
                   {user.email}
                 </td>
-                <td className="w-5 py-2.5 pr-0 pl-4 border-b border-[#e0e0e0]">
+                <td className="py-4 px-6 text-gray-600 text-sm">
                   {user.role}
                 </td>
-                <td className="py-2.5 pr-0 pl-4 border-b border-[#e0e0e0]">
-                  <span
-                    className={`inline-block py-1.5 px-2.5 rounded-lg text-xs font-medium ${user.status === "Active"
-                      ? "bg-[rgba(13,157,227,0.1)] text-[#29b1ba] border border-[#009499] py-1.5 px-7.5"
-                      : "bg-[rgba(255,87,87,0.1)] text-[#ff6365] border border-[#ff6365] py-1.5 px-6.5"
-                      }`}
-                    style={{ fontFamily: "Arial, Helvetica, sans-serif" }}
-                  >
+                <td className="py-4 px-6">
+                  <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full border ${user.status === 'Active'
+                    ? 'bg-green-50 border-green-200 text-green-700'
+                    : 'bg-red-50 border-red-200 text-red-700'
+                    }`}>
                     {user.status}
                   </span>
                 </td>
-                <td className="relative py-2.5 pr-0 pl-4 border-b border-[#e0e0e0]">
-                  <button
-                    className="bg-transparent border-none cursor-pointer text-[#374957] w-7 h-7 rounded-lg flex items-center justify-center hover:bg-[#f5f5f5]"
-                    onClick={() => toggleActionMenu(index)}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <circle cx="12" cy="12" r="1" />
-                      <circle cx="12" cy="6" r="1" />
-                      <circle cx="12" cy="18" r="1" />
-                    </svg>
+                <td className="py-4 px-6">
+                  <button className="text-gray-400 hover:text-gray-600 p-1 transition-colors">
+                    <MoreVertical size={16} />
                   </button>
-
-                  {showActionMenu === index && (
-                    <div className="absolute right-4 sm:right-20 top-[42px] bg-white border border-[#ddd] shadow-[0_2px_8px_rgba(0,0,0,0.15)] rounded-lg z-10 w-[120px] flex flex-col py-1.5">
-                      <div
-                        className="py-2 px-3 text-sm cursor-pointer text-[#333] transition-colors duration-200 hover:bg-[#f0f0f0]"
-                        onClick={handleEditUser}
-                      >
-                        Edit
-                      </div>
-                      <div
-                        className="py-2 px-3 text-sm cursor-pointer text-[#333] transition-colors duration-200 hover:bg-[#f0f0f0]"
-                        onClick={() => handleStatusToggle(user.id)}
-                      >
-                        {user.status === "Active" ? "Inactive" : "Active"}
-                      </div>
-                      <div className="py-2 px-3 text-sm cursor-pointer text-red-500 transition-colors duration-200 hover:bg-[#f0f0f0]">
-                        Delete
-                      </div>
-                    </div>
-                  )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
 
-        {/* Pagination */}
-        <div className="flex flex-col sm:flex-row justify-between items-center m-2 sm:m-5 gap-4 sm:gap-0">
-          <div className="flex justify-center items-center flex-1 pl-0 sm:pl-[50px] order-2 sm:order-1">
-            <button className="bg-transparent border border-[#e0e0e0] rounded-[30px] w-[50px] h-[50px] flex items-center justify-center cursor-pointer mr-1 hover:bg-[#f5f5f5] hover:border-[#5f5e5e]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="15 18 9 12 15 6" />
-              </svg>
-            </button>
-            <button className="bg-transparent border border-[#e0e0e0] rounded-[30px] w-[50px] h-[50px] flex items-center justify-center cursor-pointer mr-1 hover:bg-[#f5f5f5] hover:border-[#5f5e5e]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="9 18 15 12 9 6" />
-              </svg>
-            </button>
+        {/* Pagination inside card */}
+        <div className="flex justify-between items-center p-4 border-t border-gray-200 bg-white">
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-gray-600">Show</span>
+            <select
+              value={showCount}
+              onChange={(e) => setShowCount(Number(e.target.value))}
+              className="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            >
+              <option value={10}>10</option>
+              <option value={25}>25</option>
+              <option value={50}>50</option>
+            </select>
           </div>
-          <div className="flex items-center gap-2 text-sm text-[#666] order-1 sm:order-2">
-            <span>Show</span>
-            <div className="relative inline-block">
-              <button
-                className="flex items-center gap-2 py-2 px-3 border border-[#ddd] rounded-xl bg-white cursor-pointer text-sm text-[#333] transition-all duration-200 ease-in-out min-w-[60px] justify-between hover:border-[#999] hover:bg-[#f9f9f9] focus:outline-none focus:border-[#007bff] focus:shadow-[0_0_0_2px_rgba(0,123,255,0.25)]"
-                onClick={togglePageSizeDropdown}
-              >
-                {selectedPageSize}
-                <AiOutlineCaretDown
-                  className={`text-sm transition-transform duration-200 ease-in-out text-[#666] ${showPageSizeDropdown ? "rotate-180" : ""
-                    }`}
-                />
-              </button>
 
-              {showPageSizeDropdown && (
-                <div className="absolute top-full left-0 right-0 bg-white border border-[#ddd] rounded shadow-[0_2px_8px_rgba(0,0,0,0.15)] z-[1000] mt-0.5">
-                  {pageSizeOptions.map((option) => (
-                    <div
-                      key={option}
-                      className={`py-2.5 px-3 cursor-pointer text-sm text-[#333] transition-colors duration-200 ease-in-out border-b border-[#f0f0f0] last:border-b-0 hover:bg-[#f8f9fa] ${selectedPageSize === option
-                        ? "bg-[#e3f2fd] text-[#1976d2] font-medium"
-                        : ""
-                        }`}
-                      onClick={() => handlePageSizeSelect(option)}
-                    >
-                      {option}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+          <div className="flex items-center gap-2">
+            <button className="p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors">
+              <ChevronLeft size={16} />
+            </button>
+            <button className="p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors">
+              <ChevronRight size={16} />
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Results info */}
+      {showSearchBar && searchQuery && (
+        <div className="mt-4 text-sm text-gray-600">
+          Showing {filteredUsers.length} of {users.length} users
+        </div>
+      )}
     </div>
   );
 }

@@ -44,13 +44,13 @@ export default function VariantForm() {
 
 
     return (
-        <div className="max-w-7xl mx-auto p-6 bg-white">
+        <div className="max-w-7xl w-full mx-auto p-6 bg-white">
 
 
             {/* Form Content */}
             <div>
                 {/* Field Headers */}
-                <div className="grid grid-cols-12 gap-4 mb-4">
+                <div className="grid grid-cols-12 gap-4 w-full mb-4">
                     <div className="col-span-2">
                         <label className="block text-sm font-medium text-[#5E6366]">Title</label>
                     </div>

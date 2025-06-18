@@ -134,7 +134,7 @@ export default function VendorSetup() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto pt-1 px-1 sm:pt-3 sm:px-6 lg:pt-2 lg:px-5">
+    <div className="max-w-7xl w-full  mx-auto pt-1 px-1 sm:pt-3 sm:px-6 lg:pt-2 lg:px-5">
       <Card className="mb-3">
         <CardContent className="pb-2">
           <div className="flex justify-between items-center">

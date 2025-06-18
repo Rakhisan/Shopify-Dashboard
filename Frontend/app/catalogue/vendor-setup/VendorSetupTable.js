@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 const VendorSetup = () => {
   const [showActionMenu, setShowActionMenu] = useState(null);
   const [selectedRows, setSelectedRows] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
 
   const vendors = [
     {
@@ -16,12 +18,12 @@ const VendorSetup = () => {
       connectionType: "FTP",
       progressValue: 1500,
       progressPercent: 70,
-      progressColor: "bg-green-500",
-      progressBg: "bg-green-100",
+      progressColor: "bg-[#66914A]",
+      progressBg: "bg-[#98C050]",
       lastSync: "2025-05-13, 8:00 AM",
       status: "Active",
       priority: "1",
-      statusColor: "text-teal-600 bg-teal-50 border-teal-200",
+      statusColor: "text-teal-700 bg-[#E6F4F5] border border-[#009499] rounded-full",
     },
     {
       id: 2,
@@ -30,13 +32,13 @@ const VendorSetup = () => {
       connectionType: "SFTP",
       progressValue: 1200,
       progressPercent: 65,
-      progressColor: "bg-red-500",
-      progressBg: "bg-red-100",
+      progressColor: "bg-[#FF302F]",
+      progressBg: "bg-[#FF9C9C]",
       lastSync: "2025-05-15, 8:00 AM",
       status: "Active",
       priority: "2",
 
-      statusColor: "text-teal-600 bg-teal-50 border-teal-200",
+      statusColor: "text-teal-600  bg-[#E6F4F5] border border-[#009499] rounded-full",
     },
     {
       id: 3,
@@ -45,13 +47,13 @@ const VendorSetup = () => {
       connectionType: "FTP",
       progressValue: 200,
       progressPercent: 80,
-      progressColor: "bg-orange-500",
-      progressBg: "bg-gray-700",
+      progressColor: "bg-[#FF9A00]",
+      progressBg: "bg-[#292929]",
       lastSync: "2025-05-18, 8:00 AM",
       status: "Inactive",
-      priority: "3",
 
-      statusColor: "text-red-600 bg-red-50 border-red-200",
+
+      statusColor: "text-red-600 bg-[#FFD5D6] border-[#FF6365] rounded-full",
     },
     {
       id: 4,
@@ -60,12 +62,12 @@ const VendorSetup = () => {
       connectionType: "FTP",
       progressValue: 1800,
       progressPercent: 30,
-      progressColor: "bg-blue-600",
-      progressBg: "bg-yellow-400",
+      progressColor: "bg-[#0073D5]",
+      progressBg: "bg-[#FFB200]",
       lastSync: "2025-05-10, 8:00 AM",
       status: "Inactive",
-      priority: "4",
-      statusColor: "text-red-600 bg-red-50 border-red-200",
+
+      statusColor: "text-red-600 bg-[#FFD5D6] border-[#FF6365] rounded-full",
     },
   ];
 
@@ -108,7 +110,7 @@ const VendorSetup = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 w-full">
+    <div className="bg-white rounded-lg  border border-gray-200 w-full">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200">
         <h2 className="text-xl font-semibold text-gray-900">Vendor Setup</h2>
@@ -116,18 +118,22 @@ const VendorSetup = () => {
         <div className="flex items-center gap-4">
           {/* Search */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
             <input
               type="text"
-              placeholder="Search Vendor Name"
-              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg w-72 text-sm focus:outline-none focus:border-blue-500"
+              placeholder="Search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full sm:w-50 pl-10 pr-4 py-2 border border-[#D5D5D5] rounded-lg focus:border-2 focus:border-[#2FB4FF] focus:outline-none"
             />
           </div>
 
           {/* Add Vendor Button */}
           <button
             onClick={handleAddVendor}
-            className="flex items-center gap-2 bg-[#2FB4FF] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#1A9BE6] transition-colors"
+            className="flex items-center gap-2 bg-[#2FB4FF] text-white px-4 py-2 rounded-lg text-sm font-medium  transition-colors"
           >
             <Plus className="w-4 h-4" />
             Add Vendor
@@ -138,7 +144,7 @@ const VendorSetup = () => {
       {/* Table */}
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gray-50">
+          <thead className="border-b">
             <tr>
               {/* <th className="w-12 px-4 py-3">
                 <input
@@ -151,6 +157,7 @@ const VendorSetup = () => {
               {/* <th className="text-left px-4 py-3 text-sm font-medium text-gray-700">
                 S.N.
               </th> */}
+
               <th className="text-left px-4 py-4 text-sm font-medium text-gray-700">
                 Vendor Name
               </th>
@@ -174,7 +181,7 @@ const VendorSetup = () => {
           </thead>
           <tbody className="divide-y divide-gray-100">
             {vendors.map((vendor, index) => (
-              <tr key={vendor.id} className="hover:bg-gray-50">
+              <tr key={vendor.id}>
                 {/* Checkbox */}
                 {/* <td className="px-4 py-4">
                   <input
@@ -194,63 +201,63 @@ const VendorSetup = () => {
                     {/* <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
                       {vendor.initial}
                     </div> */}
-                    <span className="text-sm text-gray-900 font-medium">
+                    <span className="text-sm font-medium  text-[#686F83]">
                       {vendor.name}
                     </span>
                   </div>
                 </td>
 
                 {/* Connection Type */}
-                <td className="px-4 py-4 text-sm text-gray-600">
+                <td className="px-4 py-4 text-sm font-medium  text-[#686F83]">
                   {vendor.connectionType}
                 </td>
 
                 {/* Progress */}
                 <td className="px-4 py-4">
                   <div className="space-y-2">
-                    <div className="flex justify-between text-xs text-gray-500">
+                    <div className="flex justify-between font-medium text-xs text-[#686F83]">
                       <span>Total Product Imported</span>
                       <span className="font-semibold text-gray-700">
                         {vendor.progressValue}
                       </span>
                     </div>
                     <div
-                      className={`h-2 rounded-full ${vendor.progressBg} overflow-hidden`}
+                      className={`h-3 rounded-full ${vendor.progressBg} overflow-hidden`}
                     >
                       <div
-                        className={`h-full ${vendor.progressColor} rounded-full transition-all duration-300`}
+                        className={`h-full ${vendor.progressColor} rounded-full  font-medium  transition-all duration-300`}
                         style={{ width: `${vendor.progressPercent}%` }}
                       ></div>
                     </div>
-                    <div className="text-xs text-gray-600 text-right font-semibold">
+                    <div className="text-xs  font-medium  text-[#686F83] text-right font-semibold">
                       {vendor.progressPercent}%
                     </div>
                   </div>
                 </td>
 
                 {/* Last Sync */}
-                <td className="px-4 py-4 text-sm text-gray-600">
+                <td className="px-4 py-4 font-medium  text-sm text-[#686F83]">
                   {vendor.lastSync}
                 </td>
 
                 {/* Status */}
                 <td className="px-4 py-4">
                   <span
-                    className={`inline-flex px-5 py-1.5 rounded-half text-xs font-medium border rounded-[4px] ${vendor.statusColor}`}
+                    className={`inline-flex px-5 py-1.5 text-xs font-medium border  ${vendor.statusColor}`}
                   >
                     {vendor.status}
                   </span>
                 </td>
 
                 {/* Priority */}
-                <td className="px-4 py-4 text-sm text-gray-600">
+                <td className="px-4 py-4 text-sm text-[#686F83]">
                   {vendor.status === "Active" ? (
                     <select
                       value={vendor.priority}
                       onChange={(e) =>
                         handlePriorityChange(vendor.id, e.target.value)
                       }
-                      className="w-full px-2 py-1 text-sm  rounded-md focus:outline-none  focus:transparent"
+                      className="w-full px-2 py-1 text-sm font-medium  rounded-md focus:outline-none  focus:transparent"
                     >
                       <option value="1">1</option>
                       <option value="2">2</option>
@@ -280,9 +287,7 @@ const VendorSetup = () => {
                   {showActionMenu === index && (
                     <div className="absolute right-8 top-8 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-32">
                       <div className="py-1">
-                        <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
-                          {vendor.status === "Active" ? "Inactive" : "Active"}
-                        </button>
+
                         <button
                           className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                           onClick={handleEditVendor}

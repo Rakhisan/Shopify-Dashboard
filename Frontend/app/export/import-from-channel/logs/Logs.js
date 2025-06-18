@@ -27,8 +27,8 @@ export default function LogsTable() {
     ];
 
     return (
-        <div className="p-2 min-h-screen">
-            <div className="max-w-7xl mx-auto">
+        <div className="p-2 w-full  min-h-screen">
+            <div className="max-w-7xl w-full mx-auto">
                 <div className="bg-white rounded-tl-lg p-3 mb-1">
                     <h2 className="text-3xl text-gray-800">
                         Logs
