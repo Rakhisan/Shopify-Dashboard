@@ -155,10 +155,10 @@ export default function CompanyProfileForm() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+    <div className="w-full min-h-screen ">
       {/* Header */}
       <div className="bg-white rounded-tl-lg  w-full p-4 border-b">
-        <h2 className="text-xl font-semibold text-gray-800">Company Profile</h2>
+        <h2 className="text-xl font-bold text-[#2B2F32]">Company Profile</h2>
       </div>
 
       {/* Form Content */}
@@ -171,7 +171,7 @@ export default function CompanyProfileForm() {
 
               <div className="mt-5">
                 <div
-                  className="w-full min-h-40 border-2 border-dashed border-[#CFD3D4] rounded-lg flex flex-col items-center justify-center cursor-pointer transition-colors"
+                  className="w-full min-h-40 border-2 text-[#ABAFB1]  border-dashed border-[#CFD3D4] rounded-lg flex flex-col items-center justify-center cursor-pointer transition-colors"
                   onDragOver={handleDragOver}
                   onDrop={handleDrop}
                   onClick={() => document.getElementById("logo-upload").click()}
@@ -185,9 +185,9 @@ export default function CompanyProfileForm() {
                   ) : (
                     <div className="text-center  sm:text-base lg:text-base ">
                       <Upload className="w-6 h-6  text-gray-400 mx-auto mb-1" />
-                      <span className="text-xs 2 sm:text-base lg:text-base  text-gray-500">logo max 150 kb</span>
+                      <span className="text-xs sm:text-base lg:text-base  text-[#ABAFB1]">logo max 150 kb</span>
                       <br />
-                      <span className="text-xs  2 sm:text-base lg:text-base text-gray-500">support jpg, png</span>
+                      <span className="text-xs   sm:text-base lg:text-base text-[#ABAFB1]">support jpg, png</span>
                     </div>
                   )}
                 </div>
@@ -202,7 +202,7 @@ export default function CompanyProfileForm() {
 
               {/* Company Name */}
               <div>
-                <label className="block text-sm 2 sm:text-base lg:text-base  font-medium text-[#5E6366] mb-2">
+                <label className="block text-sm sm:text-base lg:text-base text-[#5E6366] mb-2">
                   Address
                 </label>
                 <textarea
@@ -210,26 +210,26 @@ export default function CompanyProfileForm() {
                   value={formData.address}
                   onChange={(e) => handleInputChange("address", e.target.value)}
                   rows={4}
-                  className="w-full px-2 py-2 2 sm:text-base lg:text-base  border border-[#CFD3D4] rounded-md focus:outline-none focus:ring-2 focus:ring-[#30B4FF] focus:border-transparent resize-none text-sm"
+                  className="w-full px-2 py-2  sm:text-base lg:text-base text-[#ABAFB1] border border-[#CFD3D4] rounded-md focus:outline-none focus:ring-2 focus:ring-[#30B4FF]  text-sm"
                 />
               </div>
 
               {/* Country */}
               <div className="relative">
-                <label className="block text-sm 2 sm:text-base lg:text-base  font-medium text-[#5E6366] mb-1">
+                <label className="block text-[#5E6366] mb-1">
                   Country
                 </label>
                 <button
                   onClick={() => setShowCountryNameDropdown(!showCountryNameDropdown)}
-                  className="w-full px-2 py-2  2 sm:text-base lg:text-base border border-[#CFD3D4] rounded-md text-left bg-white focus:outline-none focus:ring-2 focus:ring-[#30B4FF] flex items-center justify-between text-sm"
+                  className="w-full px-2 py-2   sm:text-base lg:text-base text-[#ABAFB1] border border-[#CFD3D4] rounded-md  focus:outline-none focus:ring-2 focus:ring-[#30B4FF] flex items-center justify-between text-sm"
                 >
-                  <span className={formData.country ? "text-gray-900" : "text-gray-500"}>
+                  <span className={formData.country ? "text-[#ABAFB1]" : "text-[#ABAFB1]"}>
                     {formData.country || "Country"}
                   </span>
                   <CustomChevronDown />
                 </button>
                 {showCountryNameDropdown && (
-                  <div className="absolute top-full left-0 mt-1 w-full bg-white 2 sm:text-base lg:text-base  border border-[#CFD3D4] rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
+                  <div className="absolute top-full left-0 mt-1 w-full bg-white 2 sm:text-base lg:text-base text-[#ABAFB1]  border border-[#CFD3D4] rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
                     {countries.map((country) => (
                       <button
                         key={country}
@@ -237,7 +237,7 @@ export default function CompanyProfileForm() {
                           handleInputChange("country", country);
                           setShowCountryNameDropdown(false);
                         }}
-                        className="w-full px-3 py-2  2 sm:text-base lg:text-base text-left text-[#5E6366] hover:bg-[#30B4FF] hover:text-white text-sm"
+                        className="w-full px-3 py-2  2 sm:text-base lg:text-base text-left text-[#ABAFB1] hover:bg-[#30B4FF] hover:text-white text-sm"
                       >
                         {country}
                       </button>
@@ -248,20 +248,20 @@ export default function CompanyProfileForm() {
 
               {/* State */}
               <div className="relative">
-                <label className="block text-sm 2 sm:text-base lg:text-base  font-medium text-[#5E6366] mb-2">
+                <label className="block text-sm  sm:text-base lg:text-base text-[#5E6366] mb-2">
                   State
                 </label>
                 <button
                   onClick={() => setShowStateDropdown(!showStateDropdown)}
-                  className="w-full px-2 py-2 2 sm:text-base lg:text-base border border-[#CFD3D4] rounded-md text-left bg-white focus:outline-none focus:ring-2 focus:ring-[#30B4FF] flex items-center justify-between text-sm"
+                  className="w-full px-2 py-2 2 sm:text-base lg:text-base text-[#ABAFB1] border border-[#CFD3D4] rounded-md text-left bg-white focus:outline-none focus:ring-2 focus:ring-[#30B4FF] flex items-center justify-between text-sm"
                 >
-                  <span className={formData.state ? "text-gray-900" : "text-gray-500"}>
+                  <span className={formData.state ? "text-[#ABAFB1]" : "text-[#ABAFB1]"}>
                     {formData.state || "State"}
                   </span>
                   <CustomChevronDown />
                 </button>
                 {showStateDropdown && (
-                  <div className="absolute top-full 2 sm:text-base lg:text-base  left-0 mt-1 w-full bg-white border border-[#CFD3D4] rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
+                  <div className="absolute top-full 2 sm:text-base lg:text-base text-[#ABAFB1] left-0 mt-1 w-full bg-white border border-[#CFD3D4] rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
                     {states.map((state) => (
                       <button
                         key={state}
@@ -269,7 +269,7 @@ export default function CompanyProfileForm() {
                           handleInputChange("state", state);
                           setShowStateDropdown(false);
                         }}
-                        className="w-full px-3 py-2 2 sm:text-base lg:text-base  text-left text-[#5E6366] hover:bg-[#30B4FF] hover:text-white text-sm"
+                        className="w-full px-3 py-2 2 sm:text-base lg:text-base  text-left text-[#ABAFB1] hover:bg-[#30B4FF] hover:text-white text-sm"
                       >
                         {state}
                       </button>
@@ -280,14 +280,14 @@ export default function CompanyProfileForm() {
 
               {/* Plan */}
               <div className="relative">
-                <label className="block text-sm  2 sm:text-base lg:text-base font-medium text-[#5E6366] mb-2">
+                <label className="block text-[#5E6366] mb-2">
                   Plan
                 </label>
                 <button
                   onClick={() => setShowPlanDropdown(!showPlanDropdown)}
-                  className="w-full px-3 py-2  2 sm:text-base lg:text-base border border-[#CFD3D4] rounded-md text-left bg-white focus:outline-none focus:ring-2 focus:ring-[#30B4FF] flex items-center justify-between text-sm"
+                  className="w-full px-3 py-2   sm:text-base lg:text-base border border-[#CFD3D4]  text-[#ABAFB1] rounded-md text-left bg-white focus:outline-none focus:ring-2 focus:ring-[#30B4FF] flex items-center justify-between"
                 >
-                  <span className={formData.plan ? "text-gray-900" : "text-gray-500"}>
+                  <span className={formData.plan ? "text-[#ABAFB1]" : "text-[#ABAFB1]"}>
                     {formData.plan || "Plan"}
                   </span>
                   <CustomChevronDown />
@@ -301,7 +301,7 @@ export default function CompanyProfileForm() {
                           handleInputChange("plan", plan);
                           setShowPlanDropdown(false);
                         }}
-                        className="w-full px-3 py-2 2 sm:text-base lg:text-base text-left text-[#5E6366] hover:bg-[#30B4FF] hover:text-white text-sm"
+                        className="w-full px-3 py-2 2 sm:text-base lg:text-base text-left text-[#ABAFB1] hover:bg-[#30B4FF] hover:text-white text-sm"
                       >
                         {plan}
                       </button>

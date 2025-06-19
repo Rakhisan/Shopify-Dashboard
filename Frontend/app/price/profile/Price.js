@@ -126,7 +126,7 @@ export default function Price() {
     <div className="w-full max-w-screen-xl mx-auto  text-[#686f83]">
       {/* Header */}
       <div className="flex justify-between items-center mb-1 bg-white text-[#727a90] rounded-t-lg px-4 py-4 shadow-md overflow-hidden flex-col md:flex-row gap-3 md:gap-0 md:p-2.5">
-        <h2 className="text-xl font-semibold text-[#24282e] text-left w-full md:w-auto">
+        <h2 className="text-xl font-bold text-[#24282e] text-left w-full md:w-auto">
           Price Profile
         </h2>
 

@@ -6,6 +6,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Public Sans';
   /* min-height: auto; */
 }
 
@@ -28,23 +29,15 @@ button {
   outline: none;
 }
 
-input,
-textarea,
-select {
-  font-family: 'Helvetica';
-  font-size: 16px;
-  font-weight: 400;
-}
 
-input::placeholder,
+/* input::placeholder,
 textarea::placeholder,
 select::placeholder {
   color: #ABAFB1;
   opacity: 1;
-  font-size: inherit;
   font-weight: 400;
-  font-family: inherit;
-}
+
+} */
 
 
 

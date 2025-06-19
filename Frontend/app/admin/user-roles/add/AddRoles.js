@@ -296,66 +296,61 @@ export default function AddRolePage() {
                         </div>
 
                         {/* Privileges Section */}
-                        <div>
-                            <h2 className="text-lg font-medium text-gray-900 mb-4">Privileges</h2>
-                            <div className="bg-gray-50 rounded-lg p-4">
-                                <div className="grid grid-cols-2 gap-4 mb-4 pb-2 border-b [#CFD2D4]">
+                        <div className="max-w-sm p-3 bg-white shadow rounded-lg">
+                            <h2 className="text-lg font-medium mb-4">Privileges</h2>
+                            <div className="rounded-lg p-3 bg-gray-50">
+                                <div className="grid grid-cols-2 gap-4 mb-4 pb-2 border-b border-[#CFD2D4]">
                                     <div className="text-sm font-medium text-gray-700">Module Name</div>
                                     <div className="text-sm font-medium text-gray-700"></div>
                                 </div>
 
                                 {/* Catalog Privilege */}
-                                <div className="grid grid-cols-2 gap-4 items-center py-3">
+                                <div className="grid grid-cols-2 gap-4 items-center py-2">
                                     <div className="text-sm text-gray-700 font-medium">Catalog</div>
                                     <div className="flex justify-start">
                                         <button
                                             onClick={() => handlePrivilegeToggle('catalog')}
-                                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${privileges.catalog ? 'bg-[#2FB4FF]' : 'bg-gray-300'
-                                                }`}
+                                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${privileges.catalog ? 'bg-[#2FB4FF]' : 'bg-gray-300'}`}
                                         >
                                             <span
-                                                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${privileges.catalog ? 'translate-x-6' : 'translate-x-1'
-                                                    }`}
+                                                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${privileges.catalog ? 'translate-x-6' : 'translate-x-1'}`}
                                             />
                                         </button>
                                     </div>
                                 </div>
 
                                 {/* Product Privilege */}
-                                <div className="grid grid-cols-2 gap-4 items-center py-3">
+                                <div className="grid grid-cols-2 gap-4 items-center py-2">
                                     <div className="text-sm text-gray-700 font-medium">Product</div>
                                     <div className="flex justify-start">
                                         <button
                                             onClick={() => handlePrivilegeToggle('product')}
-                                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${privileges.product ? 'bg-[#2FB4FF]' : 'bg-gray-300'
-                                                }`}
+                                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${privileges.product ? 'bg-[#2FB4FF]' : 'bg-gray-300'}`}
                                         >
                                             <span
-                                                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${privileges.product ? 'translate-x-6' : 'translate-x-1'
-                                                    }`}
+                                                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${privileges.product ? 'translate-x-6' : 'translate-x-1'}`}
                                             />
                                         </button>
                                     </div>
                                 </div>
 
                                 {/* Order Privilege */}
-                                <div className="grid grid-cols-2 gap-4 items-center py-3">
+                                <div className="grid grid-cols-2 gap-4 items-center py-2">
                                     <div className="text-sm text-gray-700 font-medium">Order</div>
                                     <div className="flex justify-start">
                                         <button
                                             onClick={() => handlePrivilegeToggle('order')}
-                                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${privileges.order ? 'bg-[#2FB4FF]' : 'bg-gray-300'
-                                                }`}
+                                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${privileges.order ? 'bg-[#2FB4FF]' : 'bg-gray-300'}`}
                                         >
                                             <span
-                                                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${privileges.order ? 'translate-x-6' : 'translate-x-1'
-                                                    }`}
+                                                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${privileges.order ? 'translate-x-6' : 'translate-x-1'}`}
                                             />
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

@@ -144,9 +144,9 @@ export default function Roles() {
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell className="font-medium text-gray-700">Role Name</TableCell>
-                                    <TableCell className="font-medium text-gray-700">No Of Users</TableCell>
-                                    <TableCell className="font-medium text-gray-700">Description</TableCell>
+                                    <TableCell className="font-medium text-[#727A90] font-[Halvetica]">Role Name</TableCell>
+                                    <TableCell className="font-medium text-[#727A90]">No Of Users</TableCell>
+                                    <TableCell className="font-medium text-[#727A90]">Description</TableCell>
                                     <TableCell width={50}></TableCell>
                                 </TableRow>
                             </TableHead>
@@ -156,14 +156,14 @@ export default function Roles() {
                                         key={role.id}
                                         className="hover:bg-gray-50 transition-colors border-b border-gray-100"
                                     >
-                                        <TableCell className="text-gray-900">{role.name}</TableCell>
-                                        <TableCell className="text-gray-600">{role.users}</TableCell>
-                                        <TableCell className="text-gray-600">{role.description}</TableCell>
+                                        <TableCell className="text-[#686F83] font-medium ">{role.name}</TableCell>
+                                        <TableCell className="text-[#686F83]">{role.users}</TableCell>
+                                        <TableCell className="text-[#686F83]">{role.description}</TableCell>
                                         <TableCell className="relative">
                                             <IconButton
                                                 onClick={(e) => handleMenuClick(e, role)}
                                                 size="small"
-                                                className="hover:bg-gray-200"
+
                                             >
                                                 <MoreVertIcon className="text-gray-400" />
                                             </IconButton>
