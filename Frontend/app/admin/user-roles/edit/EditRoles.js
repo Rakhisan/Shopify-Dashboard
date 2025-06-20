@@ -129,7 +129,7 @@ export default function RoleEditor() {
                 {/* Desktop Table View */}
                 <div className="hidden lg:block bg-white rounded-lg border border-gray-200 overflow-hidden">
                     <div className="grid grid-cols-5 gap-4 p-4 bg-gray-50 border-b border-gray-200">
-                        <div className="font-medium text-gray-700 text-sm">Module Name</div>
+                        <div className="medium text-gray-700 text-sm">Module Name</div>
                         <div className="font-medium text-gray-700 text-center text-sm">View</div>
                         <div className="font-medium text-gray-700 text-center text-sm">Create</div>
                         <div className="font-medium text-gray-700 text-center text-sm">Edit</div>

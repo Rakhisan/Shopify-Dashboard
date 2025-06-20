@@ -18,8 +18,11 @@ import {
   Pagination,
   Chip,
   IconButton,
+  TextField,
+  InputAdornment,
+  Collapse,
 } from "@mui/material";
-import { Search, FilterList, Add, MoreVert } from "@mui/icons-material";
+import { Search, Add, MoreVert } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 
 const PriceRuleTable = () => {
@@ -27,8 +30,9 @@ const PriceRuleTable = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
+  const [filterOpen, setFilterOpen] = useState(false);
 
-  // Sample data matching your images
+
   const priceRuleData = [
     {
       id: "#302012",
@@ -166,6 +170,11 @@ const PriceRuleTable = () => {
   const handleAddPriceRule = () => {
     router.push("/price/rule/add");
   };
+
+  const handleFilterClick = () => {
+    setFilterOpen(!filterOpen);
+  };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -203,49 +212,54 @@ const PriceRuleTable = () => {
     <div className="w-full bg-white">
       {/* Header */}
       <div className="flex justify-between items-center p-4 border-b border-gray-200">
-        <h2 className="text-xl font-semibold text-gray-800">Price Rule</h2>
+        <h2 className="text-xl font-semibold text-[#24282E]">Price Rule</h2>
         <div className="flex items-center gap-3">
-          {/* <TextField
-            size="small"
-            placeholder="Search name or description"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Search className="text-gray-400" fontSize="small" />
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-              width: 300,
-              "& .MuiOutlinedInput-root": {
-                height: 40,
-                borderRadius: "6px",
-                "& fieldset": {
-                  borderColor: "#e5e7eb",
+          {/* Search Bar - shows when filter is open */}
+          {filterOpen && (
+            <TextField
+              size="small"
+              placeholder="Search name or description"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Search className="text-[#575757]" fontSize="small" />
+                  </InputAdornment>
+                ),
+              }}
+              sx={{
+                width: 300,
+                "& .MuiOutlinedInput-root": {
+                  height: 40,
+                  borderRadius: "8px",
+                  "& fieldset": {
+                    borderColor: "#D5D5D5",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#2FB4FF",
+                  },
                 },
-                "&:hover fieldset": {
-                  borderColor: "#9ca3af",
-                },
-              },
-            }}
-          /> */}
+              }}
+            />
+          )}
+
           <Button
             variant="contained"
             startIcon={<MdTune />}
+            onClick={handleFilterClick}
             sx={{
               height: 40,
               textTransform: "none",
               backgroundColor: "#2FB4FF",
               color: "white",
-              "&:hover": {
-                backgroundColor: "#2563eb",
-              },
+              borderRadius: "8px",
+
             }}
           >
             Filters
           </Button>
+
           <Button
             onClick={handleAddPriceRule}
             variant="contained"
@@ -254,9 +268,8 @@ const PriceRuleTable = () => {
               height: 40,
               textTransform: "none",
               backgroundColor: "#2FB4FF",
-              "&:hover": {
-                backgroundColor: "#2563eb",
-              },
+              borderRadius: "8px",
+
             }}
           >
             Add Price Rule
@@ -264,120 +277,328 @@ const PriceRuleTable = () => {
         </div>
       </div>
 
-      {/* Filters Row */}
-      <div className="flex items-center gap-4 p-4  border-b border-gray-200">
-        <FormControl size="small" sx={{ minWidth: 185 }}>
-          <Select
-            displayEmpty
-            defaultValue=""
-            sx={{
-              height: 36,
-              color: "#686F83",
-              backgroundColor: "white",
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "#e5e7eb",
-              },
-            }}
-          >
-            <MenuItem value="">Effective From</MenuItem>
-            <MenuItem value="2023">2023</MenuItem>
-          </Select>
-        </FormControl>
+      {/* Filters Row - Collapsible */}
+      <Collapse in={filterOpen} timeout="auto" unmountOnExit>
+        <div className="flex items-center gap-4 p-4 border-b border-[#D5D5D5] ">
+          <FormControl size="small" sx={{ minWidth: 185 }}>
+            <Select
+              displayEmpty
+              defaultValue=""
+              sx={{
+                height: 36,
+                color: "#686F83",
+                backgroundColor: "white",
+                borderRadius: "8px",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#D5D5D5",
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#2FB4FF",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#2FB4FF",
+                },
+                "& .MuiSelect-select": {
+                  color: "#686F83",
+                },
+              }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    backgroundColor: "white",
+                    maxHeight: 200,
+                    "& .MuiMenuItem-root": {
+                      color: "#686F83",
+                      borderRadius: "8px",
+                      "&:hover": {
+                        backgroundColor: "#2FB4FF",
+                        color: "white",
+                      },
+                      "&.Mui-selected": {
+                        backgroundColor: "white",
+                        color: "#686F83",
+                        "&:hover": {
+                          backgroundColor: "#2FB4FF",
+                          color: "white",
+                        },
+                      },
+                    },
+                  },
+                },
+              }}
+            >
+              <MenuItem value="">Effective From</MenuItem>
+              <MenuItem value="2023">2023</MenuItem>
+            </Select>
+          </FormControl>
 
-        <FormControl size="small" sx={{ minWidth: 185 }}>
-          <Select
-            displayEmpty
-            defaultValue=""
-            sx={{
-              height: 36,
-              color: "#686F83",
-              backgroundColor: "white",
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "#e5e7eb",
-              },
-            }}
-          >
-            <MenuItem value="">Effective To</MenuItem>
-            <MenuItem value="2023">2023</MenuItem>
-          </Select>
-        </FormControl>
+          <FormControl size="small" sx={{ minWidth: 185 }}>
+            <Select
+              displayEmpty
+              defaultValue=""
+              sx={{
+                height: 36,
+                color: "#686F83",
+                backgroundColor: "white",
+                borderRadius: "8px",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#D5D5D5",
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#2FB4FF",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#2FB4FF",
+                },
+                "& .MuiSelect-select": {
+                  color: "#686F83",
+                },
+              }}
 
-        <FormControl size="small" sx={{ minWidth: 185 }}>
-          <Select
-            displayEmpty
-            defaultValue=""
-            sx={{
-              height: 36,
-              color: "#686F83",
-              backgroundColor: "white",
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "#e5e7eb",
-              },
-            }}
-          >
-            <MenuItem value="">Category Id</MenuItem>
-            <MenuItem value="DEVICE-101">DEVICE-101</MenuItem>
-            <MenuItem value="DEVICE-202">DEVICE-202</MenuItem>
-          </Select>
-        </FormControl>
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    backgroundColor: "white",
+                    maxHeight: 200,
+                    "& .MuiMenuItem-root": {
+                      color: "#686F83",
+                      borderRadius: "8px",
+                      "&:hover": {
+                        backgroundColor: "#2FB4FF",
+                        color: "white",
+                      },
+                      "&.Mui-selected": {
+                        backgroundColor: "white",
+                        color: "#686F83",
+                        "&:hover": {
+                          backgroundColor: "#2FB4FF",
+                          color: "white",
+                        },
+                      },
+                    },
+                  },
+                },
+              }}
+            >
+              <MenuItem value="">Effective To</MenuItem>
+              <MenuItem value="2023">2023</MenuItem>
+            </Select>
+          </FormControl>
 
-        <FormControl size="small" sx={{ minWidth: 185 }}>
-          <Select
-            displayEmpty
-            defaultValue=""
-            sx={{
-              height: 36,
-              color: "#686F83",
-              backgroundColor: "white",
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "#e5e7eb",
-              },
-            }}
-          >
-            <MenuItem value="">Method</MenuItem>
-            <MenuItem value="GadgetX">GadgetX</MenuItem>
-            <MenuItem value="GadgetY">GadgetY</MenuItem>
-          </Select>
-        </FormControl>
+          <FormControl size="small" sx={{ minWidth: 185 }}>
+            <Select
+              displayEmpty
+              defaultValue=""
+              sx={{
+                height: 36,
+                color: "#686F83",
+                backgroundColor: "white",
+                borderRadius: "8px",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#D5D5D5",
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#2FB4FF",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#2FB4FF",
+                },
+                "& .MuiSelect-select": {
+                  color: "#686F83",
+                },
+              }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    backgroundColor: "white",
+                    maxHeight: 200,
+                    "& .MuiMenuItem-root": {
+                      color: "#686F83",
+                      borderRadius: "8px",
+                      "&:hover": {
+                        backgroundColor: "#2FB4FF",
+                        color: "white",
+                      },
+                      "&.Mui-selected": {
+                        backgroundColor: "white",
+                        color: "#686F83",
+                        "&:hover": {
+                          backgroundColor: "#2FB4FF",
+                          color: "white",
+                        },
+                      },
+                    },
+                  },
+                },
+              }}
+            >
+              <MenuItem value="">Category Id</MenuItem>
+              <MenuItem value="DEVICE-101">DEVICE-101</MenuItem>
+              <MenuItem value="DEVICE-202">DEVICE-202</MenuItem>
+            </Select>
+          </FormControl>
 
-        <FormControl size="small" sx={{ minWidth: 185 }}>
-          <Select
-            displayEmpty
-            defaultValue=""
-            sx={{
-              height: 36,
-              color: "#686F83",
-              backgroundColor: "white",
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "#e5e7eb",
-              },
-            }}
-          >
-            <MenuItem value="">Is Default</MenuItem>
-            <MenuItem value="true">Yes</MenuItem>
-            <MenuItem value="false">No</MenuItem>
-          </Select>
-        </FormControl>
+          <FormControl size="small" sx={{ minWidth: 185 }}>
+            <Select
+              displayEmpty
+              defaultValue=""
+              sx={{
+                height: 36,
+                color: "#686F83",
+                backgroundColor: "white",
+                borderRadius: "8px",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#D5D5D5",
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#2FB4FF",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#2FB4FF",
+                },
+                "& .MuiSelect-select": {
+                  color: "#686F83",
+                },
+              }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    backgroundColor: "white",
+                    maxHeight: 200,
+                    "& .MuiMenuItem-root": {
+                      color: "#686F83",
+                      borderRadius: "8px",
+                      "&:hover": {
+                        backgroundColor: "#2FB4FF",
+                        color: "white",
+                      },
+                      "&.Mui-selected": {
+                        backgroundColor: "white",
+                        color: "#686F83",
+                        "&:hover": {
+                          backgroundColor: "#2FB4FF",
+                          color: "white",
+                        },
+                      },
+                    },
+                  },
+                },
+              }}
+            >
+              <MenuItem value="">Method</MenuItem>
+              <MenuItem value="GadgetX">GadgetX</MenuItem>
+              <MenuItem value="GadgetY">GadgetY</MenuItem>
+            </Select>
+          </FormControl>
 
-        <FormControl size="small" sx={{ minWidth: 185 }}>
-          <Select
-            displayEmpty
-            defaultValue=""
-            sx={{
-              height: 36,
-              color: "#686F83",
-              backgroundColor: "white",
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "#e5e7eb",
-              },
-            }}
-          >
-            <MenuItem value="">Manufacturer Id</MenuItem>
-            <MenuItem value="GAD-001">GAD-001</MenuItem>
-            <MenuItem value="GAD-002">GAD-002</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
+          <FormControl size="small" sx={{ minWidth: 185 }}>
+            <Select
+              displayEmpty
+              defaultValue=""
+              sx={{
+                height: 36,
+                color: "#686F83",
+                backgroundColor: "white",
+                borderRadius: "8px",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#D5D5D5",
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#2FB4FF",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#2FB4FF",
+                },
+                "& .MuiSelect-select": {
+                  color: "#686F83",
+                },
+              }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    backgroundColor: "white",
+                    maxHeight: 200,
+                    "& .MuiMenuItem-root": {
+                      color: "#686F83",
+                      borderRadius: "8px",
+                      "&:hover": {
+                        backgroundColor: "#2FB4FF",
+                        color: "white",
+                      },
+                      "&.Mui-selected": {
+                        backgroundColor: "white",
+                        color: "#686F83",
+                        "&:hover": {
+                          backgroundColor: "#2FB4FF",
+                          color: "white",
+                        },
+                      },
+                    },
+                  },
+                },
+              }}
+
+            >
+              <MenuItem value="">Is Default</MenuItem>
+              <MenuItem value="true">Yes</MenuItem>
+              <MenuItem value="false">No</MenuItem>
+            </Select>
+          </FormControl>
+
+          <FormControl size="small" sx={{ minWidth: 185 }}>
+            <Select
+              displayEmpty
+              defaultValue=""
+              sx={{
+                height: 36,
+                color: "#686F83",
+                backgroundColor: "white",
+                borderRadius: "8px",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#D5D5D5",
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#2FB4FF",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#2FB4FF",
+                },
+                "& .MuiSelect-select": {
+                  color: "#686F83",
+                },
+              }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    backgroundColor: "white",
+                    maxHeight: 200,
+                    "& .MuiMenuItem-root": {
+                      color: "#686F83",
+                      borderRadius: "8px",
+                      "&:hover": {
+                        backgroundColor: "#2FB4FF",
+                        color: "white",
+                      },
+                      "&.Mui-selected": {
+                        backgroundColor: "white",
+                        color: "#686F83",
+                        "&:hover": {
+                          backgroundColor: "#2FB4FF",
+                          color: "white",
+                        },
+                      },
+                    },
+                  },
+                },
+              }}
+            >
+              <MenuItem value="">Manufacturer Id</MenuItem>
+              <MenuItem value="GAD-001">GAD-001</MenuItem>
+              <MenuItem value="GAD-002">GAD-002</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+      </Collapse>
 
       {/* Table Container with Horizontal Scroll */}
       <TableContainer
@@ -390,17 +611,7 @@ const PriceRuleTable = () => {
           "&::-webkit-scrollbar": {
             height: 8,
           },
-          "&::-webkit-scrollbar-track": {
-            backgroundColor: "#f1f1f1",
-            borderRadius: 8,
-          },
-          "&::-webkit-scrollbar-thumb": {
-            backgroundColor: "#80c8f1",
-            borderRadius: 8,
-          },
-          "&::-webkit-scrollbar-thumb:hover": {
-            backgroundColor: "#9be0f7",
-          },
+
         }}
       >
         <Table sx={{ minWidth: 1200 }}>
@@ -481,11 +692,7 @@ const PriceRuleTable = () => {
             {currentRows.map((row) => (
               <TableRow
                 key={row.id}
-                hover
-                sx={{
-                  "&:hover": { backgroundColor: "#f8fafc" },
-                  "&:nth-of-type(even)": { backgroundColor: "#fafbfc" },
-                }}
+
               >
                 <TableCell padding="checkbox">
                   <Checkbox
@@ -494,7 +701,7 @@ const PriceRuleTable = () => {
                     sx={{
                       color: "#686F83",
                       "&.Mui-checked": {
-                        color: "#3b82f6",
+                        color: "#2FB4FF",
                       },
                     }}
                   />
@@ -561,29 +768,6 @@ const PriceRuleTable = () => {
 
       {/* Pagination Footer */}
       <div className="flex justify-between items-center p-4 border-t border-gray-200">
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-600">Show</span>
-          <FormControl size="small" sx={{ minWidth: 80 }}>
-            <Select
-              value={rowsPerPage}
-              onChange={handleChangeRowsPerPage}
-              sx={{
-                height: 36,
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#d1d5db",
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#9ca3af",
-                },
-              }}
-            >
-              <MenuItem value={10}>10</MenuItem>
-              <MenuItem value={20}>20</MenuItem>
-              <MenuItem value={50}>50</MenuItem>
-            </Select>
-          </FormControl>
-          <span className="text-sm text-gray-600">entries</span>
-        </div>
 
         <Pagination
           count={filteredPages}
@@ -595,6 +779,7 @@ const PriceRuleTable = () => {
             "& .MuiPaginationItem-root": {
               borderColor: "#2FB4FF",
               color: "#6b7280",
+
               "&:hover": {
                 backgroundColor: "#2FB4FF",
                 borderColor: "#9ca3af",
@@ -610,6 +795,46 @@ const PriceRuleTable = () => {
             },
           }}
         />
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-gray-600">Show</span>
+          <FormControl size="small" sx={{ minWidth: 80 }}>
+            <Select
+              value={rowsPerPage}
+              onChange={handleChangeRowsPerPage}
+              sx={{
+                height: 36,
+                color: "#727A90",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#E9EAEA",
+                  borderRadius: "8px",
+                },
+
+
+              }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    "& .MuiMenuItem-root": {
+                      color: "#686F83",
+
+                      "&.Mui-selected": {
+                        backgroundColor: "#f3f4f6",
+
+                      },
+                    },
+                  },
+                },
+              }}
+            >
+              <MenuItem value={10}>10</MenuItem>
+              <MenuItem value={20}>20</MenuItem>
+              <MenuItem value={50}>50</MenuItem>
+            </Select>
+          </FormControl>
+
+        </div>
+
+
       </div>
     </div>
   );

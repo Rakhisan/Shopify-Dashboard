@@ -20,7 +20,7 @@ import {
   Card,
   CardContent
 } from '@mui/material';
-import { MoreVert, Edit, Update, Delete } from '@mui/icons-material';
+import { MoreVert, Edit, Delete } from '@mui/icons-material';
 
 // Import logo images
 import amazonLogo from "../../images/logo_amazon.png";
@@ -29,9 +29,9 @@ import walmartLogo from "../../images/logo_walmart.png";
 import shopifyLogo from "../../images/logo.png";
 import { useRouter } from 'next/navigation';
 
-// Logo component using Next.js Image component with imported images
-const LogoComponent = ({ name, logoSrc, className, width = 80, height = 32 }) => (
-  <div className={`${className} flex items-center justify-center rounded overflow-hidden bg-white borderrelative`}>
+
+const LogoComponent = ({ name, logoSrc, className, width = 98, height = 32 }) => (
+  <div className={`${className} flex items-center justify-center rounded overflow-hidden  relative`}>
     <Image
       src={logoSrc}
       alt={`${name} logo`}
@@ -44,7 +44,7 @@ const LogoComponent = ({ name, logoSrc, className, width = 80, height = 32 }) =>
   </div>
 );
 
-export default function VendorSetup() {
+export default function ImportChannel() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedVendor, setSelectedVendor] = useState(null);
   const router = useRouter();
@@ -58,8 +58,13 @@ export default function VendorSetup() {
     setAnchorEl(null);
     setSelectedVendor(null);
   };
-  const handleViewLogs = () => {
+
+  const handleViewlogs = () => {
     router.push("/export/import-from-channel/logs");
+  };
+
+  const handleedit = () => {
+    router.push("/export/export-to-channel/edit");
   };
 
   const vendors = [
@@ -73,7 +78,7 @@ export default function VendorSetup() {
       lastSync: '2025-05-12, 8:15 PM',
       status: 'Connected',
       statusColor: 'success',
-      statusVariant: 'filled'
+      statusVariant: 'outlined'
     },
     {
       id: 2,
@@ -85,7 +90,7 @@ export default function VendorSetup() {
       lastSync: '2025-04-20, 8:10 PM',
       status: 'Setup Required',
       statusColor: 'warning',
-      statusVariant: 'filled'
+      statusVariant: 'outlined'
     },
     {
       id: 3,
@@ -97,7 +102,7 @@ export default function VendorSetup() {
       lastSync: '2025-02-12, 10:15 PM',
       status: 'Error',
       statusColor: 'error',
-      statusVariant: 'filled'
+      statusVariant: 'outlined'
     },
     {
       id: 4,
@@ -109,7 +114,7 @@ export default function VendorSetup() {
       lastSync: '2025-01-07, 11:15 PM',
       status: 'Error',
       statusColor: 'error',
-      statusVariant: 'filled'
+      statusVariant: 'outlined'
     }
   ];
 
@@ -119,7 +124,7 @@ export default function VendorSetup() {
       case 'warning': return 'bg-[#FF302F]';
       case 'error': return 'bg-[#FF9A00]';
       case 'info': return 'bg-[#0073D5]';
-
+      default: return 'bg-gray-400';
     }
   };
 
@@ -129,34 +134,56 @@ export default function VendorSetup() {
       case 'warning': return 'bg-[#FF9C9C]';
       case 'error': return 'bg-[#292929]';
       case 'info': return 'bg-[#FFB200]';
+      default: return 'bg-gray-200';
+    }
+  };
 
+  const getStatusChipStyles = (status) => {
+    switch (status) {
+      case 'Connected':
+        return {
+          backgroundColor: '#EAFFC3',
+          color: '#66914A',
+          border: '1px solid #66914A'
+        };
+      case 'Setup Required':
+        return {
+          backgroundColor: ' #FFFAEA',
+          color: '#816406',
+          border: '1px solid #FFC300'
+        };
+      case 'Error':
+        return {
+          backgroundColor: '#FFD5D6',
+          color: '#A8280C',
+          border: '1px solid #FF6365'
+        };
+      default:
+        return {
+          backgroundColor: '#FFD5D6',
+          color: '#A8280C',
+          border: '1px solid #FF6365'
+        };
     }
   };
 
   return (
-    <div className="max-w-7xl w-full  mx-auto pt-1 px-1 sm:pt-3 sm:px-6 lg:pt-2 lg:px-5">
-      <Card className="mb-3">
-        <CardContent className="pb-2">
-          <div className="flex justify-between items-center">
-            <Typography
-              variant="h5"
-              component="h2"
-              className="font-semibold"
-            >
+    <div className="w-full mx-auto pt-1 px-1 sm:pt-3 sm:px-6 lg:pt-2 lg:px-5">
+      <div className="mb-1 rounded-tl-lg bg-white">
+        <div className="bg-white w-full rounded-tl-lg p-3 sm:p-4">
+          <div className="flex justify-between items-center ">
+            <h2 className="text-2xl font-semibold text-[#2B2F32]">
               Import from Channels
-            </Typography>
-
-            {/* View Logs Button */}
-            <button className="bg-[#2FB4FF]  text-white text-sm font-medium px-5 py-2 rounded-lg " onClick={handleViewLogs}>
+            </h2>
+            <button
+              className="bg-[#2FB4FF] text-white text-sm font-medium px-5 py-2 rounded-lg"
+              onClick={handleViewlogs}
+            >
               View Logs
             </button>
           </div>
-        </CardContent>
-      </Card>
-
-
-
-
+        </div>
+      </div>
 
       {/* Desktop Table */}
       <div className="hidden md:block">
@@ -164,27 +191,27 @@ export default function VendorSetup() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell className="font-medium text-gray-600 py-4">
-                  <Typography variant="body2" className="font-medium">
+                <TableCell className="font-bold text-[#727A90] py-4" style={{ width: '20%' }}>
+                  <Typography variant="body2" className="semibold">
                     Icon
                   </Typography>
                 </TableCell>
-                <TableCell className="font-medium text-gray-600 py-4">
+                <TableCell className="font-bold text-[#727A90] py-4" style={{ width: '35%' }}>
                   <Typography variant="body2" className="font-medium">
                     Progress
                   </Typography>
                 </TableCell>
-                <TableCell className="font-medium text-gray-600 py-4">
+                <TableCell className="font-bold text-[#727A90] py-4" style={{ width: '25%' }}>
                   <Typography variant="body2" className="font-medium">
                     Last Export
                   </Typography>
                 </TableCell>
-                <TableCell className="font-medium text-gray-600 py-4">
+                <TableCell className="font-bold text-[#727A90] py-4" style={{ width: '15%' }}>
                   <Typography variant="body2" className="font-medium">
                     Status
                   </Typography>
                 </TableCell>
-                <TableCell className="font-medium text-gray-600 py-4">
+                <TableCell className="font-bold text-[#727A90] py-4" style={{ width: '5%' }}>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -194,7 +221,7 @@ export default function VendorSetup() {
                   key={vendor.id}
                   className="transition-colors duration-200"
                 >
-                  <TableCell className="py-4">
+                  <TableCell className="py-4" style={{ width: '20%' }}>
                     <LogoComponent
                       name={vendor.name}
                       logoSrc={vendor.logoSrc}
@@ -204,49 +231,48 @@ export default function VendorSetup() {
                     />
                   </TableCell>
 
-                  <TableCell className="py-4 min-w-[200px]">
-                    <div className="space-y-2">
+                  <TableCell className="py-4" style={{ width: '35%' }}>
+                    <div className="space-y-1">
                       <div className="flex justify-between items-center">
-                        <Typography variant="caption" className="text-gray-600">
-                          Total Product Imported
+                        <Typography variant="caption" className="text-[#686F83] text-xs">
+                          Total Product Receive
                         </Typography>
-                        <Typography variant="caption" className="font-medium">
-                          {vendor.progressValue}
-                        </Typography>
+                        <div className="text-left">
+                          <Typography variant="caption" className="text-sm text-[#686F83]" sx={{ fontWeight: 'bold', mr: 6, }}>
+                            {vendor.progressValue}
+                          </Typography>
+                        </div>
                       </div>
-
-                      <div className={`w-full h-2 rounded-full ${getProgressBgColor(vendor.progressColor)}`}>
-                        <div
-                          className={`h-full rounded-full transition-all duration-300 ${getProgressBarColor(vendor.progressColor)}`}
-                          style={{ width: `${vendor.progressPercent}%` }}
-                        />
-                      </div>
-
-                      <div className="text-right">
-                        <Typography variant="caption" className="text-gray-600">
+                      <div className="flex items-center space-x-3">
+                        <div className={`flex-1 h-3 max-w-[300px] rounded-full ${getProgressBgColor(vendor.progressColor)}`}>
+                          <div
+                            className={`h-full rounded-full transition-all duration-300 ${getProgressBarColor(vendor.progressColor)}`}
+                            style={{ width: `${vendor.progressPercent}%` }}
+                          />
+                        </div>
+                        <Typography variant="caption" className="text-[#686F83] text-sm min-w-[30px]" sx={{ fontWeight: 'bold' }}>
                           {vendor.progressPercent}%
                         </Typography>
                       </div>
                     </div>
                   </TableCell>
 
-                  <TableCell className="py-4">
-                    <Typography variant="body2" className="text-gray-700">
+                  <TableCell className="py-4" style={{ width: '25%' }}>
+                    <Typography variant="body2" className="text-[#686F83] whitespace-nowrap">
                       {vendor.lastSync}
                     </Typography>
                   </TableCell>
 
-                  <TableCell className="py-4">
+                  <TableCell className="py-4" style={{ width: '15%' }}>
                     <Chip
                       label={vendor.status}
-                      color={vendor.statusColor}
-                      variant={vendor.statusVariant}
                       size="small"
-                      className="font-medium"
+                      className="font-bold"
+                      style={getStatusChipStyles(vendor.status)}
                     />
                   </TableCell>
 
-                  <TableCell className="py-4">
+                  <TableCell className="py-4" style={{ width: '5%' }}>
                     <IconButton
                       onClick={(e) => handleMenuClick(e, vendor.id)}
                       className="transition-colors duration-200"
@@ -272,15 +298,14 @@ export default function VendorSetup() {
                   name={vendor.name}
                   logoSrc={vendor.logoSrc}
                   className="w-16 h-6"
-                  width={64}
-                  height={24}
+                  width={70}
+                  height={30}
                 />
                 <div className="flex items-center space-x-2">
                   <Chip
                     label={vendor.status}
-                    color={vendor.statusColor}
-                    variant={vendor.statusVariant}
                     size="small"
+                    style={getStatusChipStyles(vendor.status)}
                   />
                   <IconButton
                     onClick={(e) => handleMenuClick(e, vendor.id)}
@@ -294,10 +319,10 @@ export default function VendorSetup() {
               <div className="space-y-3">
                 <div>
                   <div className="flex justify-between items-center mb-1">
-                    <Typography variant="caption" className="text-gray-600">
-                      Total Products
+                    <Typography variant="caption" className="text-[#686F83]">
+                      Total Product Sent
                     </Typography>
-                    <Typography variant="caption" className="font-medium">
+                    <Typography variant="caption" className="font-bold">
                       {vendor.progressValue}
                     </Typography>
                   </div>
@@ -309,16 +334,16 @@ export default function VendorSetup() {
                     />
                   </div>
 
-                  <Typography variant="caption" className="text-gray-600">
+                  <Typography variant="caption" className="font-bold text-[#686F83]">
                     {vendor.progressPercent}%
                   </Typography>
                 </div>
 
                 <div>
-                  <Typography variant="caption" className="text-gray-600 block">
+                  <Typography variant="caption" className="text-[#686F83] block">
                     Last Export
                   </Typography>
-                  <Typography variant="body2" className="text-gray-800">
+                  <Typography variant="body2" className="text-[#686F83]">
                     {vendor.lastSync}
                   </Typography>
                 </div>
@@ -335,29 +360,22 @@ export default function VendorSetup() {
         onClose={handleMenuClose}
         className="mt-2"
         PaperProps={{
-          className: "shadow-lg rounded-lg min-w-[120px]"
+          className: "rounded-lg min-w-[120px] "
         }}
       >
         <MenuItem
           onClick={handleMenuClose}
           className="px-4 py-2 transition-colors duration-200"
         >
-          <Edit className="w-4 h-4 mr-2 text-gray-600" />
-          <Typography variant="body2">Edit</Typography>
+          <Edit className="w-4 h-4 mr-2 text-[#686F83]" onClick={handleedit} />
+          <Typography variant="body2" className="text-[#686F83]">Edit</Typography>
         </MenuItem>
         <MenuItem
           onClick={handleMenuClose}
-          className="px-4 py-2  transition-colors duration-200"
+          className="px-4 py-2 transition-colors duration-200"
         >
-          {/* <Update className="w-4 h-4 mr-2 text-gray-600" />
-          <Typography variant="body2">Update</Typography>
-        </MenuItem>
-        <MenuItem
-          onClick={handleMenuClose}
-          className="px-4 py-2 hover:bg-red-50 transition-colors duration-200"
-        > */}
-          <Delete className="w-4 h-4 mr-2 text-red-600" />
-          <Typography variant="body2" className="text-red-600">Delete</Typography>
+          <Delete className="w-4 h-4 mr-2 text-[#686F83] " />
+          <Typography variant="body2" className="text-[#686F83]">Delete</Typography>
         </MenuItem>
       </Menu>
     </div >

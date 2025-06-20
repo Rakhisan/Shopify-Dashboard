@@ -28,9 +28,9 @@ export default function LogsTable() {
 
     return (
         <div className="p-2 w-full  min-h-screen">
-            <div className="max-w-7xl w-full mx-auto">
+            <div className="w-full mx-auto">
                 <div className="bg-white rounded-tl-lg p-3 mb-1">
-                    <h2 className="text-3xl text-gray-800">
+                    <h2 className="text-3xl font-semibold text-[#24282E]">
                         Logs
                     </h2>
                 </div>
@@ -38,14 +38,14 @@ export default function LogsTable() {
                 <div className="bg-white  overflow-hidden">
                     <table className="w-full">
                         <thead>
-                            <tr className=" border-b border-gray-200">
-                                <th className="text-left py-4 px-6 font-semibold text-gray-700">
+                            <tr className=" border-b border-[#E9EAEA]">
+                                <th className="text-left py-4 px-6 font-bold text-[#727A90]">
                                     Channel Name
                                 </th>
-                                <th className="text-left py-4 px-6 font-semibold text-gray-700">
+                                <th className="text-left py-4 px-6 font-bold text-[#727A90]">
                                     No of Product
                                 </th>
-                                <th className="text-left py-4 px-6 font-semibold text-gray-700">
+                                <th className="text-left py-4 px-6 font-bold text-[#727A90]">
                                     Last Import
                                 </th>
                             </tr>
@@ -54,15 +54,15 @@ export default function LogsTable() {
                             {logsData.map((row, index) => (
                                 <tr
                                     key={index}
-                                    className="border-b border-gray-200 transition-colors duration-200"
+                                    className="border-b border-[#E9EAEA] transition-colors duration-200"
                                 >
-                                    <td className="py-4 px-6 text-gray-800">
+                                    <td className="py-4 px-6 text-[#686F83]">
                                         {row.channelName}
                                     </td>
-                                    <td className="py-4 px-6 text-gray-600">
+                                    <td className="py-4 px-6 text-[#686F83]">
                                         {row.noOfProducts.toLocaleString()}
                                     </td>
-                                    <td className="py-4 px-6 text-gray-600">
+                                    <td className="py-4 px-6 text-[#686F83]">
                                         {row.lastImport}
                                     </td>
                                 </tr>

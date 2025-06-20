@@ -3,6 +3,10 @@ import { usePathname } from "next/navigation";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import "./globals.css";
+//import { Public_Sans } from 'next/font/google';
+
+
+
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
@@ -10,6 +14,9 @@ export default function RootLayout({ children }) {
   // Define auth routes where navbar/sidebar should not appear
   const authRoutes = ["/auth/sign-up", "/auth/company-details", "/auth/login", "/auth/forget"];
   const isAuthPage = authRoutes.includes(pathname);
+
+
+
 
   if (isAuthPage) {
     return (

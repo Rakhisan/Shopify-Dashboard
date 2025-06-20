@@ -20,7 +20,7 @@ import {
   Card,
   CardContent
 } from '@mui/material';
-import { MoreVert, Edit, Update, Delete } from '@mui/icons-material';
+import { MoreVert, Edit, Delete } from '@mui/icons-material';
 
 // Import logo images
 import amazonLogo from "../../images/logo_amazon.png";
@@ -29,7 +29,7 @@ import walmartLogo from "../../images/logo_walmart.png";
 import shopifyLogo from "../../images/logo.png";
 import { useRouter } from 'next/navigation';
 
-// Logo component using Next.js Image component with imported images
+
 const LogoComponent = ({ name, logoSrc, className, width = 98, height = 32 }) => (
   <div className={`${className} flex items-center justify-center rounded overflow-hidden  relative`}>
     <Image
@@ -59,8 +59,12 @@ export default function VendorSetup() {
     setSelectedVendor(null);
   };
 
-  const handleViewLogs = () => {
+  const handleadd = () => {
     router.push("/export/export-to-channel/add");
+  };
+
+  const handleedit = () => {
+    router.push("/export/export-to-channel/edit");
   };
 
   const vendors = [
@@ -178,7 +182,7 @@ export default function VendorSetup() {
             </h2>
             <button
               className="bg-[#2FB4FF] text-white text-sm font-medium px-5 py-2 rounded-lg"
-              onClick={handleViewLogs}
+              onClick={handleadd}
             >
               Add Channel
             </button>
@@ -196,32 +200,32 @@ export default function VendorSetup() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell className="font-medium text-[#727A90] py-4" style={{ width: '15%' }}>
+                <TableCell className="font-bold text-[#727A90] py-4" style={{ width: '15%' }}>
                   <Typography variant="body2" className="semibold">
                     Icon
                   </Typography>
                 </TableCell>
-                <TableCell className="font-medium text-[#727A90]  py-4" style={{ width: '20%' }}>
+                <TableCell className="font-bold  text-[#727A90]  py-4" style={{ width: '20%' }}>
                   <Typography variant="body2" className="font-medium">
                     Filter Applied
                   </Typography>
                 </TableCell>
-                <TableCell className="font-medium text-[#727A90]  py-4" style={{ width: '25%' }}>
+                <TableCell className="font-bold text-[#727A90]  py-4" style={{ width: '25%' }}>
                   <Typography variant="body2" className="font-medium">
                     Progress
                   </Typography>
                 </TableCell>
-                <TableCell className="font-medium text-[#727A90] py-4" style={{ width: '20%' }}>
+                <TableCell className="font-bold  text-[#727A90] py-4" style={{ width: '20%' }}>
                   <Typography variant="body2" className="font-medium">
                     Last Export
                   </Typography>
                 </TableCell>
-                <TableCell className="font-medium text-[#727A90]  py-4" style={{ width: '15%' }}>
+                <TableCell className="font-bold  text-[#727A90]  py-4" style={{ width: '15%' }}>
                   <Typography variant="body2" className="font-medium">
                     Status
                   </Typography>
                 </TableCell>
-                <TableCell className="font-medium text[#727A90] py-4" style={{ width: '5%' }}>
+                <TableCell className="font-bold text[#727A90] py-4" style={{ width: '5%' }}>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -254,7 +258,7 @@ export default function VendorSetup() {
                           Total Product Sent
                         </Typography>
                         <div className="text-right">
-                          <Typography variant="caption" className="font-semibold text-sm text-[#686F83]">
+                          <Typography variant="caption" className="text-sm text-[#686F83]" sx={{ fontWeight: 'bold' }}>
                             {vendor.progressValue}
                           </Typography>
                         </div>
@@ -262,11 +266,11 @@ export default function VendorSetup() {
                       <div className="flex items-center space-x-3">
                         <div className={`flex-1 h-3 rounded-full ${getProgressBgColor(vendor.progressColor)}`}>
                           <div
-                            className={`h-full rounded-full transition-all duration-300 ${getProgressBarColor(vendor.progressColor)}`}
+                            className={`h-full rounded-full transition-all  duration-300 ${getProgressBarColor(vendor.progressColor)}`}
                             style={{ width: `${vendor.progressPercent}%` }}
                           />
                         </div>
-                        <Typography variant="caption" className="text-[#686F83] text-sm font-medium min-w-[30px]">
+                        <Typography variant="caption" className="text-[#686F83] text-sm min-w-[30px]" sx={{ fontWeight: 'bold' }}>
                           {vendor.progressPercent}%
                         </Typography>
                       </div>
@@ -279,11 +283,11 @@ export default function VendorSetup() {
                     </Typography>
                   </TableCell>
 
-                  <TableCell className="py-4" style={{ width: '15%' }}>
+                  <TableCell className="py-4 " style={{ width: '15%' }}>
                     <Chip
                       label={vendor.status}
                       size="small"
-                      className="font-medium"
+                      className="font-bold"
                       style={getStatusChipStyles(vendor.status)}
                     />
                   </TableCell>
@@ -347,7 +351,7 @@ export default function VendorSetup() {
                     <Typography variant="caption" className="text-[#686F83]">
                       Total Product Sent
                     </Typography>
-                    <Typography variant="caption" className="font-medium">
+                    <Typography variant="caption" className="font-bold">
                       {vendor.progressValue}
                     </Typography>
                   </div>
@@ -359,7 +363,7 @@ export default function VendorSetup() {
                     />
                   </div>
 
-                  <Typography variant="caption" className="text-[#686F83]">
+                  <Typography variant="caption" className=" font-bold text-[#686F83]">
                     {vendor.progressPercent}%
                   </Typography>
                 </div>
@@ -392,7 +396,7 @@ export default function VendorSetup() {
           onClick={handleMenuClose}
           className="px-4 py-2 transition-colors duration-200"
         >
-          <Edit className="w-4 h-4 mr-2 text--[#686F83]" />
+          <Edit className="w-4 h-4 mr-2 text-[#686F83]" onClick={handleedit} />
           <Typography variant="body2">Edit</Typography>
         </MenuItem>
         <MenuItem
