@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronUp, ChevronDown } from 'lucide-react';
+import { ChevronUp, ChevronDown, Check } from 'lucide-react';
 
 export default function AddProfileRuleForm() {
   const [formData, setFormData] = useState({
@@ -53,182 +53,210 @@ export default function AddProfileRuleForm() {
     </svg>
   );
 
+  // Custom Checkbox Component
+  const CustomCheckbox = ({ name, checked, onChange, label }) => (
+    <div className="flex items-center">
+      <div className="relative inline-block">
+        <input
+          type="checkbox"
+          name={name}
+          checked={checked}
+          onChange={onChange}
+          className="sr-only"
+        />
+        <div
+          className={`h-4 w-4 border-2 rounded cursor-pointer transition-all duration-200 flex items-center justify-center ${checked
+            ? 'bg-[#30B4FF] border-[#30B4FF]'
+            : 'bg-transparent border-[#CFD3D4] hover:border-[#30B4FF]'
+            }`}
+          onClick={() => onChange({ target: { name, checked: !checked, type: 'checkbox' } })}
+        >
+          {checked && (
+            <Check className="w-2.5 h-2.5 text-white" strokeWidth={4} />
+          )}
+        </div>
+      </div>
+      <label className="ml-2 text-sm text-[#727272] cursor-pointer" onClick={() => onChange({ target: { name, checked: !checked, type: 'checkbox' } })}>
+        {label}
+      </label>
+    </div>
+  );
+
   return (
-    <div className="flex items-center justify-center p-4">
-
-
-      <div className="bg-white rounded-lg w-full overflow-y-auto">
+    <div className="flex items-center justify-center p-2 sm:p-4 min-h-screen">
+      <div className="bg-white rounded-lg w-full max-w-7xl">
         {/* Header */}
-        <div className="bg-white px-6 py-4 rounded-tl-lg">
-          <h2 className="font-semibold text-[#24282E]">Add Profile Rule</h2>
+        <div className="bg-white px-4 sm:px-6 py-4 rounded-tl-lg">
+          <h2 className="font-semibold text-[#24282E] text-lg sm:text-xl">Add Profile Rule</h2>
         </div>
 
-        <div className="p-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
+        <div className="p-3 sm:p-4">
+          {/* First Row - Basic Information & Rule Structure */}
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-2 mb-3">
             {/* Basic Information */}
-            <div className="bg-[#F6F8FB] rounded-lg p-6">
+            <div className="bg-[#F6F8FB] rounded-lg p-4 w-full max-w-[395px] h-[423px]">
               <h3 className="font-bold text-[#5E6366] mb-4">Basic Information</h3>
 
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-[#5E6366] mb-1">Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="Name"
-                    className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-[#5E6366] mb-1">Description</label>
-                  <textarea
-                    name="description"
-                    value={formData.description}
-                    onChange={handleInputChange}
-                    placeholder="Description"
-                    className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none bg-transparent focus:ring-2 focus:ring-[#2FB4FF] h-20 resize-none"
-                  />
-                </div>
-
-                <div className="flex items-center">
-                  <div className="relative">
+              <div className="h-[350px] overflow-y-auto pr-2">
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-[#5E6366] mb-1">Name</label>
                     <input
-                      type="checkbox"
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Name"
+                      className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-[#5E6366] mb-1">Description</label>
+                    <textarea
+                      name="description"
+                      value={formData.description}
+                      onChange={handleInputChange}
+                      placeholder="Description"
+                      className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none bg-transparent focus:ring-2 focus:ring-[#2FB4FF] h-20 resize-none"
+                    />
+                  </div>
+
+                  <div className="py-2">
+                    <CustomCheckbox
                       name="setAsDefault"
                       checked={formData.setAsDefault}
                       onChange={handleInputChange}
-                      className="custom-checkbox h-4 w-4 border-[#CFD3D4] rounded appearance-none border-2 relative"
+                      label="Set as Default Rule"
                     />
                   </div>
-                  <label className="ml-2 text-sm text-[#727272]">Set as Default Rule</label>
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-[#727272] mb-1">Precedence</label>
-                  <div className="relative">
-                    <select
-                      name="precedence"
-                      value={formData.precedence}
-                      onChange={handleInputChange}
-                      className="custom-select w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
-                    >
-                      <option value="" className="hover-option">Precedence</option>
-                      <option value="1" className="hover-option">1</option>
-                      <option value="2" className="hover-option">2</option>
-                      <option value="3" className="hover-option">3</option>
-                    </select>
-                    <DropdownArrow />
+                  <div>
+                    <label className="block text-sm font-medium text-[#727272] mb-1">Precedence</label>
+                    <div className="relative">
+                      <select
+                        name="precedence"
+                        value={formData.precedence}
+                        onChange={handleInputChange}
+                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
+                        style={{ backgroundImage: 'none' }}
+                      >
+                        <option value="" className="bg-white text-gray-700">Precedence</option>
+                        <option value="1" className="bg-white text-gray-700">1</option>
+                        <option value="2" className="bg-white text-gray-700">2</option>
+                        <option value="3" className="bg-white text-gray-700">3</option>
+                      </select>
+                      <DropdownArrow />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Rule Structure & Scope */}
-            <div className="bg-[#F6F8FB] p-6 rounded-lg">
+            <div className="bg-[#F6F8FB] p-4 rounded-lg w-full max-w-[667px] h-[423px] ">
               <h3 className="font-bold text-[#5E6366] mb-4">Rule Structure & Scope</h3>
 
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-[#727272] mb-1">Sequence</label>
-                    <input
-                      type="text"
-                      name="sequence"
-                      value={formData.sequence}
-                      onChange={handleInputChange}
-                      placeholder="Sequence"
-                      className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-[#727272] mb-1">Subsequence</label>
-                    <div className="relative">
-                      <select
-                        name="subsequence"
-                        value={formData.subsequence}
+              <div className="h-[350px] overflow-y-auto pr-2">
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-[#727272] mb-1">Sequence</label>
+                      <input
+                        type="text"
+                        name="sequence"
+                        value={formData.sequence}
                         onChange={handleInputChange}
-                        className="custom-select w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
-                      >
-                        <option value="" className="hover-option">Subsequence</option>
-                        <option value="A" className="hover-option">A</option>
-                        <option value="B" className="hover-option">B</option>
-                        <option value="C" className="hover-option">C</option>
-                      </select>
-                      <DropdownArrow />
+                        placeholder="Sequence"
+                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-[#727272] mb-1">Subsequence</label>
+                      <div className="relative">
+                        <select
+                          name="subsequence"
+                          value={formData.subsequence}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
+                        >
+                          <option value="" className="bg-white text-gray-700">Subsequence</option>
+                          <option value="A" className="bg-white text-gray-700">A</option>
+                          <option value="B" className="bg-white text-gray-700">B</option>
+                          <option value="C" className="bg-white text-gray-700">C</option>
+                        </select>
+                        <DropdownArrow />
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-[#727272] mb-1">Sub Category Id</label>
-                    <div className="relative">
-                      <select
-                        name="subCategoryId"
-                        value={formData.subCategoryId}
-                        onChange={handleInputChange}
-                        className="custom-select w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
-                      >
-                        <option value="" className="hover-option">Sub category id</option>
-                        <option value="1" className="hover-option">Category 1</option>
-                        <option value="2" className="hover-option">Category 2</option>
-                      </select>
-                      <DropdownArrow />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-[#727272] mb-1">Sub Category Id</label>
+                      <div className="relative">
+                        <select
+                          name="subCategoryId"
+                          value={formData.subCategoryId}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
+                        >
+                          <option value="" className="bg-white text-gray-700">Sub category id</option>
+                          <option value="1" className="bg-white text-gray-700">Category 1</option>
+                          <option value="2" className="bg-white text-gray-700">Category 2</option>
+                        </select>
+                        <DropdownArrow />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-[#727272] mb-1">Product Id</label>
+                      <div className="relative">
+                        <select
+                          name="productId"
+                          value={formData.productId}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
+                        >
+                          <option value="" className="bg-white text-gray-700">Product id</option>
+                          <option value="1" className="bg-white text-gray-700">Product 1</option>
+                          <option value="2" className="bg-white text-gray-700">Product 2</option>
+                        </select>
+                        <DropdownArrow />
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-[#727272] mb-1">Product Id</label>
-                    <div className="relative">
-                      <select
-                        name="productId"
-                        value={formData.productId}
-                        onChange={handleInputChange}
-                        className="custom-select w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
-                      >
-                        <option value="" className="hover-option">Product id</option>
-                        <option value="1" className="hover-option">Product 1</option>
-                        <option value="2" className="hover-option">Product 2</option>
-                      </select>
-                      <DropdownArrow />
-                    </div>
-                  </div>
-                </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-[#727272] mb-1">Category Id</label>
-                    <div className="relative">
-                      <select
-                        name="categoryId"
-                        value={formData.categoryId}
-                        onChange={handleInputChange}
-                        className="custom-select w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
-                      >
-                        <option value="" className="hover-option">Category id</option>
-                        <option value="1" className="hover-option">Category 1</option>
-                        <option value="2" className="hover-option">Category 2</option>
-                      </select>
-                      <DropdownArrow />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-[#727272] mb-1">Category Id</label>
+                      <div className="relative">
+                        <select
+                          name="categoryId"
+                          value={formData.categoryId}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
+                        >
+                          <option value="" className="bg-white text-gray-700">Category id</option>
+                          <option value="1" className="bg-white text-gray-700">Category 1</option>
+                          <option value="2" className="bg-white text-gray-700">Category 2</option>
+                        </select>
+                        <DropdownArrow />
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-[#727272] mb-1">Manufacturer Id</label>
-                    <div className="relative">
-                      <select
-                        name="manufacturerId"
-                        value={formData.manufacturerId}
-                        onChange={handleInputChange}
-                        className="custom-select w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
-                      >
-                        <option value="" className="hover-option">Manufacturer id</option>
-                        <option value="1" className="hover-option">Manufacturer 1</option>
-                        <option value="2" className="hover-option">Manufacturer 2</option>
-                      </select>
-                      <DropdownArrow />
+                    <div>
+                      <label className="block text-sm font-medium text-[#727272] mb-1">Manufacturer Id</label>
+                      <div className="relative">
+                        <select
+                          name="manufacturerId"
+                          value={formData.manufacturerId}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
+                        >
+                          <option value="" className="bg-white text-gray-700">Manufacturer id</option>
+                          <option value="1" className="bg-white text-gray-700">Manufacturer 1</option>
+                          <option value="2" className="bg-white text-gray-700">Manufacturer 2</option>
+                        </select>
+                        <DropdownArrow />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -236,225 +264,199 @@ export default function AddProfileRuleForm() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-
+          {/* Second Row - Method & Source and Adjustment Values */}
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-3 mb-3">
             {/* Method & Source */}
-            <div className="bg-[#F6F8FB] p-6 rounded-lg">
+            <div className="bg-[#F6F8FB] p-4 rounded-lg w-full max-w-[522px] h-[451px] mx-auto xl:mx-0">
               <h3 className="font-bold text-[#5E6366] mb-4">Method & Source</h3>
 
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-[#727272] mb-1">Method</label>
-                    <div className="relative">
-                      <select
-                        name="method"
-                        value={formData.method}
-                        onChange={handleInputChange}
-                        className="custom-select w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-16"
-                      >
-                        <option value="" className="hover-option">select method</option>
-
-                      </select>
-                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex flex-col">
-                        <ChevronUp className="w-3 h-3 text-[#3D3C3C] cursor-pointer hover:text-[#2FB4FF]" />
-                        <ChevronDown className="w-3 h-3 text-[#3D3C3C] cursor-pointer hover:text-[#2FB4FF]" />
+              <div className="h-[378px] overflow-y-auto pr-2">
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-[#727272] mb-1">Method</label>
+                      <div className="relative">
+                        <select
+                          name="method"
+                          value={formData.method}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-16"
+                        >
+                          <option value="" className="bg-white text-gray-700">select method</option>
+                          <option value="method1" className="bg-white text-gray-700">Method 1</option>
+                          <option value="method2" className="bg-white text-gray-700">Method 2</option>
+                        </select>
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex flex-col">
+                          <ChevronUp className="w-3 h-3 text-[#3D3C3C] cursor-pointer hover:text-[#2FB4FF]" />
+                          <ChevronDown className="w-3 h-3 text-[#3D3C3C] cursor-pointer hover:text-[#2FB4FF]" />
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-[#727272] mb-1">Cost Source Id</label>
+                      <div className="relative">
+                        <select
+                          name="costSourceId"
+                          value={formData.costSourceId}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
+                        >
+                          <option value="" className="bg-white text-gray-700">cost source id</option>
+                          <option value="source1" className="bg-white text-gray-700">Source 1</option>
+                          <option value="source2" className="bg-white text-gray-700">Source 2</option>
+                        </select>
+                        <DropdownArrow />
                       </div>
                     </div>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-[#727272] mb-1">Cost Source Id</label>
-                    <div className="relative">
-                      <select
-                        name="costSourceId"
-                        value={formData.costSourceId}
-                        onChange={handleInputChange}
-                        className="custom-select w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
-                      >
-                        <option value="" className="hover-option">cost source id</option>
 
-                      </select>
-                      <DropdownArrow />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center">
-                  <div className="relative">
-                    <input
-                      type="checkbox"
+                  <div className="py-2">
+                    <CustomCheckbox
                       name="useMinSource"
                       checked={formData.useMinSource}
                       onChange={handleInputChange}
-                      className="custom-checkbox h-4 w-4 border-[#CFD3D4] rounded appearance-none border-2 relative"
+                      label="Use Min Source"
                     />
                   </div>
-                  <label className="ml-2 text-sm text-[#727272]">Use Min Source</label>
-                </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-[#727272] mb-1">Cost To</label>
+                      <input
+                        type="text"
+                        name="costTo"
+                        value={formData.costTo}
+                        onChange={handleInputChange}
+                        placeholder="Cost To"
+                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-[#727272] mb-1">Special Cost</label>
+                      <div className="relative">
+                        <select
+                          name="specialCost"
+                          value={formData.specialCost}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
+                        >
+                          <option value="" className="bg-white text-gray-700">Special Deal</option>
+                          <option value="deal1" className="bg-white text-gray-700">Deal 1</option>
+                          <option value="deal2" className="bg-white text-gray-700">Deal 2</option>
+                        </select>
+                        <DropdownArrow />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-4 py-2">
+                    <CustomCheckbox
+                      name="ceilingIsMerp"
+                      checked={formData.ceilingIsMerp}
+                      onChange={handleInputChange}
+                      label="Ceiling Is Merp"
+                    />
+                    <CustomCheckbox
+                      name="inStock"
+                      checked={formData.inStock}
+                      onChange={handleInputChange}
+                      label="In Stock"
+                    />
+                  </div>
+
                   <div>
-                    <label className="block text-sm font-medium text-[#727272] mb-1">Cost To</label>
+                    <label className="block text-sm font-medium text-[#727272] mb-1">Cost From</label>
                     <input
                       type="text"
-                      name="costTo"
-                      value={formData.costTo}
+                      name="costFrom"
+                      value={formData.costFrom}
                       onChange={handleInputChange}
-                      placeholder="Cost To"
+                      placeholder="Cost From"
                       className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
                     />
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-[#727272] mb-1">Special Cost</label>
-                    <div className="relative">
-                      <select
-                        name="specialCost"
-                        value={formData.specialCost}
-                        onChange={handleInputChange}
-                        className="custom-select w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
-                      >
-                        <option value="" className="hover-option">Special Deal</option>
-                        <option value="deal1" className="hover-option">Deal 1</option>
-                        <option value="deal2" className="hover-option">Deal 2</option>
-                      </select>
-                      <DropdownArrow />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center">
-                    <div className="relative">
-                      <input
-                        type="checkbox"
-                        name="ceilingIsMerp"
-                        checked={formData.ceilingIsMerp}
-                        onChange={handleInputChange}
-                        className="custom-checkbox h-4 w-4 border-[#CFD3D4] rounded appearance-none border-2 relative"
-                      />
-                    </div>
-                    <label className="ml-2 text-sm text-[#727272]">Ceiling Is Merp</label>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="relative">
-                      <input
-                        type="checkbox"
-                        name="inStock"
-                        checked={formData.inStock}
-                        onChange={handleInputChange}
-                        className="custom-checkbox h-4 w-4 border-[#CFD3D4] rounded appearance-none border-2 relative"
-                      />
-                    </div>
-                    <label className="ml-2 text-sm text-[#727272]">In Stock</label>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-[#727272] mb-1">Cost From</label>
-                  <input
-                    type="text"
-                    name="costFrom"
-                    value={formData.costFrom}
-                    onChange={handleInputChange}
-                    placeholder="Cost From"
-                    className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
-                  />
                 </div>
               </div>
             </div>
 
             {/* Adjustment Values */}
-            <div className="bg-[#F6F8FB] p-6 rounded-lg">
+            <div className="bg-[#F6F8FB] p-4 rounded-lg w-full max-w-[535px] h-[451px] mx-auto xl:mx-0">
               <h3 className="font-bold text-[#5E6366] mb-4">Adjustment Values</h3>
 
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-[#727272] mb-1">Percent Value</label>
-                    <input
-                      type="text"
-                      name="percentValue"
-                      value={formData.percentValue}
-                      onChange={handleInputChange}
-                      placeholder="percent value"
-                      className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-[#727272] mb-1">Cost Adj Value</label>
-                    <input
-                      type="text"
-                      name="costAdjValue"
-                      value={formData.costAdjValue}
-                      onChange={handleInputChange}
-                      placeholder="0.5%"
-                      className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-[#727272] mb-1">Rounded To</label>
-                    <input
-                      type="text"
-                      name="roundedTo"
-                      value={formData.roundedTo}
-                      onChange={handleInputChange}
-                      placeholder="0.5%"
-                      className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
-                    />
-                  </div>
-                  <div className="flex flex-col space-y-4">
-                    <div className="flex items-center">
-                      <div className="relative">
-                        <input
-                          type="checkbox"
-                          name="deceedToMsp"
-                          checked={formData.deceedToMsp}
-                          onChange={handleInputChange}
-                          className="custom-checkbox h-4 w-4 border-[#CFD3D4] rounded appearance-none border-2 relative"
-                        />
-                      </div>
-                      <label className="ml-2 text-sm text-[#727272]">Deceed To Msp</label>
+              <div className="h-[378px] overflow-y-auto pr-2">
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-[#727272] mb-1">Percent Value</label>
+                      <input
+                        type="text"
+                        name="percentValue"
+                        value={formData.percentValue}
+                        onChange={handleInputChange}
+                        placeholder="percent value"
+                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                      />
                     </div>
-
-                    <div className="flex items-center">
-                      <div className="relative">
-                        <input
-                          type="checkbox"
-                          name="minMarginCheck"
-                          checked={formData.minMarginCheck}
-                          onChange={handleInputChange}
-                          className="custom-checkbox h-4 w-4 border-[#CFD3D4] rounded appearance-none border-2 relative"
-                        />
-                      </div>
-                      <label className="ml-2 text-sm text-[#727272]">Min Margin Check</label>
+                    <div>
+                      <label className="block text-sm font-medium text-[#727272] mb-1">Cost Adj Value</label>
+                      <input
+                        type="text"
+                        name="costAdjValue"
+                        value={formData.costAdjValue}
+                        onChange={handleInputChange}
+                        placeholder="0.5%"
+                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                      />
                     </div>
                   </div>
 
-                </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-[#727272] mb-1">Rounded To</label>
+                      <input
+                        type="text"
+                        name="roundedTo"
+                        value={formData.roundedTo}
+                        onChange={handleInputChange}
+                        placeholder="0.5%"
+                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-3 pt-2">
+                      <CustomCheckbox
+                        name="deceedToMsp"
+                        checked={formData.deceedToMsp}
+                        onChange={handleInputChange}
+                        label="Deceed To Msp"
+                      />
+                      <CustomCheckbox
+                        name="minMarginCheck"
+                        checked={formData.minMarginCheck}
+                        onChange={handleInputChange}
+                        label="Min Margin Check"
+                      />
+                    </div>
+                  </div>
 
-
-
-                <div>
-                  <label className="block text-sm font-medium text-[#727272] mb-1">Cost Adj Percent</label>
-                  <input
-                    type="text"
-                    name="costAdjPercent"
-                    value={formData.costAdjPercent}
-                    onChange={handleInputChange}
-                    placeholder="cost adj percent"
-                    className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
-                  />
+                  <div>
+                    <label className="block text-sm font-medium text-[#727272] mb-1">Cost Adj Percent</label>
+                    <input
+                      type="text"
+                      name="costAdjPercent"
+                      value={formData.costAdjPercent}
+                      onChange={handleInputChange}
+                      placeholder="cost adj percent"
+                      className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Margin Rules */}
-          <div className="mt-6">
-            <div className="bg-[#F6F8FB] p-6 rounded-lg">
+          {/* Margin Rules - Full Width */}
+          <div className="mb-4">
+            <div className="bg-[#F6F8FB] p-4 rounded-lg">
               <h3 className="font-bold text-[#5E6366] mb-4">Margin Rules</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -493,27 +495,27 @@ export default function AddProfileRuleForm() {
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 sm:gap-4 lg:gap-5 mt-3 sm:mt-6 lg:mt-7 w-full px-2 sm:px-0">
-              <button
-                type="button"
-                onClick={handleCancel}
-                className="w-full sm:w-auto sm:min-w-28 md:min-w-32 lg:min-w-36 xl:min-w-40 h-8 sm:h-9 md:h-10 text-xs sm:text-sm md:text-base lg:text-lg font-medium bg-white text-[#30B4FF] border border-[#30B4FF] rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-[#30B4FF] hover:text-white"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={handleCancel}
-                className="w-full sm:w-auto sm:min-w-28 md:min-w-32 lg:min-w-36 xl:min-w-40 h-8 sm:h-9 md:h-10 text-xs sm:text-sm md:text-base lg:text-lg font-medium bg-[#30B4FF] text-white border-none rounded-lg cursor-pointer transition-all duration-200 ease-in-out"
-              >
-                Add
-              </button>
-            </div>
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-4">
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="w-full sm:w-auto min-w-40 h-10 text-base font-medium bg-white text-[#30B4FF] border border-[#30B4FF] rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-[#30B4FF] hover:text-white"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="w-full sm:w-auto min-w-40 h-10 text-base font-medium bg-[#30B4FF] text-white border-none rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-[#30B4FF]/90"
+            >
+              Add
+            </button>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

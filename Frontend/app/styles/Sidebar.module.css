@@ -6,7 +6,6 @@
   overflow-y: auto;
   overflow-x: hidden;
   position: sticky;
-  font-family: "Helvetica";
   top: 0;
   transition: all 0.3s ease-in-out;
   display: flex;
@@ -18,7 +17,7 @@
   color: #212b36;
 }
 
-/* .dark {
+.dark {
   background-color: #1a1a1a;
   color: #ffffff;
   border-right-color: #333;
@@ -27,12 +26,13 @@
 .darkModeActive {
   background-color: #121212 !important;
   color: #ffffff !important;
-} */
+}
 
 .logoText {
   font-size: 22px;
   font-weight: 600;
   color: #212b36;
+  padding: 16px;
 }
 
 .dark .logoText {
@@ -58,19 +58,43 @@
   transition: background-color 0.2s;
   position: relative;
   border-radius: 8px;
-
+  margin: 0 8px;
 }
 
+/* Fixed hover effects - sab ek saath change honge */
 .navItem:hover {
   background-color: #2fb4ff;
   color: white;
 }
 
-/* 
+.navItem:hover span {
+  color: white !important;
+}
+
+.navItem:hover .icon svg {
+  fill: white !important;
+}
+
+.navItem:hover .chevron svg {
+  fill: white !important;
+}
+
 .dark .navItem:hover {
   background-color: #2fb4ff;
   color: white;
-} */
+}
+
+.dark .navItem:hover span {
+  color: white !important;
+}
+
+.dark .navItem:hover .icon svg {
+  fill: white !important;
+}
+
+.dark .navItem:hover .chevron svg {
+  fill: white !important;
+}
 
 .icon {
   width: 20px;
@@ -79,15 +103,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .icon svg {
   width: 20px;
   height: 20px;
   fill: #1f2327;
+  transition: fill 0.2s ease;
 }
-
-
 
 .dark .icon svg {
   fill: #ffffff;
@@ -95,13 +119,13 @@
 
 .navItem span {
   flex: 1;
-  color: #637381;
+  color: #727272;
   font-size: 14px;
-  font-weight: 500;
-}
-
-.navItem span:hover {
-  color: white;
+  font-weight: 400;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dark .navItem span {
@@ -115,12 +139,14 @@
   align-items: center;
   justify-content: center;
   transition: transform 0.2s;
+  flex-shrink: 0;
 }
 
 .chevron svg {
   width: 16px;
   height: 16px;
-
+  fill: #727272;
+  transition: fill 0.2s ease;
 }
 
 .dark .chevron svg {
@@ -144,9 +170,9 @@
 
 .subItemWithLine {
   position: relative;
-  margin-left: 28px;
+  margin-left: 40px;
+  margin-right: 8px;
   border-radius: 8px;
-
 }
 
 .subItemWithLine::before {
@@ -155,7 +181,6 @@
   left: -16px;
   top: 0;
   bottom: 0;
-  /* width: 2px; */
   background-color: #e0e0e0;
   border-left: 2px solid #727a90;
   z-index: 1;
@@ -164,6 +189,10 @@
 .subItemWithLine:hover {
   background-color: #2fb4ff;
   color: white;
+}
+
+.subItemWithLine:hover .subItem {
+  color: white !important;
 }
 
 .dark .subItemWithLine::before {
@@ -176,8 +205,8 @@
   position: absolute;
   left: -16px;
   top: 50%;
-  width: 16px;
-  height: 16px;
+  width: 10px;
+  height: 10px;
   border-left: 2px solid #727a90;
   border-bottom: 2px solid #727a90;
   border-bottom-left-radius: 8px;
@@ -201,6 +230,9 @@
   margin-left: 0 !important;
   position: relative;
   background-color: transparent !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dark .subItem {
@@ -236,11 +268,10 @@
 
 .bottomSection {
   padding: 16px 0;
-  border-top: 1px solid;
   display: flex;
   flex-direction: column;
   gap: 4px;
-  border-top-color: #e0e0e0;
+  margin-top: auto;
 }
 
 .dark .bottomSection {
@@ -251,8 +282,10 @@
   display: flex;
   align-items: center;
   padding: 12px 16px;
+  margin: 0 8px;
   cursor: pointer;
   transition: background-color 0.2s;
+  border-radius: 8px;
 }
 
 .themeToggle:hover {
@@ -279,14 +312,16 @@
   display: flex;
   align-items: center;
   padding: 12px 16px;
+  margin: 0 8px;
   cursor: pointer;
   transition: background-color 0.2s;
+  border-radius: 8px;
 }
 
 .logoutButton span {
-  color: #637381;
-  font-size: 14px;
-  font-weight: 500;
+  color: #4A4A4A;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .dark .logoutButton span {
@@ -312,6 +347,15 @@
   background-color: #f5f5f5;
 }
 
+.dark .mobileMenuButton {
+  background: #333;
+  border-color: #555;
+}
+
+.dark .mobileMenuButton:hover {
+  background-color: #444;
+}
+
 .hamburger {
   width: 24px;
   height: 18px;
@@ -328,6 +372,10 @@
   background-color: #333;
   border-radius: 1px;
   transition: all 0.3s ease;
+}
+
+.dark .hamburger span {
+  background-color: #fff;
 }
 
 .hamburger.open span:first-child {
@@ -361,21 +409,41 @@
 
   .navItem {
     padding: 10px 14px;
+    margin: 0 6px;
   }
 
   .navItem span {
     font-size: 13px;
   }
+
+  .subItemWithLine {
+    margin-left: 36px;
+    margin-right: 6px;
+  }
+
+  .subItemWithLine::before {
+    left: -18px;
+  }
+
+  .subItemWithLine::after {
+    left: -18px;
+    width: 14px;
+    height: 14px;
+  }
+
+  .logoText {
+    font-size: 20px;
+    padding: 14px;
+  }
 }
 
-/* Mobile View */
+/* Mobile View - 768px and below */
 @media screen and (max-width: 768px) {
   .mobileMenuButton {
     display: block;
-    margin-top: -6px;
   }
 
-  .mobileOverlay {
+  .mobileOverlay.show {
     display: block;
   }
 
@@ -383,24 +451,33 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 280px;
+    width: 300px;
     height: 100vh;
     z-index: 1000;
     transform: translateX(-100%);
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    padding-top: 20px;
   }
 
   .sidebar.mobileOpen {
     transform: translateX(0);
   }
 
+  .logoText {
+    font-size: 22px;
+    padding: 20px 16px 16px 16px;
+    margin-bottom: 8px;
+  }
+
   .navItem {
-    padding: 18px 16px;
-    top: 50px;
+    padding: 14px 16px;
+    margin: 2px 12px;
+    border-radius: 10px;
   }
 
   .navItem span {
     font-size: 15px;
+    font-weight: 500;
   }
 
   .icon {
@@ -414,8 +491,20 @@
     height: 22px;
   }
 
+  .chevron {
+    width: 22px;
+    height: 22px;
+  }
+
+  .chevron svg {
+    width: 18px;
+    height: 18px;
+  }
+
   .subItemWithLine {
-    margin-left: 32px;
+    margin-left: 44px;
+    margin-right: 12px;
+    border-radius: 8px;
   }
 
   .subItemWithLine::before {
@@ -424,12 +513,34 @@
 
   .subItemWithLine::after {
     left: -20px;
-    width: 20px;
-    height: 20px;
-    border-bottom-left-radius: 10px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .subItem {
+    padding: 12px 14px !important;
+    font-size: 14px;
+  }
+
+  .bottomSection {
+    padding: 20px 0;
+    margin-top: 20px;
+  }
+
+  .themeToggle,
+  .logoutButton {
+    padding: 14px 16px;
+    margin: 2px 12px;
+    border-radius: 10px;
+  }
+
+  .themeToggle span,
+  .logoutButton span {
+    font-size: 15px;
   }
 }
 
+/* Small Mobile - 480px and below */
 @media screen and (max-width: 480px) {
   .mobileMenuButton {
     top: 15px;
@@ -443,11 +554,17 @@
   }
 
   .sidebar {
-    width: 260px;
+    width: 280px;
+  }
+
+  .logoText {
+    font-size: 20px;
+    padding: 18px 14px 14px 14px;
   }
 
   .navItem {
     padding: 12px 14px;
+    margin: 2px 10px;
   }
 
   .navItem span {
@@ -465,47 +582,121 @@
     height: 20px;
   }
 
+  .chevron {
+    width: 20px;
+    height: 20px;
+  }
+
+  .chevron svg {
+    width: 16px;
+    height: 16px;
+  }
+
   .subItemWithLine {
-    margin-left: 28px;
+    margin-left: 40px;
+    margin-right: 10px;
   }
 
   .subItemWithLine::before {
-    left: -16px;
+    left: -18px;
   }
 
   .subItemWithLine::after {
-    left: -16px;
-    width: 16px;
-    height: 16px;
-    border-bottom-left-radius: 8px;
+    left: -18px;
+    width: 14px;
+    height: 14px;
+  }
+
+  .subItem {
+    padding: 10px 12px !important;
+    font-size: 13px;
+  }
+
+  .themeToggle,
+  .logoutButton {
+    padding: 12px 14px;
+    margin: 2px 10px;
+  }
+
+  .themeToggle span,
+  .logoutButton span {
+    font-size: 14px;
   }
 }
 
+/* Extra Small Mobile - 360px and below */
 @media screen and (max-width: 360px) {
   .sidebar {
-    width: 240px;
+    width: 260px;
+  }
+
+  .logoText {
+    font-size: 18px;
+    padding: 16px 12px 12px 12px;
   }
 
   .navItem {
     padding: 10px 12px;
+    margin: 1px 8px;
   }
 
-  .subItem {
-    padding-left: 20px;
+  .navItem span {
+    font-size: 13px;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+  }
+
+  .icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .chevron {
+    width: 18px;
+    height: 18px;
+  }
+
+  .chevron svg {
+    width: 14px;
+    height: 14px;
   }
 
   .subItemWithLine {
-    margin-left: 24px;
+    margin-left: 36px;
+    margin-right: 8px;
   }
 
   .subItemWithLine::before {
-    left: -14px;
+    left: -16px;
   }
 
   .subItemWithLine::after {
-    left: -14px;
-    width: 14px;
-    height: 14px;
-    border-bottom-left-radius: 7px;
+    left: -16px;
+    width: 12px;
+    height: 12px;
+  }
+
+  .subItem {
+    padding: 8px 10px !important;
+    font-size: 12px;
+  }
+
+  .themeToggle,
+  .logoutButton {
+    padding: 10px 12px;
+    margin: 1px 8px;
+  }
+
+  .themeToggle span,
+  .logoutButton span {
+    font-size: 13px;
+  }
+
+  .bottomSection {
+    padding: 16px 0;
   }
 }
