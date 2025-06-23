@@ -1,20 +1,28 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
+import Toast from '../../../components/Toast';
 
 export default function AddUser() {
   const [formData, setFormData] = useState({
-    userrole: "",
-    email: "",
-    firstname: "",
-    lastname: "",
-    mfaEnabled: "",
-    phone: "",
+    userrole: '',
+    email: '',
+    firstname: '',
+    lastname: '',
+    mfaEnabled: '',
+    phone: '',
   });
 
   const [dropdownStates, setDropdownStates] = useState({
     userrole: false,
     mfaEnabled: false,
+  });
+
+  // ✅ Toast state
+  const [toast, setToast] = useState({
+    open: false,
+    message: '',
+    severity: 'success',
   });
 
   const handleChange = (e) => {
@@ -30,18 +38,46 @@ export default function AddUser() {
     setDropdownStates({
       ...dropdownStates,
       [name]: !dropdownStates[name],
-      ...(name === "userrole" ? { mfaEnabled: false } : { userrole: false }),
+      ...(name === 'userrole' ? { mfaEnabled: false } : { userrole: false }),
     });
   };
 
+  // ✅ Toast close handler
+  const handleToastClose = () => {
+    setToast({ ...toast, open: false });
+  };
+
+  // ✅ Submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Submitted", formData);
+
+    const { firstname, lastname, email, phone } = formData;
+
+    if (!firstname || !lastname || !email || !phone) {
+      setToast({
+        open: true,
+        message: '❌ Please fill all required fields!',
+        severity: 'error',
+      });
+      return;
+    }
+
+    // Form is valid
+    console.log('Form Submitted', formData);
+
+    setToast({
+      open: true,
+      message: '✅ User added successfully!',
+      severity: 'success',
+    });
+
+    // Optionally clear form
+    // setFormData({ ... });
   };
 
   const SvgArrow = ({ isOpen }) => (
     <svg
-      className={`absolute top-1/2 right-3 sm:right-4 lg:right-5 w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 pointer-events-none transform -translate-y-1/2 transition-transform duration-200 ease-in-out ${isOpen ? "rotate-180" : ""
+      className={`absolute top-1/2 right-3 sm:right-4 lg:right-5 w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 pointer-events-none transform -translate-y-1/2 transition-transform duration-200 ease-in-out ${isOpen ? 'rotate-180' : ''
         }`}
       width="21"
       height="21"
@@ -67,29 +103,25 @@ export default function AddUser() {
     label,
   }) => (
     <div className="flex flex-col w-full">
-      <label className="text-sm sm:text-base lg:text-base font-medium text-[#5E6366] mb-1.5 sm:mb-2">
+      <label className="text-sm sm:text-base font-medium text-[#5E6366] mb-1.5">
         {label}
       </label>
       <div className="relative w-full">
         <div
           onClick={() => onToggle(name)}
-          className={`flex items-center w-full placeholder-gray-400 h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 pr-8 sm:pr-10 lg:pr-11 text-left text-sm sm:text-base bg-white border rounded-lg cursor-pointer transition-all duration-200 ease-in-out ${isOpen
-            ? "border-2 border-[#30B4FF]"
-            : "border border-[#CFD3D4] hover:border-[#CFD3D4]"
-            } ${value ? "text-[#5E6366]" : "text-[#5E6366]"}`}
+          className={`flex items-center w-full h-10 px-4 pr-10 text-sm bg-white border rounded-lg cursor-pointer transition-all duration-200 ${isOpen ? 'border-2 border-[#30B4FF]' : 'border-[#CFD3D4]'
+            } ${value ? 'text-[#5E6366]' : 'text-[#8E95A6]'}`}
         >
           {value || placeholder}
         </div>
         <SvgArrow isOpen={isOpen} />
-
         {isOpen && (
-          <div className="absolute top-full left-0 right-0 mt-0.5 bg-white border border-[#CFD3D4] focus:border-[#30B4FF] rounded-lg shadow-lg z-50">
+          <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-[#CFD3D4] rounded-lg shadow z-50">
             {options.map((option, index) => (
               <div
                 key={index}
                 onClick={() => onSelect(name, option.value)}
-                className={`px-3 sm:px-4 lg:px-5 py-2.5 sm:py-3 text-sm sm:text-base lg:text-base text-[#5E6366] cursor-pointer transition-colors duration-200 ease-in-out hover:bg-[#30B4FF] hover:text-white ${index === 0 ? "rounded-t-lg" : ""
-                  } ${index === options.length - 1 ? "rounded-b-lg" : ""}`}
+                className="px-4 py-2 text-sm text-[#5E6366] hover:bg-[#30B4FF] hover:text-white cursor-pointer"
               >
                 {option.label}
               </div>
@@ -101,82 +133,47 @@ export default function AddUser() {
   );
 
   const userRoleOptions = [
-    { label: "Admin", value: "admin" },
-    { label: "User", value: "user" },
-    { label: "Manager", value: "manager" },
+    { label: 'Admin', value: 'admin' },
+    { label: 'User', value: 'user' },
+    { label: 'Manager', value: 'manager' },
   ];
 
   const mfaOptions = [
-    { label: "True", value: "true" },
-    { label: "False", value: "false" },
+    { label: 'True', value: 'true' },
+    { label: 'False', value: 'false' },
   ];
 
   return (
-    <div className="w-full mx-auto space-y-1">
-      {/* Header Card */}
-      <div className="bg-white p-2 sm:p-6 rounded-tl-lg lg:p-4 lg:rounded-1xl w-full">
-        <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-left">
-          Add User
-        </h2>
-      </div>
+    <>
+      <div className="w-full mx-auto space-y-1">
+        <div className="bg-white p-4 rounded-tl-lg w-full">
+          <h2 className="text-xl font-semibold text-left">Add User</h2>
+        </div>
 
-      {/* Form Card */}
-      <div className="bg-white p-1 sm:p-5 lg:p-4  lg:rounded-1xl w-full">
-        <div className="flex flex-col pt-1 sm:pt-2 lg:pt-1">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-3">
+        <div className="bg-white p-4 rounded-b-lg w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Input fields */}
+            {[
+              { name: 'firstname', label: 'First Name', placeholder: 'Enter first name' },
+              { name: 'lastname', label: 'Last Name', placeholder: 'Enter last name' },
+              { name: 'email', label: 'Email Address', placeholder: 'Enter email' },
+              { name: 'phone', label: 'Phone Number', placeholder: 'Enter phone' },
+            ].map((field, index) => (
+              <div className="flex flex-col w-full" key={index}>
+                <label className="text-sm font-medium text-[#5E6366] mb-1.5">
+                  {field.label}
+                </label>
+                <input
+                  className="w-full h-10 px-4 text-sm text-black bg-white border border-[#CFD3D4] rounded-lg focus:outline-none focus:border-2 focus:border-[#30B4FF]"
+                  name={field.name}
+                  value={formData[field.name]}
+                  onChange={handleChange}
+                  placeholder={field.placeholder}
+                />
+              </div>
+            ))}
 
-            <div className="flex flex-col w-full">
-              <label className="text-sm sm:text-base lg:text-base font-medium text-[#5E6366] mb-1.5 sm:mb-2">
-                First Name
-              </label>
-              <input
-                className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
-                name="firstname"
-                value={formData.firstname}
-                onChange={handleChange}
-                placeholder="Enter first name"
-              />
-            </div>
-
-            <div className="flex flex-col w-full">
-              <label className="text-sm sm:text-base lg:text-base font-medium text-[#5E6366] mb-1.5 sm:mb-2">
-                Last Name
-              </label>
-              <input
-                className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base  text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
-                name="lastname"
-                value={formData.lastname}
-                onChange={handleChange}
-                placeholder="Enter last name"
-              />
-            </div>
-
-            <div className="flex flex-col w-full">
-              <label className="text-sm sm:text-base lg:text-base font-medium text-[#5E6366] mb-1.5 sm:mb-2">
-                Email Address
-              </label>
-              <input
-                className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base  text-[#5E6366] bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Enter email address"
-              />
-            </div>
-
-            <div className="flex flex-col w-full">
-              <label className="text-sm sm:text-base lg:text-base font-medium text-[#5E6366] mb-1.5 sm:mb-2">
-                Phone Number
-              </label>
-              <input
-                className="w-full h-9 sm:h-10 lg:h-10 px-3 sm:px-4 lg:px-5 text-sm sm:text-base text-black bg-white border border-[#CFD3D4] rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:border-2 focus:border-[#30B4FF] placeholder-gray-400"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="Enter phone number"
-              />
-            </div>
-
+            {/* Custom Dropdowns */}
             <CustomDropdown
               name="userrole"
               value={formData.userrole}
@@ -198,26 +195,33 @@ export default function AddUser() {
               onSelect={handleDropdownSelect}
               label="MFA Enabled"
             />
-
           </div>
 
-          <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 sm:gap-4 lg:gap-5 mt-5 sm:mt-6 lg:mt-8 w-full">
+          <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-4 mt-6 w-full">
             <button
               type="button"
-              className="w-full sm:w-auto sm:min-w-40  md:min-w-40 h-9 sm:h-10 lg:h-10 text-sm sm:text-base lg:text-lg font-medium bg-white text-[#30B4FF] border border-[#30B4FF] rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-[#30B4FF] hover:text-white"
+              className="w-full sm:w-auto h-10 text-base font-medium bg-white text-[#30B4FF] border border-[#30B4FF] rounded-lg hover:bg-[#30B4FF] hover:text-white"
             >
               Cancel
             </button>
             <button
               type="button"
               onClick={handleSubmit}
-              className="w-full sm:w-auto  sm:min-w-40  md:min-w-40 h-9 sm:h-10 lg:h-10 text-sm sm:text-base lg:text-lg font-medium bg-[#30B4FF] text-white border-none rounded-lg cursor-pointer transition-all duration-200 ease-in-out "
+              className="w-full sm:w-auto h-10 text-base font-medium bg-[#30B4FF] text-white border-none rounded-lg"
             >
               Add
             </button>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* ✅ Toast component here */}
+      <Toast
+        open={toast.open}
+        onClose={handleToastClose}
+        message={toast.message}
+        severity={toast.severity}
+      />
+    </>
   );
 }

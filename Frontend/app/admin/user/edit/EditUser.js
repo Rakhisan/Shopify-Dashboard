@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Toast from '../../../components/Toast';
+import { useRouter } from "next/navigation";
 
 export default function EditUser() {
   const [formData, setFormData] = useState({
@@ -13,11 +15,16 @@ export default function EditUser() {
   });
 
   const [errors, setErrors] = useState({});
+  const router = useRouter();
 
   const [dropdownStates, setDropdownStates] = useState({
     userrole: false,
     mfaEnabled: false,
   });
+
+
+
+
 
   const validateField = (name, value) => {
     let error = "";
@@ -84,6 +91,25 @@ export default function EditUser() {
       setErrors({ ...errors, [name]: "" });
     }
   };
+
+  const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState('success');
+
+
+  const handleSuccess = () => {
+    setToastType('success');
+    setShowToast(true);
+  };
+
+
+  const handleError = () => {
+    setToastType('error');
+    setShowToast(true);
+  };
+
+
+
+
 
   const handleBlur = (e) => {
     const { name, value } = e.target;
@@ -336,12 +362,14 @@ export default function EditUser() {
 
           <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 sm:gap-4 lg:gap-5 mt-5 sm:mt-6 lg:mt-8 w-full">
             <button
+              onClick={handleError}
               type="button"
               className="w-full sm:w-auto sm:min-w-40  md:min-w-40 h-9 sm:h-10 lg:h-10 text-sm sm:text-base lg:text-lg font-medium bg-white text-[#30B4FF] border border-[#30B4FF] rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-[#30B4FF] hover:text-white"
             >
               Cancel
             </button>
             <button
+              onClick={handleSuccess}
               type="submit"
               className="w-full sm:w-auto  sm:min-w-40  md:min-w-40 h-9 sm:h-10 lg:h-10 text-sm sm:text-base lg:text-lg font-medium bg-[#30B4FF] text-white border-none rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-[#2A9AE6]"
             >
@@ -349,6 +377,16 @@ export default function EditUser() {
             </button>
           </div>
         </div>
+        <Toast
+          show={showToast}
+          type={toastType}
+          onClose={() => {
+            setShowToast(false);
+
+          }}
+        />
+
+
       </div>
     </div>
   );

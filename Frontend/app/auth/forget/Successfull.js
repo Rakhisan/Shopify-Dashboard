@@ -4,26 +4,13 @@ import { useState } from 'react';
 import shopifyLogo from "../../images/logo.png";
 import Image from 'next/image';
 import Link from 'next/link';
-import NewPassword from "./NewPassword.js";
+import { useRouter } from 'next/navigation';
 
-export default function ResetPasswordPage() {
-    const [email, setEmail] = useState('');
-    const [showNewPassword, setShowNewPassword] = useState(false);
-
-    const handleEmailSubmit = (e) => {
-        e.preventDefault();
-        console.log('Email submitted:', email);
-        // Email validation logic here
-        if (email) {
-
-            setShowNewPassword(true);
-        }
+export default function PasswordSuccessPage() {
+    const router = useRouter();
+    const handleBackToLogin = () => {
+        router.push('/auth/login');
     };
-
-
-    if (showNewPassword) {
-        return <NewPassword email={email} onBack={() => setShowNewPassword(false)} />;
-    }
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-50 relative overflow-hidden">
@@ -64,58 +51,67 @@ export default function ResetPasswordPage() {
                             className="mx-auto h-10 sm:h-12 w-auto"
                             alt="Shopify"
                         />
+
+                        {/* Success Icon with Animations */}
+                        <div className="mx-auto mt-4 sm:mt-6 flex justify-center">
+                            <svg width="220" height="134" viewBox="0 0 220 134" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-48 h-auto sm:w-56">
+                                <circle cx="116.003" cy="70" r="56" fill="#9ADBFF" />
+                                <g filter="url(#filter0_d_139_1163)">
+                                    <circle cx="116.003" cy="70" r="47" fill="white" />
+                                </g>
+                                <path d="M100.461 69.5001L111.92 80.9584L134.836 58.0417" stroke="black" strokeWidth="4.58333" strokeLinecap="round" strokeLinejoin="round" className="animate-pulse" />
+
+                                {/* Animated Star */}
+                                <path d="M16.5029 85L19.0848 92.9463H27.4401L20.6805 97.8574L23.2625 105.804L16.5029 100.893L9.7434 105.804L12.3253 97.8574L5.56578 92.9463H13.921L16.5029 85Z" fill="#98C050" className="animate-bounce" style={{ animationDelay: '0.5s' }} />
+
+                                {/* Animated Springs/Curves */}
+                                <path d="M1.79976 53.5382C6.20604 50.6307 15.797 47.8861 18.9106 60.1674C21.4513 70.1892 27.2021 68.283 31.1762 64.8782C32.8783 63.42 34.4382 61.7521 36.4452 60.7543C42.0006 57.9926 49.4676 57.0789 49.3307 68.5856" stroke="#98C050" strokeWidth="2" className="animate-pulse" style={{ animationDelay: '1s' }} />
+
+                                <path d="M202.289 28.9809C197.5 31.2024 187.608 32.4936 186.352 19.8863C185.326 9.59845 179.356 10.6303 174.921 13.4078C173.021 14.5973 171.231 16.0153 169.098 16.7042C163.194 18.6111 155.674 18.4067 157.517 7.04774" stroke="#98C050" strokeWidth="2" className="animate-pulse" style={{ animationDelay: '1.5s' }} />
+
+                                {/* Animated Wavy Line */}
+                                <path d="M172.003 115.822C173.581 115.072 193.178 103.397 195.531 105.888C196.937 107.378 196.472 110.205 196.472 112.058C196.472 113.688 193.299 119.07 191.034 116.554C189.337 114.669 189.519 108.015 190.511 105.941C192.973 100.794 200.722 100.165 204.942 97" stroke="#FFC300" strokeWidth="3" strokeLinecap="round" className="animate-bounce" style={{ animationDelay: '2s' }} />
+
+                                {/* Animated Triangles */}
+                                <path d="M213.082 48.6159L197.971 70.2235L187.576 55.3002L213.082 48.6159Z" fill="#480CA8" className="animate-pulse" style={{ animationDelay: '0.3s' }} />
+
+                                <path d="M51.7536 118.402L72.7938 116.928L68.7434 130.9L51.7536 118.402Z" fill="#A80C4A" className="animate-bounce" style={{ animationDelay: '2.5s' }} />
+
+                                {/* Animated Circle */}
+                                <path d="M35.6451 25.733C34.4882 25.1298 34.0226 23.6803 34.8641 22.6833C35.8802 21.4792 37.1643 20.4907 38.6499 19.7811C40.8776 18.717 43.4582 18.3279 46.0654 18.6629C48.6727 18.9979 51.1895 20.0421 53.2975 21.6633C55.4056 23.2845 57.0102 25.41 57.9085 27.7709C58.8068 30.1319 58.9584 32.6223 58.3442 34.9272C57.73 37.2321 56.3775 39.248 54.4577 40.7199C52.538 42.1919 50.1373 43.0538 47.5591 43.1967C45.6606 43.3019 43.7287 43.0137 41.8967 42.3616C40.8042 41.9727 40.4082 40.689 40.9443 39.6607C41.4804 38.6323 42.7474 38.2587 43.8661 38.5642C44.8432 38.8311 45.8516 38.942 46.8459 38.8869C48.5218 38.794 50.0823 38.2337 51.3302 37.2769C52.5781 36.3201 53.4572 35.0097 53.8565 33.5115C54.2558 32.0132 54.1572 30.3944 53.5733 28.8597C52.9894 27.325 51.9463 25.9434 50.576 24.8895C49.2057 23.8357 47.5698 23.157 45.875 22.9392C44.1802 22.7214 42.5027 22.9744 41.0546 23.666C40.3482 24.0035 39.7119 24.4379 39.1625 24.9533C38.2111 25.8459 36.802 26.3361 35.6451 25.733Z" fill="#9ADBFF" className="animate-pulse" style={{ animationDelay: '3s' }} />
+
+                                <defs>
+                                    <filter id="filter0_d_139_1163" x="65.0029" y="23" width="102" height="102" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                        <feOffset dy="4" />
+                                        <feGaussianBlur stdDeviation="2" />
+                                        <feComposite in2="hardAlpha" operator="out" />
+                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_139_1163" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_139_1163" result="shape" />
+                                    </filter>
+                                </defs>
+                            </svg>
+                        </div>
+
                         <h2 className="mt-4 sm:mt-6 text-xl sm:text-xl font-bold text-[#101010]">
-                            Reset Your Password
+                            You successfully changed your password
                         </h2>
                         <p className="mt-2 font-medium text-[17px] sm:text-[17px] text-[#333333] px-2 sm:px-0">
-                            Enter your email and we'll send you password reset instructions.
+                            Always remember the password to your account at shopify dashboard
                         </p>
                     </div>
 
-                    <form className="mt-6 sm:mt-8 space-y-6" onSubmit={handleEmailSubmit}>
-                        <div className="rounded-md shadow-sm">
-                            <label htmlFor="email-address" className="block text-sm font-medium text-[#333333] mb-1">
-                                Email Address*
-                            </label>
-                            <div className="relative">
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg width="20" height="20" className="sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g opacity="0.3">
-                                            <path fillRule="evenodd" clipRule="evenodd" d="M1.5 5.25L2.25 4.5H21.75L22.5 5.25V18.75L21.75 19.5H2.25L1.5 18.75V5.25ZM3 6.8025V18H21V6.804L12.465 13.35H11.55L3 6.8025ZM19.545 6H4.455L12 11.8035L19.545 6Z" fill="#333333" />
-                                        </g>
-                                    </svg>
-                                </div>
-                                <input
-                                    id="email-address"
-                                    name="email"
-                                    type="email"
-                                    autoComplete="email"
-                                    required
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="block w-full pl-10 sm:pl-12 pr-3 py-2 sm:py-2 border border-[#000000] text-[#333333] rounded-md focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] focus:border-transparent text-sm sm:text-base"
-                                    placeholder="Email Address"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="space-y-3 sm:space-y-4">
-                            <button
-                                type="submit"
-                                className="w-full flex justify-center py-2 sm:py-2 px-2 border border-transparent text-xl sm:text-xl font-bold rounded-md text-white bg-[#2FB4FF] hover:bg-[#1DADEB] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2FB4FF] transition-colors duration-200"
-                            >
-                                Login
-                            </button>
-
-                            <button
-                                type="button"
-                                className="w-full flex justify-center py-2 sm:py-2 px-2 border text-xl sm:text-xl font-bold rounded-md text-[#000000] border-[#000000] hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200"
-                                onClick={() => window.location.href = '/auth/login'}
-                            >
-                                Back To Login
-                            </button>
-                        </div>
-                    </form>
+                    <div className="mt-6 sm:mt-8 space-y-6">
+                        <button
+                            type="button"
+                            onClick={handleBackToLogin}
+                            className="w-full flex justify-center py-2 sm:py-2 px-2 border border-transparent text-xl sm:text-xl font-bold rounded-md text-white bg-[#2FB4FF] hover:bg-[#1DADEB] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2FB4FF] transition-colors duration-200"
+                        >
+                            Back to Login
+                        </button>
+                    </div>
                 </div>
             </div>
 

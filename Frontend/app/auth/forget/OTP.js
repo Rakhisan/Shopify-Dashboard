@@ -22,7 +22,7 @@ export default function ShopifyOTPVerification() {
         newOtp[index] = value;
         setOtp(newOtp);
 
-        // Auto-focus next input
+
         if (value && index < 3) {
             inputRefs.current[index + 1]?.focus();
         }
@@ -39,7 +39,7 @@ export default function ShopifyOTPVerification() {
         if (otpValue.length !== 4) return;
 
         setIsSubmitting(true);
-        // Simulate API call
+
         setTimeout(() => {
             setIsSubmitting(false);
             alert(`OTP Submitted: ${otpValue}`);
@@ -104,11 +104,11 @@ export default function ShopifyOTPVerification() {
                         <div className="text-center mb-10">
                             <p className="text-[#333333] text-base leading-relaxed">
                                 We have sent a verification code to email address<br />
-                                abc@gmail.com. <span className="text-[#2FB4FF] cursor-pointer hover:underline">Wrong Email?</span>
+                                abc@gmail.com. <Link href="text-[#2FB4FF] cursor-pointer hover:underline">Wrong Email?</Link>
                             </p>
                         </div>
 
-                        {/* OTP Input boxes - exact spacing and styling */}
+
                         <div className="flex justify-center gap-4 mb-10">
                             {otp.map((digit, index) => (
                                 <input
@@ -125,7 +125,7 @@ export default function ShopifyOTPVerification() {
                             ))}
                         </div>
 
-                        {/* Submit Button - exact same color and styling */}
+
                         <button
                             onClick={handleSubmit}
                             disabled={otp.join('').length !== 4 || isSubmitting}

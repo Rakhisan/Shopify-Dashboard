@@ -85,7 +85,7 @@ export default function UpdatePasswordPage() {
                         alt="Shopify"
                     />
                     <h2 className="mt-6 text-2xl font-bold text-[#101010]">Update your password</h2>
-                    <p className="mt-2 text-sm text-[#333333]">
+                    <p className="mt-2 text-[17px] text-[#333333]">
                         Set your password with minimum 8 characters with a combination of letters and numbers
                     </p>
                 </div>
@@ -188,10 +188,21 @@ export default function UpdatePasswordPage() {
                     </div>
                 </form>
 
-                <div className="text-center text-xs text-gray-500 mt-4">
-                    © 2025 Shopify Dashboard. All rights reserved.{' '}
-                    <Link href="#" className="text-blue-500 underline">Terms & Conditions</Link> and{' '}
-                    <Link href="#" className="text-blue-500 underline">Privacy Policy</Link>
+                <div className="text-center text-xs sm:text-sm text-[#333333] py-3 sm:py-4 px-4 relative z-10">
+                    <div className="max-w-md mx-auto">
+                        <p className="mb-1 sm:mb-0">
+                            © 2025 Shopify Dashboard. All rights reserved.
+                        </p>
+                        <div className="space-x-4">
+                            <Link href="#" className="text-blue-500 underline hover:text-blue-600">
+                                Terms & Conditions
+                            </Link>
+                            <span className="text-gray-400">and</span>
+                            <Link href="#" className="text-blue-500 underline hover:text-blue-600">
+                                Privacy Policy
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

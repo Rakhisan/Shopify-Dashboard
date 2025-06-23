@@ -43,7 +43,8 @@ export default function AddProfileRuleForm() {
   };
 
   const handleCancel = () => {
-    // router.back();
+    router.back();
+
   };
 
   // Custom dropdown arrow component
@@ -53,7 +54,6 @@ export default function AddProfileRuleForm() {
     </svg>
   );
 
-  // Custom Checkbox Component
   const CustomCheckbox = ({ name, checked, onChange, label }) => (
     <div className="flex items-center">
       <div className="relative inline-block">
@@ -67,7 +67,7 @@ export default function AddProfileRuleForm() {
         <div
           className={`h-4 w-4 border-2 rounded cursor-pointer transition-all duration-200 flex items-center justify-center ${checked
             ? 'bg-[#30B4FF] border-[#30B4FF]'
-            : 'bg-transparent border-[#CFD3D4] hover:border-[#30B4FF]'
+            : 'bg-white border-[#CFD3D4] hover:border-[#30B4FF]'
             }`}
           onClick={() => onChange({ target: { name, checked: !checked, type: 'checkbox' } })}
         >
@@ -83,22 +83,22 @@ export default function AddProfileRuleForm() {
   );
 
   return (
-    <div className="flex items-center justify-center p-2 sm:p-4 min-h-screen">
-      <div className="bg-white rounded-lg w-full max-w-7xl">
+    <div className="min-h-screen p-2 sm:p-4 lg:p-6">
+      <div className="mx-auto">
         {/* Header */}
-        <div className="bg-white px-4 sm:px-6 py-4 rounded-tl-lg">
+        <div className="bg-white px-4 sm:px-6 py-4 rounded-tl-lg border-b">
           <h2 className="font-semibold text-[#24282E] text-lg sm:text-xl">Add Profile Rule</h2>
         </div>
 
-        <div className="p-3 sm:p-4">
+        <div className="bg-white p-4 sm:p-6 rounded-b-lg">
           {/* First Row - Basic Information & Rule Structure */}
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-2 mb-3">
-            {/* Basic Information */}
-            <div className="bg-[#F6F8FB] rounded-lg p-4 w-full max-w-[395px] h-[423px]">
-              <h3 className="font-bold text-[#5E6366] mb-4">Basic Information</h3>
+          <div className="flex flex-col xl:flex-row gap-4 mb-4">
 
-              <div className="h-[350px] overflow-y-auto pr-2">
-                <div className="space-y-4">
+            <div className="bg-[#F6F8FB] rounded-lg p-4 w-full xl:w-[450px] min-h-[350px]">
+              <h3 className="font-bold text-[#5E6366] mb-3">Basic Information</h3>
+
+              <div className="max-h-[320px] overflow-y-auto pr-2">
+                <div className="space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-[#5E6366] mb-1">Name</label>
                     <input
@@ -107,7 +107,7 @@ export default function AddProfileRuleForm() {
                       value={formData.name}
                       onChange={handleInputChange}
                       placeholder="Name"
-                      className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                      className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] transition-all duration-200"
                     />
                   </div>
 
@@ -118,11 +118,11 @@ export default function AddProfileRuleForm() {
                       value={formData.description}
                       onChange={handleInputChange}
                       placeholder="Description"
-                      className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none bg-transparent focus:ring-2 focus:ring-[#2FB4FF] h-20 resize-none"
+                      className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] h-16 resize-none transition-all duration-200"
                     />
                   </div>
 
-                  <div className="py-2">
+                  <div className="py-1">
                     <CustomCheckbox
                       name="setAsDefault"
                       checked={formData.setAsDefault}
@@ -138,13 +138,13 @@ export default function AddProfileRuleForm() {
                         name="precedence"
                         value={formData.precedence}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
+                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] appearance-none pr-12 transition-all duration-200"
                         style={{ backgroundImage: 'none' }}
                       >
-                        <option value="" className="bg-white text-gray-700">Precedence</option>
-                        <option value="1" className="bg-white text-gray-700">1</option>
-                        <option value="2" className="bg-white text-gray-700">2</option>
-                        <option value="3" className="bg-white text-gray-700">3</option>
+                        <option value="" className="text-gray-400 bg-white">Precedence</option>
+                        <option value="1" >1</option>
+                        <option value="2" >2</option>
+                        <option value="3" >3</option>
                       </select>
                       <DropdownArrow />
                     </div>
@@ -154,12 +154,12 @@ export default function AddProfileRuleForm() {
             </div>
 
             {/* Rule Structure & Scope */}
-            <div className="bg-[#F6F8FB] p-4 rounded-lg w-full max-w-[667px] h-[423px] ">
-              <h3 className="font-bold text-[#5E6366] mb-4">Rule Structure & Scope</h3>
+            <div className="bg-[#F6F8FB] p-4 sm:p-6 rounded-lg w-full xl:w-[742px] min-h-[350px]">
+              <h3 className="font-bold text-[#5E6366] mb-3">Rule Structure & Scope</h3>
 
-              <div className="h-[350px] overflow-y-auto pr-2">
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="max-h-[320px] overflow-y-auto pr-2">
+                <div className="space-y-3">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-sm font-medium text-[#727272] mb-1">Sequence</label>
                       <input
@@ -168,7 +168,7 @@ export default function AddProfileRuleForm() {
                         value={formData.sequence}
                         onChange={handleInputChange}
                         placeholder="Sequence"
-                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1]  rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] transition-all duration-200"
                       />
                     </div>
                     <div>
@@ -178,19 +178,19 @@ export default function AddProfileRuleForm() {
                           name="subsequence"
                           value={formData.subsequence}
                           onChange={handleInputChange}
-                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] appearance-none pr-12 transition-all duration-200"
                         >
-                          <option value="" className="bg-white text-gray-700">Subsequence</option>
-                          <option value="A" className="bg-white text-gray-700">A</option>
-                          <option value="B" className="bg-white text-gray-700">B</option>
-                          <option value="C" className="bg-white text-gray-700">C</option>
+                          <option value="" className="text-[#ABAFB1] bg-white">Subsequence</option>
+                          <option value="A" >A</option>
+                          <option value="B" >B</option>
+                          <option value="C">C</option>
                         </select>
                         <DropdownArrow />
                       </div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-sm font-medium text-[#727272] mb-1">Sub Category Id</label>
                       <div className="relative">
@@ -198,11 +198,11 @@ export default function AddProfileRuleForm() {
                           name="subCategoryId"
                           value={formData.subCategoryId}
                           onChange={handleInputChange}
-                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] appearance-none pr-12 transition-all duration-200"
                         >
-                          <option value="" className="bg-white text-gray-700">Sub category id</option>
-                          <option value="1" className="bg-white text-gray-700">Category 1</option>
-                          <option value="2" className="bg-white text-gray-700">Category 2</option>
+                          <option value="" className="text-gray-400 bg-white">Sub category id</option>
+                          <option value="1">Category 1</option>
+                          <option value="2">Category 2</option>
                         </select>
                         <DropdownArrow />
                       </div>
@@ -214,18 +214,18 @@ export default function AddProfileRuleForm() {
                           name="productId"
                           value={formData.productId}
                           onChange={handleInputChange}
-                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] appearance-none pr-12 transition-all duration-200"
                         >
-                          <option value="" className="bg-white text-gray-700">Product id</option>
-                          <option value="1" className="bg-white text-gray-700">Product 1</option>
-                          <option value="2" className="bg-white text-gray-700">Product 2</option>
+                          <option value="" className="text-gray-400 bg-white">Product id</option>
+                          <option value="1" >Product 1</option>
+                          <option value="2" >Product 2</option>
                         </select>
                         <DropdownArrow />
                       </div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-sm font-medium text-[#727272] mb-1">Category Id</label>
                       <div className="relative">
@@ -233,11 +233,11 @@ export default function AddProfileRuleForm() {
                           name="categoryId"
                           value={formData.categoryId}
                           onChange={handleInputChange}
-                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] appearance-none pr-12 transition-all duration-200"
                         >
-                          <option value="" className="bg-white text-gray-700">Category id</option>
-                          <option value="1" className="bg-white text-gray-700">Category 1</option>
-                          <option value="2" className="bg-white text-gray-700">Category 2</option>
+                          <option value="" className="text-gray-400 bg-white">Category id</option>
+                          <option value="1">Category 1</option>
+                          <option value="2" >Category 2</option>
                         </select>
                         <DropdownArrow />
                       </div>
@@ -249,11 +249,11 @@ export default function AddProfileRuleForm() {
                           name="manufacturerId"
                           value={formData.manufacturerId}
                           onChange={handleInputChange}
-                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] appearance-none pr-12 transition-all duration-200"
                         >
-                          <option value="" className="bg-white text-gray-700">Manufacturer id</option>
-                          <option value="1" className="bg-white text-gray-700">Manufacturer 1</option>
-                          <option value="2" className="bg-white text-gray-700">Manufacturer 2</option>
+                          <option value="" className="text-gray-400 bg-white">Manufacturer id</option>
+                          <option value="1">Manufacturer 1</option>
+                          <option value="2" >Manufacturer 2</option>
                         </select>
                         <DropdownArrow />
                       </div>
@@ -264,28 +264,26 @@ export default function AddProfileRuleForm() {
             </div>
           </div>
 
-          {/* Second Row - Method & Source and Adjustment Values */}
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-3 mb-3">
+          {/* Second Row - Method & Source */}
+          <div className="flex flex-col xl:flex-row gap-3 mb-4">
             {/* Method & Source */}
-            <div className="bg-[#F6F8FB] p-4 rounded-lg w-full max-w-[522px] h-[451px] mx-auto xl:mx-0">
-              <h3 className="font-bold text-[#5E6366] mb-4">Method & Source</h3>
+            <div className="bg-[#F6F8FB] p-4 rounded-lg w-full xl:w-[522px] min-h-[400px]">
+              <h3 className="font-bold text-[#5E6366] mb-3">Method & Source</h3>
 
-              <div className="h-[378px] overflow-y-auto pr-2">
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="max-h-[340px] overflow-y-auto pr-2">
+                <div className="space-y-3">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-sm font-medium text-[#727272] mb-1">Method</label>
                       <div className="relative">
-                        <select
+                        <input
+                          type="text"
                           name="method"
                           value={formData.method}
                           onChange={handleInputChange}
-                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-16"
-                        >
-                          <option value="" className="bg-white text-gray-700">select method</option>
-                          <option value="method1" className="bg-white text-gray-700">Method 1</option>
-                          <option value="method2" className="bg-white text-gray-700">Method 2</option>
-                        </select>
+                          placeholder="Method"
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] pr-16 transition-all duration-200"
+                        />
                         <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex flex-col">
                           <ChevronUp className="w-3 h-3 text-[#3D3C3C] cursor-pointer hover:text-[#2FB4FF]" />
                           <ChevronDown className="w-3 h-3 text-[#3D3C3C] cursor-pointer hover:text-[#2FB4FF]" />
@@ -295,22 +293,23 @@ export default function AddProfileRuleForm() {
                     <div>
                       <label className="block text-sm font-medium text-[#727272] mb-1">Cost Source Id</label>
                       <div className="relative">
-                        <select
+                        <input
+                          type="text"
                           name="costSourceId"
                           value={formData.costSourceId}
                           onChange={handleInputChange}
-                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
-                        >
-                          <option value="" className="bg-white text-gray-700">cost source id</option>
-                          <option value="source1" className="bg-white text-gray-700">Source 1</option>
-                          <option value="source2" className="bg-white text-gray-700">Source 2</option>
-                        </select>
-                        <DropdownArrow />
+                          placeholder="Cost Source Id"
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] pr-16 transition-all duration-200"
+                        />
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex flex-col">
+                          <ChevronUp className="w-3 h-3 text-[#3D3C3C] cursor-pointer hover:text-[#2FB4FF]" />
+                          <ChevronDown className="w-3 h-3 text-[#3D3C3C] cursor-pointer hover:text-[#2FB4FF]" />
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="py-2">
+                  <div className="py-1">
                     <CustomCheckbox
                       name="useMinSource"
                       checked={formData.useMinSource}
@@ -319,7 +318,7 @@ export default function AddProfileRuleForm() {
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-sm font-medium text-[#727272] mb-1">Cost To</label>
                       <input
@@ -328,64 +327,59 @@ export default function AddProfileRuleForm() {
                         value={formData.costTo}
                         onChange={handleInputChange}
                         placeholder="Cost To"
-                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] transition-all duration-200"
                       />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-[#727272] mb-1">Special Cost</label>
-                      <div className="relative">
-                        <select
-                          name="specialCost"
-                          value={formData.specialCost}
+                      <input
+                        type="text"
+                        name="specialCost"
+                        value={formData.specialCost}
+                        onChange={handleInputChange}
+                        placeholder="Special Cost"
+                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] transition-all duration-200"
+                      />
+                    </div>
+                  </div>
+                  <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
+                    <div className="space-y-2 ">
+                      <CustomCheckbox
+                        name="ceilingIsMerp"
+                        checked={formData.ceilingIsMerp}
+                        onChange={handleInputChange}
+                        label="Ceiling is MERP"
+                      />
+                      <CustomCheckbox
+                        name="inStock"
+                        checked={formData.inStock}
+                        onChange={handleInputChange}
+                        label="In Stock"
+                      />
+                      <div>
+                        <label className="block text-sm font-medium text-[#727272] mb-1">Cost From</label>
+                        <input
+                          type="text"
+                          name="costFrom"
+                          value={formData.costFrom}
                           onChange={handleInputChange}
-                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] appearance-none bg-transparent pr-12"
-                        >
-                          <option value="" className="bg-white text-gray-700">Special Deal</option>
-                          <option value="deal1" className="bg-white text-gray-700">Deal 1</option>
-                          <option value="deal2" className="bg-white text-gray-700">Deal 2</option>
-                        </select>
-                        <DropdownArrow />
+                          placeholder="Cost From"
+                          className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1]  rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] transition-all duration-200"
+                        />
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4 py-2">
-                    <CustomCheckbox
-                      name="ceilingIsMerp"
-                      checked={formData.ceilingIsMerp}
-                      onChange={handleInputChange}
-                      label="Ceiling Is Merp"
-                    />
-                    <CustomCheckbox
-                      name="inStock"
-                      checked={formData.inStock}
-                      onChange={handleInputChange}
-                      label="In Stock"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-[#727272] mb-1">Cost From</label>
-                    <input
-                      type="text"
-                      name="costFrom"
-                      value={formData.costFrom}
-                      onChange={handleInputChange}
-                      placeholder="Cost From"
-                      className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
-                    />
-                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Adjustment Values */}
-            <div className="bg-[#F6F8FB] p-4 rounded-lg w-full max-w-[535px] h-[451px] mx-auto xl:mx-0">
-              <h3 className="font-bold text-[#5E6366] mb-4">Adjustment Values</h3>
+            <div className="bg-[#F6F8FB] p-4 rounded-lg w-[650px] h-[400px]">
+              <h3 className="font-bold text-[#5E6366] mb-3">Adjustment Values</h3>
 
-              <div className="h-[378px] overflow-y-auto pr-2">
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="h-[340px] overflow-y-auto pr-2">
+                <div className="space-y-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-sm font-medium text-[#727272] mb-1">Percent Value</label>
                       <input
@@ -393,8 +387,8 @@ export default function AddProfileRuleForm() {
                         name="percentValue"
                         value={formData.percentValue}
                         onChange={handleInputChange}
-                        placeholder="percent value"
-                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                        placeholder="Percent Value"
+                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] transition-all duration-200"
                       />
                     </div>
                     <div>
@@ -404,13 +398,14 @@ export default function AddProfileRuleForm() {
                         name="costAdjValue"
                         value={formData.costAdjValue}
                         onChange={handleInputChange}
-                        placeholder="0.5%"
-                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                        placeholder="Cost Adj Value"
+                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] transition-all duration-200"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
                     <div>
                       <label className="block text-sm font-medium text-[#727272] mb-1">Rounded To</label>
                       <input
@@ -418,16 +413,19 @@ export default function AddProfileRuleForm() {
                         name="roundedTo"
                         value={formData.roundedTo}
                         onChange={handleInputChange}
-                        placeholder="0.5%"
-                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                        placeholder="Rounded To"
+                        className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] transition-all duration-200"
                       />
                     </div>
-                    <div className="flex flex-col gap-3 pt-2">
+
+
+
+                    <div className="space-y-2">
                       <CustomCheckbox
                         name="deceedToMsp"
                         checked={formData.deceedToMsp}
                         onChange={handleInputChange}
-                        label="Deceed To Msp"
+                        label="Deceed to MSP"
                       />
                       <CustomCheckbox
                         name="minMarginCheck"
@@ -435,9 +433,9 @@ export default function AddProfileRuleForm() {
                         onChange={handleInputChange}
                         label="Min Margin Check"
                       />
+
                     </div>
                   </div>
-
                   <div>
                     <label className="block text-sm font-medium text-[#727272] mb-1">Cost Adj Percent</label>
                     <input
@@ -445,8 +443,8 @@ export default function AddProfileRuleForm() {
                       name="costAdjPercent"
                       value={formData.costAdjPercent}
                       onChange={handleInputChange}
-                      placeholder="cost adj percent"
-                      className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                      placeholder="Cost Adj Percent"
+                      className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] transition-all duration-200"
                     />
                   </div>
                 </div>
@@ -455,42 +453,42 @@ export default function AddProfileRuleForm() {
           </div>
 
           {/* Margin Rules - Full Width */}
-          <div className="mb-4">
+          <div className="mb-6">
             <div className="bg-[#F6F8FB] p-4 rounded-lg">
               <h3 className="font-bold text-[#5E6366] mb-4">Margin Rules</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-[#727272] mb-1">Min Margin</label>
+                  <label className="block text-sm font-medium text-[#727272] mb-2">Min Margin</label>
                   <input
                     type="text"
                     name="minMargin"
                     value={formData.minMargin}
                     onChange={handleInputChange}
                     placeholder="percent value"
-                    className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                    className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] transition-all duration-200"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#727272] mb-1">Min Margin Check</label>
+                  <label className="block text-sm font-medium text-[#727272] mb-2">Min Margin Check</label>
                   <input
                     type="text"
                     name="minMarginCheckValue"
                     value={formData.minMarginCheckValue}
                     onChange={handleInputChange}
                     placeholder="cost adj percent"
-                    className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                    className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] transition-all duration-200"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#727272] mb-1">Min Margin Percentage</label>
+                  <label className="block text-sm font-medium text-[#727272] mb-2">Min Margin Percentage</label>
                   <input
                     type="text"
                     name="minMarginPercentage"
                     value={formData.minMarginPercentage}
                     onChange={handleInputChange}
                     placeholder="0.5%"
-                    className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2FB4FF] bg-transparent"
+                    className="w-full px-3 py-2 border border-[#CFD3D4] text-[#ABAFB1]  rounded-lg focus:outline-none focus:ring-1 focus:ring-[#2FB4FF] focus:border-[#2FB4FF] transition-all duration-200"
                   />
                 </div>
               </div>
@@ -498,18 +496,18 @@ export default function AddProfileRuleForm() {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-4">
+          <div className="flex justify-center items-center gap-4 mt-8">
             <button
               type="button"
               onClick={handleCancel}
-              className="w-full sm:w-auto min-w-40 h-10 text-base font-medium bg-white text-[#30B4FF] border border-[#30B4FF] rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-[#30B4FF] hover:text-white"
+              className="min-w-[120px] h-10 text-base font-medium  text-[#30B4FF] border border-[#30B4FF] rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-[#30B4FF] hover:text-white"
             >
               Cancel
             </button>
             <button
               type="button"
               onClick={handleCancel}
-              className="w-full sm:w-auto min-w-40 h-10 text-base font-medium bg-[#30B4FF] text-white border-none rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-[#30B4FF]/90"
+              className="min-w-[120px] h-10 text-base font-medium bg-[#30B4FF] text-white border-none rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-[#30B4FF]/90"
             >
               Add
             </button>

@@ -1,5 +1,5 @@
-import ForgetPassword from "@/app/auth/forget/ForgetPassword";
+import Successfull from "@/app/auth/forget/Successfull";
 
 export default function ForgetPasswordPage() {
-    return <ForgetPassword />;
+    return <Successfull />;
 }
